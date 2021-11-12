@@ -1,12 +1,6 @@
 import styles from "./Navbar.module.css";
 import { Dropdown, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
 export default function Navbar() {
-  const rightItems = [
-    { as: "a", content: "Home", key: "home" },
-    { as: "a", content: "Users", key: "users" },
-    { as: "a", content: "Login", key: "login" },
-    { as: "a", content: "Register", key: "register" }
-  ];
   return (
     <Menu fixed="top" secondary className={styles.menuWrapper}>
       <Menu.Item>
