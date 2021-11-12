@@ -1,0 +1,26 @@
+.menuWrapper {
+  border: none !important;
+  box-shadow: -10px 4.6px 13px 0 rgba(0, 0, 0, 0.05) !important;
+  padding: 10px 40px;
+  font-family: Montserrat !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+}
+.dropdownWrapper {
+  display: flex !important;
+  align-items: center !important;
+}
+.itemWrapper {
+  font-weight: 600 !important;
+}
+.menuStyling {
+  margin-right: 70px !important;
+}
+.signUpButton {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 11px 22px 10px 21px;
+  background-color: #268f8c;
+  border-radius: 18px;
+  color: #fff;
+}
