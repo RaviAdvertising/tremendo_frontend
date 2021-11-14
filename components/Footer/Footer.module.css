@@ -1,0 +1,11 @@
+.base {
+  background-color: #222222;
+  color: #fff;
+  display: flex;
+  padding: 25px;
+  font-size: 12px;
+  padding: 25px 0 25px 100px;
+}
+.copyright {
+  margin-right: 50px;
+}
