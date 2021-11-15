@@ -6,11 +6,15 @@ import WhyTremendo from "../components/WhyTremendo/WhyTremendo";
 import styles from "../styles/Home.module.css";
 import {
   language,
+  popularCourses,
+  promotionsContent,
   trustFactor,
   whyTremendo1,
   whyTremendo2
 } from "../utils/constants";
 import Image from "next/image";
+import CourseBox from "../components/CourseBox/CourseBox";
+import PromotionBox from "../components/PromotionBox/PromotionBox";
 
 export default function Home() {
   return (
@@ -20,11 +24,21 @@ export default function Home() {
         <meta name="description" content="Tremendo Education website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ImageComponent
-        src={"Images/banner.png"}
-        paddingBottom={"32%"}
-        alt={"banner logo"}
-      />
+
+      <div className={styles.bannerWaveWrapper}>
+        <ImageComponent
+          src={"Images/banner.png"}
+          paddingBottom={"35%"}
+          alt={"banner logo"}
+        />
+        <div className={styles.waveShape}>
+          <ImageComponent
+            src={"Images/wave_shape.png"}
+            paddingBottom={"5%"}
+            alt={"banner logo"}
+          />
+        </div>
+      </div>
 
       <div className={styles.flagWrapper}>
         <div className={styles.languageHeading}>
@@ -81,6 +95,73 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      <div className={styles.popularCourses}>
+        <div className={styles.popularCoursesHeading}>Popular courses</div>
+        <div className={styles.courseBox}>
+          {popularCourses.map((i, index) => (
+            <div key={index}>
+              <CourseBox {...i} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.subscribe}>
+        <ImageComponent
+          src={"Images/subscribe.png"}
+          paddingBottom={"10%"}
+          alt={"banner logo"}
+        />
+        <div className={styles.textBtnWrapper}>
+          <div>
+            Stay tuned with all the latest language updates around the world.
+          </div>
+          <div className={styles.subscribeInputBtnWrapper}>
+            <div className={styles.subscribeInputWrapper}>
+              <input
+                placeholder="Enter your email"
+                className={styles.subscribeInput}
+              />
+            </div>
+            <div>
+              <button className={styles.subscribeBtn}>SUBSCRIBE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.learnAnyWhere}>
+        <div className={styles.learnAnyWhereHeading}>Learn from anywhere</div>
+        <div className={styles.learnAnyWhereSubheading}>
+          Learn new languages with virtual learning and be an expert
+        </div>
+        <div className={styles.devicesImages}>
+          <Image
+            src={"/Images/devices.jpg"}
+            alt={"devices"}
+            width={"700px"}
+            height={"300px"}
+          />
+        </div>
+      </div>
+
+      <div className={styles.promotions}>
+        <div className={styles.boxesWrap}>
+          {promotionsContent.map((i, index) => (
+            <div key={index} className={styles.promoBox}>
+              <PromotionBox {...i} />
+            </div>
+          ))}
+        </div>
+        <div>
+          <ImageComponent
+            src={"Images/learn_grow_lead.png"}
+            paddingBottom={"15%"}
+            alt={"banner logo"}
+          />
         </div>
       </div>
     </div>

@@ -1,4 +1,6 @@
 .base {
+}
+.blackFooterbase {
   background-color: #222222;
   color: #fff;
   display: flex;
@@ -8,4 +10,34 @@
 }
 .copyright {
   margin-right: 50px;
+}
+.heading {
+  font-size: 14px;
+  color: #268f8c;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.subheading {
+  font-size: 14px;
+  color: #212121;
+  margin-top: 30px;
+}
+.whiteFooter {
+  display: flex;
+  padding: 70px 180px;
+  width: 100%;
+  justify-content: space-between;
+}
+.followIcons {
+  display: flex;
+  margin-top: 30px;
+}
+.footerSection {
+  width: 20%;
+}
+.socialSection {
+  margin-top: 30px;
+}
+.socialIcons {
+  margin: 5px;
 }

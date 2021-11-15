@@ -1,5 +1,6 @@
 import styles from "./Navbar.module.css";
 import { Dropdown, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
+import { language } from "../../utils/constants";
 export default function Navbar() {
   return (
     <Menu fixed="top" secondary className={styles.menuWrapper}>
@@ -15,16 +16,9 @@ export default function Navbar() {
         />
         <Dropdown text="LANGUAGES" className={styles.dropdownWrapper}>
           <Dropdown.Menu>
-            <Dropdown.Item text="Japanese" />
-            <Dropdown.Item text="Chinese" />
-            <Dropdown.Item text="Spanish" />
-            <Dropdown.Item text="German" />
-            <Dropdown.Item text="French" />
-            <Dropdown.Item text="Portuguese" />
-            <Dropdown.Item text="Arabic" />
-            <Dropdown.Item text="English" />
-            <Dropdown.Item text="Hindi" />
-            <Dropdown.Item text="Russian" />
+            {language.map((i, index) => (
+              <Dropdown.Item key={index} text={i.name} />
+            ))}
           </Dropdown.Menu>
         </Dropdown>
         <Menu.Item
