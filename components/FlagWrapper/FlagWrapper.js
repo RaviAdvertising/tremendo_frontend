@@ -1,13 +1,18 @@
 import { Fragment } from "react";
 import Icon from "../Icons/Icons";
-import Image from "../Image/Image";
+import Image from "next/image";
 import styles from "./FlagWrapper.module.css";
 
 export default function FlagWrapper(props) {
   return (
     <div className={styles.base}>
       <div className={styles.flagImage}>
-        <Icon image={props.flagSrc} size={70} />
+        <Image
+          src={`/Images/${props.flagSrc}`}
+          alt={"flags"}
+          width={"120px"}
+          height={"50px"}
+        />
       </div>
       <div className={styles.language}>{props.language}</div>
       <div className={styles.languageDescription}>

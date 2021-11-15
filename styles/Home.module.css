@@ -1,12 +1,13 @@
 .flagWrapper {
   background-color: #25908d;
-  padding: 20px;
+  padding: 70px 100px;
 }
 .allFlags {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
-.languageHeading {
+.languageHeadingWrapper {
   color: #fff;
   font-weight: bold;
   text-align: center;
@@ -14,6 +15,12 @@
   font-size: 30px;
   text-transform: uppercase;
   font-family: Montserrat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.languageHeading {
+  margin: 0 20px;
 }
 .flag {
   padding: 50px;
@@ -21,19 +28,30 @@
 .stylingLines {
   background-color: #39cdc9;
 }
-.whyLearnHeading {
+.whyLearnHeadingWrapper {
   font-weight: bold;
   text-align: center;
   font-size: 30px;
   text-transform: uppercase;
   font-family: Montserrat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.whyLearnHeading {
+  margin: 0 20px;
+}
+.borderLineStyling {
+  background-color: #39cdc9;
+  width: 65px;
+  height: 5px;
 }
 .trustfactorWrapper {
   display: flex;
   margin-top: 70px;
 }
 .whyLearnLang {
-  padding: 70px 100px;
+  padding: 70px 190px;
 }
 .trustfactor {
   padding-right: 25px;
@@ -44,13 +62,19 @@
 .whyTremendo {
   background-color: #f78f1e;
 }
-.whyTremendoHeading {
+.whyTremendoHeadingWrapper {
   color: #fff;
   font-weight: bold;
   text-align: center;
   font-size: 30px;
   text-transform: uppercase;
   font-family: Montserrat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.whyTremendoHeading {
+  margin: 0 20px;
 }
 .imageWhyWrapper {
   display: flex;
@@ -59,7 +83,7 @@
   width: 100%;
 }
 .whyTremendo {
-  padding: 70px 100px;
+  padding: 70px 190px;
 }
 .whyTremendoSection {
   margin-bottom: 30px;
@@ -75,17 +99,23 @@
   display: flex;
   justify-content: center;
 }
-.popularCoursesHeading {
+.popularCoursesHeadingWrapper {
   color: #fff;
   font-weight: bold;
   text-align: center;
   font-size: 30px;
   text-transform: uppercase;
   font-family: Montserrat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popularCoursesHeading {
+  margin: 0 20px;
 }
 .popularCourses {
   background-color: #25908d;
-  padding: 70px 100px;
+  padding: 70px 190px;
 }
 .bannerWaveWrapper {
   position: relative;
@@ -132,6 +162,7 @@
   border: none;
   border-radius: 25px;
   padding: 0 40px;
+  cursor: pointer;
 }
 .subscribeInputBtnWrapper {
   display: flex;
@@ -140,17 +171,23 @@
 .subscribeInputWrapper {
   margin-right: 20px;
 }
-.learnAnyWhereHeading {
+.learnAnyWhereHeadingWrapper {
   color: #000;
   font-weight: bold;
   text-align: center;
   font-size: 30px;
   text-transform: uppercase;
   font-family: Montserrat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.learnAnyWhereHeading {
+  margin: 0 20px;
 }
 .learnAnyWhere {
   text-align: center;
-  padding: 70px 100px;
+  padding: 70px 190px;
 }
 .learnAnyWhereSubheading {
   font-size: 16px;
@@ -165,11 +202,19 @@
 }
 .boxesWrap {
   display: flex;
-  padding: 70px 100px;
+  padding: 70px 190px;
+  width: 100%;
 }
 .promoBox {
   margin-right: 30px;
+  width: 30%;
 }
 .promoBox:last-child {
   margin-right: 0;
+}
+.chat {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  cursor: pointer;
 }

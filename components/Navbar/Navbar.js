@@ -1,7 +1,9 @@
 import styles from "./Navbar.module.css";
-import { Dropdown, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
+import { Dropdown, Image, Menu } from "semantic-ui-react";
 import { language } from "../../utils/constants";
+import { useRouter } from "next/router";
 export default function Navbar() {
+  const router = useRouter();
   return (
     <Menu fixed="top" secondary className={styles.menuWrapper}>
       <Menu.Item>
@@ -44,7 +46,12 @@ export default function Navbar() {
       </Menu.Menu>
       <Menu.Item className={styles.itemWrapper}>LOGIN</Menu.Item>
       <Menu.Item>
-        <div className={styles.signUpButton}>SIGN UP</div>
+        <div
+          className={styles.signUpButton}
+          onClick={() => router.push("/signup")}
+        >
+          SIGN UP
+        </div>
       </Menu.Item>
     </Menu>
   );

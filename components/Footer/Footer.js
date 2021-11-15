@@ -23,25 +23,27 @@ export default function Footer(props) {
         <div className={styles.footerSection}>
           <div className={styles.heading}>Know us better</div>
           <div className={styles.subheading}>
-            <div>Who we are</div>
-            <div>What we do</div>
-            <div>Our mission</div>
-            <div>Our Vision</div>
+            <div className={styles.footerItem}>Who we are</div>
+            <div className={styles.footerItem}>What we do</div>
+            <div className={styles.footerItem}>Our mission</div>
+            <div className={styles.footerItem}>Our Vision</div>
           </div>
         </div>
         <div className={styles.footerSection}>
           <div className={styles.heading}>Languages</div>
           <div className={styles.subheading}>
             {language.map((i, index) => (
-              <div key={index}>{i.name}</div>
+              <div key={index} className={styles.footerItem}>
+                {i.name}
+              </div>
             ))}
           </div>
         </div>
         <div className={styles.footerSection}>
           <div className={styles.heading}>Help</div>
           <div className={styles.subheading}>
-            <div>FAQ’s</div>
-            <div> Contact Us</div>
+            <div className={styles.footerItem}>FAQ’s</div>
+            <div className={styles.footerItem}> Contact Us</div>
             <div className={styles.socialSection}>
               <div className={styles.heading}>Follow Us</div>
               <div className={styles.followIcons}>

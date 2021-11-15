@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./ReadMore.module.css";
 
 export const ReadMore = ({ children }) => {
   const text = children;
@@ -9,9 +10,9 @@ export const ReadMore = ({ children }) => {
   return (
     <p className="text">
       {isReadMore ? text.slice(0, 150) : text}
-      <span onClick={toggleReadMore} className="read-or-hide">
-        {isReadMore ? "...read more" : " show less"}
-      </span>
+      <div onClick={toggleReadMore} className={styles.readMoreAndLessText}>
+        {isReadMore ? "Read More ..." : "Show Less"}
+      </div>
     </p>
   );
 };

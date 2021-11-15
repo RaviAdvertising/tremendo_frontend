@@ -1,0 +1,7 @@
+.readMoreAndLessText {
+  cursor: pointer;
+  margin-top: 15px;
+}
+.readMoreAndLessText:hover {
+  text-decoration: underline;
+}

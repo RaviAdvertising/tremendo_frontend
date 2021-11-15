@@ -13,6 +13,7 @@
 }
 .itemWrapper {
   font-weight: 600 !important;
+  cursor: pointer;
 }
 .menuStyling {
   margin-right: 70px !important;

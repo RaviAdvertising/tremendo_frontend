@@ -29,8 +29,11 @@
   font-size: 18px;
   color: #fff;
   text-transform: uppercase;
+  cursor: pointer;
 }
 .flagImage {
   position: absolute;
-  top: -32px;
+  top: -26px;
+  box-shadow: 0 8px 6px -7px #00000096;
+  height: 50px;
 }

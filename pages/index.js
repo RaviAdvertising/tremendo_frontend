@@ -41,18 +41,18 @@ export default function Home() {
       </div>
 
       <div className={styles.flagWrapper}>
-        <div className={styles.languageHeading}>
-          <div className={styles.stylingLines}></div>
-          <div>Languages</div>
-          <div className={styles.stylingLines}></div>
+        <div className={styles.languageHeadingWrapper}>
+          <div className={styles.borderLineStyling}></div>
+          <div className={styles.languageHeading}>Languages</div>
+          <div className={styles.borderLineStyling}></div>
         </div>
         <div className={styles.allFlags}>
           {language.map((i, index) => (
             <div key={index} className={styles.flag}>
               <FlagWrapper
                 language={i.name}
-                languageDescription={i.name}
-                flagSrc={"Images/china_flag.png"}
+                languageDescription={i.subtext}
+                flagSrc={i.flag}
               />
             </div>
           ))}
@@ -60,7 +60,11 @@ export default function Home() {
       </div>
 
       <div className={styles.whyLearnLang}>
-        <div className={styles.whyLearnHeading}>Why Learn A New Language</div>
+        <div className={styles.whyLearnHeadingWrapper}>
+          <div className={styles.borderLineStyling}></div>
+          <div className={styles.whyLearnHeading}>Why Learn A New Language</div>
+          <div className={styles.borderLineStyling}></div>
+        </div>
         <div className={styles.trustfactorWrapper}>
           {trustFactor.map((i, index) => (
             <div key={index} className={styles.trustfactor}>
@@ -71,7 +75,11 @@ export default function Home() {
       </div>
 
       <div className={styles.whyTremendo}>
-        <div className={styles.whyTremendoHeading}>Why tremendo</div>
+        <div className={styles.whyTremendoHeadingWrapper}>
+          <div className={styles.borderLineStyling}></div>
+          <div className={styles.whyTremendoHeading}>Why tremendo</div>
+          <div className={styles.borderLineStyling}></div>
+        </div>
         <div className={styles.imageWhyWrapper}>
           <div className={styles.sections}>
             {whyTremendo1.map((i, index) => (
@@ -99,7 +107,11 @@ export default function Home() {
       </div>
 
       <div className={styles.popularCourses}>
-        <div className={styles.popularCoursesHeading}>Popular courses</div>
+        <div className={styles.popularCoursesHeadingWrapper}>
+          <div className={styles.borderLineStyling}></div>
+          <div className={styles.popularCoursesHeading}>Popular courses</div>
+          <div className={styles.borderLineStyling}></div>
+        </div>
         <div className={styles.courseBox}>
           {popularCourses.map((i, index) => (
             <div key={index}>
@@ -134,7 +146,11 @@ export default function Home() {
       </div>
 
       <div className={styles.learnAnyWhere}>
-        <div className={styles.learnAnyWhereHeading}>Learn from anywhere</div>
+        <div className={styles.learnAnyWhereHeadingWrapper}>
+          <div className={styles.borderLineStyling}></div>
+          <div className={styles.learnAnyWhereHeading}>Learn from anywhere</div>
+          <div className={styles.borderLineStyling}></div>
+        </div>
         <div className={styles.learnAnyWhereSubheading}>
           Learn new languages with virtual learning and be an expert
         </div>
@@ -163,6 +179,15 @@ export default function Home() {
             alt={"banner logo"}
           />
         </div>
+      </div>
+
+      <div className={styles.chat}>
+        <Image
+          src={"/Images/chat.png"}
+          alt={"chat icons"}
+          width={"70px"}
+          height={"70px"}
+        />
       </div>
     </div>
   );
