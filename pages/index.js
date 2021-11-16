@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import CourseBox from "../components/CourseBox/CourseBox";
 import PromotionBox from "../components/PromotionBox/PromotionBox";
+import HomeCarousal from "../components/Carousal/HomeCarousal";
 
 export default function Home() {
   return (
@@ -26,11 +27,7 @@ export default function Home() {
       </Head>
 
       <div className={styles.bannerWaveWrapper}>
-        <ImageComponent
-          src={"Images/banner.png"}
-          paddingBottom={"35%"}
-          alt={"banner logo"}
-        />
+        <HomeCarousal />
         <div className={styles.waveShape}>
           <ImageComponent
             src={"Images/wave_shape.png"}

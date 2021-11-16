@@ -6,15 +6,8 @@ export default function PromotionBox(props) {
   return (
     <div className={styles.base}>
       <div className={styles.heading}>{heading}</div>
-      <div className={styles.subheading}>
-        <ReadMore
-          actionTextMore={"Learn More..."}
-          actionTextLess={"Show Less..."}
-          color={"#268f8c"}
-        >
-          {description}
-        </ReadMore>
-      </div>
+      <div className={styles.subheading}>{description.slice(0, 150)}...</div>
+      <div className={styles.learnMore}>Learn More</div>
     </div>
   );
 }
