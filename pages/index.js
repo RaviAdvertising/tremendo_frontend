@@ -86,11 +86,12 @@ export default function Home() {
             ))}
           </div>
           <div className={styles.imgSections}>
-            <Image
+            <ImageComponent
               src={"/Images/why_tremendo.png"}
               alt={""}
-              width={"450px"}
-              height={"200px"}
+              paddingBottom={"20%"}
+              // width={"450px"}
+              // height={"200px"}
             />
           </div>
           <div className={styles.sections}>

@@ -26,7 +26,7 @@ export default function Footer(props) {
             <div className={styles.footerItem}>Who we are</div>
             <div className={styles.footerItem}>What we do</div>
             <div className={styles.footerItem}>Our mission</div>
-            <div className={styles.footerItem}>Our Vision</div>
+            <div className={styles.footerItem}>Our vision</div>
           </div>
         </div>
         <div className={styles.footerSection}>
@@ -43,7 +43,7 @@ export default function Footer(props) {
           <div className={styles.heading}>Help</div>
           <div className={styles.subheading}>
             <div className={styles.footerItem}>FAQ’s</div>
-            <div className={styles.footerItem}> Contact Us</div>
+            <div className={styles.footerItem}> Contact us</div>
             <div className={styles.socialSection}>
               <div className={styles.heading}>Follow Us</div>
               <div className={styles.followIcons}>
