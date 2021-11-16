@@ -5,11 +5,13 @@
   font-family: Montserrat;
   margin-top: 20px;
   margin-bottom: 12px;
+  font-family: Open Sans;
 }
 .description {
   color: #fff;
   font-size: 13px;
   font-family: Montserrat;
+  font-family: Open Sans;
 }
 .imageWrapper {
   position: relative;
@@ -26,6 +28,7 @@
   position: absolute;
   top: -21px;
   left: 15px;
+  font-family: Open Sans;
 }
 .offer {
   position: absolute;

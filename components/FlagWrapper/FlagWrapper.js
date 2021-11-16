@@ -10,7 +10,7 @@ export default function FlagWrapper(props) {
         <Image
           src={`/Images/${props.flagSrc}`}
           alt={"flags"}
-          width={"120px"}
+          width={"100px"}
           height={"50px"}
         />
       </div>

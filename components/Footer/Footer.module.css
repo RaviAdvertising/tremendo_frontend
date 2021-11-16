@@ -7,6 +7,7 @@
   padding: 25px;
   font-size: 12px;
   padding: 25px 0 25px 100px;
+  font-family: Open Sans;
 }
 .copyright {
   margin-right: 50px;
@@ -16,11 +17,13 @@
   color: #268f8c;
   font-weight: bold;
   text-transform: uppercase;
+  font-family: Open Sans;
 }
 .subheading {
   font-size: 14px;
   color: #212121;
   margin-top: 30px;
+  font-family: Open Sans;
 }
 .whiteFooter {
   display: flex;

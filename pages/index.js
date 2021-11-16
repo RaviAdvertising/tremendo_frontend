@@ -89,8 +89,8 @@ export default function Home() {
             <Image
               src={"/Images/why_tremendo.png"}
               alt={""}
-              width={"200px"}
-              height={"180px"}
+              width={"450px"}
+              height={"200px"}
             />
           </div>
           <div className={styles.sections}>

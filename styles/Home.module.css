@@ -140,6 +140,8 @@
   top: 38%;
   justify-content: space-evenly;
   width: 100%;
+  font-family: Open Sans;
+  color: #000;
 }
 .subscribeInput {
   height: 49px;
@@ -149,6 +151,7 @@
   padding-left: 24px;
   padding-right: 50px;
   font-size: 12px;
+  font-family: Open Sans;
 }
 .subscribeInput:focus {
   outline: none;
@@ -163,6 +166,7 @@
   border-radius: 25px;
   padding: 0 40px;
   cursor: pointer;
+  font-family: Open Sans;
 }
 .subscribeInputBtnWrapper {
   display: flex;
@@ -193,6 +197,7 @@
   font-size: 16px;
   color: #212121;
   margin-top: 25px;
+  font-family: Open Sans;
 }
 .devicesImages {
   margin-top: 70px;

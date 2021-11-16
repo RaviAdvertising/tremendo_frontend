@@ -16,6 +16,7 @@
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 28px;
+  font-family: Open Sans;
 }
 .languageDescription {
   position: absolute;
@@ -30,6 +31,7 @@
   color: #fff;
   text-transform: uppercase;
   cursor: pointer;
+  font-family: Open Sans;
 }
 .flagImage {
   position: absolute;

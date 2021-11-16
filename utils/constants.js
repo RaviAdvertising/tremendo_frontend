@@ -12,10 +12,10 @@ export const language = [
 ];
 export const trustFactor = [
   {
-    heading: "Travel",
+    heading: "Work & Experience ",
     subheading:
-      "Learning a foreign language will help you navigate new places and make travel so much easier. It helps you to understand signs and ask for directions. ",
-    image: "Images/plane.png",
+      "Command over a foreign language can set you ahead in your career. It can land you better job opportunities and help you in achieving your educational goals.    ",
+    image: "Images/work_experience.png",
     backgroundColor: "#000"
   },
   {
@@ -25,11 +25,12 @@ export const trustFactor = [
     image: "Images/learning.png",
     backgroundColor: "#39cdc9"
   },
+
   {
-    heading: "Work & Experience ",
+    heading: "Travel",
     subheading:
-      "Command over a foreign language can set you ahead in your career. It can land you better job opportunities and help you in achieving your educational goals.    ",
-    image: "Images/work_experience.png",
+      "Learning a foreign language will help you navigate new places and make travel so much easier. It helps you to understand signs and ask for directions. ",
+    image: "Images/plane.png",
     backgroundColor: "#000"
   }
 ];

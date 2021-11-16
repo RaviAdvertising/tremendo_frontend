@@ -7,11 +7,13 @@
   font-size: 16px;
   color: #212121;
   font-weight: bold;
+  font-family: Open Sans;
 }
 .subheading {
   color: #666;
   font-size: 13px;
   margin-top: 20px;
+  font-family: Open Sans;
 }
 .learnMore {
   font-size: 13px;
