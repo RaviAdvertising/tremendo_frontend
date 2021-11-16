@@ -19,7 +19,7 @@ export const trustFactor = [
     backgroundColor: "#000"
   },
   {
-    heading: "Learn New Culture",
+    heading: "Learn new culture",
     subheading:
       "Learning a foreign language is an investment as it helps you to understand other cultures and ideologies. Knowing a new language opens up a new world for you.",
     image: "Images/learning.png",
@@ -36,13 +36,13 @@ export const trustFactor = [
 ];
 export const whyTremendo1 = [
   {
-    heading: "Personalized Learning",
+    heading: "Affordable price",
     subheading:
-      "We customize ways of learning according to each student's strengths, needs, interests, and skills.",
+      "Tremendo aims to provide the best quality teaching at the minimum and pocket-friendly costs. As all the study material is provided digitally, you do not have to buy any books.",
     image: "Images/self-growth.png"
   },
   {
-    heading: "Quick Growth",
+    heading: "Quick growth",
     subheading:
       "Having command over foreign languages can provide better career opportunities and set you on the fastest route to success.",
     image: "Images/online-class.png"
@@ -50,13 +50,13 @@ export const whyTremendo1 = [
 ];
 export const whyTremendo2 = [
   {
-    heading: "Supporting Mentors",
+    heading: "Experienced mentors",
     subheading:
       "Tremendo appoints highly skilled mentors that provide both professional and personal support.",
     image: "Images/consulting.png"
   },
   {
-    heading: "Real-Time Feedback",
+    heading: "Real-Time feedback",
     subheading:
       "We provide real-time feedback to ensure all students are on the right track throughout their learning journey. ",
     image: "Images/feedback.png"
@@ -89,12 +89,12 @@ export const promotionsContent = [
   {
     heading: "Who we are",
     description:
-      "We are a team of highly skilled people fluent in different languages and with great teaching experience. We help people take over the professional world with an extra language skill that results in extremely beneficial career opportunities, opening gates to many international countries, and providing amazing packages.With an increase in Multinational companies in India, they look forward to hiring people who know more than just their mother tongue, so that they could interact better and create a good impression in front of their international clients."
+      "We are a team of highly skilled people fluent in different languages and with great teaching experience. We help people take over the professional world with an extra language skill that results in extremely beneficial career opportunities. With Tremendo you can learn new languages from anywhere in the world, under the guidance of the best mentors.With an increase in Multinational companies in India, companies look forward to hiring people who know more than one language. So, with us you develop a skill which creates the best jobs for you and keep your resume on demand in the market."
   },
   {
     heading: "What we do",
     description:
-      "We offer ten different language courses starting from the Beginner level so that one could learn from scratch for better understanding. We provide Personalized Learning, Quick Growth, Supporting Mentors, Real-Time Feedback, making it easier for our students to get comfortable and be able to gain a better understanding.We provide virtual classes that are easier to attend from anywhere, following the batch time provided. The live classes ensure seriousness and help students to ask their queries and get instant solutions from the experts. We also provide the study material making it convenient for you to study in your free time and grow enthusiastically in the professional world."
+      "We offer different language courses starting from the Beginner level so that one could learn from scratch for better understanding. We provide Digital Learning, Quick Growth, Experienced Mentors, Real-Time Feedback, making it easier for our students to get comfortable and improve their understanding.We provide virtual classes that are easier to attend from anywhere, following the batch time provided. The live classes ensure seriousness and help students to ask their queries and get instant solutions from the experts. We also provide digital study material making it convenient for you to study in your free time and grow enthusiastically in the competitive world. When you enroll in a class with us, you are also contributing towards saving the environment. As our program is completely digital, no paper is utilized, and you save on natural energy on the commute."
   },
   {
     heading: "Our Mission",
