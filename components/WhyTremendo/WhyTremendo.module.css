@@ -16,3 +16,5 @@
 .headingWrapper {
   margin-left: 20px;
 }
+@media (max-device-width: 1024px) {
+}

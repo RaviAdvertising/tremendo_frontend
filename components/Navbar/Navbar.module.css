@@ -28,3 +28,43 @@
   border-radius: 18px;
   color: #fff;
 }
+.mobileBase {
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12px 0px 16px;
+  position: fixed;
+  background-color: rgb(255, 255, 255);
+  top: 0px;
+}
+.toggleIcon {
+  padding-left: 10px;
+  position: absolute;
+  left: 0px;
+  top: 32%;
+}
+.overlayBase {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.48);
+  top: 95px;
+  transition: transform 0.5s;
+  left: 0;
+}
+.contentWrapper {
+  width: 80%;
+  background-color: #f3f3f3;
+  height: 100%;
+  position: absolute;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+@media (max-device-width: 1024px) {
+  .menuWrapper {
+    padding: 5px 10px;
+  }
+}

@@ -16,8 +16,13 @@ import Image from "next/image";
 import CourseBox from "../components/CourseBox/CourseBox";
 import PromotionBox from "../components/PromotionBox/PromotionBox";
 import HomeCarousal from "../components/Carousal/HomeCarousal";
+import DesktopOnly from "../components/DeviceCheck/DesktopOnly";
+import MobileOnly from "../components/DeviceCheck/MobileOnly";
+import { useContext } from "react";
+import { DeviceContext } from "./_app";
 
-export default function Home() {
+export default function Home({}) {
+  const { isMobileView } = useContext(DeviceContext);
   return (
     <div>
       <Head>
@@ -77,30 +82,44 @@ export default function Home() {
           <div className={styles.whyTremendoHeading}>Why tremendo</div>
           <div className={styles.borderLineStyling}></div>
         </div>
-        <div className={styles.imageWhyWrapper}>
-          <div className={styles.sections}>
-            {whyTremendo1.map((i, index) => (
-              <div key={index} className={styles.whyTremendoSection}>
-                <WhyTremendo {...i} />
-              </div>
-            ))}
+        <DesktopOnly>
+          <div className={styles.imageWhyWrapper}>
+            <div className={styles.sections}>
+              {whyTremendo1.map((i, index) => (
+                <div key={index} className={styles.whyTremendoSection}>
+                  <WhyTremendo {...i} />
+                </div>
+              ))}
+            </div>
+            <div className={styles.imgSections}>
+              <Image
+                src={"/Images/why_tremendo.png"}
+                alt={""}
+                width={"450px"}
+                height={"200px"}
+              />
+            </div>
+            <div className={styles.sections}>
+              {whyTremendo2.map((i, index) => (
+                <div key={index} className={styles.whyTremendoSection}>
+                  <WhyTremendo {...i} />
+                </div>
+              ))}
+            </div>
           </div>
-          <div className={styles.imgSections}>
-            <Image
-              src={"/Images/why_tremendo.png"}
-              alt={""}
-              width={"450px"}
-              height={"200px"}
-            />
-          </div>
-          <div className={styles.sections}>
-            {whyTremendo2.map((i, index) => (
-              <div key={index} className={styles.whyTremendoSection}>
-                <WhyTremendo {...i} />
-              </div>
-            ))}
-          </div>
-        </div>
+        </DesktopOnly>
+        <MobileOnly>
+          {whyTremendo1.map((i, index) => (
+            <div key={index} className={styles.whyTremendoSection}>
+              <WhyTremendo {...i} />
+            </div>
+          ))}
+          {whyTremendo2.map((i, index) => (
+            <div key={index} className={styles.whyTremendoSection}>
+              <WhyTremendo {...i} />
+            </div>
+          ))}
+        </MobileOnly>
       </div>
 
       <div className={styles.popularCourses}>
@@ -121,7 +140,7 @@ export default function Home() {
       <div className={styles.subscribe}>
         <ImageComponent
           src={"Images/subscribe.png"}
-          paddingBottom={"10%"}
+          paddingBottom={isMobileView ? "30%" : "10%"}
           alt={"banner logo"}
         />
         <div className={styles.textBtnWrapper}>

@@ -39,3 +39,20 @@
   box-shadow: 0 8px 6px -7px #00000096;
   height: 50px;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    width: 120px;
+    height: 115px;
+  }
+  .languageDescription {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .language {
+    font-size: 13px;
+  }
+  .flagImage {
+    top: -15px;
+    height: 29px;
+  }
+}

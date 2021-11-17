@@ -2,7 +2,6 @@
   background-color: #222222;
   color: #fff;
   display: flex;
-  padding: 25px;
   font-size: 12px;
   padding: 25px 0 25px 100px;
   font-family: Open Sans;
@@ -48,4 +47,16 @@
 }
 .footerItem:hover {
   text-decoration: underline;
+}
+@media (max-device-width: 1024px) {
+  .whiteFooter {
+    padding: 15px;
+    display: inline-block;
+  }
+  .footerSection {
+    width: 100%;
+  }
+  .blackFooterbase {
+    padding: 20px;
+  }
 }

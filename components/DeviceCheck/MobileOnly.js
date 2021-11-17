@@ -1,7 +1,7 @@
-import React from "react";
-import isMobile from "../../utils/userAgents";
-export default class MobileOnly extends React.Component {
-  render() {
-    return isMobile() ? this.props.children : null;
-  }
+import { useContext } from "react";
+import { DeviceContext } from "../../pages/_app";
+
+export default function MobileOnly(props) {
+  const { isMobileView } = useContext(DeviceContext);
+  return isMobileView ? props.children : null;
 }

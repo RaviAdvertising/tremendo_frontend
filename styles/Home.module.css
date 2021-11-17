@@ -130,6 +130,7 @@
   display: flex;
   margin-top: 70px;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 .subscribe {
   position: relative;
@@ -223,4 +224,56 @@
   bottom: 40px;
   right: 40px;
   cursor: pointer;
+}
+@media (max-device-width: 1024px) {
+  .languageHeadingWrapper {
+    font-size: 20px;
+  }
+  .flagWrapper {
+    padding: 15px;
+  }
+  .flag {
+    padding: 25px;
+  }
+  .whyLearnLang {
+    padding: 15px;
+  }
+  .whyLearnHeadingWrapper {
+    font-size: 20px;
+  }
+  .whyTremendo {
+    padding: 15px;
+  }
+  .whyTremendoHeadingWrapper {
+    font-size: 20px;
+  }
+  .popularCourses {
+    padding: 15px;
+  }
+  .popularCoursesHeadingWrapper {
+    font-size: 20px;
+  }
+  .textBtnWrapper {
+    display: inline-block;
+    top: 5px;
+  }
+  .learnAnyWhere {
+    padding: 15px;
+  }
+  .learnAnyWhereHeadingWrapper {
+    font-size: 20px;
+  }
+  .boxesWrap {
+    padding: 15px;
+    display: inline-block;
+  }
+  .promoBox {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+  }
+  .promoBox:last-child {
+    margin: auto;
+    margin-top: 10px;
+  }
 }
