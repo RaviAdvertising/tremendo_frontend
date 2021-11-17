@@ -4,7 +4,11 @@ export const language = [
   { name: "Spanish", subtext: "Hola", flag: "spain_flag.png" },
   { name: "German", subtext: "Hallo", flag: "german_flag.png" },
   { name: "French", subtext: "Bonjour", flag: "french_flag.png" },
-  { name: "Portuguese", subtext: "Olá", flag: "portuguese_flag.png" },
+  {
+    name: "Portuguese",
+    subtext: "Olá",
+    flag: "portuguese_flag.png"
+  },
   { name: "Arabic", subtext: "أهلا", flag: "arabic_flag.png" },
   { name: "English", subtext: "Hello", flag: "english_flag.png" },
   { name: "Hindi", subtext: "नमस्ते", flag: "hindi_flag.png" },
@@ -16,7 +20,7 @@ export const trustFactor = [
     subheading:
       "Command over a foreign language can set you ahead in your career. It can land you better job opportunities and help you in achieving your educational goals.    ",
     image: "Images/work_experience.png",
-    backgroundColor: "#000"
+    backgroundColor: "#f78f1e"
   },
   {
     heading: "Learn new culture",
@@ -31,7 +35,7 @@ export const trustFactor = [
     subheading:
       "Learning a foreign language will help you navigate new places and make travel so much easier. It helps you to understand signs and ask for directions. ",
     image: "Images/plane.png",
-    backgroundColor: "#000"
+    backgroundColor: "#f78f1e"
   }
 ];
 export const whyTremendo1 = [

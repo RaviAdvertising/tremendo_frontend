@@ -95,7 +95,8 @@
   width: 30%;
 }
 .imgSections {
-  width: 30%;
+  width: 450px;
+  height: 200px;
   display: flex;
   justify-content: center;
 }
