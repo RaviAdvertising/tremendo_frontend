@@ -16,7 +16,6 @@ function MyApp({ Component, pageProps, isMobileView }) {
 }
 
 export default MyApp;
-
 MyApp.getInitialProps = async ({ Component, ctx }) => {
   let isMobileView = (ctx.req
     ? ctx.req.headers["user-agent"]

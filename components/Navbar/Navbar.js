@@ -59,7 +59,12 @@ function Navbar({}) {
             //   onClick={this.handleItemClick}
           />
         </Menu.Menu>
-        <Menu.Item className={styles.itemWrapper}>LOGIN</Menu.Item>
+        <Menu.Item
+          className={styles.itemWrapper}
+          onClick={() => router.push("/login")}
+        >
+          LOGIN
+        </Menu.Item>
         <Menu.Item>
           <div
             className={styles.signUpButton}
@@ -82,7 +87,7 @@ function Navbar({}) {
             <Icon name="sidebar" size={"big"} />
           </div>
           <div>
-            <Image src="Images/tremendo_logo.png" alt="logo" />
+            <Image src="Images/tremendo_logo.png" alt="logo" size={"small"} />
           </div>
         </div>
         {visible && (

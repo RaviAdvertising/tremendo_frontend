@@ -34,7 +34,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 12px 0px 16px;
+  padding: 12px 0px 12px;
   position: fixed;
   background-color: rgb(255, 255, 255);
   top: 0px;
@@ -51,7 +51,7 @@
   position: fixed;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.48);
-  top: 95px;
+  top: 75px;
   transition: transform 0.5s;
   left: 0;
 }
