@@ -33,8 +33,8 @@ export default function Home({}) {
   const { homeState, homeDispatch: dispatch } = useContext(GlobalContext);
 
   useEffect(() => {
-    getPageData(DASHBOARD_PAGE_TYPE)(dispatch);
-    getLanguages()(dispatch);
+    if (!homeState?.pageData) getPageData(DASHBOARD_PAGE_TYPE)(dispatch);
+    if (!homeState?.getLanguage) getLanguages()(dispatch);
   }, []);
 
   return (
