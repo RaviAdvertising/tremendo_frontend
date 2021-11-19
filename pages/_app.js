@@ -2,16 +2,19 @@ import React, { createContext } from "react";
 import "../styles/globals.css";
 import "semantic-ui-css/semantic.min.css";
 import Layout from "../components/Navbar/Layout";
+import { GlobalProvider } from "../Context/Provider";
 
 export const DeviceContext = createContext({});
 
 function MyApp({ Component, pageProps, isMobileView }) {
   return (
-    <DeviceContext.Provider value={{ isMobileView }}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </DeviceContext.Provider>
+    <GlobalProvider>
+      <DeviceContext.Provider value={{ isMobileView }}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </DeviceContext.Provider>
+    </GlobalProvider>
   );
 }
 

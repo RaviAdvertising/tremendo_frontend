@@ -1,0 +1,7 @@
+.inputStyling {
+  font-family: Open Sans;
+  border: none;
+}
+.inputStyling:focus {
+  outline: none;
+}

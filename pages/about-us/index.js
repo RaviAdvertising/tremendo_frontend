@@ -1,6 +1,6 @@
 import Button from "../../components/Button/Button";
 
-export default function Login(props) {
+export default function AboutUs(props) {
   return (
     <div>
       <Button
@@ -12,7 +12,7 @@ export default function Login(props) {
           padding: "10px 20px"
         }}
       >
-        Click Here
+        about us
       </Button>
     </div>
   );

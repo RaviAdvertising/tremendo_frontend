@@ -106,3 +106,5 @@ export const promotionsContent = [
       "Everyone has got their reasons to learn languages. Some acquire knowledge because of their interest, and others want to master them to get better in the professional world.We at Tremendo come up with various ways to make learning new languages easy and fun so that you can follow your ambition and develop a new skill. Learning a language could also be beneficial for you to explore new cultures and traditions across the world. It also helps you re-imagine something which you were not able to understand in the first place. Knowing a second language not only enhances your profile professionally, but also  introduces you to a variety of beliefs and traditions."
   }
 ];
+
+export const DASHBOARD_PAGE_TYPE = "dashboard";

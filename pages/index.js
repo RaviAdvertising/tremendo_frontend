@@ -5,6 +5,7 @@ import Trustfactor from "../components/Trustfactor/Trustfactor";
 import WhyTremendo from "../components/WhyTremendo/WhyTremendo";
 import styles from "../styles/Home.module.css";
 import {
+  DASHBOARD_PAGE_TYPE,
   language,
   popularCourses,
   promotionsContent,
@@ -18,11 +19,24 @@ import PromotionBox from "../components/PromotionBox/PromotionBox";
 import HomeCarousal from "../components/Carousal/HomeCarousal";
 import DesktopOnly from "../components/DeviceCheck/DesktopOnly";
 import MobileOnly from "../components/DeviceCheck/MobileOnly";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DeviceContext } from "./_app";
+import Input from "../components/Input/Input";
+import FlagWrapperSkelton from "../components/FlagWrapper/FlagWrapperSkelton";
+import { Icon } from "semantic-ui-react";
+import axiosInstance from "../utils/axiosInstance";
+import { GlobalContext } from "../Context/Provider";
+import { getLanguages, getPageData } from "../Context/Actions/Home/HomeAction";
 
 export default function Home({}) {
   const { isMobileView } = useContext(DeviceContext);
+  const { homeState, homeDispatch: dispatch } = useContext(GlobalContext);
+
+  useEffect(() => {
+    getPageData(DASHBOARD_PAGE_TYPE)(dispatch);
+    getLanguages()(dispatch);
+  }, []);
+
   return (
     <div>
       <Head>
@@ -32,7 +46,7 @@ export default function Home({}) {
       </Head>
 
       <div className={styles.bannerWaveWrapper}>
-        <HomeCarousal />
+        <HomeCarousal data={homeState} />
         <div className={styles.waveShape}>
           <ImageComponent
             src={"Images/wave_shape.png"}
@@ -41,26 +55,30 @@ export default function Home({}) {
           />
         </div>
       </div>
-
-      <div className={styles.flagWrapper}>
-        <div className={styles.languageHeadingWrapper}>
-          <div className={styles.borderLineStyling}></div>
-          <div className={styles.languageHeading}>Languages</div>
-          <div className={styles.borderLineStyling}></div>
+      {/* ---------------------------------------------------------------------------------------------- */}
+      {homeState?.getLangaugeLoading ? (
+        <FlagWrapperSkelton />
+      ) : (
+        <div className={styles.flagWrapper}>
+          <div className={styles.languageHeadingWrapper}>
+            <div className={styles.borderLineStyling}></div>
+            <div className={styles.languageHeading}>Languages</div>
+            <div className={styles.borderLineStyling}></div>
+          </div>
+          <div className={styles.allFlags}>
+            {language.map((i, index) => (
+              <div key={index} className={styles.flag}>
+                <FlagWrapper
+                  language={i.name}
+                  languageDescription={i.subtext}
+                  flagSrc={i.flag}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-        <div className={styles.allFlags}>
-          {language.map((i, index) => (
-            <div key={index} className={styles.flag}>
-              <FlagWrapper
-                language={i.name}
-                languageDescription={i.subtext}
-                flagSrc={i.flag}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
+      )}
+      {/* ---------------------------------------------------------------------------------------------- */}
       <div className={styles.whyLearnLang}>
         <div className={styles.whyLearnHeadingWrapper}>
           <div className={styles.borderLineStyling}></div>
@@ -75,7 +93,7 @@ export default function Home({}) {
           ))}
         </div>
       </div>
-
+      {/* ---------------------------------------------------------------------------------------------- */}
       <div className={styles.whyTremendo}>
         <div className={styles.whyTremendoHeadingWrapper}>
           <div className={styles.borderLineStyling}></div>
@@ -121,7 +139,7 @@ export default function Home({}) {
           ))}
         </MobileOnly>
       </div>
-
+      {/* ---------------------------------------------------------------------------------------------- */}
       <div className={styles.popularCourses}>
         <div className={styles.popularCoursesHeadingWrapper}>
           <div className={styles.borderLineStyling}></div>
@@ -136,7 +154,7 @@ export default function Home({}) {
           ))}
         </div>
       </div>
-
+      {/* ---------------------------------------------------------------------------------------------- */}
       <div className={styles.subscribe}>
         <ImageComponent
           src={"Images/subscribe.png"}
@@ -149,9 +167,16 @@ export default function Home({}) {
           </div>
           <div className={styles.subscribeInputBtnWrapper}>
             <div className={styles.subscribeInputWrapper}>
-              <input
+              <Input
+                type="text"
                 placeholder="Enter your email"
-                className={styles.subscribeInput}
+                inputStyling={{
+                  height: "49px",
+                  borderRadius: "43px",
+                  padding: "0 50px 0 24px",
+                  fontSize: "12px"
+                }}
+                handleChange={text => console.log(text)}
               />
             </div>
             <div>
@@ -160,7 +185,7 @@ export default function Home({}) {
           </div>
         </div>
       </div>
-
+      {/* ---------------------------------------------------------------------------------------------- */}
       <div className={styles.learnAnyWhere}>
         <div className={styles.learnAnyWhereHeadingWrapper}>
           <div className={styles.borderLineStyling}></div>
@@ -179,7 +204,7 @@ export default function Home({}) {
           />
         </div>
       </div>
-
+      {/* ---------------------------------------------------------------------------------------------- */}
       <div className={styles.promotions}>
         <div className={styles.boxesWrap}>
           {promotionsContent.map((i, index) => (
@@ -196,7 +221,7 @@ export default function Home({}) {
           />
         </div>
       </div>
-
+      {/* ---------------------------------------------------------------------------------------------- */}
       <div className={styles.chat}>
         <Image
           src={"/Images/chat.png"}
@@ -208,3 +233,10 @@ export default function Home({}) {
     </div>
   );
 }
+
+// export const getStaticProps = async context => {
+//   const response = await axiosInstance.get("/getLanguages");
+//   return {
+//     props: { response }
+//   };
+// };

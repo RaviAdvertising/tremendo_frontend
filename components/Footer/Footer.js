@@ -1,8 +1,17 @@
 import { language } from "../../utils/constants";
 import styles from "./Footer.module.css";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { LOGIN_PATH, SIGN_UP_PATH } from "../../utils/routes";
 
 export default function Footer(props) {
+  const router = useRouter();
+  if (
+    router.pathname.includes(SIGN_UP_PATH) ||
+    router.pathname.includes(LOGIN_PATH)
+  ) {
+    return false;
+  }
   return (
     <div className={styles.base}>
       <div className={styles.whiteFooter}>

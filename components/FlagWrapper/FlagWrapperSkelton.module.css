@@ -1,0 +1,20 @@
+.base {
+  background-color: #25908d;
+  padding: 70px 100px;
+}
+.box {
+  width: 185px;
+  height: 173px;
+  background-color: rgba(195, 192, 192, 0.25);
+  border-radius: 10px;
+}
+.flags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.heading {
+  background-color: rgba(195, 192, 192, 0.25);
+  height: 30px;
+  width: 100px;
+}
