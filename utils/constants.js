@@ -108,3 +108,5 @@ export const promotionsContent = [
 ];
 
 export const DASHBOARD_PAGE_TYPE = "dashboard";
+export const LOGIN_STUDENT_TAB = "For Student";
+export const LOGIN_MENTOR_TAB = "For Mentor";

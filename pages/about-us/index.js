@@ -1,4 +1,4 @@
-import Button from "../../components/Button/Button";
+import Head from "next/head";
 import Image from "next/image";
 import ImageComponent from "../../components/Image/Image";
 import styles from "../../styles/AboutUs.module.css";
@@ -175,6 +175,12 @@ export default function AboutUs() {
   };
   return (
     <div className={styles.base}>
+      <Head>
+        <title>Tremendo-About-us</title>
+        <meta name="description" content="Tremendo About us page" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <div className={styles.banner}></div>
       <div className={styles.sections}>
         <div className={styles.contentWrapper}>

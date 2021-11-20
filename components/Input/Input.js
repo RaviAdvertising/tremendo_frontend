@@ -12,6 +12,7 @@ export default function Input(props) {
         className={styles.inputStyling}
         style={props.inputStyling}
         onChange={event => handleChange(event)}
+        autoComplete="off"
       />
     </div>
   );
