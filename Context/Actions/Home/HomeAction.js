@@ -1,5 +1,5 @@
 import axiosInstance from "../../../utils/axiosInstance";
-
+import firebase from "../../../utils/firebase-config";
 export const GET_LANGUAGE_REQUEST = "get_language_request";
 export const GET_LANGUAGE_SUCCESS = "get_language_success";
 export const GET_LANGUAGE_ERROR = "get_language_error";
@@ -45,3 +45,15 @@ export const getPageData = pageType => dispatch => {
       });
     });
 };
+
+export default function socialMediaAuth(provider) {
+  return firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then(res => {
+      return res.user;
+    })
+    .catch(err => {
+      return err;
+    });
+}

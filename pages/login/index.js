@@ -7,6 +7,8 @@ import Input from "../../components/Input/Input";
 import { Checkbox, Divider } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import { SIGN_UP_PATH } from "../../utils/routes";
+import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
+import socialMediaAuth from "../../Context/Actions/Home/HomeAction";
 
 const STUDENT_BACKGROUND_COLOR = "#ecf8f8";
 const MENTOR_BACKGROUND_COLOR = "#fbeedf";
@@ -21,6 +23,11 @@ export default function Login(props) {
   const unSelectedTabStyling = {
     color: "rgba(56, 56, 56, 0.3)",
     borderBottom: "3px solid rgba(56, 56, 56, 0.3)"
+  };
+
+  const socialLogin = async provider => {
+    const res = await socialMediaAuth(provider);
+    console.log(res, res.photoURL);
   };
 
   const loginFormWithImage = () => {
@@ -92,7 +99,10 @@ export default function Login(props) {
             or login with
           </Divider>
           <div className={styles.socialLoginBtn}>
-            <div className={styles.socialBtn}>
+            <div
+              className={styles.socialBtn}
+              onClick={() => socialLogin(googleProvider)}
+            >
               <Image
                 src="/Images/google_loginbtn.png"
                 alt="google login btn"
@@ -100,7 +110,10 @@ export default function Login(props) {
                 width="200px"
               />
             </div>
-            <div className={styles.socialBtn}>
+            <div
+              className={styles.socialBtn}
+              onClick={() => socialLogin(facebookProvider)}
+            >
               <Image
                 src="/Images/facebook_loginbtn.png"
                 alt="google login btn"
