@@ -6,9 +6,11 @@ import Head from "next/head";
 import Input from "../../components/Input/Input";
 import { Checkbox, Divider } from "semantic-ui-react";
 import { useRouter } from "next/router";
-import { SIGN_UP_PATH } from "../../utils/routes";
+import { HOME_PAGE, SIGN_UP_PATH } from "../../utils/routes";
 import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
 import socialMediaAuth from "../../Context/Actions/Home/HomeAction";
+import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
+import { toast } from "react-toastify";
 
 const STUDENT_BACKGROUND_COLOR = "#ecf8f8";
 const MENTOR_BACKGROUND_COLOR = "#fbeedf";
@@ -28,28 +30,34 @@ export default function Login(props) {
   const socialLogin = async provider => {
     const res = await socialMediaAuth(provider);
     console.log(res, res.photoURL);
+    toast.success("Success Notification !", {
+      theme: "dark"
+    });
+    //router.push(HOME_PAGE);
   };
 
   const loginFormWithImage = () => {
     return (
       <div className={styles.imageAndLoginWrapper}>
-        <div
-          className={styles.loginImage}
-          style={{
-            marginLeft: selectedTab == LOGIN_STUDENT_TAB ? "85px" : "49px"
-          }}
-        >
-          <Image
-            src={`/Images/${
-              selectedTab == LOGIN_STUDENT_TAB
-                ? "student_login.png"
-                : "mentor_login.png"
-            }`}
-            alt={"login page"}
-            width={selectedTab == LOGIN_STUDENT_TAB ? "550px" : "567px"}
-            height={selectedTab == LOGIN_STUDENT_TAB ? "350px" : "515px"}
-          />
-        </div>
+        <DesktopOnly>
+          <div
+            className={styles.loginImage}
+            style={{
+              marginLeft: selectedTab == LOGIN_STUDENT_TAB ? "85px" : "49px"
+            }}
+          >
+            <Image
+              src={`/Images/${
+                selectedTab == LOGIN_STUDENT_TAB
+                  ? "student_login.png"
+                  : "mentor_login.png"
+              }`}
+              alt={"login page"}
+              width={selectedTab == LOGIN_STUDENT_TAB ? "550px" : "567px"}
+              height={selectedTab == LOGIN_STUDENT_TAB ? "350px" : "515px"}
+            />
+          </div>
+        </DesktopOnly>
         <div className={styles.loginSection}>
           <div className={styles.heading}>Hello!</div>
           <div className={styles.inputs}>

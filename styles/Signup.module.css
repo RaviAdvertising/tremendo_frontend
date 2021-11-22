@@ -97,3 +97,15 @@
   font-weight: bold;
   cursor: pointer;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    padding-right: 0;
+    padding: 40px 10px;
+  }
+  .header {
+    font-size: 22px;
+  }
+  .wrapper {
+    padding: 40px 0;
+  }
+}

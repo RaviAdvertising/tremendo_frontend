@@ -6,6 +6,7 @@ import Input from "../../components/Input/Input";
 import { Fragment } from "react";
 import { Checkbox, Divider } from "semantic-ui-react";
 import { LOGIN_PATH } from "../../utils/routes";
+import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 
 export default function Signup(props) {
   const router = useRouter();
@@ -19,14 +20,16 @@ export default function Signup(props) {
       <div className={styles.base}>
         <div className={styles.header}>START YOUR JOURNEY TODAY</div>
         <div className={styles.wrapper}>
-          <div className={styles.loginImage}>
-            <Image
-              src={`/Images/student_signup.png`}
-              alt={"sign up page"}
-              width={"1138px"}
-              height={"897px"}
-            />
-          </div>
+          <DesktopOnly>
+            <div className={styles.loginImage}>
+              <Image
+                src={`/Images/student_signup.png`}
+                alt={"sign up page"}
+                width={"1138px"}
+                height={"897px"}
+              />
+            </div>
+          </DesktopOnly>
           <div className={styles.loginSection}>
             <div className={styles.heading}>Welcome!</div>
             <div className={styles.inputs}>

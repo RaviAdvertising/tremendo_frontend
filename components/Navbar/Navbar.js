@@ -82,13 +82,16 @@ function Navbar({}) {
     return (
       <Fragment>
         <div className={styles.mobileBase}>
-          <div
-            className={styles.toggleIcon}
-            onClick={() => setVisible(!visible)}
-          >
-            <Icon name="sidebar" size={"big"} />
-          </div>
-          <div>
+          {!router.pathname.includes(SIGN_UP_PATH) &&
+            !router.pathname.includes(LOGIN_PATH) && (
+              <div
+                className={styles.toggleIcon}
+                onClick={() => setVisible(!visible)}
+              >
+                <Icon name="sidebar" size={"big"} />
+              </div>
+            )}
+          <div onClick={() => router.push(HOME_PAGE)}>
             <Image src="Images/tremendo_logo.png" alt="logo" size={"small"} />
           </div>
         </div>

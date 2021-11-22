@@ -3,6 +3,8 @@ import "../styles/globals.css";
 import "semantic-ui-css/semantic.min.css";
 import Layout from "../components/Navbar/Layout";
 import { GlobalProvider } from "../Context/Provider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 export const DeviceContext = createContext({});
 
@@ -13,6 +15,17 @@ function MyApp({ Component, pageProps, isMobileView }) {
         <Layout>
           <Component {...pageProps} />
         </Layout>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable={false}
+          pauseOnHover={false}
+        />
       </DeviceContext.Provider>
     </GlobalProvider>
   );
