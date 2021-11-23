@@ -182,11 +182,20 @@ export default function AboutUs() {
       </Head>
 
       <div className={styles.banner}>
-        <ImageComponent
-          src={"Images/aboutus_banner.png"}
-          paddingBottom={"35%"}
-          alt={"banner logo"}
-        />
+        <DesktopOnly>
+          <ImageComponent
+            src={"Images/aboutus_banner.png"}
+            paddingBottom={"35%"}
+            alt={"banner logo"}
+          />
+        </DesktopOnly>
+        <MobileOnly>
+          <ImageComponent
+            src={"Images/about_banner_mobile.png"}
+            paddingBottom={"65%"}
+            alt={"banner logo"}
+          />
+        </MobileOnly>
       </div>
       <div className={styles.sections}>
         <div className={styles.contentWrapper}>
