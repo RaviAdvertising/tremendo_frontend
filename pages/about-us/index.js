@@ -181,7 +181,13 @@ export default function AboutUs() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={styles.banner}></div>
+      <div className={styles.banner}>
+        <ImageComponent
+          src={"Images/aboutus_banner.png"}
+          paddingBottom={"35%"}
+          alt={"banner logo"}
+        />
+      </div>
       <div className={styles.sections}>
         <div className={styles.contentWrapper}>
           <div className={styles.header}>

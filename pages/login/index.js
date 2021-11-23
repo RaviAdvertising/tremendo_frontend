@@ -8,9 +8,9 @@ import { Checkbox, Divider } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import { HOME_PAGE, SIGN_UP_PATH } from "../../utils/routes";
 import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
-import socialMediaAuth from "../../Context/Actions/Home/HomeAction";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import { toast } from "react-toastify";
+import socialMediaAuth from "../../Context/Actions/Auth/AuthAction";
 
 const STUDENT_BACKGROUND_COLOR = "#ecf8f8";
 const MENTOR_BACKGROUND_COLOR = "#fbeedf";
@@ -33,7 +33,7 @@ export default function Login(props) {
     toast.success("Success Notification !", {
       theme: "dark"
     });
-    //router.push(HOME_PAGE);
+    router.push(HOME_PAGE);
   };
 
   const loginFormWithImage = () => {

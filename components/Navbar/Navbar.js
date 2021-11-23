@@ -61,17 +61,18 @@ function Navbar({}) {
               </Menu.Item>
               <Menu.Item>
                 <Button
-                  url={SIGN_UP_PATH}
-                  btnStyle={{
+                  label={"SIGN UP"}
+                  height={34}
+                  borderRadius={18}
+                  textStyle={{
                     color: "#fff",
-                    fontWeight: "600",
-                    backgroundColor: "#268f8c",
-                    borderRadius: "18px",
-                    padding: "11px 22px 10px 21px"
+                    fontWeight: "bold",
+                    fontFamily: "Montserrat",
+                    fontSize: "13px"
                   }}
-                >
-                  SIGN UP
-                </Button>
+                  border="none"
+                  onClick={() => router.push(SIGN_UP_PATH)}
+                />
               </Menu.Item>
             </Fragment>
           )}
@@ -101,7 +102,19 @@ function Navbar({}) {
             onClick={() => setVisible(!visible)}
           >
             <div className={styles.contentWrapper}>
-              <Button url={SIGN_UP_PATH}>SIGN UP</Button>
+              <Button
+                label={"SIGN UP"}
+                height={34}
+                borderRadius={18}
+                textStyle={{
+                  color: "#fff",
+                  fontWeight: "bold",
+                  fontFamily: "Montserrat",
+                  fontSize: "13px"
+                }}
+                border="none"
+                onClick={() => router.push(SIGN_UP_PATH)}
+              />
             </div>
           </div>
         )}
