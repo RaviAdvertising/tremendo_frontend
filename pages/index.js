@@ -27,6 +27,7 @@ import { Icon } from "semantic-ui-react";
 import axiosInstance from "../utils/axiosInstance";
 import { GlobalContext } from "../Context/Provider";
 import { getLanguages, getPageData } from "../Context/Actions/Home/HomeAction";
+import Button from "../components/Button/Button";
 
 export default function Home({}) {
   const { isMobileView } = useContext(DeviceContext);
@@ -66,12 +67,12 @@ export default function Home({}) {
             <div className={styles.borderLineStyling}></div>
           </div>
           <div className={styles.allFlags}>
-            {language.map((i, index) => (
+            {homeState?.getLanguage.map((i, index) => (
               <div key={index} className={styles.flag}>
                 <FlagWrapper
-                  language={i.name}
-                  languageDescription={i.subtext}
-                  flagSrc={i.flag}
+                  language={i.title}
+                  languageDescription={i.welcome_text}
+                  flagSrc={i.flag_url}
                 />
               </div>
             ))}
@@ -147,7 +148,7 @@ export default function Home({}) {
           <div className={styles.borderLineStyling}></div>
         </div>
         <div className={styles.courseBox}>
-          {popularCourses.map((i, index) => (
+          {homeState?.pageData?.popular_courses?.map((i, index) => (
             <div key={index}>
               <CourseBox {...i} />
             </div>
@@ -180,7 +181,20 @@ export default function Home({}) {
               />
             </div>
             <div>
-              <button className={styles.subscribeBtn}>SUBSCRIBE</button>
+              <Button
+                label={"SUBSCRIBE"}
+                height={49}
+                borderRadius={25}
+                backgroundColor={"#212121"}
+                textStyle={{
+                  color: "#fff",
+                  fontWeight: "bold",
+                  fontFamily: "Open Sans",
+                  fontSize: "12px"
+                }}
+                border="none"
+                onClick={() => goToLogin()}
+              />
             </div>
           </div>
         </div>

@@ -3,13 +3,22 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
 import Input from "../../components/Input/Input";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Checkbox, Divider } from "semantic-ui-react";
 import { LOGIN_PATH } from "../../utils/routes";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
+import Button from "../../components/Button/Button";
 
 export default function Signup(props) {
   const router = useRouter();
+  const [fields, setFields] = useState({});
+  const handleChange = (type, value) => {
+    console.log(([type], value));
+    setFields({ ...fields, [type]: value });
+  };
+  const goToSignUp = () => {
+    console.log(fields);
+  };
   return (
     <Fragment>
       <Head>
@@ -44,6 +53,7 @@ export default function Signup(props) {
                   padding: "0 20px 0 30px",
                   width: "100%"
                 }}
+                handleChange={e => handleChange("name", e)}
               />
             </div>
             <div className={styles.inputs}>
@@ -58,6 +68,7 @@ export default function Signup(props) {
                   padding: "0 20px 0 30px",
                   width: "100%"
                 }}
+                handleChange={e => handleChange("dob", e)}
               />
             </div>
             <div className={styles.inputs}>
@@ -72,6 +83,7 @@ export default function Signup(props) {
                   padding: "0 20px 0 30px",
                   width: "100%"
                 }}
+                handleChange={e => handleChange("phone_no", e)}
               />
             </div>
             <div className={styles.inputs}>
@@ -86,6 +98,7 @@ export default function Signup(props) {
                   padding: "0 20px 0 30px",
                   width: "100%"
                 }}
+                handleChange={e => handleChange("email", e)}
               />
             </div>
             <div className={styles.inputs}>
@@ -100,16 +113,23 @@ export default function Signup(props) {
                   padding: "0 20px 0 30px",
                   width: "100%"
                 }}
+                handleChange={e => handleChange("password", e)}
               />
             </div>
-            <div
-              className={styles.loginBtn}
-              style={{
-                backgroundColor: "#25908d"
+            <Button
+              label={"Create Account"}
+              height={55}
+              borderRadius={43}
+              backgroundColor={"#25908d"}
+              textStyle={{
+                color: "#fff",
+                fontWeight: "bold",
+                fontFamily: "Open Sans",
+                fontSize: "16px"
               }}
-            >
-              Create Account
-            </div>
+              border="none"
+              onClick={() => goToSignUp()}
+            />
             <Divider horizontal className={styles.dividerStyle}>
               or signup with
             </Divider>

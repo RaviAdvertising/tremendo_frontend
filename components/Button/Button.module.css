@@ -9,7 +9,7 @@
   font-size: 14px;
   transition: 300ms;
   position: relative;
-  padding: 0 15px;
+  padding: 0 20px;
 }
 .base:after {
   content: "";

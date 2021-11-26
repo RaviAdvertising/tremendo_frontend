@@ -11,12 +11,14 @@ import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import { toast } from "react-toastify";
 import socialMediaAuth from "../../Context/Actions/Auth/AuthAction";
+import Button from "../../components/Button/Button";
 
 const STUDENT_BACKGROUND_COLOR = "#ecf8f8";
 const MENTOR_BACKGROUND_COLOR = "#fbeedf";
 
 export default function Login(props) {
   const [selectedTab, setSelectedTab] = useState(LOGIN_STUDENT_TAB);
+  const [fields, setFields] = useState({});
   const router = useRouter();
   const selectedTabStyling = {
     color: "#212121",
@@ -34,6 +36,13 @@ export default function Login(props) {
       theme: "dark"
     });
     router.push(HOME_PAGE);
+  };
+  const handleChange = (type, value) => {
+    console.log(([type], value));
+    setFields({ ...fields, [type]: value });
+  };
+  const goToLogin = () => {
+    console.log(fields);
   };
 
   const loginFormWithImage = () => {
@@ -72,11 +81,12 @@ export default function Login(props) {
                 padding: "0 20px 0 30px",
                 width: "100%"
               }}
+              handleChange={e => handleChange("email", e)}
             />
           </div>
           <div className={styles.inputs}>
             <Input
-              type="text"
+              type="password"
               placeholder="Password"
               inputStyling={{
                 height: "50px",
@@ -86,6 +96,7 @@ export default function Login(props) {
                 padding: "0 20px 0 30px",
                 width: "100%"
               }}
+              handleChange={e => handleChange("password", e)}
             />
           </div>
           <div className={styles.remeberMeAndForgotPwd}>
@@ -94,15 +105,22 @@ export default function Login(props) {
             </div>
             <div className={styles.forgotPwd}>Forgot Password?</div>
           </div>
-          <div
-            className={styles.loginBtn}
-            style={{
-              backgroundColor:
-                selectedTab == LOGIN_STUDENT_TAB ? "#25908d" : "#f78f1e"
+          <Button
+            label={"LOG IN"}
+            height={55}
+            borderRadius={43}
+            backgroundColor={
+              selectedTab == LOGIN_STUDENT_TAB ? "#25908d" : "#f78f1e"
+            }
+            textStyle={{
+              color: "#fff",
+              fontWeight: "bold",
+              fontFamily: "Open Sans",
+              fontSize: "16px"
             }}
-          >
-            LOG IN
-          </div>
+            border="none"
+            onClick={() => goToLogin()}
+          />
           <Divider horizontal className={styles.dividerStyle}>
             or login with
           </Divider>

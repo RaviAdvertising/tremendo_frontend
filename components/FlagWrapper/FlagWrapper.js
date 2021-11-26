@@ -9,8 +9,8 @@ export default function FlagWrapper(props) {
     <div className={styles.base}>
       <div className={styles.flagImage}>
         <Image
-          src={`/Images/${props.flagSrc}`}
-          alt={"flags"}
+          src={props.flagSrc}
+          alt={props.language}
           width={isMobileView ? "70px" : "100px"}
           height={isMobileView ? "30px" : "50px"}
         />

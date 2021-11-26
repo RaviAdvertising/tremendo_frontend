@@ -240,18 +240,28 @@
   }
   .whyLearnHeadingWrapper {
     font-size: 20px;
+    line-height: 28px;
+    margin-top: 16px;
   }
   .whyTremendo {
     padding: 15px;
   }
   .whyTremendoHeadingWrapper {
     font-size: 20px;
+    margin-top: 16px;
+  }
+  .whyTremendoHeading {
+    line-height: 28px;
   }
   .popularCourses {
     padding: 15px;
   }
   .popularCoursesHeadingWrapper {
     font-size: 20px;
+    margin-top: 16px;
+  }
+  .popularCoursesHeading {
+    line-height: 28px;
   }
   .textBtnWrapper {
     display: inline-block;
@@ -263,10 +273,15 @@
   }
   .learnAnyWhereHeadingWrapper {
     font-size: 20px;
+    margin-top: 16px;
+  }
+  .learnAnyWhereHeading {
+    line-height: 28px;
   }
   .boxesWrap {
     padding: 15px;
     display: inline-block;
+    padding-bottom: 50px;
   }
   .promoBox {
     width: 80%;
@@ -298,5 +313,9 @@
   .subscribeInputBtnWrapper {
     margin-left: 0;
     margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .waveShape {
+    bottom: 0;
   }
 }

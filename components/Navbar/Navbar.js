@@ -89,7 +89,11 @@ function Navbar({}) {
                 className={styles.toggleIcon}
                 onClick={() => setVisible(!visible)}
               >
-                <Icon name="sidebar" size={"big"} />
+                <div className={`${visible && styles.hamburger}`}>
+                  <span className={styles.line}></span>
+                  <span className={styles.line}></span>
+                  <span className={styles.line}></span>
+                </div>
               </div>
             )}
           <div onClick={() => router.push(HOME_PAGE)}>
@@ -102,19 +106,33 @@ function Navbar({}) {
             onClick={() => setVisible(!visible)}
           >
             <div className={styles.contentWrapper}>
-              <Button
-                label={"SIGN UP"}
-                height={34}
-                borderRadius={18}
-                textStyle={{
-                  color: "#fff",
-                  fontWeight: "bold",
-                  fontFamily: "Montserrat",
-                  fontSize: "13px"
-                }}
-                border="none"
+              <div
+                className={styles.mwebMenus}
+                onClick={() => router.push(LOGIN_PATH)}
+              >
+                Login
+              </div>
+              <div
+                className={styles.mwebMenus}
                 onClick={() => router.push(SIGN_UP_PATH)}
-              />
+              >
+                Sign Up
+              </div>
+              <Dropdown
+                text="Languages"
+                pointing="left"
+                className={styles.mwebLanguage}
+              >
+                <Dropdown.Menu>
+                  {language.map((i, index) => (
+                    <Dropdown.Item key={index} text={i.name} />
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+              <div className={styles.mwebMenus}>Review</div>
+              <div className={styles.mwebMenus}>FAQs</div>
+              <div className={styles.mwebMenus}>Blogs</div>
+              <div className={styles.mwebMenus}>Contact Us</div>
             </div>
           </div>
         )}

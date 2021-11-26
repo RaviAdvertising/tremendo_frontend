@@ -23,7 +23,7 @@ export default function CourseBox(props) {
           />
         </div>
       </div>
-      <div className={styles.language}>{props.language}</div>
+      <div className={styles.language}>{props.title}</div>
       <div className={styles.description}>
         <ReadMore
           actionTextMore={"Read More..."}
