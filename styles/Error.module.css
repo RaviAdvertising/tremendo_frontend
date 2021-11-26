@@ -1,0 +1,7 @@
+.base {
+  background-color: #3f918d;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
