@@ -3,21 +3,92 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
 import Input from "../../components/Input/Input";
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Checkbox, Divider } from "semantic-ui-react";
-import { LOGIN_PATH } from "../../utils/routes";
+import { HOME_PAGE, LOGIN_PATH } from "../../utils/routes";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import Button from "../../components/Button/Button";
+import {
+  COOKIE_TOKEN,
+  EMAIL_REGULAR_EXPRESSION,
+  LOGIN_TYPE_EMAIL,
+  LOGIN_TYPE_FB,
+  LOGIN_TYPE_GOOGLE
+} from "../../utils/constants";
+import { GlobalContext } from "../../Context/Provider";
+import socialMediaAuth, {
+  signupAuth
+} from "../../Context/Actions/Auth/AuthAction";
+import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
+import Cookies from "js-cookie";
 
 export default function Signup(props) {
   const router = useRouter();
   const [fields, setFields] = useState({});
+  const [errors, setErrors] = useState({});
+  const { authState, authDispatch: dispatch } = useContext(GlobalContext);
+  if (Cookies.get(COOKIE_TOKEN)) {
+    router.replace(HOME_PAGE);
+    return false;
+  }
   const handleChange = (type, value) => {
-    console.log(([type], value));
     setFields({ ...fields, [type]: value });
+    setErrors({});
   };
-  const goToSignUp = () => {
-    console.log(fields);
+
+  const socialLogin = async (provider, type) => {
+    const res = await socialMediaAuth(provider);
+    if (!res.message) {
+      const payload = {
+        ...fields,
+        type: type,
+        gg_token: "",
+        fb_token: ""
+      };
+      await signupAuth(payload)(dispatch);
+      Cookies.set(COOKIE_TOKEN, res.za);
+      toast.success("Success Notification !", {
+        theme: "dark"
+      });
+      router.push(HOME_PAGE);
+    }
+  };
+
+  const goToSignUp = async () => {
+    let errors = { ...errors };
+    if (!fields.name) {
+      errors["name"] = "Please Enter Name";
+      setErrors(errors);
+      return false;
+    } else if (!fields.dob) {
+      errors["dob"] = "Please Enter Date of Birth";
+      setErrors(errors);
+      return false;
+    } else if (!fields.phone_no) {
+      errors["phone_no"] = "Please Enter Phone number";
+      setErrors(errors);
+      return false;
+    } else if (!fields.email) {
+      errors["email"] = "Please Enter Email Id";
+      setErrors(errors);
+      return false;
+    } else if (fields.email && !EMAIL_REGULAR_EXPRESSION.test(fields.email)) {
+      errors["email"] = "Please Enter Correct Email Id";
+      setErrors(errors);
+      return false;
+    } else if (!fields.password) {
+      errors["password"] = "Please Enter Password";
+      setErrors(errors);
+      return false;
+    } else {
+      const payload = {
+        ...fields,
+        type: LOGIN_TYPE_EMAIL,
+        gg_token: "",
+        fb_token: ""
+      };
+      await signupAuth(payload)(dispatch);
+    }
   };
   return (
     <Fragment>
@@ -55,6 +126,9 @@ export default function Signup(props) {
                 }}
                 handleChange={e => handleChange("name", e)}
               />
+              {errors["name"] && (
+                <div className={styles.errorMsg}>{errors["name"]}</div>
+              )}
             </div>
             <div className={styles.inputs}>
               <Input
@@ -70,6 +144,9 @@ export default function Signup(props) {
                 }}
                 handleChange={e => handleChange("dob", e)}
               />
+              {errors["dob"] && (
+                <div className={styles.errorMsg}>{errors["dob"]}</div>
+              )}
             </div>
             <div className={styles.inputs}>
               <Input
@@ -85,6 +162,9 @@ export default function Signup(props) {
                 }}
                 handleChange={e => handleChange("phone_no", e)}
               />
+              {errors["phone_no"] && (
+                <div className={styles.errorMsg}>{errors["phone_no"]}</div>
+              )}
             </div>
             <div className={styles.inputs}>
               <Input
@@ -100,6 +180,9 @@ export default function Signup(props) {
                 }}
                 handleChange={e => handleChange("email", e)}
               />
+              {errors["email"] && (
+                <div className={styles.errorMsg}>{errors["email"]}</div>
+              )}
             </div>
             <div className={styles.inputs}>
               <Input
@@ -115,6 +198,9 @@ export default function Signup(props) {
                 }}
                 handleChange={e => handleChange("password", e)}
               />
+              {errors["password"] && (
+                <div className={styles.errorMsg}>{errors["password"]}</div>
+              )}
             </div>
             <Button
               label={"Create Account"}
@@ -127,6 +213,7 @@ export default function Signup(props) {
                 fontFamily: "Open Sans",
                 fontSize: "16px"
               }}
+              loading={authState?.signupLoading}
               border="none"
               onClick={() => goToSignUp()}
             />
@@ -134,7 +221,10 @@ export default function Signup(props) {
               or signup with
             </Divider>
             <div className={styles.socialLoginBtn}>
-              <div className={styles.socialBtn}>
+              <div
+                className={styles.socialBtn}
+                onClick={() => socialLogin(googleProvider, LOGIN_TYPE_GOOGLE)}
+              >
                 <Image
                   src="/Images/google_loginbtn.png"
                   alt="google login btn"
@@ -142,7 +232,10 @@ export default function Signup(props) {
                   width="200px"
                 />
               </div>
-              <div className={styles.socialBtn}>
+              <div
+                className={styles.socialBtn}
+                onClick={() => socialLogin(facebookProvider, LOGIN_TYPE_FB)}
+              >
                 <Image
                   src="/Images/facebook_loginbtn.png"
                   alt="google login btn"

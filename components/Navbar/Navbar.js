@@ -9,7 +9,7 @@ import {
   Icon,
   Sidebar
 } from "semantic-ui-react";
-import { language } from "../../utils/constants";
+import { COOKIE_TOKEN, language } from "../../utils/constants";
 import { useRouter } from "next/router";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
 import MobileOnly from "../DeviceCheck/MobileOnly";
@@ -20,10 +20,20 @@ import {
   LOGIN_PATH,
   SIGN_UP_PATH
 } from "../../utils/routes";
+import Cookies from "js-cookie";
 
 function Navbar({}) {
   const [visible, setVisible] = useState(false);
   const router = useRouter();
+
+  const signUpAndLogout = () => {
+    if (Cookies.get(COOKIE_TOKEN)) {
+      Cookies.remove(COOKIE_TOKEN);
+    } else {
+      router.push(SIGN_UP_PATH);
+    }
+  };
+
   const desktopNavbar = () => {
     return (
       <Menu fixed="top" secondary className={styles.menuWrapper}>
@@ -53,15 +63,17 @@ function Navbar({}) {
                 <Menu.Item name="BLOGS" className={styles.itemWrapper} />
                 <Menu.Item name="CONTACT US" className={styles.itemWrapper} />
               </Menu.Menu>
-              <Menu.Item
-                className={styles.itemWrapper}
-                onClick={() => router.push(LOGIN_PATH)}
-              >
-                LOGIN
-              </Menu.Item>
+              {!Cookies.get(COOKIE_TOKEN) && (
+                <Menu.Item
+                  className={styles.itemWrapper}
+                  onClick={() => router.push(LOGIN_PATH)}
+                >
+                  LOGIN
+                </Menu.Item>
+              )}
               <Menu.Item>
                 <Button
-                  label={"SIGN UP"}
+                  label={Cookies.get(COOKIE_TOKEN) ? "LOG OUT" : "SIGN UP"}
                   height={34}
                   borderRadius={18}
                   textStyle={{
@@ -71,7 +83,7 @@ function Navbar({}) {
                     fontSize: "13px"
                   }}
                   border="none"
-                  onClick={() => router.push(SIGN_UP_PATH)}
+                  onClick={() => signUpAndLogout()}
                 />
               </Menu.Item>
             </Fragment>

@@ -1,6 +1,14 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import styles from "../../styles/Login.module.css";
-import { LOGIN_MENTOR_TAB, LOGIN_STUDENT_TAB } from "../../utils/constants";
+import {
+  COOKIE_TOKEN,
+  EMAIL_REGULAR_EXPRESSION,
+  LOGIN_MENTOR_TAB,
+  LOGIN_STUDENT_TAB,
+  LOGIN_TYPE_EMAIL,
+  LOGIN_TYPE_FB,
+  LOGIN_TYPE_GOOGLE
+} from "../../utils/constants";
 import Image from "next/image";
 import Head from "next/head";
 import Input from "../../components/Input/Input";
@@ -10,8 +18,12 @@ import { HOME_PAGE, SIGN_UP_PATH } from "../../utils/routes";
 import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import { toast } from "react-toastify";
-import socialMediaAuth from "../../Context/Actions/Auth/AuthAction";
+import socialMediaAuth, {
+  loginAuth
+} from "../../Context/Actions/Auth/AuthAction";
 import Button from "../../components/Button/Button";
+import Cookies from "js-cookie";
+import { GlobalContext } from "../../Context/Provider";
 
 const STUDENT_BACKGROUND_COLOR = "#ecf8f8";
 const MENTOR_BACKGROUND_COLOR = "#fbeedf";
@@ -19,7 +31,14 @@ const MENTOR_BACKGROUND_COLOR = "#fbeedf";
 export default function Login(props) {
   const [selectedTab, setSelectedTab] = useState(LOGIN_STUDENT_TAB);
   const [fields, setFields] = useState({});
+  const [errors, setErrors] = useState({});
+  const { authState, authDispatch: dispatch } = useContext(GlobalContext);
   const router = useRouter();
+
+  if (Cookies.get(COOKIE_TOKEN)) {
+    router.replace(HOME_PAGE);
+    return false;
+  }
   const selectedTabStyling = {
     color: "#212121",
     borderBottom: "3px solid #212121"
@@ -29,21 +48,56 @@ export default function Login(props) {
     borderBottom: "3px solid rgba(56, 56, 56, 0.3)"
   };
 
-  const socialLogin = async provider => {
+  const socialLogin = async (provider, type) => {
     const res = await socialMediaAuth(provider);
-    console.log(res, res.photoURL);
-    toast.success("Success Notification !", {
-      theme: "dark"
-    });
-    router.push(HOME_PAGE);
+    console.log(res);
+    if (!res.message) {
+      const payload = {
+        ...fields,
+        type: type,
+        gg_token: "",
+        fb_token: ""
+      };
+      await loginAuth(payload)(dispatch);
+      Cookies.set(COOKIE_TOKEN, res.za);
+      toast.success("Success Notification !", {
+        theme: "dark"
+      });
+      router.push(HOME_PAGE);
+    }
   };
+
   const handleChange = (type, value) => {
-    console.log(([type], value));
     setFields({ ...fields, [type]: value });
+    setErrors({});
   };
-  const goToLogin = () => {
-    console.log(fields);
+
+  const goToLogin = async () => {
+    let errors = { ...errors };
+    if (!fields.email) {
+      errors["email"] = "Please Enter Email Id";
+      setErrors(errors);
+      return false;
+    } else if (fields.email && !EMAIL_REGULAR_EXPRESSION.test(fields.email)) {
+      errors["email"] = "Please Enter Correct Email Id";
+      setErrors(errors);
+      return false;
+    } else if (!fields.password) {
+      errors["password"] = "Please Enter Password";
+      setErrors(errors);
+      return false;
+    } else {
+      const payload = {
+        ...fields,
+        type: LOGIN_TYPE_EMAIL,
+        gg_token: "",
+        fb_token: ""
+      };
+      const response = await loginAuth(payload)(dispatch);
+      console.log(response);
+    }
   };
+  console.log(authState);
 
   const loginFormWithImage = () => {
     return (
@@ -83,6 +137,9 @@ export default function Login(props) {
               }}
               handleChange={e => handleChange("email", e)}
             />
+            {errors["email"] && (
+              <div className={styles.errorMsg}>{errors["email"]}</div>
+            )}
           </div>
           <div className={styles.inputs}>
             <Input
@@ -98,6 +155,9 @@ export default function Login(props) {
               }}
               handleChange={e => handleChange("password", e)}
             />
+            {errors["password"] && (
+              <div className={styles.errorMsg}>{errors["password"]}</div>
+            )}
           </div>
           <div className={styles.remeberMeAndForgotPwd}>
             <div className={styles.rememberMe}>
@@ -119,6 +179,7 @@ export default function Login(props) {
               fontSize: "16px"
             }}
             border="none"
+            loading={authState?.loginLoading}
             onClick={() => goToLogin()}
           />
           <Divider horizontal className={styles.dividerStyle}>
@@ -127,7 +188,7 @@ export default function Login(props) {
           <div className={styles.socialLoginBtn}>
             <div
               className={styles.socialBtn}
-              onClick={() => socialLogin(googleProvider)}
+              onClick={() => socialLogin(googleProvider, LOGIN_TYPE_GOOGLE)}
             >
               <Image
                 src="/Images/google_loginbtn.png"
@@ -138,7 +199,7 @@ export default function Login(props) {
             </div>
             <div
               className={styles.socialBtn}
-              onClick={() => socialLogin(facebookProvider)}
+              onClick={() => socialLogin(facebookProvider, LOGIN_TYPE_FB)}
             >
               <Image
                 src="/Images/facebook_loginbtn.png"
@@ -160,6 +221,10 @@ export default function Login(props) {
         </div>
       </div>
     );
+  };
+  const onChangeTabs = type => {
+    setSelectedTab(type);
+    setErrors({});
   };
   return (
     <div className={styles.base}>
@@ -185,7 +250,7 @@ export default function Login(props) {
                 ? selectedTabStyling
                 : unSelectedTabStyling
             }
-            onClick={() => setSelectedTab(LOGIN_STUDENT_TAB)}
+            onClick={() => onChangeTabs(LOGIN_STUDENT_TAB)}
           >
             {LOGIN_STUDENT_TAB}
           </div>
@@ -196,7 +261,7 @@ export default function Login(props) {
                 ? selectedTabStyling
                 : unSelectedTabStyling
             }
-            onClick={() => setSelectedTab(LOGIN_MENTOR_TAB)}
+            onClick={() => onChangeTabs(LOGIN_MENTOR_TAB)}
           >
             {LOGIN_MENTOR_TAB}
           </div>
