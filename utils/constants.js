@@ -66,29 +66,7 @@ export const whyTremendo2 = [
     image: "Images/feedback.png"
   }
 ];
-export const popularCourses = [
-  {
-    language: "Japanese",
-    description:
-      "Japanese is the most popular choice among East Asian languages in India because of growing India-Japan relations and this language gets you paid the most in India and abroad. Prominent Japanese brands such as Sony, Honda, Panasonic, Hitachi, Toshiba, Sanyo, Casio, Canon, Minolta, Pioneer, Nikon, Fujitsu, Suzuki, Toyota, Mitsubishi, and hundreds of more give the best career opportunities.      ",
-    image: "/Images/course1.png",
-    price: 100
-  },
-  {
-    language: "Spanish",
-    description:
-      "An estimated 37.6 million people speak Spanish as their first language which gives great career opportunities. You can find jobs in BPO, translation, interpretation, language teaching, etc. Knowing Spanish can open doors in Spain, Latin American countries like Mexico, Peru, Paraguay and Ecuador, and even the United States.      ",
-    image: "/Images/course2.png",
-    price: 100
-  },
-  {
-    language: "German",
-    description:
-      "German is the second most popular foreign language in India. Knowing the German language offers plenty of job opportunities in many big German companies such as Volkswagen, BASF, Daimler, BMW, Bosch, Siemens, etc. As the world’s third-largest contributor to research and development, knowing German can be a key to succeeding in these fields globally.",
-    image: "/Images/course3.png",
-    price: 100
-  }
-];
+
 export const promotionsContent = [
   {
     heading: "Who we are",

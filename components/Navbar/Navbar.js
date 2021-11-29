@@ -73,7 +73,10 @@ function Navbar({}) {
                 <Dropdown text="LANGUAGES" className={styles.dropdownWrapper}>
                   <Dropdown.Menu>
                     {language.map((i, index) => (
-                      <Dropdown.Item key={index} text={i.name} />
+                      <Dropdown.Item
+                        key={index}
+                        text={`${i.name}  (${i.subtext})`}
+                      />
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
