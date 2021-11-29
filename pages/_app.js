@@ -5,6 +5,7 @@ import Layout from "../components/Navbar/Layout";
 import { GlobalProvider } from "../Context/Provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const DeviceContext = createContext({});
 

@@ -103,6 +103,18 @@
   margin-top: 5px;
   padding-left: 22px;
 }
+.dateInput {
+  height: 50px;
+  border-radius: 43px;
+  border: 1px solid grey;
+  font-size: 16px;
+  padding: 0px 20px 0px 30px;
+  width: 100%;
+  background: #fff;
+  font-size: 16px;
+  font-family: Open Sans;
+  text-align: left;
+}
 @media (max-device-width: 1024px) {
   .base {
     padding-right: 0;

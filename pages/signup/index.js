@@ -23,6 +23,7 @@ import socialMediaAuth, {
 import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import DatePicker from "react-datepicker";
 
 export default function Signup(props) {
   const router = useRouter();
@@ -108,6 +109,17 @@ export default function Signup(props) {
       }
     }
   };
+  const DateInput = ({ value, onClick }) => {
+    return (
+      <button
+        className={styles.dateInput}
+        style={{ color: !value && "gray" }}
+        onClick={onClick}
+      >
+        {value ? value : "DOB"}
+      </button>
+    );
+  };
   return (
     <Fragment>
       <Head>
@@ -149,19 +161,18 @@ export default function Signup(props) {
               )}
             </div>
             <div className={styles.inputs}>
-              <Input
-                type="text"
-                placeholder="DOB (DD-MM-YY)"
-                inputStyling={{
-                  height: "50px",
-                  borderRadius: "43px",
-                  border: "1px solid grey",
-                  fontSize: "16px",
-                  padding: "0 20px 0 30px",
-                  width: "100%"
-                }}
-                handleChange={e => handleChange("dob", e)}
+              <DatePicker
+                selected={fields.dob}
+                onChange={date => handleChange("dob", date)}
+                customInput={<DateInput />}
+                dateFormat="MMMM d, yyyy"
+                maxDate={new Date()}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
               />
+
               {errors["dob"] && (
                 <div className={styles.errorMsg}>{errors["dob"]}</div>
               )}
