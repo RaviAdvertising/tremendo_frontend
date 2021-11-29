@@ -9,6 +9,10 @@ export const SIGNUP_REQUEST = "signup_request";
 export const SIGNUP_SUCCESS = "signup_success";
 export const SIGNUP_ERROR = "signup_error";
 
+export const LOGOUT_REQUEST = "logout_request";
+export const LOGOUT_SUCCESS = "logout_success";
+export const LOGOUT_ERROR = "logout_error";
+
 export default function socialMediaAuth(provider) {
   return firebase
     .auth()
@@ -23,40 +27,78 @@ export default function socialMediaAuth(provider) {
 
 export const loginAuth = payload => dispatch => {
   dispatch({ type: LOGIN_REQUEST });
-  return new Promise((resolve, reject) => {
-    axiosInstance
-      .post("/login", payload)
-      .then(res => {
-        resolve(res.data);
-        return dispatch({
-          type: LOGIN_SUCCESS,
-          data: res.data.data
-        });
-      })
-      .catch(err => {
-        reject(err);
-        return dispatch({
-          type: LOGIN_ERROR,
-          error: err.message
-        });
+  return axiosInstance
+    .post("/login", payload)
+    .then(res => {
+      dispatch({
+        type: LOGIN_SUCCESS,
+        data: res.data.data
       });
-  });
+      return {
+        type: LOGIN_SUCCESS,
+        data: res.data
+      };
+    })
+    .catch(err => {
+      dispatch({
+        type: LOGIN_ERROR,
+        error: err.response.data
+      });
+      return {
+        type: LOGIN_ERROR,
+        error: err.response.data
+      };
+    });
 };
 
 export const signupAuth = payload => dispatch => {
   dispatch({ type: SIGNUP_REQUEST });
-  axiosInstance
+  return axiosInstance
     .post("/signup", payload)
     .then(res => {
       dispatch({
         type: SIGNUP_SUCCESS,
         data: res.data.data
       });
+      return {
+        type: SIGNUP_SUCCESS,
+        data: res.data
+      };
     })
     .catch(err => {
       dispatch({
         type: SIGNUP_ERROR,
-        error: err.message
+        error: err.response.data
       });
+      return {
+        type: SIGNUP_ERROR,
+        error: err.response.data
+      };
+    });
+};
+
+export const logoutAuth = payload => dispatch => {
+  dispatch({ type: LOGOUT_REQUEST });
+  return axiosInstance
+    .post("/logout", payload)
+    .then(res => {
+      dispatch({
+        type: LOGOUT_SUCCESS,
+        data: res.data.data
+      });
+      return {
+        type: LOGOUT_SUCCESS,
+        data: res.data
+      };
+    })
+    .catch(err => {
+      dispatch({
+        type: LOGOUT_ERROR,
+        error: err.response.data
+      });
+      return {
+        type: LOGOUT_ERROR,
+        error: err.response.data
+      };
     });
 };

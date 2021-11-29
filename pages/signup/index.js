@@ -17,10 +17,12 @@ import {
 } from "../../utils/constants";
 import { GlobalContext } from "../../Context/Provider";
 import socialMediaAuth, {
-  signupAuth
+  signupAuth,
+  SIGNUP_ERROR
 } from "../../Context/Actions/Auth/AuthAction";
 import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 export default function Signup(props) {
   const router = useRouter();
@@ -38,20 +40,26 @@ export default function Signup(props) {
 
   const socialLogin = async (provider, type) => {
     const res = await socialMediaAuth(provider);
-    if (!res.message) {
-      const payload = {
-        ...fields,
-        type: type,
-        gg_token: "",
-        fb_token: ""
-      };
-      await signupAuth(payload)(dispatch);
-      Cookies.set(COOKIE_TOKEN, res.za);
-      toast.success("Success Notification !", {
-        theme: "dark"
+    // if (!res.message) {
+    const payload = {
+      email: res.email,
+      name: type == LOGIN_TYPE_GOOGLE ? res.displayName : res.email,
+      type: type,
+      gg_token: type == LOGIN_TYPE_GOOGLE ? res.za : "",
+      fb_token: type == LOGIN_TYPE_FB ? res.credential.accessToken : ""
+    };
+    const response = await signupAuth(payload)(dispatch);
+    if (response.type == SIGNUP_ERROR) {
+      toast.error(response.error.msg, {
+        theme: "colored"
+      });
+    } else {
+      toast.success(response.data.msg, {
+        theme: "colored"
       });
       router.push(HOME_PAGE);
     }
+    // }
   };
 
   const goToSignUp = async () => {
@@ -64,8 +72,8 @@ export default function Signup(props) {
       errors["dob"] = "Please Enter Date of Birth";
       setErrors(errors);
       return false;
-    } else if (!fields.phone_no) {
-      errors["phone_no"] = "Please Enter Phone number";
+    } else if (!fields.phone_number) {
+      errors["phone_number"] = "Please Enter Phone number";
       setErrors(errors);
       return false;
     } else if (!fields.email) {
@@ -87,7 +95,17 @@ export default function Signup(props) {
         gg_token: "",
         fb_token: ""
       };
-      await signupAuth(payload)(dispatch);
+      const response = await signupAuth(payload)(dispatch);
+      if (response.type == SIGNUP_ERROR) {
+        toast.error(response.error.msg, {
+          theme: "colored"
+        });
+      } else {
+        toast.success(response.data.msg, {
+          theme: "colored"
+        });
+        router.push(HOME_PAGE);
+      }
     }
   };
   return (
@@ -160,10 +178,10 @@ export default function Signup(props) {
                   padding: "0 20px 0 30px",
                   width: "100%"
                 }}
-                handleChange={e => handleChange("phone_no", e)}
+                handleChange={e => handleChange("phone_number", e)}
               />
-              {errors["phone_no"] && (
-                <div className={styles.errorMsg}>{errors["phone_no"]}</div>
+              {errors["phone_number"] && (
+                <div className={styles.errorMsg}>{errors["phone_number"]}</div>
               )}
             </div>
             <div className={styles.inputs}>

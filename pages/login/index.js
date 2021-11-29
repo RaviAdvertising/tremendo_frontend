@@ -19,7 +19,8 @@ import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import { toast } from "react-toastify";
 import socialMediaAuth, {
-  loginAuth
+  loginAuth,
+  LOGIN_ERROR
 } from "../../Context/Actions/Auth/AuthAction";
 import Button from "../../components/Button/Button";
 import Cookies from "js-cookie";
@@ -51,20 +52,25 @@ export default function Login(props) {
   const socialLogin = async (provider, type) => {
     const res = await socialMediaAuth(provider);
     console.log(res);
-    if (!res.message) {
-      const payload = {
-        ...fields,
-        type: type,
-        gg_token: "",
-        fb_token: ""
-      };
-      await loginAuth(payload)(dispatch);
-      Cookies.set(COOKIE_TOKEN, res.za);
-      toast.success("Success Notification !", {
-        theme: "dark"
+    // if (!res.message) {
+    const payload = {
+      email: res.email,
+      type: type,
+      gg_token: type == LOGIN_TYPE_GOOGLE ? res.za : "",
+      fb_token: type == LOGIN_TYPE_FB ? res.credential.accessToken : ""
+    };
+    const response = await loginAuth(payload)(dispatch);
+    if (response.type == LOGIN_ERROR) {
+      toast.error(response.error.msg, {
+        theme: "colored"
+      });
+    } else {
+      toast.success(response.data.msg, {
+        theme: "colored"
       });
       router.push(HOME_PAGE);
     }
+    // }
   };
 
   const handleChange = (type, value) => {
@@ -94,10 +100,18 @@ export default function Login(props) {
         fb_token: ""
       };
       const response = await loginAuth(payload)(dispatch);
-      console.log(response);
+      if (response.type == LOGIN_ERROR) {
+        toast.error(response.error.msg, {
+          theme: "colored"
+        });
+      } else {
+        toast.success(response.data.msg, {
+          theme: "colored"
+        });
+        router.push(HOME_PAGE);
+      }
     }
   };
-  console.log(authState);
 
   const loginFormWithImage = () => {
     return (

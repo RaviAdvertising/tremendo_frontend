@@ -9,7 +9,7 @@ import {
   Icon,
   Sidebar
 } from "semantic-ui-react";
-import { COOKIE_TOKEN, language } from "../../utils/constants";
+import { COOKIE_TOKEN, language, USER_DETAILS } from "../../utils/constants";
 import { useRouter } from "next/router";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
 import MobileOnly from "../DeviceCheck/MobileOnly";
@@ -21,14 +21,33 @@ import {
   SIGN_UP_PATH
 } from "../../utils/routes";
 import Cookies from "js-cookie";
+import { GlobalContext } from "../../Context/Provider";
+import {
+  logoutAuth,
+  LOGOUT_ERROR
+} from "../../Context/Actions/Auth/AuthAction";
+import { toast } from "react-toastify";
 
 function Navbar({}) {
   const [visible, setVisible] = useState(false);
   const router = useRouter();
+  const { authState, authDispatch: dispatch } = useContext(GlobalContext);
 
-  const signUpAndLogout = () => {
+  const signUpAndLogout = async () => {
     if (Cookies.get(COOKIE_TOKEN)) {
-      Cookies.remove(COOKIE_TOKEN);
+      const response = await logoutAuth({
+        email: JSON.parse(localStorage.getItem(USER_DETAILS)).email
+      })(dispatch);
+      if (response.type == LOGOUT_ERROR) {
+        toast.error(response.error.msg, {
+          theme: "colored"
+        });
+      } else {
+        toast.success(response.data.msg, {
+          theme: "colored"
+        });
+        router.push(HOME_PAGE);
+      }
     } else {
       router.push(SIGN_UP_PATH);
     }
@@ -63,12 +82,18 @@ function Navbar({}) {
                 <Menu.Item name="BLOGS" className={styles.itemWrapper} />
                 <Menu.Item name="CONTACT US" className={styles.itemWrapper} />
               </Menu.Menu>
-              {!Cookies.get(COOKIE_TOKEN) && (
+              {!Cookies.get(COOKIE_TOKEN) ? (
                 <Menu.Item
                   className={styles.itemWrapper}
                   onClick={() => router.push(LOGIN_PATH)}
                 >
                   LOGIN
+                </Menu.Item>
+              ) : (
+                <Menu.Item className={styles.itemWrapper}>
+                  {JSON.parse(localStorage.getItem(USER_DETAILS)).name
+                    ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
+                    : JSON.parse(localStorage.getItem(USER_DETAILS)).email}
                 </Menu.Item>
               )}
               <Menu.Item>
@@ -82,6 +107,7 @@ function Navbar({}) {
                     fontFamily: "Montserrat",
                     fontSize: "13px"
                   }}
+                  loading={authState?.logoutLoading}
                   border="none"
                   onClick={() => signUpAndLogout()}
                 />
