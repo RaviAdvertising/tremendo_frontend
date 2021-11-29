@@ -246,8 +246,8 @@ export default function Signup(props) {
                 <Image
                   src="/Images/google_loginbtn.png"
                   alt="google login btn"
-                  height="60px"
-                  width="200px"
+                  height="55px"
+                  width="180px"
                 />
               </div>
               <div
@@ -257,8 +257,8 @@ export default function Signup(props) {
                 <Image
                   src="/Images/facebook_loginbtn.png"
                   alt="google login btn"
-                  height="60px"
-                  width="200px"
+                  height="55px"
+                  width="180px"
                 />
               </div>
             </div>

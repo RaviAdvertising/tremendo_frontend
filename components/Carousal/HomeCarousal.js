@@ -15,7 +15,7 @@ export default function HomeCarousal(props) {
         <div key={index}>
           <ImageComponent
             src={!isMobileView ? i.banner_url_full : i.banner_url_small}
-            paddingBottom={isMobileView ? "65%" : "35%"}
+            paddingBottom={isMobileView ? "62%" : "35%"}
             alt={"banner logo"}
           />
         </div>

@@ -40,7 +40,7 @@
   font-weight: bold;
   font-family: Open Sans;
   text-align: center;
-  margin: 65px 0 40px 0;
+  padding: 65px 0 40px 0;
 }
 .inputs {
   margin-bottom: 24px;
@@ -90,7 +90,7 @@
   margin-top: 50px;
   text-align: center;
   letter-spacing: 1.4px;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
 }
 .text1 {
   color: #9595a4;
@@ -103,8 +103,8 @@
 }
 .loginImage {
   display: flex;
-  justify-content: center;
   align-items: center;
+  width: 50%;
 }
 .termAndCondition {
   font-size: 18px;
@@ -137,5 +137,9 @@
   }
   .tab {
     font-size: 18px;
+  }
+  .termAndCondition {
+    font-size: 13px;
+    padding: 40px 0;
   }
 }

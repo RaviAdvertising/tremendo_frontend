@@ -57,6 +57,7 @@
 .socialLoginBtn {
   display: flex;
   margin-top: 36px;
+  justify-content: center;
 }
 .socialBtn {
   cursor: pointer;
@@ -112,5 +113,8 @@
   }
   .wrapper {
     padding: 40px 0;
+  }
+  .tandC {
+    font-size: 13px;
   }
 }

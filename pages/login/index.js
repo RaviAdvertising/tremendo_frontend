@@ -25,6 +25,7 @@ import socialMediaAuth, {
 import Button from "../../components/Button/Button";
 import Cookies from "js-cookie";
 import { GlobalContext } from "../../Context/Provider";
+import { DeviceContext } from "../_app";
 
 const STUDENT_BACKGROUND_COLOR = "#ecf8f8";
 const MENTOR_BACKGROUND_COLOR = "#fbeedf";
@@ -34,6 +35,7 @@ export default function Login(props) {
   const [fields, setFields] = useState({});
   const [errors, setErrors] = useState({});
   const { authState, authDispatch: dispatch } = useContext(GlobalContext);
+  const { isMobileView } = useContext(DeviceContext);
   const router = useRouter();
 
   if (Cookies.get(COOKIE_TOKEN)) {
@@ -119,7 +121,7 @@ export default function Login(props) {
           <div
             className={styles.loginImage}
             style={{
-              marginLeft: selectedTab == LOGIN_STUDENT_TAB ? "85px" : "49px"
+              justifyContent: selectedTab == LOGIN_STUDENT_TAB && "center"
             }}
           >
             <Image
@@ -134,102 +136,104 @@ export default function Login(props) {
             />
           </div>
         </DesktopOnly>
-        <div className={styles.loginSection}>
-          <div className={styles.heading}>Hello!</div>
-          <div className={styles.inputs}>
-            <Input
-              type="text"
-              placeholder="Email or Username"
-              inputStyling={{
-                height: "50px",
-                borderRadius: "43px",
-                fontSize: "16px",
-                border: "1px solid grey",
-                padding: "0 20px 0 30px",
-                width: "100%"
-              }}
-              handleChange={e => handleChange("email", e)}
-            />
-            {errors["email"] && (
-              <div className={styles.errorMsg}>{errors["email"]}</div>
-            )}
-          </div>
-          <div className={styles.inputs}>
-            <Input
-              type="password"
-              placeholder="Password"
-              inputStyling={{
-                height: "50px",
-                borderRadius: "43px",
-                border: "1px solid grey",
-                fontSize: "16px",
-                padding: "0 20px 0 30px",
-                width: "100%"
-              }}
-              handleChange={e => handleChange("password", e)}
-            />
-            {errors["password"] && (
-              <div className={styles.errorMsg}>{errors["password"]}</div>
-            )}
-          </div>
-          <div className={styles.remeberMeAndForgotPwd}>
-            <div className={styles.rememberMe}>
-              <Checkbox label="Remember me" />
-            </div>
-            <div className={styles.forgotPwd}>Forgot Password?</div>
-          </div>
-          <Button
-            label={"LOG IN"}
-            height={55}
-            borderRadius={43}
-            backgroundColor={
-              selectedTab == LOGIN_STUDENT_TAB ? "#25908d" : "#f78f1e"
-            }
-            textStyle={{
-              color: "#fff",
-              fontWeight: "bold",
-              fontFamily: "Open Sans",
-              fontSize: "16px"
-            }}
-            border="none"
-            loading={authState?.loginLoading}
-            onClick={() => goToLogin()}
-          />
-          <Divider horizontal className={styles.dividerStyle}>
-            or login with
-          </Divider>
-          <div className={styles.socialLoginBtn}>
-            <div
-              className={styles.socialBtn}
-              onClick={() => socialLogin(googleProvider, LOGIN_TYPE_GOOGLE)}
-            >
-              <Image
-                src="/Images/google_loginbtn.png"
-                alt="google login btn"
-                height="60px"
-                width="200px"
+        <div style={{ width: !isMobileView ? "50%" : "100%" }}>
+          <div className={styles.loginSection}>
+            <div className={styles.heading}>Hello!</div>
+            <div className={styles.inputs}>
+              <Input
+                type="text"
+                placeholder="Email or Username"
+                inputStyling={{
+                  height: "50px",
+                  borderRadius: "43px",
+                  fontSize: "16px",
+                  border: "1px solid grey",
+                  padding: "0 20px 0 30px",
+                  width: "100%"
+                }}
+                handleChange={e => handleChange("email", e)}
               />
+              {errors["email"] && (
+                <div className={styles.errorMsg}>{errors["email"]}</div>
+              )}
             </div>
-            <div
-              className={styles.socialBtn}
-              onClick={() => socialLogin(facebookProvider, LOGIN_TYPE_FB)}
-            >
-              <Image
-                src="/Images/facebook_loginbtn.png"
-                alt="google login btn"
-                height="60px"
-                width="200px"
+            <div className={styles.inputs}>
+              <Input
+                type="password"
+                placeholder="Password"
+                inputStyling={{
+                  height: "50px",
+                  borderRadius: "43px",
+                  border: "1px solid grey",
+                  fontSize: "16px",
+                  padding: "0 20px 0 30px",
+                  width: "100%"
+                }}
+                handleChange={e => handleChange("password", e)}
               />
+              {errors["password"] && (
+                <div className={styles.errorMsg}>{errors["password"]}</div>
+              )}
             </div>
-          </div>
-          <div className={styles.bottomTexts}>
-            <span className={styles.text1}>New user? </span>
-            <span
-              className={styles.text2}
-              onClick={() => router.push(SIGN_UP_PATH)}
-            >
-              Sign Up Here
-            </span>
+            <div className={styles.remeberMeAndForgotPwd}>
+              <div className={styles.rememberMe}>
+                <Checkbox label="Remember me" />
+              </div>
+              <div className={styles.forgotPwd}>Forgot Password?</div>
+            </div>
+            <Button
+              label={"LOG IN"}
+              height={55}
+              borderRadius={43}
+              backgroundColor={
+                selectedTab == LOGIN_STUDENT_TAB ? "#25908d" : "#f78f1e"
+              }
+              textStyle={{
+                color: "#fff",
+                fontWeight: "bold",
+                fontFamily: "Open Sans",
+                fontSize: "16px"
+              }}
+              border="none"
+              loading={authState?.loginLoading}
+              onClick={() => goToLogin()}
+            />
+            <Divider horizontal className={styles.dividerStyle}>
+              or login with
+            </Divider>
+            <div className={styles.socialLoginBtn}>
+              <div
+                className={styles.socialBtn}
+                onClick={() => socialLogin(googleProvider, LOGIN_TYPE_GOOGLE)}
+              >
+                <Image
+                  src="/Images/google_loginbtn.png"
+                  alt="google login btn"
+                  height="60px"
+                  width="200px"
+                />
+              </div>
+              <div
+                className={styles.socialBtn}
+                onClick={() => socialLogin(facebookProvider, LOGIN_TYPE_FB)}
+              >
+                <Image
+                  src="/Images/facebook_loginbtn.png"
+                  alt="google login btn"
+                  height="60px"
+                  width="200px"
+                />
+              </div>
+            </div>
+            <div className={styles.bottomTexts}>
+              <span className={styles.text1}>New user? </span>
+              <span
+                className={styles.text2}
+                onClick={() => router.push(SIGN_UP_PATH)}
+              >
+                Sign Up Here
+              </span>
+            </div>
           </div>
         </div>
       </div>

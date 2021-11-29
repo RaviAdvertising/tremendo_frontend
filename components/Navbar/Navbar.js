@@ -143,17 +143,31 @@ function Navbar({}) {
             onClick={() => setVisible(!visible)}
           >
             <div className={styles.contentWrapper}>
+              {!Cookies.get(COOKIE_TOKEN) ? (
+                <div
+                  className={styles.mwebMenus}
+                  onClick={() => router.push(LOGIN_PATH)}
+                >
+                  Login
+                </div>
+              ) : (
+                <div className={styles.mwebMenus}>
+                  {JSON.parse(localStorage.getItem(USER_DETAILS)).name
+                    ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
+                    : JSON.parse(localStorage.getItem(USER_DETAILS)).email}
+                </div>
+              )}
               <div
                 className={styles.mwebMenus}
-                onClick={() => router.push(LOGIN_PATH)}
+                onClick={() => signUpAndLogout()}
               >
-                Login
+                {Cookies.get(COOKIE_TOKEN) ? "Log Out" : "Sign Up"}
               </div>
               <div
                 className={styles.mwebMenus}
-                onClick={() => router.push(SIGN_UP_PATH)}
+                onClick={() => router.push(ABOUTUS_PATH)}
               >
-                Sign Up
+                About Us
               </div>
               <Dropdown
                 text="Languages"
