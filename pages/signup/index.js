@@ -43,10 +43,10 @@ export default function Signup(props) {
     // if (!res.message) {
     const payload = {
       email: res.email,
-      name: type == LOGIN_TYPE_GOOGLE ? res.displayName : res.email,
+      name: res.displayName,
       type: type,
-      gg_token: type == LOGIN_TYPE_GOOGLE ? res.za : "",
-      fb_token: type == LOGIN_TYPE_FB ? res.credential.accessToken : ""
+      gg_token: type == LOGIN_TYPE_GOOGLE && res.uid,
+      fb_token: type == LOGIN_TYPE_FB && res.uid
     };
     const response = await signupAuth(payload)(dispatch);
     if (response.type == SIGNUP_ERROR) {

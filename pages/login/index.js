@@ -51,13 +51,12 @@ export default function Login(props) {
 
   const socialLogin = async (provider, type) => {
     const res = await socialMediaAuth(provider);
-    console.log(res);
     // if (!res.message) {
     const payload = {
       email: res.email,
       type: type,
-      gg_token: type == LOGIN_TYPE_GOOGLE ? res.za : "",
-      fb_token: type == LOGIN_TYPE_FB ? res.credential.accessToken : ""
+      gg_token: type == LOGIN_TYPE_GOOGLE && res.uid,
+      fb_token: type == LOGIN_TYPE_FB && res.uid
     };
     const response = await loginAuth(payload)(dispatch);
     if (response.type == LOGIN_ERROR) {

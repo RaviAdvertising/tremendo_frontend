@@ -2,6 +2,7 @@ import styles from "./Input.module.css";
 
 export default function Input(props) {
   const handleChange = event => {
+    const NUMBER_REGEX = /^[0-9]+$/;
     if (props.handleChange) props.handleChange(event.target.value);
   };
   return (

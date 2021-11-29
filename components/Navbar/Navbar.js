@@ -107,7 +107,6 @@ function Navbar({}) {
                     fontFamily: "Montserrat",
                     fontSize: "13px"
                   }}
-                  loading={authState?.logoutLoading}
                   border="none"
                   onClick={() => signUpAndLogout()}
                 />

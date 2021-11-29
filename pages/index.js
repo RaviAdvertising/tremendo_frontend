@@ -28,10 +28,13 @@ import axiosInstance from "../utils/axiosInstance";
 import { GlobalContext } from "../Context/Provider";
 import { getLanguages, getPageData } from "../Context/Actions/Home/HomeAction";
 import Button from "../components/Button/Button";
+import PageLoader from "../components/Loader/PageLoader";
 
 export default function Home({}) {
   const { isMobileView } = useContext(DeviceContext);
-  const { homeState, homeDispatch: dispatch } = useContext(GlobalContext);
+  const { homeState, homeDispatch: dispatch, authState } = useContext(
+    GlobalContext
+  );
 
   useEffect(() => {
     if (!homeState?.pageData) getPageData(DASHBOARD_PAGE_TYPE)(dispatch);
@@ -45,7 +48,7 @@ export default function Home({}) {
         <meta name="description" content="Tremendo Education website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      {authState?.logoutLoading && <PageLoader />}
       <div className={styles.bannerWaveWrapper}>
         <HomeCarousal data={homeState} />
         <div className={styles.waveShape}>
