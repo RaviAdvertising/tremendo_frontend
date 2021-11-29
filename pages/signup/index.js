@@ -151,7 +151,7 @@ export default function Signup(props) {
             <div className={styles.inputs}>
               <Input
                 type="text"
-                placeholder="DOB"
+                placeholder="DOB (DD-MM-YY)"
                 inputStyling={{
                   height: "50px",
                   borderRadius: "43px",
