@@ -61,11 +61,7 @@ export default class Image extends React.Component {
             <div />
           ) : (
             <img
-              src={
-                this.state.showFallbackImage
-                  ? this.props.fallbackUrl
-                  : this.props.src
-              }
+              src={this.props.src}
               style={this.style(this.state.status)}
               onClick={this.props.onClick}
               className={className}
@@ -75,34 +71,6 @@ export default class Image extends React.Component {
             />
           )}
         </div>
-        {/* <div
-          className={
-            this.props.verticallyCenter
-              ? styles.verticallyCenter
-              : styles.fullWidth
-          }
-        >
-          {this.state.imageStatus !== ERROR && this.props.src ? (
-            <img
-              className={
-                this.props.verticallyCenter
-                  ? styles.verticallyCenterBase
-                  : styles.base
-              }
-              alt="No Image"
-              src={this.props.src}
-              onLoad={() => this.setState({ imageStatus: LOADED })}
-              onError={() => this.setState({ imageStatus: ERROR })}
-              style={Object.assign(
-                {},
-                { height: this.props.height },
-                this.props.style
-              )}
-            />
-          ) : (
-            <div />
-          )}
-        </div> */}
       </VisibilityChild>
     );
   }

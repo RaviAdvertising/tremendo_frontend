@@ -1,30 +1,25 @@
 import ImageComponent from "../Image/Image";
 import CarouselComponent from "./Carousel";
+import CarouselSkelton from "./CarouselSkelton";
+import { DeviceContext } from "../../pages/_app";
+import { useContext } from "react";
 
 export default function HomeCarousal(props) {
+  const { isMobileView } = useContext(DeviceContext);
+  if (props?.data?.pageDataLoading) {
+    return <CarouselSkelton />;
+  }
   return (
     <CarouselComponent>
-      <div>
-        <ImageComponent
-          src={"Images/banner1.png"}
-          paddingBottom={"35%"}
-          alt={"banner logo"}
-        />
-      </div>
-      <div>
-        <ImageComponent
-          src={"Images/banner2.png"}
-          paddingBottom={"35%"}
-          alt={"banner logo"}
-        />
-      </div>
-      <div>
-        <ImageComponent
-          src={"Images/banner.png"}
-          paddingBottom={"35%"}
-          alt={"banner logo"}
-        />
-      </div>
+      {props?.data?.pageData?.banner.map((i, index) => (
+        <div key={index}>
+          <ImageComponent
+            src={!isMobileView ? i.banner_url_full : i.banner_url_small}
+            paddingBottom={isMobileView ? "65%" : "35%"}
+            alt={"banner logo"}
+          />
+        </div>
+      ))}
     </CarouselComponent>
   );
 }

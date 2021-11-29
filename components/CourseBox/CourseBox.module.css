@@ -10,7 +10,6 @@
 .description {
   color: #fff;
   font-size: 13px;
-  font-family: Montserrat;
   font-family: Open Sans;
 }
 .imageWrapper {
@@ -37,4 +36,9 @@
 }
 .base {
   width: 270px;
+}
+@media (max-device-width: 1024px) {
+  .base {
+    margin-bottom: 35px;
+  }
 }

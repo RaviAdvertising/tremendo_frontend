@@ -9,70 +9,110 @@ import {
   Icon,
   Sidebar
 } from "semantic-ui-react";
-import { language } from "../../utils/constants";
+import { COOKIE_TOKEN, language, USER_DETAILS } from "../../utils/constants";
 import { useRouter } from "next/router";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
 import MobileOnly from "../DeviceCheck/MobileOnly";
+import Button from "../Button/Button";
+import {
+  ABOUTUS_PATH,
+  HOME_PAGE,
+  LOGIN_PATH,
+  SIGN_UP_PATH
+} from "../../utils/routes";
+import Cookies from "js-cookie";
+import { GlobalContext } from "../../Context/Provider";
+import {
+  logoutAuth,
+  LOGOUT_ERROR
+} from "../../Context/Actions/Auth/AuthAction";
+import { toast } from "react-toastify";
 
 function Navbar({}) {
   const [visible, setVisible] = useState(false);
-
   const router = useRouter();
+  const { authState, authDispatch: dispatch } = useContext(GlobalContext);
+
+  const signUpAndLogout = async () => {
+    if (Cookies.get(COOKIE_TOKEN)) {
+      const response = await logoutAuth({
+        email: JSON.parse(localStorage.getItem(USER_DETAILS)).email
+      })(dispatch);
+      if (response.type == LOGOUT_ERROR) {
+        toast.error(response.error.msg, {
+          theme: "colored"
+        });
+      } else {
+        toast.success(response.data.msg, {
+          theme: "colored"
+        });
+        router.push(HOME_PAGE);
+      }
+    } else {
+      router.push(SIGN_UP_PATH);
+    }
+  };
+
   const desktopNavbar = () => {
     return (
       <Menu fixed="top" secondary className={styles.menuWrapper}>
-        <Menu.Item>
+        <Menu.Item onClick={() => router.push(HOME_PAGE)}>
           <Image src="Images/tremendo_logo.png" alt="logo" />
         </Menu.Item>
-
-        <Menu.Menu position="right" className={styles.menuStyling}>
-          <Menu.Item
-            name="ABOUT US"
-            className={styles.itemWrapper}
-            //onClick={this.handleItemClick}
-          />
-          <Dropdown text="LANGUAGES" className={styles.dropdownWrapper}>
-            <Dropdown.Menu>
-              {language.map((i, index) => (
-                <Dropdown.Item key={index} text={i.name} />
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
-          <Menu.Item
-            name="REVIEW"
-            className={styles.itemWrapper}
-            //   onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="FAQ'S"
-            className={styles.itemWrapper}
-            //   onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="BLOGS"
-            className={styles.itemWrapper}
-            //   onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="CONTACT US"
-            className={styles.itemWrapper}
-            //   onClick={this.handleItemClick}
-          />
-        </Menu.Menu>
-        <Menu.Item
-          className={styles.itemWrapper}
-          onClick={() => router.push("/login")}
-        >
-          LOGIN
-        </Menu.Item>
-        <Menu.Item>
-          <div
-            className={styles.signUpButton}
-            onClick={() => router.push("/signup")}
-          >
-            SIGN UP
-          </div>
-        </Menu.Item>
+        {!router.pathname.includes(SIGN_UP_PATH) &&
+          !router.pathname.includes(LOGIN_PATH) && (
+            <Fragment>
+              <Menu.Menu position="right" className={styles.menuStyling}>
+                <Menu.Item
+                  name="ABOUT US"
+                  className={`${styles.itemWrapper} ${router.pathname.includes(
+                    ABOUTUS_PATH
+                  ) && styles.activeItemWrapper}`}
+                  onClick={() => router.push(ABOUTUS_PATH)}
+                />
+                <Dropdown text="LANGUAGES" className={styles.dropdownWrapper}>
+                  <Dropdown.Menu>
+                    {language.map((i, index) => (
+                      <Dropdown.Item key={index} text={i.name} />
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Menu.Item name="REVIEW" className={styles.itemWrapper} />
+                <Menu.Item name="FAQ'S" className={styles.itemWrapper} />
+                <Menu.Item name="BLOGS" className={styles.itemWrapper} />
+                <Menu.Item name="CONTACT US" className={styles.itemWrapper} />
+              </Menu.Menu>
+              {!Cookies.get(COOKIE_TOKEN) ? (
+                <Menu.Item
+                  className={styles.itemWrapper}
+                  onClick={() => router.push(LOGIN_PATH)}
+                >
+                  LOGIN
+                </Menu.Item>
+              ) : (
+                <Menu.Item className={styles.itemWrapper}>
+                  {JSON.parse(localStorage.getItem(USER_DETAILS)).name
+                    ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
+                    : JSON.parse(localStorage.getItem(USER_DETAILS)).email}
+                </Menu.Item>
+              )}
+              <Menu.Item>
+                <Button
+                  label={Cookies.get(COOKIE_TOKEN) ? "LOG OUT" : "SIGN UP"}
+                  height={34}
+                  borderRadius={18}
+                  textStyle={{
+                    color: "#fff",
+                    fontWeight: "bold",
+                    fontFamily: "Montserrat",
+                    fontSize: "13px"
+                  }}
+                  border="none"
+                  onClick={() => signUpAndLogout()}
+                />
+              </Menu.Item>
+            </Fragment>
+          )}
       </Menu>
     );
   };
@@ -80,13 +120,20 @@ function Navbar({}) {
     return (
       <Fragment>
         <div className={styles.mobileBase}>
-          <div
-            className={styles.toggleIcon}
-            onClick={() => setVisible(!visible)}
-          >
-            <Icon name="sidebar" size={"big"} />
-          </div>
-          <div>
+          {!router.pathname.includes(SIGN_UP_PATH) &&
+            !router.pathname.includes(LOGIN_PATH) && (
+              <div
+                className={styles.toggleIcon}
+                onClick={() => setVisible(!visible)}
+              >
+                <div className={`${visible && styles.hamburger}`}>
+                  <span className={styles.line}></span>
+                  <span className={styles.line}></span>
+                  <span className={styles.line}></span>
+                </div>
+              </div>
+            )}
+          <div onClick={() => router.push(HOME_PAGE)}>
             <Image src="Images/tremendo_logo.png" alt="logo" size={"small"} />
           </div>
         </div>
@@ -96,7 +143,33 @@ function Navbar({}) {
             onClick={() => setVisible(!visible)}
           >
             <div className={styles.contentWrapper}>
-              <div>Sign In</div>
+              <div
+                className={styles.mwebMenus}
+                onClick={() => router.push(LOGIN_PATH)}
+              >
+                Login
+              </div>
+              <div
+                className={styles.mwebMenus}
+                onClick={() => router.push(SIGN_UP_PATH)}
+              >
+                Sign Up
+              </div>
+              <Dropdown
+                text="Languages"
+                pointing="left"
+                className={styles.mwebLanguage}
+              >
+                <Dropdown.Menu>
+                  {language.map((i, index) => (
+                    <Dropdown.Item key={index} text={i.name} />
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+              <div className={styles.mwebMenus}>Review</div>
+              <div className={styles.mwebMenus}>FAQs</div>
+              <div className={styles.mwebMenus}>Blogs</div>
+              <div className={styles.mwebMenus}>Contact Us</div>
             </div>
           </div>
         )}

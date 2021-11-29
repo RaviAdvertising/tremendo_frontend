@@ -106,3 +106,13 @@ export const promotionsContent = [
       "Everyone has got their reasons to learn languages. Some acquire knowledge because of their interest, and others want to master them to get better in the professional world.We at Tremendo come up with various ways to make learning new languages easy and fun so that you can follow your ambition and develop a new skill. Learning a language could also be beneficial for you to explore new cultures and traditions across the world. It also helps you re-imagine something which you were not able to understand in the first place. Knowing a second language not only enhances your profile professionally, but also  introduces you to a variety of beliefs and traditions."
   }
 ];
+
+export const DASHBOARD_PAGE_TYPE = "dashboard";
+export const LOGIN_STUDENT_TAB = "For Student";
+export const LOGIN_MENTOR_TAB = "For Mentor";
+export const EMAIL_REGULAR_EXPRESSION = /[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,64}/;
+export const COOKIE_TOKEN = "tremendo_token";
+export const LOGIN_TYPE_EMAIL = "email";
+export const LOGIN_TYPE_FB = "facebook";
+export const LOGIN_TYPE_GOOGLE = "google";
+export const USER_DETAILS = "user_details";
