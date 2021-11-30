@@ -2,9 +2,9 @@
   "name": "tremendo_frontend",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "start:prod": "next start -p 80"
   },
   "dependencies": {
