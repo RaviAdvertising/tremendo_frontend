@@ -205,20 +205,26 @@ export default function AboutUs() {
             <div className={styles.borderStyling}></div>
           </div>
           <div className={styles.text}>
-            Learning new languages can be fun and exciting when you embark on
-            that journey with Tremendo. A hybrid learning platform where you get
-            live classes and get real-time feedback on your progress. We started
-            Tremendo to build a bridge of communication across the world. To
-            give every keen learner a platform where they can master any
-            language at the comfort of their home. It also helps people achieve
-            their career goals and enroll in colleges abroad. <br />
+            We started Tremendo to build a bridge of communication across the
+            world. We aim to give every keen learner a platform where they can
+            master any language at the comfort of their home.
             <br />
-            <br />A team of expert linguists and native speakers from all
-            corners of the globe come together to teach different languages
-            using the latest technologies and enjoyable and effective learning
-            features so that you feel confident to start the conversation in any
-            language. So welcome onboard amigos, and start your voyage to your
-            favorite continent.
+            Learning new languages can be fun and exciting and help you achieve
+            your career goals and enroll in colleges abroad. It also opens a
+            vast number of job opportunities for you worldwide. That is why we
+            offer education through a hybrid learning platform where you get
+            live classes and real-time feedback on your progress.
+            <br />
+            <br />
+            <br />
+            Our faculty is a team of expert linguists and native speakers from
+            all corners of the globe who have come together to teach different
+            languages. We make sure to use the latest technologies with
+            enjoyable and effective learning features so that you feel confident
+            when its time to showcase your talent.
+            <br />
+            So welcome onboard amigos, and start your voyage to your favorite
+            continent!
           </div>
           {section1()}
           {section2()}

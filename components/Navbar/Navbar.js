@@ -35,9 +35,7 @@ function Navbar({}) {
 
   const signUpAndLogout = async () => {
     if (Cookies.get(COOKIE_TOKEN)) {
-      const response = await logoutAuth({
-        email: JSON.parse(localStorage.getItem(USER_DETAILS)).email
-      })(dispatch);
+      const response = await logoutAuth(Cookies.get(COOKIE_TOKEN))(dispatch);
       if (response.type == LOGOUT_ERROR) {
         toast.error(response.error.msg, {
           theme: "colored"

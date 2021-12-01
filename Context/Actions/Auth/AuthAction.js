@@ -77,10 +77,10 @@ export const signupAuth = payload => dispatch => {
     });
 };
 
-export const logoutAuth = payload => dispatch => {
+export const logoutAuth = token => dispatch => {
   dispatch({ type: LOGOUT_REQUEST });
   return axiosInstance
-    .post("/logout", payload)
+    .delete(`/logout?access_token=${token}`)
     .then(res => {
       dispatch({
         type: LOGOUT_SUCCESS,
