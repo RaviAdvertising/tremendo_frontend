@@ -133,7 +133,7 @@ export default function Signup(props) {
           <DesktopOnly>
             <div className={styles.loginImage}>
               <Image
-                src={`/Images/student_signup.png`}
+                src={`/Images/student_signup2.png`}
                 alt={"sign up page"}
                 width={"1138px"}
                 height={"897px"}
