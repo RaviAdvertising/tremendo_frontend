@@ -1,19 +1,7 @@
 import Cookies from "js-cookie";
 import { COOKIE_TOKEN, USER_DETAILS } from "../../utils/constants";
 import * as authAction from "../Actions/Auth/AuthAction";
-const authReducer = (
-  state = {
-    loginData: "",
-    loginLoading: false,
-
-    signUpData: "",
-    signupLoading: false,
-
-    logout: "",
-    logoutLoading: false
-  },
-  action
-) => {
+const authReducer = (state, action) => {
   switch (action.type) {
     case authAction.LOGIN_REQUEST:
       return Object.assign({}, state, {

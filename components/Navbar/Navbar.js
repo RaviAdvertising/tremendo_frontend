@@ -9,7 +9,7 @@ import {
   Icon,
   Sidebar
 } from "semantic-ui-react";
-import { COOKIE_TOKEN, language, USER_DETAILS } from "../../utils/constants";
+import { COOKIE_TOKEN, USER_DETAILS } from "../../utils/constants";
 import { useRouter } from "next/router";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
 import MobileOnly from "../DeviceCheck/MobileOnly";
@@ -31,8 +31,7 @@ import { toast } from "react-toastify";
 function Navbar({}) {
   const [visible, setVisible] = useState(false);
   const router = useRouter();
-  const { authState, authDispatch: dispatch } = useContext(GlobalContext);
-
+  const { homeState, authDispatch: dispatch } = useContext(GlobalContext);
   const signUpAndLogout = async () => {
     if (Cookies.get(COOKIE_TOKEN)) {
       const response = await logoutAuth(Cookies.get(COOKIE_TOKEN))(dispatch);
@@ -70,10 +69,10 @@ function Navbar({}) {
                 />
                 <Dropdown text="LANGUAGES" className={styles.dropdownWrapper}>
                   <Dropdown.Menu>
-                    {language.map((i, index) => (
+                    {homeState.getLanguage.map((i, index) => (
                       <Dropdown.Item
                         key={index}
-                        text={`${i.name}  (${i.subtext})`}
+                        text={`${i.title}  (${i.welcome_text})`}
                       />
                     ))}
                   </Dropdown.Menu>
@@ -176,8 +175,8 @@ function Navbar({}) {
                 className={styles.mwebLanguage}
               >
                 <Dropdown.Menu>
-                  {language.map((i, index) => (
-                    <Dropdown.Item key={index} text={i.name} />
+                  {homeState.getLanguage.map((i, index) => (
+                    <Dropdown.Item key={index} text={i.title} />
                   ))}
                 </Dropdown.Menu>
               </Dropdown>

@@ -37,10 +37,10 @@ export default function Home({}) {
   );
 
   useEffect(() => {
-    if (!homeState?.pageData) getPageData(DASHBOARD_PAGE_TYPE)(dispatch);
-    if (!homeState?.getLanguage) getLanguages()(dispatch);
+    if (homeState.pageData.length == 0)
+      getPageData(DASHBOARD_PAGE_TYPE)(dispatch);
+    if (homeState.getLanguage.length == 0) getLanguages()(dispatch);
   }, []);
-
   return (
     <div>
       <Head>
@@ -48,7 +48,7 @@ export default function Home({}) {
         <meta name="description" content="Tremendo Education website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {authState?.logoutLoading && <PageLoader />}
+      {authState.logoutLoading && <PageLoader />}
       <div className={styles.bannerWaveWrapper}>
         <HomeCarousal data={homeState} />
         <div className={styles.waveShape}>
@@ -60,7 +60,7 @@ export default function Home({}) {
         </div>
       </div>
       {/* ---------------------------------------------------------------------------------------------- */}
-      {homeState?.getLangaugeLoading ? (
+      {homeState.getLangaugeLoading ? (
         <FlagWrapperSkelton />
       ) : (
         <div className={styles.flagWrapper}>
@@ -70,7 +70,7 @@ export default function Home({}) {
             <div className={styles.borderLineStyling}></div>
           </div>
           <div className={styles.allFlags}>
-            {homeState?.getLanguage.map((i, index) => (
+            {homeState.getLanguage.map((i, index) => (
               <div key={index} className={styles.flag}>
                 <FlagWrapper
                   language={i.title}
@@ -151,7 +151,7 @@ export default function Home({}) {
           <div className={styles.borderLineStyling}></div>
         </div>
         <div className={styles.courseBox}>
-          {homeState?.pageData?.popular_courses?.map((i, index) => (
+          {homeState.pageData.popular_courses?.map((i, index) => (
             <div key={index}>
               <CourseBox {...i} />
             </div>

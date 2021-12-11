@@ -1,19 +1,3 @@
-export const language = [
-  { name: "Japanese", subtext: "こんにちは", flag: "japan_flag.png" },
-  { name: "Chinese", subtext: "你好", flag: "china_flag.png" },
-  { name: "Spanish", subtext: "Hola", flag: "spain_flag.png" },
-  { name: "German", subtext: "Hallo", flag: "german_flag.png" },
-  { name: "French", subtext: "Bonjour", flag: "french_flag.png" },
-  {
-    name: "Portuguese",
-    subtext: "Olá",
-    flag: "portuguese_flag.png"
-  },
-  { name: "Arabic", subtext: "أهلا", flag: "arabic_flag.png" },
-  { name: "English", subtext: "Hello", flag: "english_flag.png" },
-  { name: "Hindi", subtext: "नमस्ते", flag: "hindi_flag.png" },
-  { name: "Russian", subtext: "Привет", flag: "russian_flag.png" }
-];
 export const trustFactor = [
   {
     heading: "Work & Experience ",

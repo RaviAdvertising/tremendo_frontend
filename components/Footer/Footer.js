@@ -1,10 +1,12 @@
-import { language } from "../../utils/constants";
 import styles from "./Footer.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { LOGIN_PATH, SIGN_UP_PATH } from "../../utils/routes";
+import { useContext } from "react";
+import { GlobalContext } from "../../Context/Provider";
 
 export default function Footer(props) {
+  const { homeState } = useContext(GlobalContext);
   const router = useRouter();
   if (
     router.pathname.includes(SIGN_UP_PATH) ||
@@ -41,9 +43,9 @@ export default function Footer(props) {
         <div className={styles.footerSection}>
           <div className={styles.heading}>Languages</div>
           <div className={styles.subheading}>
-            {language.map((i, index) => (
+            {homeState.getLanguage.map((i, index) => (
               <div key={index} className={styles.footerItem}>
-                {i.name}
+                {i.title}
               </div>
             ))}
           </div>

@@ -1,14 +1,5 @@
 import * as homeAction from "../Actions/Home/HomeAction";
-const homeReducer = (
-  state = {
-    getLanguage: [],
-    getLangaugeLoading: false,
-
-    pageData: [],
-    pageDataLoading: false
-  },
-  action
-) => {
+const homeReducer = (state, action) => {
   switch (action.type) {
     case homeAction.GET_LANGUAGE_REQUEST:
       return Object.assign({}, state, {
