@@ -24,6 +24,7 @@ import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
+import FacebookLoginComponent from "../../components/FacebookLogin/FacebookLogin";
 
 export default function Signup(props) {
   const router = useRouter();
@@ -39,16 +40,28 @@ export default function Signup(props) {
     setErrors({});
   };
 
-  const socialLogin = async (provider, type) => {
-    const res = await socialMediaAuth(provider);
-    // if (!res.message) {
-    const payload = {
-      email: res.email,
-      name: res.displayName,
-      type: type,
-      gg_token: type == LOGIN_TYPE_GOOGLE && res.uid,
-      fb_token: type == LOGIN_TYPE_FB && res.uid
-    };
+  const socialLogin = async (provider, type, fbResponse) => {
+    let payload = {};
+    if (type == LOGIN_TYPE_GOOGLE) {
+      const res = await socialMediaAuth(provider);
+      payload = {
+        email: res.email,
+        name: res.displayName,
+        type: type,
+        gg_token: type == LOGIN_TYPE_GOOGLE && res.uid,
+        fb_token: ""
+      };
+    } else {
+      console.log(fbResponse);
+      payload = {
+        email: fbResponse.email,
+        name: fbResponse.name,
+        type: type,
+        gg_token: "",
+        fb_token: fbResponse.accessToken
+      };
+    }
+
     const response = await signupAuth(payload)(dispatch);
     if (response.type == SIGNUP_ERROR) {
       toast.error(response.error.msg, {
@@ -261,17 +274,13 @@ export default function Signup(props) {
                   width="180px"
                 />
               </div>
-              <div
-                className={styles.socialBtn}
-                onClick={() => socialLogin(facebookProvider, LOGIN_TYPE_FB)}
-              >
-                <Image
-                  src="/Images/facebook_loginbtn.png"
-                  alt="google login btn"
-                  height="55px"
-                  width="180px"
-                />
-              </div>
+              <FacebookLoginComponent
+                height="55px"
+                width="180px"
+                responseFacebook={response =>
+                  socialLogin(false, LOGIN_TYPE_FB, response)
+                }
+              />
             </div>
             <div className={styles.bottomTexts}>
               <span className={styles.text1}>Already have an account? </span>
