@@ -53,7 +53,7 @@ export default function Home({}) {
         <HomeCarousal data={homeState} />
         <div className={styles.waveShape}>
           <ImageComponent
-            src={"Images/wave_shape.png"}
+            src={"/Images/wave_shape.png"}
             paddingBottom={"5%"}
             alt={"banner logo"}
           />
@@ -161,7 +161,7 @@ export default function Home({}) {
       {/* ---------------------------------------------------------------------------------------------- */}
       <div className={styles.subscribe}>
         <ImageComponent
-          src={"Images/subscribe.png"}
+          src={"/Images/subscribe.png"}
           paddingBottom={isMobileView ? "30%" : "10%"}
           alt={"banner logo"}
         />

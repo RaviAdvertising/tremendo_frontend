@@ -3,14 +3,14 @@ export const trustFactor = [
     heading: "Work & Experience ",
     subheading:
       "Command over a foreign language can set you ahead in your career. It can land you better job opportunities and help you in achieving your educational goals.    ",
-    image: "Images/work_experience.png",
+    image: "/Images/work_experience.png",
     backgroundColor: "#f78f1e"
   },
   {
     heading: "Learn new culture",
     subheading:
       "Learning a foreign language is an investment as it helps you to understand other cultures and ideologies. Knowing a new language opens up a new world for you.",
-    image: "Images/learning.png",
+    image: "/Images/learning.png",
     backgroundColor: "#39cdc9"
   },
 
@@ -18,7 +18,7 @@ export const trustFactor = [
     heading: "Travel",
     subheading:
       "Learning a foreign language will help you navigate new places and make travel so much easier. It helps you to understand signs and ask for directions. ",
-    image: "Images/plane.png",
+    image: "/Images/plane.png",
     backgroundColor: "#f78f1e"
   }
 ];
@@ -27,13 +27,13 @@ export const whyTremendo1 = [
     heading: "Affordable price",
     subheading:
       "Tremendo aims to provide the best quality teaching at the minimum and pocket-friendly costs. As all the study material is provided digitally, you do not have to buy any books.",
-    image: "Images/self-growth.png"
+    image: "/Images/self-growth.png"
   },
   {
     heading: "Quick growth",
     subheading:
       "Having command over foreign languages can provide better career opportunities and set you on the fastest route to success.",
-    image: "Images/online-class.png"
+    image: "/Images/online-class.png"
   }
 ];
 export const whyTremendo2 = [
@@ -41,13 +41,13 @@ export const whyTremendo2 = [
     heading: "Experienced mentors",
     subheading:
       "Tremendo appoints highly skilled mentors that provide both professional and personal support.",
-    image: "Images/consulting.png"
+    image: "/Images/consulting.png"
   },
   {
     heading: "Real-Time feedback",
     subheading:
       "We provide real-time feedback to ensure all students are on the right track throughout their learning journey. ",
-    image: "Images/feedback.png"
+    image: "/Images/feedback.png"
   }
 ];
 

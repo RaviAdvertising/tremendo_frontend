@@ -1,14 +1,7 @@
 import { Fragment, useState } from "react";
 import React, { useContext } from "react";
 import styles from "./Navbar.module.css";
-import {
-  Dropdown,
-  Image,
-  Menu,
-  Segment,
-  Icon,
-  Sidebar
-} from "semantic-ui-react";
+import { Dropdown, Icon, Image, Menu, Popup } from "semantic-ui-react";
 import { COOKIE_TOKEN, USER_DETAILS } from "../../utils/constants";
 import { useRouter } from "next/router";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
@@ -17,6 +10,7 @@ import Button from "../Button/Button";
 import {
   ABOUTUS_PATH,
   HOME_PAGE,
+  LANGUAGE_DETAIL,
   LOGIN_PATH,
   SIGN_UP_PATH
 } from "../../utils/routes";
@@ -27,6 +21,7 @@ import {
   LOGOUT_ERROR
 } from "../../Context/Actions/Auth/AuthAction";
 import { toast } from "react-toastify";
+import ImageComponent from "next/image";
 
 function Navbar({}) {
   const [visible, setVisible] = useState(false);
@@ -49,12 +44,12 @@ function Navbar({}) {
       router.push(SIGN_UP_PATH);
     }
   };
-
+  // const localstorageValue = JSON.parse(localStorage.getItem(USER_DETAILS));
   const desktopNavbar = () => {
     return (
       <Menu fixed="top" secondary className={styles.menuWrapper}>
         <Menu.Item onClick={() => router.push(HOME_PAGE)}>
-          <Image src="Images/tremendo_logo.png" alt="logo" />
+          <Image src="/Images/tremendo_logo.png" alt="logo" />
         </Menu.Item>
         {!router.pathname.includes(SIGN_UP_PATH) &&
           !router.pathname.includes(LOGIN_PATH) && (
@@ -67,7 +62,13 @@ function Navbar({}) {
                   ) && styles.activeItemWrapper}`}
                   onClick={() => router.push(ABOUTUS_PATH)}
                 />
-                <Dropdown text="LANGUAGES" className={styles.dropdownWrapper}>
+                <Dropdown
+                  text="LANGUAGES"
+                  className={`${
+                    styles.dropdownWrapper
+                  } ${router.pathname.includes(LANGUAGE_DETAIL) &&
+                    styles.activeItemWrapper}`}
+                >
                   <Dropdown.Menu>
                     {homeState.getLanguage.map((i, index) => (
                       <Dropdown.Item
@@ -90,27 +91,59 @@ function Navbar({}) {
                   LOGIN
                 </Menu.Item>
               ) : (
-                <Menu.Item className={styles.itemWrapper}>
-                  {JSON.parse(localStorage.getItem(USER_DETAILS)).name
-                    ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
-                    : JSON.parse(localStorage.getItem(USER_DETAILS)).email}
+                <Menu.Item>
+                  <Popup
+                    trigger={
+                      <ImageComponent
+                        src={
+                          JSON.parse(localStorage.getItem(USER_DETAILS))
+                            .profileUrl
+                            ? JSON.parse(localStorage.getItem(USER_DETAILS))
+                                .profileUrl
+                            : "/Images/blank_profile.png"
+                        }
+                        alt="profile"
+                        height={"35px"}
+                        width={"35px"}
+                      />
+                    }
+                    flowing
+                    hoverable
+                    style={{ padding: "0px" }}
+                  >
+                    <div className={styles.profileName}>
+                      {JSON.parse(localStorage.getItem(USER_DETAILS)).name
+                        ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
+                        : JSON.parse(localStorage.getItem(USER_DETAILS)).email}
+                    </div>
+                    <div className={styles.profileOptions}>Profile setting</div>
+                    <div className={styles.profileOptions}>Invite friends</div>
+                    <div
+                      className={styles.profileLogout}
+                      onClick={() => signUpAndLogout()}
+                    >
+                      Log out
+                    </div>
+                  </Popup>
                 </Menu.Item>
               )}
-              <Menu.Item>
-                <Button
-                  label={Cookies.get(COOKIE_TOKEN) ? "LOG OUT" : "SIGN UP"}
-                  height={34}
-                  borderRadius={18}
-                  textStyle={{
-                    color: "#fff",
-                    fontWeight: "bold",
-                    fontFamily: "Montserrat",
-                    fontSize: "13px"
-                  }}
-                  border="none"
-                  onClick={() => signUpAndLogout()}
-                />
-              </Menu.Item>
+              {!Cookies.get(COOKIE_TOKEN) && (
+                <Menu.Item>
+                  <Button
+                    label={"SIGN UP"}
+                    height={34}
+                    borderRadius={18}
+                    textStyle={{
+                      color: "#fff",
+                      fontWeight: "bold",
+                      fontFamily: "Montserrat",
+                      fontSize: "13px"
+                    }}
+                    border="none"
+                    onClick={() => signUpAndLogout()}
+                  />
+                </Menu.Item>
+              )}
             </Fragment>
           )}
       </Menu>
@@ -134,7 +167,7 @@ function Navbar({}) {
               </div>
             )}
           <div onClick={() => router.push(HOME_PAGE)}>
-            <Image src="Images/tremendo_logo.png" alt="logo" size={"small"} />
+            <Image src="/Images/tremendo_logo.png" alt="logo" size={"small"} />
           </div>
         </div>
         {visible && (
