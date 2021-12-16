@@ -8,7 +8,7 @@ const authReducer = (state, action) => {
         loginLoading: true
       });
     case authAction.LOGIN_SUCCESS:
-      Cookies.set(COOKIE_TOKEN, action.data.access_token);
+      Cookies.set(COOKIE_TOKEN, action.data.access_token, { expires: 7 });
       localStorage.setItem(USER_DETAILS, JSON.stringify(action.data));
       return Object.assign({}, state, {
         loginLoading: false,
@@ -24,7 +24,7 @@ const authReducer = (state, action) => {
         signupLoading: true
       });
     case authAction.SIGNUP_SUCCESS:
-      Cookies.set(COOKIE_TOKEN, action.data.access_token);
+      Cookies.set(COOKIE_TOKEN, action.data.access_token, { expires: 7 });
       localStorage.setItem(USER_DETAILS, JSON.stringify(action.data));
       return Object.assign({}, state, {
         signupLoading: false,

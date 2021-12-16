@@ -1,6 +1,6 @@
 import styles from "./StatusBar.module.css";
 
-export default function StatusBar({}) {
+export default function StatusBar({ children }) {
   return (
     <div className={styles.base}>
       <div className={styles.circleLineWrapper}>
@@ -9,12 +9,7 @@ export default function StatusBar({}) {
         </div>
         <div className={styles.lines}></div>
       </div>
-      <div className={""}>
-        <div className={""}>content</div> <div className={""}>content</div>{" "}
-        <div className={""}>content</div>
-        <div className={""}>content</div> <div className={""}>content</div>{" "}
-        <div className={""}>content</div>
-      </div>
+      <div style={{ width: "100%" }}>{children}</div>
     </div>
   );
 }

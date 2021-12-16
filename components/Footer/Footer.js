@@ -1,7 +1,7 @@
 import styles from "./Footer.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { LOGIN_PATH, SIGN_UP_PATH } from "../../utils/routes";
+import { LANGUAGE_DETAIL, LOGIN_PATH, SIGN_UP_PATH } from "../../utils/routes";
 import { useContext } from "react";
 import { GlobalContext } from "../../Context/Provider";
 
@@ -44,7 +44,11 @@ export default function Footer(props) {
           <div className={styles.heading}>Languages</div>
           <div className={styles.subheading}>
             {homeState.getLanguage.map((i, index) => (
-              <div key={index} className={styles.footerItem}>
+              <div
+                key={index}
+                className={styles.footerItem}
+                onClick={() => router.push(`${LANGUAGE_DETAIL}${i.id}`)}
+              >
                 {i.title}
               </div>
             ))}

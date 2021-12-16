@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import React, { useContext } from "react";
 import styles from "./Navbar.module.css";
 import { Dropdown, Icon, Image, Menu, Popup } from "semantic-ui-react";
@@ -22,11 +22,39 @@ import {
 } from "../../Context/Actions/Auth/AuthAction";
 import { toast } from "react-toastify";
 import ImageComponent from "next/image";
+import { getLanguages } from "../../Context/Actions/Home/HomeAction";
 
 function Navbar({}) {
   const [visible, setVisible] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("LANGUAGES");
   const router = useRouter();
-  const { homeState, authDispatch: dispatch } = useContext(GlobalContext);
+  const {
+    homeState,
+    authDispatch: dispatch,
+    homeDispatch: homeDispatch
+  } = useContext(GlobalContext);
+
+  useEffect(() => {
+    if (router.pathname == HOME_PAGE) {
+      setSelectedLanguage("LANGUAGES");
+      return false;
+    }
+    setLanguageToStore();
+  }, [router.pathname]);
+
+  const setLanguageToStore = async () => {
+    const currentLanguagePage = router.query.languageId;
+    if (homeState.getLanguage.length == 0) {
+      const response = await getLanguages()(homeDispatch);
+      const selectedLang = response.data.find(i => i.id == currentLanguagePage);
+      if (selectedLang) {
+        setSelectedLanguage(selectedLang.title);
+      } else {
+        setSelectedLanguage("LANGUAGES");
+      }
+    }
+  };
+
   const signUpAndLogout = async () => {
     if (Cookies.get(COOKIE_TOKEN)) {
       const response = await logoutAuth(Cookies.get(COOKIE_TOKEN))(dispatch);
@@ -44,7 +72,12 @@ function Navbar({}) {
       router.push(SIGN_UP_PATH);
     }
   };
-  // const localstorageValue = JSON.parse(localStorage.getItem(USER_DETAILS));
+
+  const goToLanguage = language => {
+    setSelectedLanguage(language.title);
+    router.push(`${LANGUAGE_DETAIL}${language.id}`);
+  };
+
   const desktopNavbar = () => {
     return (
       <Menu fixed="top" secondary className={styles.menuWrapper}>
@@ -63,7 +96,7 @@ function Navbar({}) {
                   onClick={() => router.push(ABOUTUS_PATH)}
                 />
                 <Dropdown
-                  text="LANGUAGES"
+                  text={selectedLanguage}
                   className={`${
                     styles.dropdownWrapper
                   } ${router.pathname.includes(LANGUAGE_DETAIL) &&
@@ -74,6 +107,7 @@ function Navbar({}) {
                       <Dropdown.Item
                         key={index}
                         text={`${i.title}  (${i.welcome_text})`}
+                        onClick={() => goToLanguage(i)}
                       />
                     ))}
                   </Dropdown.Menu>

@@ -21,7 +21,7 @@ export default function FlagWrapper(props) {
       <div className={styles.language}>{props.language}</div>
       <div
         className={styles.languageDescription}
-        onClick={() => router.push(`${LANGUAGE_DETAIL}${props.language}`)}
+        onClick={() => router.push(`${LANGUAGE_DETAIL}${props.id}`)}
       >
         {props.languageDescription}
       </div>
