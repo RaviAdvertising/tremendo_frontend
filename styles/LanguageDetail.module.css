@@ -83,6 +83,7 @@
   justify-content: space-evenly;
   margin-top: 80px;
   margin-bottom: 100px;
+  flex-wrap: wrap;
 }
 .upcomingBatch {
   background-color: #fff;
@@ -134,17 +135,17 @@
   padding: 20px 10px;
   margin-left: 30px;
   margin-bottom: 30px;
-  cursor: pointer;
 }
 .batchDetails {
   display: flex;
+  cursor: pointer;
 }
 .batchNo {
   width: 20%;
   text-transform: uppercase;
 }
 .batchTiming {
-  width: 20%;
+  width: 30%;
   text-transform: uppercase;
 }
 .batchDays {
@@ -153,7 +154,7 @@
   text-align: center;
 }
 .batchCodes {
-  width: 20%;
+  width: 10%;
   text-transform: uppercase;
   text-align: center;
 }
@@ -188,12 +189,27 @@
   justify-content: end;
   margin-right: 34px;
 }
+.priceWrapper {
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
+  margin-right: 45px;
+}
 .startDateHeading {
   font-weight: 700;
   width: 45%;
 }
+.priceHeading {
+  font-weight: 700;
+  width: 25%;
+  font-size: 22px;
+}
+.price {
+  font-size: 22px;
+}
 .startTimeHeading {
   font-weight: 700;
+  width: 35%;
 }
 .startDate {
   font-family: Open Sans;
@@ -201,4 +217,13 @@
 .detailsWrapper {
   display: flex;
   margin-top: 40px;
+}
+.duration {
+  margin-top: 10px;
+}
+.enrollNowBtn {
+  display: flex;
+  justify-content: end;
+  margin-right: 34px;
+  margin-top: 35px;
 }

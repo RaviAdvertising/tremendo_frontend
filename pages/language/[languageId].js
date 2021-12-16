@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "../../styles/LanguageDetail.module.css";
 import StatusBar from "../../components/StatusBar/StatusBar";
 import ImageComponent from "../../components/Image/Image";
 import { USER_DETAILS } from "../../utils/constants";
 import Image from "next/image";
 import Button from "../../components/Button/Button";
+import { useRouter } from "next/router";
+import { GlobalContext } from "../../Context/Provider";
+import { getLangaugeDetails } from "../../Context/Actions/Language/LanguageAction";
+import LanguageDetailSkelton from "../../components/Skelton/LanguageDetailSkelton";
 
 export default function DetailLanguagePage({}) {
+  const [openTab, setOpenTab] = useState(null);
+  const router = useRouter();
+  const { languageState, languageDispatch: dispatch } = useContext(
+    GlobalContext
+  );
+
+  const currentLanguagePage = router.query.languageId;
+  useEffect(() => {
+    getLangaugeDetails(currentLanguagePage)(dispatch);
+  }, [currentLanguagePage]);
+
   const name =
     typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
       ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
       : "";
+  const openDetailSection = code => {
+    if (openTab == code) {
+      setOpenTab(null);
+    } else {
+      setOpenTab(code);
+    }
+  };
 
   const header = headerName => {
     return (
@@ -24,260 +46,233 @@ export default function DetailLanguagePage({}) {
   const registerNow = () => {
     //
   };
+  const details = languageState.getLanguageDetails;
   return (
     <div className={styles.base}>
       <div className={styles.topBannerWrapper}>
-        <ImageComponent
-          src={"/Images/lang_demo_banner.png"}
-          paddingBottom={"21%"}
-        />
+        <ImageComponent src={details.banner_large} paddingBottom={"21%"} />
         <div className={styles.profileName}>{`Hello ${name}`}</div>
       </div>
-      <div className={styles.subBaseWrapper}>
-        <div className={styles.contentWrapper}>
-          <div className={styles.header}>{header("Japanese culture")}</div>
-          <div className={styles.cultureDescription}>
-            Japanese is the national and primary language of Japan and is
-            written with a combination of three scripts: kanji, hiragana, and
-            katakana. In Japan, Shinto and Buddhism are two major religions that
-            are being followed. Shinto comes under old Japanese culture, while
-            Buddhism was imported from the mainland in the 6th century. Japan is
-            well known worldwide for all of its Shinto Shrines and Buddhist
-            Temples. There are tens of thousands of them throughout the country
-            and play an important part in Japanese culture and tradition
-          </div>
-          <div className={styles.boxWrapper}>
-            <div className={styles.boxBase}>
-              <div className={styles.boxImage}>
-                <Image
-                  alt=""
-                  src={"/Images/why_japan.png"}
-                  width={"330px"}
-                  height={"245px"}
-                />
-              </div>
-              <div className={styles.boxHeading}>Why learn japanese</div>
-              <div className={styles.boxDescription}>
-                Japan follows a culture that is totally different from ours.
-                Learning Japanese can result in many benefits as it would help
-                you gain broader perspectives, higher thinking skills, and new
-                learning strategies that you can apply to your other academic
-                subjects. Fluency in Japanese allows people to improve their
-                communication and gain knowledge and higher understanding of
-                Japan as a whole.<br></br>
-                <br></br> Japanese investors are actively interested in
-                automobile, electronics, semiconductor, shipbuilding, and
-                optical media. Top career options after learning the Japanese
-                language like job of translators and interpreters, Japanese
-                trainers, Japanese teachers, jobs in Japanese Embassies, jobs in
-                the aviation sector, jobs in travel and tourism, and IT Sector
-                are just a step away from you.
-              </div>
+      <div
+        className={styles.subBaseWrapper}
+        style={{ backgroundColor: details.bg_color }}
+      >
+        {languageState.getLangaugeDetailsLoading ? (
+          <LanguageDetailSkelton />
+        ) : (
+          <div className={styles.contentWrapper}>
+            <div className={styles.header}>
+              {header(details.culture?.title)}
             </div>
-            <div className={styles.boxBase}>
-              <div className={styles.boxImage}>
-                <Image
-                  alt=""
-                  src={"/Images/career_opt.png"}
-                  width={"400px"}
-                  height={"204px"}
-                />
-              </div>
-              <div className={styles.boxHeading}>Career opportunity</div>
-              <div className={styles.boxDescription}>
-                Japanese culture is unique in its own way as it is a combination
-                of traditional and modern practices. Roughly 127 million people
-                speak Japanese in Japan and is the most popular choice among
-                East Asian Languages. Due to complexity of the language, not
-                everyone is able to learn this language leaving a higher package
-                structure and growth rate in career opportunities like:
-                Translator, Interpreter & Trainer. Japanese companies such as
-                Honda, Yamaha, Sony, Toyota have manufacturing facilities in
-                India which means more job opportunities for you if you are
-                fluent in Japanese. With so many big Japanese companies
-                investing in India, one can also move to Japan and for there
-                full time for these companies.
-              </div>
+            <div className={styles.cultureDescription}>
+              {details.culture?.description}
             </div>
-          </div>
-          <div>
-            <div className={styles.header}>{header("UPCOMING batches")}</div>
-            <div className={styles.upcomingBatchWrapper}>
-              <div className={styles.upcomingBatch}>
-                <div className={styles.batchCode}>JLPT 4</div>
-                <div className={styles.batchLang}>(Japanese)</div>
-                <div className={styles.batchTime}>weekend batch</div>
-                <div>
-                  <Button
-                    label={"Register Now"}
-                    height={55}
-                    borderRadius={10}
-                    backgroundColor={"#fbd7b0"}
-                    textStyle={{
-                      color: "#212121",
-                      fontFamily: "Open Sans",
-                      fontSize: "16px"
-                    }}
-                    border="none"
-                    onClick={() => registerNow()}
-                  />
-                </div>
-                <div className={styles.offPercentage}>
-                  <div>SAVE</div>
-                  <div>5%</div>
-                </div>
-              </div>
-              <div className={styles.upcomingBatch}>
-                <div className={styles.batchCode}>JLPT 4</div>
-                <div className={styles.batchLang}>(Japanese)</div>
-                <div className={styles.batchTime}>weekend batch</div>
-                <div>
-                  <Button
-                    label={"Register Now"}
-                    height={55}
-                    borderRadius={10}
-                    backgroundColor={"#fbd7b0"}
-                    textStyle={{
-                      color: "#212121",
-                      fontFamily: "Open Sans",
-                      fontSize: "16px"
-                    }}
-                    border="none"
-                    onClick={() => registerNow()}
-                  />
-                </div>
-                <div className={styles.offPercentage}>
-                  <div>SAVE</div>
-                  <div>5%</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className={styles.header}>{header("Batch details")}</div>
-            <div>
-              <StatusBar>
-                <div className={styles.batchDetailsWrapper}>
-                  <div className={styles.batchDetails}>
-                    <div className={styles.batchNo}>BATCH: 01</div>
-                    <div className={styles.batchTiming}>Weekday Morning</div>
-                    <div className={styles.batchDays}>MON WED FRI</div>
-                    <div className={styles.batchCodes}>JA</div>
-                    <div className={styles.batchSeats}>
-                      <div style={{ fontWeight: "bold", marginRight: "5px" }}>
-                        2{" "}
-                      </div>{" "}
-                      SEATS LEFT{" "}
-                      <div
-                        style={{
-                          transform: "rotate(-90deg)",
-                          marginLeft: "10px"
-                        }}
-                      >
-                        <Image
-                          src={"/Images/down_arrow.png"}
-                          alt=""
-                          height={"20px"}
-                          width={"20px"}
-                        />
-                      </div>
-                    </div>
+            <div className={styles.boxWrapper}>
+              {details.culture?.banners.map((i, index) => (
+                <div
+                  className={styles.boxBase}
+                  style={{ backgroundColor: i.bg_color }}
+                  key={index}
+                >
+                  <div className={styles.boxImage}>
+                    <Image
+                      alt=""
+                      src={i.image_url}
+                      width={index == 0 ? "330px" : "400px"}
+                      height={index == 0 ? "245px" : "204px"}
+                    />
                   </div>
-                  <div className={styles.detailsWrapper}>
-                    <div className={styles.dateClassWrapper}>
-                      <div className={styles.startDateWrapper}>
-                        <div className={styles.startDateHeading}>
-                          Start Date :
-                        </div>
-                        <div className={styles.startDate}>12/10/2021</div>
-                      </div>
-                      <div className={styles.startDateWrapper}>
-                        <div className={styles.startDateHeading}>
-                          End Date :
-                        </div>
-                        <div className={styles.startDate}>12/10/2021</div>
-                      </div>
-                      <div className={styles.startDateWrapper}>
-                        <div className={styles.startDateHeading}>
-                          Total Classes :
-                        </div>
-                        <div className={styles.startDate}>12/10/2021</div>
-                      </div>
-                      <div className={styles.startDateWrapper}>
-                        <div className={styles.startDateHeading}>
-                          Exam Date :
-                        </div>
-                        <div className={styles.startDate}>12/10/2021</div>
-                      </div>
-                    </div>
-                    <div className={styles.durationWrapper}>
+                  <div
+                    className={styles.boxHeading}
+                    style={{ color: i.text_color }}
+                  >
+                    {i.title}
+                  </div>
+                  <div
+                    className={styles.boxDescription}
+                    style={{ color: i.text_color }}
+                  >
+                    {i.description}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {details.upcoming_batches?.banners.length !== 0 && (
+              <div>
+                <div className={styles.header}>
+                  {header(details.upcoming_batches?.title)}
+                </div>
+                <div className={styles.upcomingBatchWrapper}>
+                  {details.upcoming_batches?.banners.map((i, index) => (
+                    <div className={styles.upcomingBatch} key={index}>
+                      <div className={styles.batchCode}>{i.title}</div>
+                      <div className={styles.batchTime}>{i.description}</div>
                       <div>
-                        <Image
-                          src={"/Images/duration_rotate.png"}
-                          alt=""
-                          height={"30px"}
-                          width={"30px"}
+                        <Button
+                          label={i.cta_title}
+                          height={55}
+                          borderRadius={10}
+                          backgroundColor={i.cta_color}
+                          textStyle={{
+                            color: i.cta_text_color,
+                            fontFamily: "Open Sans",
+                            fontSize: "16px"
+                          }}
+                          border="none"
+                          onClick={() => registerNow()}
                         />
                       </div>
-                      <div>
-                        <span style={{ fontWeight: "bold" }}>
-                          TOTAL DURATION:{" "}
-                        </span>{" "}
-                        <span>00 hours</span>
+                      <div className={styles.offPercentage}>
+                        <div>SAVE</div>
+                        <div>{i.discount_percentage}%</div>
                       </div>
                     </div>
-                    <div className={styles.timeWrapper}>
-                      <div className={styles.startTimeWrapper}>
-                        <div className={styles.startTimeHeading}>
-                          Start Time :
-                        </div>
-                        <div className={styles.startTime}>12/10/2021</div>
-                      </div>
-                      <div className={styles.startTimeWrapper}>
-                        <div className={styles.startTimeHeading}>
-                          End Time :
-                        </div>
-                        <div className={styles.startTime}>12/10/2021</div>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              </StatusBar>
-            </div>
+              </div>
+            )}
             <div>
-              <StatusBar>
-                <div className={styles.batchDetailsWrapper}>
-                  <div className={styles.batchDetails}>
-                    <div className={styles.batchNo}>BATCH: 01</div>
-                    <div className={styles.batchTiming}>Weekday Morning</div>
-                    <div className={styles.batchDays}>MON WED FRI</div>
-                    <div className={styles.batchCodes}>JA</div>
-                    <div className={styles.batchSeats}>
-                      <div style={{ fontWeight: "bold", marginRight: "5px" }}>
-                        2{" "}
-                      </div>{" "}
-                      SEATS LEFT{" "}
+              <div className={styles.header}>
+                {header(details.batch_details?.title)}
+              </div>
+              {details.batch_details?.bathches.map((i, index) => (
+                <div key={index}>
+                  <StatusBar>
+                    <div className={styles.batchDetailsWrapper}>
                       <div
-                        style={{
-                          transform: "rotate(-90deg)",
-                          marginLeft: "10px"
-                        }}
+                        className={styles.batchDetails}
+                        onClick={() => openDetailSection(i.batch_code)}
                       >
-                        <Image
-                          src={"/Images/down_arrow.png"}
-                          alt=""
-                          height={"20px"}
-                          width={"20px"}
-                        />
+                        <div className={styles.batchNo}>{i.title}</div>
+                        <div className={styles.batchTiming}>
+                          {i.description}
+                        </div>
+                        <div className={styles.batchDays}>
+                          {i.days.map(i => i).join("  ")}
+                        </div>
+                        <div className={styles.batchCodes}>{i.batch_code}</div>
+                        <div className={styles.batchSeats}>
+                          <div
+                            style={{ fontWeight: "bold", marginRight: "5px" }}
+                          >
+                            {i.seats_left}{" "}
+                          </div>{" "}
+                          SEATS LEFT{" "}
+                          <div
+                            style={{
+                              transform:
+                                openTab != i.batch_code && "rotate(-90deg)",
+                              marginLeft: "10px"
+                            }}
+                          >
+                            <Image
+                              src={"/Images/down_arrow.png"}
+                              alt=""
+                              height={"20px"}
+                              width={"20px"}
+                            />
+                          </div>
+                        </div>
                       </div>
+                      {openTab == i.batch_code && (
+                        <div className={styles.detailsWrapper}>
+                          <div className={styles.dateClassWrapper}>
+                            <div className={styles.startDateWrapper}>
+                              <div className={styles.startDateHeading}>
+                                Start Date :
+                              </div>
+                              <div className={styles.startDate}>
+                                {i.batch_start_date}
+                              </div>
+                            </div>
+                            <div className={styles.startDateWrapper}>
+                              <div className={styles.startDateHeading}>
+                                End Date :
+                              </div>
+                              <div className={styles.startDate}>
+                                {i.batch_end_date}
+                              </div>
+                            </div>
+                            <div className={styles.startDateWrapper}>
+                              <div className={styles.startDateHeading}>
+                                Total Classes :
+                              </div>
+                              <div className={styles.startDate}>
+                                {i.total_classes}
+                              </div>
+                            </div>
+                            <div className={styles.startDateWrapper}>
+                              <div className={styles.startDateHeading}>
+                                Exam Date :
+                              </div>
+                              <div className={styles.startDate}>
+                                {i.batch_exam_date}
+                              </div>
+                            </div>
+                          </div>
+                          <div className={styles.durationWrapper}>
+                            <div>
+                              <Image
+                                src={"/Images/duration_rotate.png"}
+                                alt=""
+                                height={"30px"}
+                                width={"30px"}
+                              />
+                            </div>
+                            <div className={styles.duration}>
+                              <span style={{ fontWeight: "bold" }}>
+                                TOTAL DURATION:{" "}
+                              </span>{" "}
+                              <span>{i.total_duration}</span>
+                            </div>
+                          </div>
+                          <div className={styles.timeWrapper}>
+                            <div className={styles.startTimeWrapper}>
+                              <div className={styles.startTimeHeading}>
+                                Start Time :
+                              </div>
+                              <div className={styles.startTime}>
+                                {i.batch_start_time}
+                              </div>
+                            </div>
+                            <div className={styles.startTimeWrapper}>
+                              <div className={styles.startTimeHeading}>
+                                End Time :
+                              </div>
+                              <div className={styles.startTime}>
+                                {i.batch_end_time}
+                              </div>
+                            </div>
+                            <div className={styles.priceWrapper}>
+                              <div className={styles.priceHeading}>Price :</div>
+                              <div className={styles.price}>$ {i.price}</div>
+                            </div>
+                            <div className={styles.enrollNowBtn}>
+                              <Button
+                                label={i.cta_title}
+                                height={35}
+                                borderRadius={5}
+                                backgroundColor={"#f78f1e"}
+                                textStyle={{
+                                  color: "#fff",
+                                  fontFamily: "Open Sans",
+                                  fontSize: "16px",
+                                  fontWeight: "bold"
+                                }}
+                                border="none"
+                                onClick={() => registerNow()}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                  <div></div>
+                  </StatusBar>
                 </div>
-              </StatusBar>
+              ))}
             </div>
           </div>
-        </div>
+        )}
         <div>
           <ImageComponent
             src={"/Images/learn_grow_lead.png"}
