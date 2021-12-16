@@ -201,7 +201,7 @@
 }
 .priceHeading {
   font-weight: 700;
-  width: 25%;
+  width: 30%;
   font-size: 22px;
 }
 .price {
@@ -209,7 +209,7 @@
 }
 .startTimeHeading {
   font-weight: 700;
-  width: 35%;
+  width: 40%;
 }
 .startDate {
   font-family: Open Sans;
@@ -226,4 +226,33 @@
   justify-content: end;
   margin-right: 34px;
   margin-top: 35px;
+}
+@media (max-device-width: 1024px) {
+  .contentWrapper {
+    padding: 0 10px;
+  }
+  .headerWrapper {
+    font-size: 20px;
+  }
+  .headerHeading {
+    margin: 0 10px;
+  }
+  .cultureDescription {
+    width: 100%;
+  }
+  .boxWrapper {
+    flex-wrap: wrap;
+  }
+  .boxBase {
+    margin-bottom: 15px;
+  }
+  .upcomingBatch {
+    margin-bottom: 75px;
+  }
+  .batchDetailsWrapper {
+    margin-left: 10px;
+    margin-bottom: 17px;
+    font-size: 10px;
+    padding: 10px 5px;
+  }
 }
