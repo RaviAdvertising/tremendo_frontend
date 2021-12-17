@@ -41,7 +41,8 @@ export default function Signup(props) {
   };
 
   const socialLogin = async (provider, type, fbResponse) => {
-    let payload = {};
+    let payload = {},
+      profileImage = "";
     if (type == LOGIN_TYPE_GOOGLE) {
       const res = await socialMediaAuth(provider);
       payload = {
@@ -51,8 +52,8 @@ export default function Signup(props) {
         gg_token: type == LOGIN_TYPE_GOOGLE && res.uid,
         fb_token: ""
       };
+      profileImage = res.photoURL;
     } else {
-      console.log(fbResponse);
       payload = {
         email: fbResponse.email,
         name: fbResponse.name,
@@ -60,9 +61,19 @@ export default function Signup(props) {
         gg_token: "",
         fb_token: fbResponse.accessToken
       };
+      profileImage = fbResponse.picture?.data?.url;
     }
 
     const response = await signupAuth(payload)(dispatch);
+
+    const localstorageValue =
+      localStorage.getItem(USER_DETAILS) &&
+      JSON.parse(localStorage.getItem(USER_DETAILS));
+    const updatedLocalstorage = {
+      ...localstorageValue,
+      profileUrl: profileImage
+    };
+    localStorage.setItem(USER_DETAILS, JSON.stringify(updatedLocalstorage));
     if (response.type == SIGNUP_ERROR) {
       toast.error(response.error.msg, {
         theme: "colored"

@@ -11,13 +11,17 @@ export const GET_PAGE_DATA_ERROR = "GET_PAGE_DATA_error";
 export const getLanguages = () => dispatch => {
   dispatch({ type: GET_LANGUAGE_REQUEST });
 
-  axiosInstance
+  return axiosInstance
     .get("/getLanguages")
     .then(res => {
       dispatch({
         type: GET_LANGUAGE_SUCCESS,
         data: res.data.data
       });
+      return {
+        type: GET_LANGUAGE_SUCCESS,
+        data: res.data.data
+      };
     })
     .catch(err => {
       dispatch({

@@ -7,7 +7,8 @@ import {
   LOGIN_STUDENT_TAB,
   LOGIN_TYPE_EMAIL,
   LOGIN_TYPE_FB,
-  LOGIN_TYPE_GOOGLE
+  LOGIN_TYPE_GOOGLE,
+  USER_DETAILS
 } from "../../utils/constants";
 import Image from "next/image";
 import Head from "next/head";
@@ -53,7 +54,9 @@ export default function Login(props) {
   };
 
   const socialLogin = async (provider, type, fbResponse) => {
-    let payload = {};
+    let payload = {},
+      profileImage = "";
+
     if (type == LOGIN_TYPE_GOOGLE) {
       const res = await socialMediaAuth(provider);
       payload = {
@@ -62,6 +65,7 @@ export default function Login(props) {
         gg_token: type == LOGIN_TYPE_GOOGLE && res.uid,
         fb_token: ""
       };
+      profileImage = res.photoURL;
     } else {
       payload = {
         email: fbResponse.email,
@@ -69,9 +73,18 @@ export default function Login(props) {
         gg_token: "",
         fb_token: fbResponse.accessToken
       };
+      profileImage = fbResponse.picture?.data?.url;
     }
-
     const response = await loginAuth(payload)(dispatch);
+
+    const localstorageValue =
+      localStorage.getItem(USER_DETAILS) &&
+      JSON.parse(localStorage.getItem(USER_DETAILS));
+    const updatedLocalstorage = {
+      ...localstorageValue,
+      profileUrl: profileImage
+    };
+    localStorage.setItem(USER_DETAILS, JSON.stringify(updatedLocalstorage));
     if (response.type == LOGIN_ERROR) {
       toast.error(response.error.msg, {
         theme: "colored"

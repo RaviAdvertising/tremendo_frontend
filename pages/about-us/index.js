@@ -184,14 +184,14 @@ export default function AboutUs() {
       <div className={styles.banner}>
         <DesktopOnly>
           <ImageComponent
-            src={"Images/aboutus_banner.png"}
+            src={"/Images/aboutus_banner.png"}
             paddingBottom={"35%"}
             alt={"banner logo"}
           />
         </DesktopOnly>
         <MobileOnly>
           <ImageComponent
-            src={"Images/about_banner_mobile.png"}
+            src={"/Images/about_banner_mobile.png"}
             paddingBottom={"65%"}
             alt={"banner logo"}
           />
@@ -233,7 +233,7 @@ export default function AboutUs() {
         </div>
         <div>
           <ImageComponent
-            src={"Images/learn_grow_lead.png"}
+            src={"/Images/learn_grow_lead.png"}
             paddingBottom={"15%"}
             alt={"banner logo"}
           />
