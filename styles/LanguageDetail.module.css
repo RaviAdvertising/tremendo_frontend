@@ -45,6 +45,7 @@
   border-radius: 20px;
   width: 381px;
   padding: 5px 30px 10px 30px;
+  width: 40%;
 }
 .boxHeading {
   color: #fff;
@@ -64,11 +65,13 @@
 .boxWrapper {
   display: flex;
   justify-content: space-evenly;
+  width: 100%;
 }
 .boxImage {
   height: 245px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .cultureDescription {
   color: #fff;
