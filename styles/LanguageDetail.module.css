@@ -59,8 +59,9 @@
 .boxDescription {
   color: #fff;
   font-family: Open Sans;
-  font-size: 13px;
+  font-size: 16px;
   text-align: center;
+  font-weight: 700;
 }
 .boxWrapper {
   display: flex;
