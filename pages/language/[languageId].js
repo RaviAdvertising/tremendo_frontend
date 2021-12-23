@@ -51,8 +51,11 @@ export default function DetailLanguagePage({}) {
     <div className={styles.base}>
       <div className={styles.topBannerWrapper}>
         <ImageComponent src={details.banner_large} paddingBottom={"21%"} />
-        <div className={styles.profileName}>{`${details.banner_title &&
-          details.banner_title} ${name}`}</div>
+        {details.banner_title && (
+          <div
+            className={styles.profileName}
+          >{`${details.banner_title} ${name}`}</div>
+        )}
       </div>
       <div
         className={styles.subBaseWrapper}
