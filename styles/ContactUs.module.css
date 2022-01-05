@@ -1,0 +1,82 @@
+.sections {
+  background-color: #268f8c;
+}
+.wrapper {
+  display: flex;
+  width: 84%;
+  margin: auto;
+  padding-top: 170px;
+  padding-bottom: 180px;
+  justify-content: space-between;
+}
+.formWrapper {
+  width: 50%;
+}
+.mapWrapper {
+  width: 40%;
+}
+.heading {
+  color: #fff;
+  font-family: Open Sans;
+  font-weight: bold;
+  font-size: 40px;
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+}
+.inputStyling {
+  background-color: transparent;
+  border: 2px solid rgb(221, 223, 225);
+  padding: 15px;
+  width: 100%;
+  color: rgb(221, 223, 225);
+  font-family: Open Sans;
+}
+.inputStyling::placeholder {
+  color: #dddfe1;
+}
+
+.inputStyling:focus {
+  outline: none;
+}
+.inputsWrapper {
+  margin-bottom: 30px;
+}
+.selectStyling {
+  background-color: transparent;
+  border: 2px solid rgb(221, 223, 225);
+  padding: 13px;
+  width: 100%;
+  color: rgb(221, 223, 225);
+  font-family: Open Sans;
+}
+.selectStyling::placeholder {
+  color: #dddfe1;
+}
+
+.selectStyling:focus {
+  outline: none;
+}
+.selectStyling > option {
+  background: #f78f1f;
+}
+.submitBtn {
+  width: 30%;
+}
+.infoBox {
+  border-radius: 10px;
+  background: #f78f1f;
+  padding: 20px 25px;
+  margin-top: 45px;
+}
+.infoSec {
+  display: flex;
+  align-items: center;
+}
+.textInfo {
+  color: #fff;
+  font-family: Open Sans;
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}

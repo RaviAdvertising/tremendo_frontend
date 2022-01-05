@@ -1,0 +1,59 @@
+.sections {
+  background-color: #268f8c;
+}
+.headerWrapper {
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-family: Montserrat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.headerHeading {
+  margin: 0 20px;
+}
+.borderLineStyling {
+  background-color: #39cdc9;
+  width: 65px;
+  height: 5px;
+}
+.header {
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+.faqStripWrapper {
+  width: 64%;
+  margin: auto;
+}
+.blogs {
+  width: 30%;
+  margin-bottom: 80px;
+}
+.contentWrapper {
+  padding-bottom: 150px;
+}
+.faqStrip {
+  margin-bottom: 29px;
+}
+.askBtn {
+  width: 230px;
+  margin-top: 78px;
+}
+@media (max-device-width: 1024px) {
+  .headerWrapper {
+    font-size: 15px;
+  }
+  .headerHeading {
+    line-height: 28px;
+  }
+  .faqStripWrapper {
+    width: 95%;
+  }
+  .header {
+    padding-top: 40px;
+    padding-bottom: 50px;
+  }
+}

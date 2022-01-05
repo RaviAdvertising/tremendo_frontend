@@ -1,0 +1,57 @@
+.writeReviewForm {
+  background-color: #fff;
+  padding: 24px 30px;
+  margin-top: 32px;
+}
+
+.profileImgAndDateWrapper {
+  display: flex;
+  align-items: center;
+}
+.nameAndData {
+  margin-left: 24px;
+}
+.name {
+  color: #252525;
+  font-size: 28px;
+  font-family: Open Sans;
+  font-weight: bold;
+}
+.date {
+  color: #252525;
+  font-family: Montserrat;
+  font-size: 18px;
+  margin-top: 12px;
+}
+.rateStar {
+  margin-top: 20px;
+}
+.sectionWrapper {
+  margin-left: 88px;
+}
+.border {
+  background-color: rgba(37, 37, 37, 0.3);
+  height: 2px;
+  margin-top: 30px;
+  width: 60%;
+}
+.ctaButtons {
+  display: flex;
+  justify-content: flex-end;
+  color: #3293d6;
+  font-size: 20px;
+  font-family: Open Sans;
+  font-weight: bold;
+  margin-top: 50px;
+}
+.cancelCta {
+  cursor: pointer;
+  margin-right: 20px;
+}
+.postCta {
+  cursor: pointer;
+}
+
+.inputBox {
+  margin-top: 25px;
+}
