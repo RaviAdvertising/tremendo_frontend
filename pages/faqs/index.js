@@ -43,8 +43,8 @@ export default function Faqs() {
       <div className={styles.banner}>
         <DesktopOnly>
           <ImageComponent
-            src={"/Images/aboutus_banner.png"}
-            paddingBottom={"35%"}
+            src={"/Images/faqsBanner.png"}
+            paddingBottom={"21%"}
             alt={"banner logo"}
           />
         </DesktopOnly>

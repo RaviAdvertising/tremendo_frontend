@@ -34,7 +34,7 @@ export default function WriteFormBox(props) {
               defaultRating={0}
               maxRating={5}
               size="massive"
-              // onRate={(e, rate) => console.log(e, { rating, maxRating })}
+              onRate={(e, rate) => props.onRating(rate)}
             />
           </div>
         )}
@@ -43,7 +43,7 @@ export default function WriteFormBox(props) {
           <Input
             placeholder={"Describe your experience"}
             handleChange={text => props.onChangeValue(text)}
-            inputStyling={{ width: "80%" }}
+            inputStyling={{ width: "80%", height: "30px" }}
           />
         </div>
       </div>
@@ -51,7 +51,9 @@ export default function WriteFormBox(props) {
         <div className={styles.cancelCta} onClick={() => props.openBox()}>
           CANCEL
         </div>
-        <div className={styles.postCta}>POST</div>
+        <div className={styles.postCta} onClick={() => props.submitReview()}>
+          POST
+        </div>
       </div>
     </div>
   );

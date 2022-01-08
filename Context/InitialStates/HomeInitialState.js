@@ -3,6 +3,21 @@ const homeInitialState = {
   getLangaugeLoading: false,
 
   pageData: [],
-  pageDataLoading: false
+  pageDataLoading: false,
+
+  reviewData: [],
+  reviewDataLoading: false,
+
+  setReviewData: [],
+  setReviewLoading: false,
+
+  reviewDetails: [],
+  reviewDetailsLoading: false,
+
+  reviewComment: [],
+  reviewCommentLoading: false,
+
+  setReviewLike: [],
+  setReviewLikeLoading: false
 };
 export default homeInitialState;

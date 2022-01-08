@@ -3,6 +3,8 @@ import Button from "../../components/Button/Button";
 import ImageComponent from "../../components/Image/Image";
 import styles from "../../styles/ContactUs.module.css";
 import Image from "next/image";
+import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
+import MobileOnly from "../../components/DeviceCheck/MobileOnly";
 
 export default function ContactUs() {
   return (
@@ -12,6 +14,22 @@ export default function ContactUs() {
         <meta name="description" content="Tremendo Contact-Us page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className={styles.banner}>
+        <DesktopOnly>
+          <ImageComponent
+            src={"/Images/contactUsBanner.png"}
+            paddingBottom={"21%"}
+            alt={"banner logo"}
+          />
+        </DesktopOnly>
+        <MobileOnly>
+          <ImageComponent
+            src={"/Images/about_banner_mobile.png"}
+            paddingBottom={"65%"}
+            alt={"banner logo"}
+          />
+        </MobileOnly>
+      </div>
       <div className={styles.sections}>
         <div className={styles.wrapper}>
           <div className={styles.formWrapper}>

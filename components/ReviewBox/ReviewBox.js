@@ -45,10 +45,19 @@ export default function ReviewBox(props) {
         lacus vel facilisis.
       </div>
       <div className={styles.readMoreAndThumbWrapper}>
-        {<div className={styles.readMore}>Read More »</div>}
+        <div
+          className={styles.readMore}
+          onClick={() => props.clickOnReadMore()}
+        >
+          Read More »
+        </div>
         <div className={styles.thumbAndButtonWrapper}>
-          <div>
-            <Icon name="thumbs up outline" size="big" />
+          <div onClick={() => props.clickOnLike()} className={styles.thumb}>
+            <Icon
+              name={props.thumbLike ? "thumbs up" : "thumbs up outline"}
+              size="big"
+              color={props.thumbLike && "blue"}
+            />
           </div>
           {props.isOpen != props.id && (
             <div>
@@ -93,11 +102,13 @@ export default function ReviewBox(props) {
             <div className={styles.input}>
               <Input
                 placeholder={"Comments..."}
-                //handleChange={text => onChangeValue(text)}
+                handleChange={text => props.addComments(text)}
                 inputStyling={{ width: "100%", fontSize: "18px" }}
               />
             </div>
-            <div className={styles.postCta}>Post</div>
+            <div className={styles.postCta} onClick={() => props.postComment()}>
+              Post
+            </div>
           </div>
         </div>
       )}

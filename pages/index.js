@@ -23,8 +23,6 @@ import { useContext, useEffect } from "react";
 import { DeviceContext } from "./_app";
 import Input from "../components/Input/Input";
 import FlagWrapperSkelton from "../components/FlagWrapper/FlagWrapperSkelton";
-import { Icon } from "semantic-ui-react";
-import axiosInstance from "../utils/axiosInstance";
 import { GlobalContext } from "../Context/Provider";
 import { getLanguages, getPageData } from "../Context/Actions/Home/HomeAction";
 import Button from "../components/Button/Button";

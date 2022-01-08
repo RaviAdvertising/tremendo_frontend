@@ -8,6 +8,7 @@ import {
   LOGIN_TYPE_EMAIL,
   LOGIN_TYPE_FB,
   LOGIN_TYPE_GOOGLE,
+  PREVIOUS_PATH,
   USER_DETAILS
 } from "../../utils/constants";
 import Image from "next/image";
@@ -93,7 +94,7 @@ export default function Login(props) {
       toast.success(response.data.msg, {
         theme: "colored"
       });
-      router.push(HOME_PAGE);
+      actionAfterLogin();
     }
   };
 
@@ -132,8 +133,16 @@ export default function Login(props) {
         toast.success(response.data.msg, {
           theme: "colored"
         });
-        router.push(HOME_PAGE);
+        actionAfterLogin();
       }
+    }
+  };
+
+  const actionAfterLogin = () => {
+    if (localStorage.getItem(PREVIOUS_PATH)) {
+      router.replace(localStorage.getItem(PREVIOUS_PATH));
+    } else {
+      router.push(HOME_PAGE);
     }
   };
 
