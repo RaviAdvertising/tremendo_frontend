@@ -3,13 +3,14 @@ import { Rating, Icon, Image } from "semantic-ui-react";
 import Button from "../Button/Button";
 import { USER_DETAILS } from "../../utils/constants";
 import Input from "../Input/Input";
+import moment from "moment";
 
 export default function ReviewBox(props) {
   const imageUrl =
     typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
       ? JSON.parse(localStorage.getItem(USER_DETAILS)).profileUrl
       : "/Images/blank_profile.png";
-
+  const data = props.data;
   return (
     <div className={styles.base}>
       <div className={styles.ratingAndNameWrapper}>
@@ -24,26 +25,23 @@ export default function ReviewBox(props) {
             />
           </div>
           <div className={styles.nameAndData}>
-            <div className={styles.name}>Lorem Ipsum</div>
-            <div className={styles.date}>30 Dec 2021</div>
+            <div className={styles.name}>{data.user_name}</div>
+            <div className={styles.date}>
+              {moment(data.created_at).format("DD MMM YYYY")}
+            </div>
           </div>
         </div>
         <div>
           <Rating
             icon="star"
-            defaultRating={5}
+            defaultRating={data.rating}
             maxRating={5}
             size="huge"
             disabled
           />
         </div>
       </div>
-      <div className={styles.reviewDescription}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
-        suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
-        lacus vel facilisis.
-      </div>
+      <div className={styles.reviewDescription}>{data.review_desc}</div>
       <div className={styles.readMoreAndThumbWrapper}>
         <div
           className={styles.readMore}
@@ -79,7 +77,21 @@ export default function ReviewBox(props) {
           )}
         </div>
       </div>
-
+      {props.comments && props.comments.course_review_id == props.id && (
+        <div className={styles.ownImageAndNameWrapper}>
+          <div className={styles.profileImg}>
+            <Image
+              src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/user.png?alt=media&token=91b2da16-b278-4eb6-a1cc-90ecfe2c1b55"
+              circular
+              alt="user-image"
+              height={"30px"}
+              width={"30px"}
+            />
+          </div>
+          <div className={styles.ownName}>{props.comments.user_name}</div>
+          <div className={styles.owndescription}>{props.comments.comment}</div>
+        </div>
+      )}
       {props.isOpen == props.id && (
         <div className={styles.replyBox}>
           <div className={styles.ownImageAndNameWrapper}>
@@ -92,7 +104,9 @@ export default function ReviewBox(props) {
                 width={"50px"}
               />
             </div>
-            <div className={styles.ownName}>Lorem Ipsum</div>
+            <div className={styles.ownName}>
+              {JSON.parse(localStorage.getItem(USER_DETAILS)).name}
+            </div>
             <div className={styles.owndescription}>
               Lorem ipsum dolor sit amet
             </div>

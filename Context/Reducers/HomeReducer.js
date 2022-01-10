@@ -99,6 +99,33 @@ const homeReducer = (state, action) => {
         setReviewLikeLoading: false
       });
 
+    case homeAction.CONTACT_US_REQUEST:
+      return Object.assign({}, state, {
+        contactUsLoading: true
+      });
+    case homeAction.CONTACT_US_SUCCESS:
+      return Object.assign({}, state, {
+        contactUsLoading: false
+      });
+    case homeAction.CONTACT_US_ERROR:
+      return Object.assign({}, state, {
+        contactUsLoading: false
+      });
+
+    case homeAction.GET_BLOGS_REQUEST:
+      return Object.assign({}, state, {
+        getBlogsLoading: true
+      });
+    case homeAction.GET_BLOGS_SUCCESS:
+      return Object.assign({}, state, {
+        getBlogsLoading: false,
+        getBlogs: action.data
+      });
+    case homeAction.GET_BLOGS_ERROR:
+      return Object.assign({}, state, {
+        getBlogsLoading: false
+      });
+
     default:
       return state;
   }

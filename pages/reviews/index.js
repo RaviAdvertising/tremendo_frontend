@@ -26,7 +26,6 @@ import LanguageDetailSkelton from "../../components/Skelton/LanguageDetailSkelto
 import Cookies from "js-cookie";
 import PageLoader from "../../components/Loader/PageLoader";
 import { toast } from "react-toastify";
-import moment from "moment";
 
 export default function Reviews() {
   const [writeReview, setWriteReview] = useState(false);
@@ -49,7 +48,7 @@ export default function Reviews() {
   useEffect(() => {
     getReviewData()(dispatch);
   }, []);
-  console.log(homeState, moment(1641650969761).format("DD MMM YYYY"));
+  console.log(homeState);
   const header = headerName => {
     return (
       <div className={styles.headerWrapper}>
@@ -78,6 +77,7 @@ export default function Reviews() {
         access_token: Cookies.get(COOKIE_TOKEN)
       };
       await setReviewLikeStatus(payload)(dispatch);
+      getReviewData()(dispatch);
     } else {
       localStorage.setItem(PREVIOUS_PATH, router.pathname);
       router.push(LOGIN_PATH);
@@ -99,6 +99,7 @@ export default function Reviews() {
         theme: "colored"
       });
       setIsOpen(null);
+      getReviewData()(dispatch);
     }
   };
   const onSubmitComment = async reviewId => {
@@ -156,17 +157,19 @@ export default function Reviews() {
           <div className={styles.contentWrapper}>
             <div className={styles.header}>{header("REVIEW AND RATING")}</div>
             <div className={styles.faqStripWrapper}>
-              {[1, 1].map((i, index) => (
+              {homeState.reviewData.map((i, index) => (
                 <div key={index} className={styles.faqStrip}>
                   <ReviewBox
-                    clickOnReply={() => toggleBar(index)}
+                    clickOnReply={() => toggleBar(i.course_review_id)}
                     isOpen={isOpen}
-                    id={index}
-                    clickOnLike={() => clickOnThumb("r_2006")}
+                    id={i.course_review_id}
+                    clickOnLike={() => clickOnThumb(i.course_review_id)}
                     addComments={text => onHandleChange("comment", text)}
-                    postComment={() => onSubmitComment("r_2006")}
-                    clickOnReadMore={() => readMoreReplies("r_2006")}
-                    thumbLike={false}
+                    postComment={() => onSubmitComment(i.course_review_id)}
+                    clickOnReadMore={() => readMoreReplies(i.course_review_id)}
+                    thumbLike={i.like_status}
+                    data={i}
+                    comments={homeState.reviewDetails.comment}
                   />
                 </div>
               ))}

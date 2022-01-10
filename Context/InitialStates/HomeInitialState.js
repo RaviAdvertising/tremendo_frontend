@@ -18,6 +18,11 @@ const homeInitialState = {
   reviewCommentLoading: false,
 
   setReviewLike: [],
-  setReviewLikeLoading: false
+  setReviewLikeLoading: false,
+
+  contactUsLoading: false,
+
+  getBlogs: [],
+  getBlogsLoading: false
 };
 export default homeInitialState;

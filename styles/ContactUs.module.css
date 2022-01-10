@@ -25,7 +25,6 @@
 }
 .inputStyling {
   background-color: transparent;
-  border: 2px solid rgb(221, 223, 225);
   padding: 15px;
   width: 100%;
   color: rgb(221, 223, 225);
@@ -43,7 +42,6 @@
 }
 .selectStyling {
   background-color: transparent;
-  border: 2px solid rgb(221, 223, 225);
   padding: 13px;
   width: 100%;
   color: rgb(221, 223, 225);

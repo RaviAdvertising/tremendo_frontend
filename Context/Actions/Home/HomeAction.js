@@ -28,6 +28,14 @@ export const SET_REVIEW_LIKE_REQUEST = "SET_REVIEW_LIKE_request";
 export const SET_REVIEW_LIKE_SUCCESS = "SET_REVIEW_LIKE_success";
 export const SET_REVIEW_LIKE_ERROR = "SET_REVIEW_LIKE_error";
 
+export const CONTACT_US_REQUEST = "CONTACT_US_request";
+export const CONTACT_US_SUCCESS = "CONTACT_US_success";
+export const CONTACT_US_ERROR = "CONTACT_US_error";
+
+export const GET_BLOGS_REQUEST = "GET_BLOGS_request";
+export const GET_BLOGS_SUCCESS = "GET_BLOGS_success";
+export const GET_BLOGS_ERROR = "GET_BLOGS_error";
+
 export const getLanguages = () => dispatch => {
   dispatch({ type: GET_LANGUAGE_REQUEST });
 
@@ -197,5 +205,49 @@ export const setReviewLikeStatus = payload => dispatch => {
         type: SET_REVIEW_LIKE_ERROR,
         error: err.response.data
       };
+    });
+};
+
+export const contactUs = payload => dispatch => {
+  dispatch({ type: CONTACT_US_REQUEST });
+  return axiosInstance
+    .post(`/contactUs`, payload)
+    .then(res => {
+      dispatch({
+        type: CONTACT_US_SUCCESS,
+        data: res.data.data
+      });
+      return {
+        type: CONTACT_US_SUCCESS,
+        data: res.data
+      };
+    })
+    .catch(err => {
+      dispatch({
+        type: CONTACT_US_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const getBlogs = () => dispatch => {
+  dispatch({ type: GET_BLOGS_REQUEST });
+  return axiosInstance
+    .get(`/getCourseBlogList`)
+    .then(res => {
+      dispatch({
+        type: GET_BLOGS_SUCCESS,
+        data: res.data.data
+      });
+      return {
+        type: GET_BLOGS_SUCCESS,
+        data: res.data
+      };
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_BLOGS_ERROR,
+        error: err.response.data
+      });
     });
 };

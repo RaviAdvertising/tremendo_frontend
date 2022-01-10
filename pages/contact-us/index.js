@@ -5,8 +5,65 @@ import styles from "../../styles/ContactUs.module.css";
 import Image from "next/image";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import MobileOnly from "../../components/DeviceCheck/MobileOnly";
+import { useContext, useState } from "react";
+import { GlobalContext } from "../../Context/Provider";
+import { EMAIL_REGULAR_EXPRESSION } from "../../utils/constants";
+import { contactUs } from "../../Context/Actions/Home/HomeAction";
+import { toast } from "react-toastify";
+import PageLoader from "../../components/Loader/PageLoader";
 
 export default function ContactUs() {
+  const { homeState, homeDispatch: dispatch } = useContext(GlobalContext);
+  const [fields, setFields] = useState({});
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (type, value) => {
+    setFields({ ...fields, [type]: value });
+    setErrors({});
+  };
+
+  const onSubmit = async () => {
+    let errors = { ...errors };
+    if (!fields.user_name) {
+      errors["user_name"] = true;
+      setErrors(errors);
+      return false;
+    } else if (!fields.email_address) {
+      errors["email_address"] = true;
+      setErrors(errors);
+      return false;
+    } else if (!fields.phone_num) {
+      errors["phone_num"] = true;
+      setErrors(errors);
+      return false;
+    } else if (!fields.language) {
+      errors["language"] = true;
+      setErrors(errors);
+      return false;
+    } else if (
+      fields.email_address &&
+      !EMAIL_REGULAR_EXPRESSION.test(fields.email_address)
+    ) {
+      errors["email_address"] = true;
+      setErrors(errors);
+      return false;
+    } else if (!fields.purpose) {
+      errors["purpose"] = true;
+      setErrors(errors);
+      return false;
+    } else if (!fields.message) {
+      errors["message"] = true;
+      setErrors(errors);
+      return false;
+    } else {
+      const response = await contactUs(fields)(dispatch);
+      toast.success(response.data.msg, {
+        theme: "colored"
+      });
+      setFields({});
+      setErrors({});
+    }
+  };
   return (
     <div className={styles.base}>
       <Head>
@@ -30,6 +87,7 @@ export default function ContactUs() {
           />
         </MobileOnly>
       </div>
+      {homeState.contactUsLoading && <PageLoader />}
       <div className={styles.sections}>
         <div className={styles.wrapper}>
           <div className={styles.formWrapper}>
@@ -39,6 +97,13 @@ export default function ContactUs() {
                 placeholder="Your Name*"
                 type="text"
                 className={styles.inputStyling}
+                style={{
+                  border: errors["user_name"]
+                    ? "2px solid red"
+                    : "2px solid rgb(221, 223, 225)"
+                }}
+                value={fields.user_name}
+                onChange={e => handleChange("user_name", e.target.value)}
               />
             </div>
             <div className={styles.inputsWrapper}>
@@ -46,6 +111,13 @@ export default function ContactUs() {
                 placeholder="Email Address*"
                 type="text"
                 className={styles.inputStyling}
+                style={{
+                  border: errors["email_address"]
+                    ? "2px solid red"
+                    : "2px solid rgb(221, 223, 225)"
+                }}
+                value={fields.email_address}
+                onChange={e => handleChange("email_address", e.target.value)}
               />
             </div>
             <div className={styles.inputsWrapper}>
@@ -53,6 +125,13 @@ export default function ContactUs() {
                 placeholder="Phone Number*"
                 type="text"
                 className={styles.inputStyling}
+                style={{
+                  border: errors["phone_num"]
+                    ? "2px solid red"
+                    : "2px solid rgb(221, 223, 225)"
+                }}
+                value={fields.phone_num}
+                onChange={e => handleChange("phone_num", e.target.value)}
               />
             </div>
             <div className={styles.inputsWrapper}>
@@ -60,6 +139,13 @@ export default function ContactUs() {
                 name="Language"
                 id="Language"
                 className={styles.selectStyling}
+                style={{
+                  border: errors["language"]
+                    ? "2px solid red"
+                    : "2px solid rgb(221, 223, 225)"
+                }}
+                value={fields.language}
+                onChange={e => handleChange("language", e.target.value)}
               >
                 <option value={0}>Language </option>
                 <option value="volvo">Volvo</option>
@@ -73,6 +159,13 @@ export default function ContactUs() {
                 name="reason"
                 id="reason"
                 className={styles.selectStyling}
+                style={{
+                  border: errors["purpose"]
+                    ? "2px solid red"
+                    : "2px solid rgb(221, 223, 225)"
+                }}
+                value={fields.purpose}
+                onChange={e => handleChange("purpose", e.target.value)}
               >
                 <option value={0}>
                   Why do you want to learn this language?{" "}
@@ -87,8 +180,15 @@ export default function ContactUs() {
               <textarea
                 placeholder="Message"
                 className={styles.inputStyling}
+                style={{
+                  border: errors["message"]
+                    ? "2px solid red"
+                    : "2px solid rgb(221, 223, 225)"
+                }}
                 rows="7"
                 cols="50"
+                value={fields.message}
+                onChange={e => handleChange("message", e.target.value)}
               ></textarea>
             </div>
             <div className={styles.submitBtn}>
@@ -104,7 +204,7 @@ export default function ContactUs() {
                   fontSize: "20px"
                 }}
                 border="none"
-                //onClick={() => askAQuestion()}
+                onClick={() => onSubmit()}
               />
             </div>
           </div>

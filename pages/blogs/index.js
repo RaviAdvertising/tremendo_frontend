@@ -1,11 +1,20 @@
 import Head from "next/head";
+import { useContext, useEffect } from "react";
 import BlogBox from "../../components/BlogBox/BlogBox";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import MobileOnly from "../../components/DeviceCheck/MobileOnly";
 import ImageComponent from "../../components/Image/Image";
+import LanguageDetailSkelton from "../../components/Skelton/LanguageDetailSkelton";
+import { getBlogs } from "../../Context/Actions/Home/HomeAction";
+import { GlobalContext } from "../../Context/Provider";
 import styles from "../../styles/Blogs.module.css";
 
 export default function Blogs() {
+  const { homeState, homeDispatch: dispatch } = useContext(GlobalContext);
+  useEffect(() => {
+    getBlogs()(dispatch);
+  }, []);
+  console.log(homeState.getBlogs);
   const header = headerName => {
     return (
       <div className={styles.headerWrapper}>
@@ -41,16 +50,20 @@ export default function Blogs() {
       </div>
 
       <div className={styles.sections}>
-        <div className={styles.contentWrapper}>
-          <div className={styles.header}>{header("OUR BLOG")}</div>
-          <div className={styles.blogWrapper}>
-            {[1, 1, 1, 1, 1, 1].map((i, index) => (
-              <div key={index} className={styles.blogs}>
-                <BlogBox />
-              </div>
-            ))}
+        {homeState.getBlogsLoading ? (
+          <LanguageDetailSkelton />
+        ) : (
+          <div className={styles.contentWrapper}>
+            <div className={styles.header}>{header("OUR BLOG")}</div>
+            <div className={styles.blogWrapper}>
+              {[1, 1, 1, 1, 1, 1].map((i, index) => (
+                <div key={index} className={styles.blogs}>
+                  <BlogBox />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
         <div>
           <ImageComponent
             src={"/Images/learn_grow_lead.png"}
