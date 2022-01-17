@@ -5,7 +5,7 @@ export default function FaqsStrip(props) {
   const toggleBar = () => {
     props.clickOnBar();
   };
-
+  const data = props.data;
   return (
     <div className={styles.base}>
       <div
@@ -19,8 +19,7 @@ export default function FaqsStrip(props) {
           className={styles.header}
           style={{ color: props.isOpen == props.id ? "#fff" : "#1f1f1f" }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elitaccumsan lacus
-          vel facilisis.{" "}
+          {data.faq}
         </div>
         <div
           className={`${styles.closeIcon}`}
@@ -33,15 +32,7 @@ export default function FaqsStrip(props) {
         </div>
       </div>
       {props.isOpen == props.id && (
-        <div className={`${styles.content}`}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
-          suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
-          lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
-          viverra maecenas accumsan lacus vel facilisis.
-        </div>
+        <div className={`${styles.content}`}>{data.answer}</div>
       )}
     </div>
   );

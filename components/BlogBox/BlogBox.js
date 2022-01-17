@@ -1,30 +1,27 @@
 import styles from "./BlogBox.module.css";
 import Image from "next/image";
-export default function BlogBox() {
+export default function BlogBox({ data }) {
   return (
-    <div className={styles.base} style={{ backgroundColor: "#ff9000" }}>
-      <div className={styles.heading} style={{ color: "#fff" }}>
-        Lorem ipsum dolor sit ame
+    <div className={styles.base} style={{ backgroundColor: data.bg_color }}>
+      <div className={styles.heading} style={{ color: data.title_color }}>
+        {data.title}
       </div>
-      <div className={styles.description} style={{ color: "#fff" }}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
-        suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
-        lacus vel facilisis.
+      <div className={styles.description} style={{ color: data.desc_color }}>
+        {data.short_desc}
       </div>
       <div className={styles.btnImageWrapper}>
         <div
           className={styles.btnText}
-          style={{ color: "#121212", backgroundColor: "#fff" }}
+          style={{ color: data.cta_title_color, backgroundColor: data.cta_bg }}
         >
-          Read More {">"}
+          {data.cta_title} {">"}
           {">"}
         </div>
         <div>
           <Image
             alt="blogs"
-            src={"/Images/blog1.png"}
-            height={"90px"}
+            src={data.image_url}
+            height={"80px"}
             width={"100px"}
           />
         </div>

@@ -14,7 +14,7 @@ export default function Blogs() {
   useEffect(() => {
     getBlogs()(dispatch);
   }, []);
-  console.log(homeState.getBlogs);
+
   const header = headerName => {
     return (
       <div className={styles.headerWrapper}>
@@ -56,9 +56,9 @@ export default function Blogs() {
           <div className={styles.contentWrapper}>
             <div className={styles.header}>{header("OUR BLOG")}</div>
             <div className={styles.blogWrapper}>
-              {[1, 1, 1, 1, 1, 1].map((i, index) => (
+              {homeState.getBlogs.map((i, index) => (
                 <div key={index} className={styles.blogs}>
-                  <BlogBox />
+                  <BlogBox data={i} />
                 </div>
               ))}
             </div>

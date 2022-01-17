@@ -23,6 +23,15 @@ const homeInitialState = {
   contactUsLoading: false,
 
   getBlogs: [],
-  getBlogsLoading: false
+  getBlogsLoading: false,
+
+  getFaqs: [],
+  getFaqsLoading: false,
+
+  addUserFaq: [],
+  addUserFaqLoading: false,
+
+  getUserFaq: [],
+  getUserFaqLoading: false
 };
 export default homeInitialState;

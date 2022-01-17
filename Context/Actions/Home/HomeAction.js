@@ -1,4 +1,6 @@
+import Cookies from "js-cookie";
 import axiosInstance from "../../../utils/axiosInstance";
+import { COOKIE_TOKEN } from "../../../utils/constants";
 
 export const GET_LANGUAGE_REQUEST = "get_language_request";
 export const GET_LANGUAGE_SUCCESS = "get_language_success";
@@ -35,6 +37,18 @@ export const CONTACT_US_ERROR = "CONTACT_US_error";
 export const GET_BLOGS_REQUEST = "GET_BLOGS_request";
 export const GET_BLOGS_SUCCESS = "GET_BLOGS_success";
 export const GET_BLOGS_ERROR = "GET_BLOGS_error";
+
+export const GET_FAQS_REQUEST = "GET_FAQS_request";
+export const GET_FAQS_SUCCESS = "GET_FAQS_success";
+export const GET_FAQS_ERROR = "GET_FAQS_error";
+
+export const ADD_USER_FAQ_REQUEST = "ADD_USER_FAQ_request";
+export const ADD_USER_FAQ_SUCCESS = "ADD_USER_FAQ_success";
+export const ADD_USER_FAQ_ERROR = "ADD_USER_FAQ_error";
+
+export const GET_USER_FAQ_REQUEST = "GET_USER_FAQ_request";
+export const GET_USER_FAQ_SUCCESS = "GET_USER_FAQ_success";
+export const GET_USER_FAQ_ERROR = "GET_USER_FAQ_error";
 
 export const getLanguages = () => dispatch => {
   dispatch({ type: GET_LANGUAGE_REQUEST });
@@ -81,7 +95,7 @@ export const getPageData = pageType => dispatch => {
 export const getReviewData = () => dispatch => {
   dispatch({ type: GET_REVIEW_DATA_REQUEST });
   return axiosInstance
-    .get(`/getCourseReview`)
+    .get(`/getCourseReview?access_token=${Cookies.get(COOKIE_TOKEN)}`)
     .then(res => {
       dispatch({
         type: GET_REVIEW_DATA_SUCCESS,
@@ -133,7 +147,11 @@ export const setReviewData = payload => dispatch => {
 export const getReviewDetails = id => dispatch => {
   dispatch({ type: GET_REVIEW_DETAILS_REQUEST });
   return axiosInstance
-    .get(`/getCourseReviewDetails?id=${id}`)
+    .get(
+      `/getCourseReviewDetails?id=${id}?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}`
+    )
     .then(res => {
       dispatch({
         type: GET_REVIEW_DETAILS_SUCCESS,
@@ -247,6 +265,72 @@ export const getBlogs = () => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_BLOGS_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const getFaqs = () => dispatch => {
+  dispatch({ type: GET_FAQS_REQUEST });
+  return axiosInstance
+    .get(`/getCourseFaqs`)
+    .then(res => {
+      dispatch({
+        type: GET_FAQS_SUCCESS,
+        data: res.data.data
+      });
+      return {
+        type: GET_FAQS_SUCCESS,
+        data: res.data
+      };
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_FAQS_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const addUserFaqs = payload => dispatch => {
+  dispatch({ type: ADD_USER_FAQ_REQUEST });
+  return axiosInstance
+    .post(`/addUserFaq`, payload)
+    .then(res => {
+      dispatch({
+        type: ADD_USER_FAQ_SUCCESS,
+        data: res.data.data
+      });
+      return {
+        type: ADD_USER_FAQ_SUCCESS,
+        data: res.data
+      };
+    })
+    .catch(err => {
+      dispatch({
+        type: ADD_USER_FAQ_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const getUserFaqs = () => dispatch => {
+  dispatch({ type: GET_USER_FAQ_REQUEST });
+  return axiosInstance
+    .get(`/getUserFaqs?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .then(res => {
+      dispatch({
+        type: GET_USER_FAQ_SUCCESS,
+        data: res.data.data
+      });
+      return {
+        type: GET_USER_FAQ_SUCCESS,
+        data: res.data
+      };
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_USER_FAQ_ERROR,
         error: err.response.data
       });
     });

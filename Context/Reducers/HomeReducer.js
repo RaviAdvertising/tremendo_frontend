@@ -126,6 +126,48 @@ const homeReducer = (state, action) => {
         getBlogsLoading: false
       });
 
+    case homeAction.GET_FAQS_REQUEST:
+      return Object.assign({}, state, {
+        getFaqsLoading: true
+      });
+    case homeAction.GET_FAQS_SUCCESS:
+      return Object.assign({}, state, {
+        getFaqsLoading: false,
+        getFaqs: action.data
+      });
+    case homeAction.GET_FAQS_ERROR:
+      return Object.assign({}, state, {
+        getFaqsLoading: false
+      });
+
+    case homeAction.ADD_USER_FAQ_REQUEST:
+      return Object.assign({}, state, {
+        addUserFaqLoading: true
+      });
+    case homeAction.ADD_USER_FAQ_SUCCESS:
+      return Object.assign({}, state, {
+        addUserFaqLoading: false,
+        addUserFaq: action.data
+      });
+    case homeAction.ADD_USER_FAQ_ERROR:
+      return Object.assign({}, state, {
+        addUserFaqLoading: false
+      });
+
+    case homeAction.GET_USER_FAQ_REQUEST:
+      return Object.assign({}, state, {
+        getUserFaqLoading: true
+      });
+    case homeAction.GET_USER_FAQ_SUCCESS:
+      return Object.assign({}, state, {
+        getUserFaqLoading: false,
+        getUserFaq: action.data
+      });
+    case homeAction.GET_USER_FAQ_ERROR:
+      return Object.assign({}, state, {
+        getUserFaqLoading: false
+      });
+
     default:
       return state;
   }

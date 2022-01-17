@@ -17,7 +17,7 @@
 .btnImageWrapper {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   margin-top: 25px;
 }
 .btnText {
@@ -26,4 +26,5 @@
   font-family: Open Sans;
   padding: 16px;
   cursor: pointer;
+  height: 50px;
 }
