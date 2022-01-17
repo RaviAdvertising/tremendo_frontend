@@ -1,0 +1,30 @@
+.base {
+  border-radius: 20px;
+  box-shadow: -0.6px 11px 21px 0 rgba(0, 0, 0, 0.45);
+  padding: 28px;
+}
+.heading {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Open Sans;
+  margin-bottom: 30px;
+  line-height: 42px;
+}
+.description {
+  font-size: 14px;
+  font-family: Open Sans;
+}
+.btnImageWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 25px;
+}
+.btnText {
+  font-weight: bold;
+  font-size: 18px;
+  font-family: Open Sans;
+  padding: 16px;
+  cursor: pointer;
+  height: 50px;
+}

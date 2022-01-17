@@ -13,7 +13,9 @@ import {
   EMAIL_REGULAR_EXPRESSION,
   LOGIN_TYPE_EMAIL,
   LOGIN_TYPE_FB,
-  LOGIN_TYPE_GOOGLE
+  LOGIN_TYPE_GOOGLE,
+  PREVIOUS_PATH,
+  USER_DETAILS
 } from "../../utils/constants";
 import { GlobalContext } from "../../Context/Provider";
 import socialMediaAuth, {
@@ -82,7 +84,7 @@ export default function Signup(props) {
       toast.success(response.data.msg, {
         theme: "colored"
       });
-      router.push(HOME_PAGE);
+      actionAfterLogin();
     }
     // }
   };
@@ -129,10 +131,18 @@ export default function Signup(props) {
         toast.success(response.data.msg, {
           theme: "colored"
         });
-        router.push(HOME_PAGE);
+        actionAfterLogin();
       }
     }
   };
+  const actionAfterLogin = () => {
+    if (localStorage.getItem(PREVIOUS_PATH)) {
+      router.replace(localStorage.getItem(PREVIOUS_PATH));
+    } else {
+      router.push(HOME_PAGE);
+    }
+  };
+
   const DateInput = ({ value, onClick }) => {
     return (
       <button

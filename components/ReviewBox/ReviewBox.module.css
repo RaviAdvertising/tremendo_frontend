@@ -1,0 +1,107 @@
+.base {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 24px 30px;
+  border: solid 2px #ff9000;
+}
+.profileImgAndDateWrapper {
+  display: flex;
+  align-items: center;
+}
+.profileImg {
+}
+.nameAndData {
+  margin-left: 24px;
+}
+.name {
+  color: #252525;
+  font-size: 28px;
+  font-family: Open Sans;
+  font-weight: bold;
+}
+.ownName {
+  color: #252525;
+  font-size: 24px;
+  font-family: Open Sans;
+  font-weight: bold;
+  margin-left: 15px;
+}
+.date {
+  color: #252525;
+  font-family: Montserrat;
+  font-size: 18px;
+  margin-top: 12px;
+}
+.owndescription {
+  color: #252525;
+  font-family: Montserrat;
+  font-size: 16px;
+  margin-left: 10px;
+  margin-top: 6px;
+}
+.ratingAndNameWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.reviewDescription {
+  color: #252525;
+  font-size: 18px;
+  font-family: Montserrat;
+  line-height: 30px;
+  margin-top: 30px;
+}
+.readMoreAndThumbWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 35px;
+}
+.thumb {
+  cursor: pointer;
+}
+.readMore {
+  color: #252525;
+  font-size: 18px;
+  font-family: Montserrat;
+  font-weight: bold;
+  cursor: pointer;
+}
+.thumbAndButtonWrapper {
+  display: flex;
+  align-items: center;
+}
+.replyBox {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+.ownImageAndNameWrapper {
+  display: flex;
+  align-items: center;
+}
+.border {
+  background-color: rgba(37, 37, 37, 0.3);
+  height: 2px;
+  margin-top: 20px;
+}
+.inputPostWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.input {
+  width: 80%;
+}
+.postCta {
+  color: #3293d6;
+  font-size: 20px;
+  font-family: Open Sans;
+  font-weight: bold;
+  cursor: pointer;
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+.inputPostWrapper {
+  margin-top: 30px;
+}

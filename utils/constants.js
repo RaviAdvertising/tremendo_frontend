@@ -78,3 +78,4 @@ export const LOGIN_TYPE_EMAIL = "email";
 export const LOGIN_TYPE_FB = "facebook";
 export const LOGIN_TYPE_GOOGLE = "google";
 export const USER_DETAILS = "user_details";
+export const PREVIOUS_PATH = "previous_path";

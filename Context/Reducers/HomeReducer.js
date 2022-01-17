@@ -29,6 +29,145 @@ const homeReducer = (state, action) => {
         pageDataLoading: false
       });
 
+    case homeAction.GET_REVIEW_DATA_REQUEST:
+      return Object.assign({}, state, {
+        reviewDataLoading: true
+      });
+    case homeAction.GET_REVIEW_DATA_SUCCESS:
+      return Object.assign({}, state, {
+        reviewDataLoading: false,
+        reviewData: action.data
+      });
+    case homeAction.GET_REVIEW_DATA_ERROR:
+      return Object.assign({}, state, {
+        reviewDataLoading: false
+      });
+
+    case homeAction.SET_REVIEW_DATA_REQUEST:
+      return Object.assign({}, state, {
+        setReviewLoading: true
+      });
+    case homeAction.SET_REVIEW_DATA_SUCCESS:
+      return Object.assign({}, state, {
+        setReviewLoading: false,
+        setReviewData: action.data
+      });
+    case homeAction.SET_REVIEW_DATA_ERROR:
+      return Object.assign({}, state, {
+        setReviewLoading: false
+      });
+
+    case homeAction.GET_REVIEW_DETAILS_REQUEST:
+      return Object.assign({}, state, {
+        reviewDetailsLoading: true
+      });
+    case homeAction.GET_REVIEW_DETAILS_SUCCESS:
+      return Object.assign({}, state, {
+        reviewDetailsLoading: false,
+        reviewDetails: action.data
+      });
+    case homeAction.GET_REVIEW_DETAILS_ERROR:
+      return Object.assign({}, state, {
+        reviewDetailsLoading: false
+      });
+
+    case homeAction.ADD_REVIEW_COMMENT_REQUEST:
+      return Object.assign({}, state, {
+        reviewCommentLoading: true
+      });
+    case homeAction.ADD_REVIEW_COMMENT_SUCCESS:
+      return Object.assign({}, state, {
+        reviewCommentLoading: false,
+        reviewComment: action.data
+      });
+    case homeAction.ADD_REVIEW_COMMENT_ERROR:
+      return Object.assign({}, state, {
+        reviewCommentLoading: false
+      });
+
+    case homeAction.SET_REVIEW_LIKE_REQUEST:
+      return Object.assign({}, state, {
+        setReviewLikeLoading: true
+      });
+    case homeAction.SET_REVIEW_LIKE_SUCCESS:
+      return Object.assign({}, state, {
+        setReviewLikeLoading: false,
+        setReviewLike: action.data
+      });
+    case homeAction.SET_REVIEW_LIKE_ERROR:
+      return Object.assign({}, state, {
+        setReviewLikeLoading: false
+      });
+
+    case homeAction.CONTACT_US_REQUEST:
+      return Object.assign({}, state, {
+        contactUsLoading: true
+      });
+    case homeAction.CONTACT_US_SUCCESS:
+      return Object.assign({}, state, {
+        contactUsLoading: false
+      });
+    case homeAction.CONTACT_US_ERROR:
+      return Object.assign({}, state, {
+        contactUsLoading: false
+      });
+
+    case homeAction.GET_BLOGS_REQUEST:
+      return Object.assign({}, state, {
+        getBlogsLoading: true
+      });
+    case homeAction.GET_BLOGS_SUCCESS:
+      return Object.assign({}, state, {
+        getBlogsLoading: false,
+        getBlogs: action.data
+      });
+    case homeAction.GET_BLOGS_ERROR:
+      return Object.assign({}, state, {
+        getBlogsLoading: false
+      });
+
+    case homeAction.GET_FAQS_REQUEST:
+      return Object.assign({}, state, {
+        getFaqsLoading: true
+      });
+    case homeAction.GET_FAQS_SUCCESS:
+      return Object.assign({}, state, {
+        getFaqsLoading: false,
+        getFaqs: action.data
+      });
+    case homeAction.GET_FAQS_ERROR:
+      return Object.assign({}, state, {
+        getFaqsLoading: false
+      });
+
+    case homeAction.ADD_USER_FAQ_REQUEST:
+      return Object.assign({}, state, {
+        addUserFaqLoading: true
+      });
+    case homeAction.ADD_USER_FAQ_SUCCESS:
+      return Object.assign({}, state, {
+        addUserFaqLoading: false,
+        addUserFaq: action.data
+      });
+    case homeAction.ADD_USER_FAQ_ERROR:
+      return Object.assign({}, state, {
+        addUserFaqLoading: false
+      });
+
+    case homeAction.GET_USER_FAQ_REQUEST:
+      return Object.assign({}, state, {
+        getUserFaqLoading: true
+      });
+    case homeAction.GET_USER_FAQ_SUCCESS:
+      return Object.assign({}, state, {
+        getUserFaqLoading: false,
+        getUserFaq: action.data
+      });
+    case homeAction.GET_USER_FAQ_ERROR:
+      return Object.assign({}, state, {
+        getUserFaqLoading: false
+      });
+
     default:
       return state;
   }

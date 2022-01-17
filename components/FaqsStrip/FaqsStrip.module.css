@@ -1,0 +1,23 @@
+.headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  cursor: pointer;
+  align-items: center;
+}
+.header {
+  font-family: Open Sans;
+  font-weight: bold;
+  font-size: 14px;
+}
+.content {
+  color: #fff;
+  margin-top: 25px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-family: Open Sans;
+}
+
+.closeIcon {
+  font-size: 44px;
+}

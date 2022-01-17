@@ -12,7 +12,11 @@ import {
   HOME_PAGE,
   LANGUAGE_DETAIL,
   LOGIN_PATH,
-  SIGN_UP_PATH
+  SIGN_UP_PATH,
+  BLOGS_PATH,
+  CONTACTUS_PATH,
+  FAQS_PATH,
+  REVIEW_PATH
 } from "../../utils/routes";
 import Cookies from "js-cookie";
 import { GlobalContext } from "../../Context/Provider";
@@ -112,10 +116,34 @@ function Navbar({}) {
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
-                <Menu.Item name="REVIEW" className={styles.itemWrapper} />
-                <Menu.Item name="FAQ'S" className={styles.itemWrapper} />
-                <Menu.Item name="BLOGS" className={styles.itemWrapper} />
-                <Menu.Item name="CONTACT US" className={styles.itemWrapper} />
+                <Menu.Item
+                  name="REVIEW"
+                  className={`${styles.itemWrapper} ${router.pathname.includes(
+                    REVIEW_PATH
+                  ) && styles.activeItemWrapper}`}
+                  onClick={() => router.push(REVIEW_PATH)}
+                />
+                <Menu.Item
+                  name="FAQ'S"
+                  className={`${styles.itemWrapper} ${router.pathname.includes(
+                    FAQS_PATH
+                  ) && styles.activeItemWrapper}`}
+                  onClick={() => router.push(FAQS_PATH)}
+                />
+                <Menu.Item
+                  name="BLOGS"
+                  className={`${styles.itemWrapper} ${router.pathname.includes(
+                    BLOGS_PATH
+                  ) && styles.activeItemWrapper}`}
+                  onClick={() => router.push(BLOGS_PATH)}
+                />
+                <Menu.Item
+                  name="CONTACT US"
+                  className={`${styles.itemWrapper} ${router.pathname.includes(
+                    CONTACTUS_PATH
+                  ) && styles.activeItemWrapper}`}
+                  onClick={() => router.push(CONTACTUS_PATH)}
+                />
               </Menu.Menu>
               {!Cookies.get(COOKIE_TOKEN) ? (
                 <Menu.Item
@@ -247,10 +275,30 @@ function Navbar({}) {
                   ))}
                 </Dropdown.Menu>
               </Dropdown>
-              <div className={styles.mwebMenus}>Review</div>
-              <div className={styles.mwebMenus}>FAQs</div>
-              <div className={styles.mwebMenus}>Blogs</div>
-              <div className={styles.mwebMenus}>Contact Us</div>
+              <div
+                className={styles.mwebMenus}
+                onClick={() => router.push(REVIEW_PATH)}
+              >
+                Review
+              </div>
+              <div
+                className={styles.mwebMenus}
+                onClick={() => router.push(FAQS_PATH)}
+              >
+                FAQs
+              </div>
+              <div
+                className={styles.mwebMenus}
+                onClick={() => router.push(BLOGS_PATH)}
+              >
+                Blogs
+              </div>
+              <div
+                className={styles.mwebMenus}
+                onClick={() => router.push(CONTACTUS_PATH)}
+              >
+                Contact Us
+              </div>
             </div>
           </div>
         )}
