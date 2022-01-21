@@ -8,9 +8,9 @@ export const DeviceContext = createContext({});
 function MyApp({ Component, pageProps, isMobileView }) {
   return (
     <DeviceContext.Provider value={{ isMobileView }}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      {/* <Layout> */}
+      <Component {...pageProps} />
+      {/* </Layout> */}
     </DeviceContext.Provider>
   );
 }

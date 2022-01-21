@@ -2,10 +2,17 @@ import { useContext } from "react";
 import { DeviceContext } from "./_app";
 import Image from "../components/Image/Image";
 import styles from "../styles/Error.module.css";
-export default function Custom404(props) {
+import Head from "next/head";
+
+export default function Main(props) {
   const { isMobileView } = useContext(DeviceContext);
   return (
     <div className={styles.base}>
+      <Head>
+        <title>Tremendo</title>
+        <meta name="description" content="Tremendo About us page" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Image
         src={isMobileView ? "Images/404_mobile.png" : "Images/404_desktop.png"}
         alt="404 error"
