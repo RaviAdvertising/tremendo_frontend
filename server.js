@@ -13,7 +13,11 @@ app.prepare().then(() => {
     // This tells it to parse the query portion of the URL.
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
-
+    res.writeHead(301, {
+      Location: `https://www.tremendo.in/`
+    });
+    res.end();
+    return {};
     if (pathname === "/a") {
       app.render(req, res, "/a", query);
     } else if (pathname === "/b") {
