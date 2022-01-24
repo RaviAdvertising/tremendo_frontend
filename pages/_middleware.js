@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
 
 export function middleware(req, ev) {
-  return NextResponse.redirect(`https://www.tremendo.in/`, 301);
+  return NextResponse.redirect(`https://tremendo.in`);
 }
