@@ -249,9 +249,12 @@
     width: 100%;
   }
   .boxWrapper {
-    flex-wrap: wrap;
+    display: block;
   }
   .boxBase {
+    margin-bottom: 15px;
+    width: 90%;
+    margin: auto;
     margin-bottom: 15px;
   }
   .upcomingBatch {
@@ -262,5 +265,24 @@
     margin-bottom: 17px;
     font-size: 10px;
     padding: 10px 5px;
+  }
+  .header {
+    padding: 50px 0px;
+  }
+  .profileName {
+    font-size: 30px;
+  }
+  .upcomingBatchWrapper {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  .priceHeading {
+    font-size: 16px;
+  }
+  .price {
+    font-size: 16px;
+  }
+  .priceWrapper {
+    margin: 0;
   }
 }

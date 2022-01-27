@@ -80,6 +80,7 @@ function Navbar({}) {
   const goToLanguage = language => {
     setSelectedLanguage(language.title);
     router.push(`${LANGUAGE_DETAIL}${language.id}`);
+    setVisible(!visible);
   };
 
   const desktopNavbar = () => {
@@ -271,7 +272,11 @@ function Navbar({}) {
               >
                 <Dropdown.Menu>
                   {homeState.getLanguage.map((i, index) => (
-                    <Dropdown.Item key={index} text={i.title} />
+                    <Dropdown.Item
+                      key={index}
+                      text={i.title}
+                      onClick={() => goToLanguage(i)}
+                    />
                   ))}
                 </Dropdown.Menu>
               </Dropdown>

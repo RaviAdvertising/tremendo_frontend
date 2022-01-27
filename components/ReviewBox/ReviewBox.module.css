@@ -105,3 +105,17 @@
 .inputPostWrapper {
   margin-top: 30px;
 }
+@media (max-device-width: 1024px) {
+  .name {
+    font-size: 20px;
+  }
+  .ratingAndNameWrapper {
+    align-items: center;
+  }
+  .nameAndData {
+    margin-left: 12px;
+  }
+  .ownName {
+    font-size: 16px;
+  }
+}

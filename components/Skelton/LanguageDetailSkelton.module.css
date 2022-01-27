@@ -43,3 +43,20 @@
   border-radius: 20px;
   background-color: rgba(195, 192, 192, 0.25);
 }
+@media (max-device-width: 1024px) {
+  .heading {
+    width: 50%;
+  }
+  .descriptionText {
+    width: 90%;
+  }
+  .descriptionTextSmall {
+    width: 80%;
+  }
+  .descriptionTextMoreSmall {
+    width: 50%;
+  }
+  .box {
+    width: 45%;
+  }
+}

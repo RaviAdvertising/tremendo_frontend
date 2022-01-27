@@ -38,7 +38,7 @@ export default function Home({}) {
     if (homeState.pageData.length == 0)
       getPageData(DASHBOARD_PAGE_TYPE)(dispatch);
     if (homeState.getLanguage.length == 0) getLanguages()(dispatch);
-  });
+  }, []);
   return (
     <div>
       <Head>

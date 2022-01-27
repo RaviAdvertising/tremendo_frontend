@@ -55,3 +55,8 @@
 .inputBox {
   margin-top: 25px;
 }
+@media (max-device-width: 1024px) {
+  .sectionWrapper {
+    margin-left: 58px;
+  }
+}

@@ -30,7 +30,6 @@ export default function Faqs() {
     getFaqs()(dispatch);
   }, []);
 
-  console.log(homeState.getUserFaq);
   const toggleBar = id => {
     if (isOpen == id) {
       setIsOpen(null);
