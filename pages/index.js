@@ -242,7 +242,7 @@ export default function Home({}) {
         <Image
           src={"/Images/chat.png"}
           alt={"chat icons"}
-          width={isMobileView ? "40px" : "70px"}
+          width={isMobileView ? "40px" : "75px"}
           height={isMobileView ? "40px" : "70px"}
         />
       </div>
