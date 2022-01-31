@@ -16,7 +16,8 @@ import {
   BLOGS_PATH,
   CONTACTUS_PATH,
   FAQS_PATH,
-  REVIEW_PATH
+  REVIEW_PATH,
+  STUDENT_DASHBOARD_PATH
 } from "../../utils/routes";
 import Cookies from "js-cookie";
 import { GlobalContext } from "../../Context/Provider";
@@ -179,7 +180,12 @@ function Navbar({}) {
                         ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
                         : JSON.parse(localStorage.getItem(USER_DETAILS)).email}
                     </div>
-                    <div className={styles.profileOptions}>Profile setting</div>
+                    <div
+                      className={styles.profileOptions}
+                      onClick={() => router.push(STUDENT_DASHBOARD_PATH)}
+                    >
+                      Dashboard
+                    </div>
                     <div className={styles.profileOptions}>Invite friends</div>
                     <div
                       className={styles.profileLogout}
