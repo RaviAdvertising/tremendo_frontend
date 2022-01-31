@@ -38,7 +38,7 @@
   outline: none;
 }
 .inputsWrapper {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .selectStyling {
   background-color: transparent;
@@ -55,7 +55,7 @@
   outline: none;
 }
 .selectStyling > option {
-  background: #f78f1f;
+  color: #000;
 }
 .submitBtn {
   width: 30%;
@@ -77,6 +77,10 @@
   font-size: 18px;
   margin-left: 10px;
   margin-bottom: 10px;
+}
+.phoneIcon {
+  transform: rotate(100deg);
+  margin-bottom: 8px;
 }
 @media (max-device-width: 1024px) {
   .wrapper {

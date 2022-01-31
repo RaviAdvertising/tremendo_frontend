@@ -52,9 +52,9 @@ export default function DetailLanguagePage({}) {
       <div className={styles.topBannerWrapper}>
         <ImageComponent src={details.banner_large} paddingBottom={"21%"} />
         {details.banner_title && (
-          <div
-            className={styles.profileName}
-          >{`${details.banner_title} ${name}`}</div>
+          <div className={styles.profileName}>{`${
+            details.banner_title
+          } ${name && name.split(" ")[0]}`}</div>
         )}
       </div>
       <div
@@ -101,7 +101,7 @@ export default function DetailLanguagePage({}) {
                 </div>
               ))}
             </div>
-            {details.upcoming_batches?.banners.length !== 0 && (
+            {/* {details.upcoming_batches?.banners.length !== 0 && (
               <div>
                 <div className={styles.header}>
                   {header(details.upcoming_batches?.title)}
@@ -134,7 +134,7 @@ export default function DetailLanguagePage({}) {
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
             <div>
               <div className={styles.header}>
                 {header(details.batch_details?.title)}

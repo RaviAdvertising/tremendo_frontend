@@ -88,7 +88,12 @@ function Navbar({}) {
     return (
       <Menu fixed="top" secondary className={styles.menuWrapper}>
         <Menu.Item onClick={() => router.push(HOME_PAGE)}>
-          <Image src="/Images/tremendo_logo.png" alt="logo" />
+          <Image
+            src="/Images/tremendo_logo.png"
+            alt="tremendo logo"
+            width={"150px"}
+            height={"50px"}
+          />
         </Menu.Item>
         {!router.pathname.includes(SIGN_UP_PATH) &&
           !router.pathname.includes(LOGIN_PATH) && (

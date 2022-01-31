@@ -3,12 +3,12 @@
 }
 .profileName {
   position: absolute;
-  left: 20%;
+  left: 12%;
   top: 40%;
   color: #212121;
   font-weight: 700;
   font-family: Open Sans;
-  font-size: 60px;
+  font-size: 50px;
 }
 .subBaseWrapper {
   background-color: #268f8c;
