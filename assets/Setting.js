@@ -1,6 +1,6 @@
 import React from "react";
 
-const Setting = ({ color = "#949494" }) => {
+const Setting = ({ color = "#000" }) => {
   return (
     <svg
       width="24"

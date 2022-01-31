@@ -49,3 +49,30 @@
 .tabIcon {
   display: flex;
 }
+.tabWrapper {
+  margin-top: 60px;
+}
+.footerBanner {
+  background-color: #268f8c;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 60px 20px 20px 20px;
+}
+.footerText {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 14px;
+}
+.footerImg {
+  margin-top: 35px;
+}
+.profileWrapper {
+  display: flex;
+  align-items: center;
+}
+.topHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 10px 20px 30px;
+}
