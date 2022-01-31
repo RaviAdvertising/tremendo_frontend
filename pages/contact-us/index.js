@@ -150,10 +150,11 @@ export default function ContactUs() {
                 onChange={e => handleChange("language", e.target.value)}
               >
                 <option value={0}>Language </option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+                {homeState.getLanguage.map((i, index) => (
+                  <option value={i.title} key={index}>
+                    {i.title}
+                  </option>
+                ))}
               </select>
             </div>
             <div className={styles.inputsWrapper}>
@@ -172,10 +173,11 @@ export default function ContactUs() {
                 <option value={0}>
                   Why do you want to learn this language?{" "}
                 </option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+                {homeState.getLanguage.map((i, index) => (
+                  <option value={i.title} key={index}>
+                    {i.title}
+                  </option>
+                ))}
               </select>
             </div>
             <div className={styles.inputsWrapper}>
@@ -227,7 +229,7 @@ export default function ContactUs() {
                   <Image
                     src="/Images/location.png"
                     alt="location"
-                    width={"30px"}
+                    width={"32px"}
                     height={"37px"}
                   />
                 </div>
@@ -236,7 +238,7 @@ export default function ContactUs() {
                 </div>
               </div>
               <div className={styles.infoSec}>
-                <div>
+                <div className={styles.phoneIcon}>
                   <Image
                     src="/Images/phone.png"
                     alt="location"
@@ -253,7 +255,7 @@ export default function ContactUs() {
                   <Image
                     src="/Images/mail.png"
                     alt="location"
-                    width={"30px"}
+                    width={"37px"}
                     height={"37px"}
                   />
                 </div>
