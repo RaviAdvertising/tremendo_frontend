@@ -4,14 +4,15 @@
   display: flex;
 }
 .leftSection {
-  width: 15%;
+  width: 17%;
 }
 .centerSection {
-  width: 65%;
+  width: 63%;
   background-color: #fff6eb;
 }
 .rightSection {
   width: 20%;
+  padding: 0 20px;
 }
 .searchHeader {
   background-color: #fff;
@@ -74,5 +75,99 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 10px 20px 30px;
+  padding: 20px 0;
+}
+.lens {
+  background-color: #ecf8f8;
+  padding: 6px 0;
+  display: flex;
+}
+.profileName {
+  font-size: 22px;
+  margin-left: 12px;
+  font-family: Poppins;
+  font-weight: 600;
+}
+.upcomingTaskHeading {
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0a2227;
+}
+.upcomingTaskBox {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 14px;
+  padding: 14px;
+}
+.upcomingTaskSection {
+  margin-top: 20px;
+}
+.taskWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.taskImage {
+  background-color: #9aeeec;
+  height: 50px;
+  width: 50px;
+}
+.taskDetail {
+  font-family: Poppins;
+  color: #0c0c0c;
+  margin-left: 10px;
+}
+.taskName {
+  font-weight: 600;
+  font-size: 16px;
+}
+.taskTime {
+  font-size: 12px;
+}
+.letsTalkSection {
+  margin-top: 30px;
+}
+.chatNameAndImgWrapper {
+  display: flex;
+  align-items: center;
+}
+.userName {
+  font-family: Poppins;
+  color: #0c0c0c;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.messageTime {
+  font-family: Poppins;
+  color: #b5b5b5;
+  font-size: 10px;
+  margin-left: 25px;
+}
+.chatMessageBox {
+  background-color: #248497;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 10px;
+  padding: 6px;
+  margin-top: 7px;
+  margin-left: 27px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.chatBoxWrapper {
+  margin-bottom: 12px;
+}
+.chatInputWrapper {
+  display: flex;
+  align-items: center;
+  width: 156%;
+}
+.chatIcons {
+  background-color: #fafafa;
+  padding: 6px 0px 6px 6px;
+  display: flex;
+  cursor: pointer;
 }

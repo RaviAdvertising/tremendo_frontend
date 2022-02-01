@@ -20,7 +20,14 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
     <div className={styles.base}>
       <div className={styles.leftSection}>
         <div className={styles.flagSection}>
-          <Icon name="dashboardIcon" color="#ff9000" />
+          <ImageComponent
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/english_flag.png?alt=media&token=426f6879-24af-4182-a3e7-3cbc39f9622c"
+            }
+            alt={"flag"}
+            width={"65px"}
+            height={"35px"}
+          />
         </div>
         <div className={styles.tabWrapper}>
           {tabsData.map((i, index) => (
@@ -57,6 +64,9 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
       </div>
       <div className={styles.centerSection}>
         <div className={styles.searchHeader}>
+          <div className={styles.lens}>
+            <Icon name={"lens"} />
+          </div>
           <div className={styles.search}>
             <Input
               placeholder={"What Are you looking for?"}
@@ -69,7 +79,9 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
               }}
             />
           </div>
-          <div className={styles.dateSection}>{moment().format("LLLL")}</div>
+          <div className={styles.dateSection}>{`${moment().format(
+            "dddd"
+          )}, ${moment().format("LL")}`}</div>
         </div>
         <div className={styles.childrenSection}>
           {tabsData[selectedTab - 1].component}
@@ -92,6 +104,105 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
           <div className={styles.notification}>
             <Icon name="notification" color="#ff9000" />
           </div>
+        </div>
+        <div className={styles.upcomingTaskSection}>
+          <div className={styles.upcomingTaskHeading}>Upcoming Task</div>
+          <div className={styles.upcomingTaskBox}>
+            {[1, 1, 1, 1].map((i, index) => (
+              <div className={styles.taskWrapper} key={index}>
+                <div className={styles.taskImage}></div>
+                <div className={styles.taskDetail}>
+                  <div className={styles.taskName}>Lorem Ipsum Lorem</div>
+                  <div className={styles.taskTime}>Time & Date</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={styles.letsTalkSection}>
+          <div className={styles.upcomingTaskHeading}>Let’s Talk</div>
+          <div className={styles.upcomingTaskBox}>
+            <div className={styles.chatBoxWrapper}>
+              <div className={styles.chatNameAndImgWrapper}>
+                <div className={styles.userImg}>
+                  <Image
+                    src={"/Images/blank_profile.png"}
+                    circular
+                    alt="user-image"
+                    height={"20px"}
+                    width={"20px"}
+                  />
+                </div>
+                <div className={styles.userName}>Mirza</div>
+                <div className={styles.messageTime}>1 min</div>
+              </div>
+              <div className={styles.chatMessageBox}>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry.
+              </div>
+            </div>
+            <div className={styles.chatBoxWrapper}>
+              <div className={styles.chatNameAndImgWrapper}>
+                <div className={styles.userImg}>
+                  <Image
+                    src={"/Images/blank_profile.png"}
+                    circular
+                    alt="user-image"
+                    height={"20px"}
+                    width={"20px"}
+                  />
+                </div>
+                <div className={styles.userName}>John</div>
+                <div className={styles.messageTime}>1 min</div>
+              </div>
+              <div className={styles.chatMessageBox}>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry.
+              </div>
+            </div>
+            <div className={styles.chatBoxWrapper}>
+              <div className={styles.chatNameAndImgWrapper}>
+                <div className={styles.userImg}>
+                  <Image
+                    src={"/Images/blank_profile.png"}
+                    circular
+                    alt="user-image"
+                    height={"20px"}
+                    width={"20px"}
+                  />
+                </div>
+                <div className={styles.userName}>Andrew</div>
+                <div className={styles.messageTime}>1 min</div>
+              </div>
+              <div className={styles.chatMessageBox}>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry.
+              </div>
+            </div>
+            <div className={styles.chatInputWrapper}>
+              <div className={styles.chatIcons}>
+                <Icon name={"chatIcon"} />
+              </div>
+              <div className={styles.search}>
+                <Input
+                  placeholder={"Write a message"}
+                  inputStyling={{
+                    width: "100%",
+                    fontSize: "10px",
+                    backgroundColor: "#fafafa",
+                    color: "#1b1c1c",
+                    padding: "8px 15px"
+                  }}
+                />
+              </div>
+              <div className={styles.chatIcons}>
+                <Icon name={"sendIcon"} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.letsTalkSection}>
+          <div className={styles.upcomingTaskHeading}>Batch Mates</div>
         </div>
       </div>
     </div>
