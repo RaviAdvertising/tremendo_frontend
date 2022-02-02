@@ -1,0 +1,173 @@
+.base {
+  background-color: #ecf8f8;
+  width: 100%;
+  display: flex;
+}
+.leftSection {
+  width: 17%;
+}
+.centerSection {
+  width: 63%;
+  background-color: #fff6eb;
+}
+.rightSection {
+  width: 20%;
+  padding: 0 20px;
+}
+.searchHeader {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 20px 10px 20px 30px;
+}
+.search {
+  width: 50%;
+}
+.dateSection {
+  width: 50%;
+  font-family: Poppins;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.flagSection {
+  padding: 20px 0;
+  text-align: center;
+}
+.tabs {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 30px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.tabName {
+  font-family: Poppins;
+  font-size: 14px;
+  margin-left: 15px;
+}
+.tabIcon {
+  display: flex;
+}
+.tabWrapper {
+  margin-top: 60px;
+}
+.footerBanner {
+  background-color: #268f8c;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 60px 20px 20px 20px;
+}
+.footerText {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 14px;
+}
+.footerImg {
+  margin-top: 35px;
+}
+.profileWrapper {
+  display: flex;
+  align-items: center;
+}
+.topHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.lens {
+  background-color: #ecf8f8;
+  padding: 6px 0;
+  display: flex;
+}
+.profileName {
+  font-size: 22px;
+  margin-left: 12px;
+  font-family: Poppins;
+  font-weight: 600;
+}
+.upcomingTaskHeading {
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0a2227;
+}
+.upcomingTaskBox {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 14px;
+  padding: 14px;
+}
+.upcomingTaskSection {
+  margin-top: 20px;
+}
+.taskWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.taskImage {
+  background-color: #9aeeec;
+  height: 50px;
+  width: 50px;
+}
+.taskDetail {
+  font-family: Poppins;
+  color: #0c0c0c;
+  margin-left: 10px;
+}
+.taskName {
+  font-weight: 600;
+  font-size: 16px;
+}
+.taskTime {
+  font-size: 12px;
+}
+.letsTalkSection {
+  margin-top: 30px;
+}
+.chatNameAndImgWrapper {
+  display: flex;
+  align-items: center;
+}
+.userName {
+  font-family: Poppins;
+  color: #0c0c0c;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.messageTime {
+  font-family: Poppins;
+  color: #b5b5b5;
+  font-size: 10px;
+  margin-left: 25px;
+}
+.chatMessageBox {
+  background-color: #248497;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 10px;
+  padding: 6px;
+  margin-top: 7px;
+  margin-left: 27px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.chatBoxWrapper {
+  margin-bottom: 12px;
+}
+.chatInputWrapper {
+  display: flex;
+  align-items: center;
+  width: 156%;
+}
+.chatIcons {
+  background-color: #fafafa;
+  padding: 6px 0px 6px 6px;
+  display: flex;
+  cursor: pointer;
+}

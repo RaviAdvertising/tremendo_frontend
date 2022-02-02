@@ -7,3 +7,4 @@ export const BLOGS_PATH = "/blogs";
 export const REVIEW_PATH = "/reviews";
 export const FAQS_PATH = "/faqs";
 export const CONTACTUS_PATH = "/contact-us";
+export const STUDENT_DASHBOARD_PATH = "/dashboard/student";
