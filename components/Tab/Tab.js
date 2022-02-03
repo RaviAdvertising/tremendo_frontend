@@ -5,6 +5,7 @@ import Icon from "../../assets/Icon/Icon";
 import ImageComponent from "next/image";
 import { Image } from "semantic-ui-react";
 import { USER_DETAILS } from "../../utils/constants";
+import CustomImage from "../Image/Image";
 
 export default function Tab({ tabsData, selectTab, selectedTab }) {
   const SELECTED_TAB_COLOR = "#ff9000";
@@ -17,6 +18,7 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
       ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
       : "User";
   return (
+    // <div style={{ backgroundColor: "#fff6eb" }}>
     <div className={styles.base}>
       <div className={styles.leftSection}>
         <div className={styles.flagSection}>
@@ -90,7 +92,7 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
       <div className={styles.rightSection}>
         <div className={styles.topHeader}>
           <div className={styles.profileWrapper}>
-            <div className={styles.profileImage}>
+            {/* <div className={styles.profileImage}>
               <Image
                 src={imageUrl}
                 circular
@@ -98,7 +100,7 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
                 height={"36px"}
                 width={"36px"}
               />
-            </div>
+            </div> */}
             <div className={styles.profileName}>{name.split(" ")[0]}</div>
           </div>
           <div className={styles.notification}>
@@ -206,5 +208,13 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
         </div>
       </div>
     </div>
+    //   <div>
+    //     <CustomImage
+    //       src={"/Images/learn_grow_lead.png"}
+    //       paddingBottom={"15%"}
+    //       alt={"banner logo"}
+    //     />
+    //   </div>
+    // </div>
   );
 }

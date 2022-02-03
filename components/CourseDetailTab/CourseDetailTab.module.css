@@ -1,0 +1,148 @@
+.base {
+  padding: 50px;
+}
+.courseName {
+  color: #202323;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Poppins;
+  margin-bottom: 20px;
+}
+.batchName {
+  color: #202323;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Poppins;
+}
+.dateMonthHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 90px;
+}
+.datesWrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  overflow-x: scroll;
+}
+.date {
+  color: #202323;
+  font-size: 14px;
+  font-family: Poppins;
+  margin-right: 25px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+.datesWrapper::-webkit-scrollbar {
+  display: block;
+  background-color: #c4c4c4;
+  height: 4px;
+}
+
+.datesWrapper::-webkit-scrollbar-thumb {
+  background-color: #616161;
+}
+.detailHeadingWrapper {
+  background-color: #fa9116;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-top: 10px;
+  width: 92%;
+  margin-left: 10px;
+}
+.headingName {
+  width: 25%;
+}
+.mentorHeading {
+  width: 35%;
+  text-align: center;
+}
+.joiningHeading {
+  width: 15%;
+  text-align: center;
+}
+.horizontalBorderLine {
+  height: 2px;
+  width: 100%;
+  background-color: #616161;
+  margin-top: 5px;
+}
+.border {
+  width: 2px;
+  background-color: #616161;
+  height: auto;
+}
+.emptySection {
+  width: 8%;
+}
+.borderLineWrapper {
+  display: flex;
+}
+.courseDetailSection {
+  display: flex;
+  width: 100%;
+}
+.dayBorderWrapper {
+  width: 8%;
+  display: flex;
+}
+.detailsWrapper {
+  width: 92%;
+  display: flex;
+  background-color: #e6e4e4;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0 10px 10px;
+  position: relative;
+}
+.days {
+  font-family: Poppins;
+  font-size: 18px;
+  color: #202323;
+  font-weight: 700;
+  padding: 0px 4px;
+  display: flex;
+  align-items: center;
+  width: 98%;
+  justify-content: center;
+}
+.batchCode {
+  width: 25%;
+  font-family: Poppins;
+  font-size: 16px;
+  color: #202323;
+  font-weight: 700;
+}
+.mentorProfile {
+  width: 35%;
+  font-family: Poppins;
+  font-size: 16px;
+  color: #202323;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.name {
+  margin-left: 10px;
+}
+.joiningLink {
+  width: 15%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+.overlay {
+  background: #f2efef;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}

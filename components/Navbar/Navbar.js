@@ -163,7 +163,7 @@ function Navbar({}) {
                 <Menu.Item>
                   <Popup
                     trigger={
-                      <ImageComponent
+                      <Image
                         src={
                           JSON.parse(localStorage.getItem(USER_DETAILS))
                             .profileUrl
@@ -171,6 +171,7 @@ function Navbar({}) {
                                 .profileUrl
                             : "/Images/blank_profile.png"
                         }
+                        circular
                         alt="profile"
                         height={"35px"}
                         width={"35px"}
