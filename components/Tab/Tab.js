@@ -101,7 +101,9 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
                 width={"36px"}
               />
             </div> */}
-            <div className={styles.profileName}>{name.split(" ")[0]}</div>
+            <div className={styles.profileName}>{`Hi, ${
+              name.split(" ")[0]
+            }`}</div>
           </div>
           <div className={styles.notification}>
             <Icon name="notification" color="#ff9000" />
