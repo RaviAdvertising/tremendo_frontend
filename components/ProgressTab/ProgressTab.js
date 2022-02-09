@@ -1,40 +1,11 @@
-import { Image } from "semantic-ui-react";
-import Icon from "../../assets/Icon/Icon";
-import { Bar, Pie } from "react-chartjs-2";
+import styles from "./ProgressTab.module.css";
+import { Bar, Line, Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import styles from "./Dashboard.module.css";
-import StudentDashboardSkelton from "./StudentDashboardSkelton";
+import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
+import moment from "moment";
 
-export default function Dashboard() {
-  const classes = [
-    {
-      subject_code: "A1-4",
-      date: "Sunday, January 23",
-      time: " 02:00-04:00PM"
-    },
-    {
-      subject_code: "A1-4",
-      date: "Sunday, January 23",
-      time: " 02:00-04:00PM"
-    },
-    {
-      subject_code: "A1-4",
-      date: "Sunday, January 23",
-      time: " 02:00-04:00PM"
-    }
-    // {
-    //   subject_code: "A1-4",
-    //   date: "Sunday, January 23",
-    //   time: " 02:00-04:00PM"
-    // },
-    // {
-    //   subject_code: "A1-4",
-    //   date: "Sunday, January 23",
-    //   time: " 02:00-04:00PM"
-    // }
-  ];
-
+export default function ProgressTab({}) {
   const options = {
     maintainAspectRatio: false,
     scales: {
@@ -77,6 +48,69 @@ export default function Dashboard() {
     }
   };
 
+  const lineChartOption = {
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Day",
+          color: "#7b7b7b",
+          font: {
+            family: "Poppins",
+            size: 14,
+            weight: "bold"
+          }
+        },
+        ticks: {
+          callback: function(value) {
+            return value + 1;
+          }
+        },
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Score",
+          color: "#7b7b7b",
+          font: {
+            family: "Poppins",
+            size: 14,
+            weight: "bold"
+          }
+        },
+        beginAtZero: true,
+        suggestedMax: 100,
+        grid: {
+          display: false
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        displayColors: false,
+        titleAlign: "center",
+        callbacks: {
+          title: function(context) {
+            return `${context[0].formattedValue}%`;
+          },
+          label: function(context) {
+            return "Total score : 100";
+          },
+          footer: function(context) {
+            return `Score : ${context[0].formattedValue}`;
+          }
+        }
+      }
+    }
+  };
+
   const pieChartOption = {
     maintainAspectRatio: false,
     plugins: {
@@ -85,43 +119,83 @@ export default function Dashboard() {
       }
     }
   };
-  // if (true) {
-  //   return <StudentDashboardSkelton />;
-  // }
+  const totalDatesInCurrentMonth = Array.from(
+    Array(moment().daysInMonth()).keys()
+  );
+  //   if (true) {
+  //     return <StudentDashboardSkelton />;
+  //   }
+  const lineIndication = [
+    { name: "Low", color: "#ffb922", height: "34px" },
+    { name: "Average", color: "#3bbafb", height: "220px" },
+    { name: "High", color: "#00a651", height: "180px" }
+  ];
   return (
-    <div className={styles.dashboardBase}>
-      <div className={styles.dashboardBanner}>
-        <Image
-          src="/Images/dashboard_banner.png"
-          alt="tremendo dashboard banner"
-          className={styles.banner}
-        />
-        <div className={styles.bannerTextWrapper}>
-          <div className={styles.welcomeText}>Welcome</div>
-          <div className={styles.descriptionText}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
-          </div>
+    <div className={styles.base}>
+      <div className={styles.chartHeading}>Score</div>
+      <div className={styles.lineChartWrapper}>
+        <div className={styles.lineChart}>
+          <Line
+            data={{
+              labels: totalDatesInCurrentMonth,
+              datasets: [
+                {
+                  data: [
+                    90,
+                    39,
+                    80,
+                    20,
+                    40,
+                    20,
+                    56,
+                    25,
+                    45,
+                    65,
+                    44,
+                    76,
+                    81,
+                    54,
+                    77,
+                    33
+                  ],
+                  backgroundColor: [
+                    "#ffb922",
+                    "#3bbafb",
+                    "#00a651",
+                    "#3bbafb",
+                    "#ffb922",
+                    "#3bbafb",
+                    "#00a651",
+                    "#3bbafb",
+                    "#ffb922",
+                    "#3bbafb",
+                    "#00a651",
+                    "#3bbafb"
+                  ],
+                  fill: {
+                    target: "origin",
+                    above: "#c1ffdf", // Area will be red above the origin
+                    below: "#c1ffdf" // And blue below the origin
+                  },
+                  tension: 2,
+                  showLine: false,
+                  cubicInterpolationMode: "monotone"
+                }
+              ]
+            }}
+            width={500}
+            height={300}
+            options={lineChartOption}
+          />
         </div>
-      </div>
-      <div className={styles.classesWrapper}>
-        <div className={styles.titleWrapper}>
-          <div className={styles.classTitle}>Classes</div>
-          <div className={styles.arrowIcon}>
-            <Icon name="rightArrow" width="24" height="24" />
-          </div>
-        </div>
-        <div className={styles.classBoxWrapper}>
-          {classes.map((i, index) => (
-            <div className={styles.classBox} key={index}>
-              <div className={styles.classDetail}>
-                <div className={styles.subject}>Subject</div>
-                <div className={styles.subjectCode}>{i.subject_code}</div>
-              </div>
-              <div className={styles.classTime}>
-                <div className={styles.data}> {i.date}</div>
-                <div className={styles.time}> {i.time}</div>
-              </div>
+        <div className={styles.indicationPoints}>
+          {lineIndication.map(i => (
+            <div className={styles.namePointWrapper} key={i.name}>
+              <div className={styles.stepsNames}>{i.name}</div>
+              <div
+                className={styles.pointsSteps}
+                style={{ backgroundColor: i.color, height: i.height }}
+              ></div>
             </div>
           ))}
         </div>

@@ -37,7 +37,7 @@
 .datesWrapper::-webkit-scrollbar {
   display: block;
   background-color: #c4c4c4;
-  height: 4px;
+  height: 8px;
 }
 
 .datesWrapper::-webkit-scrollbar-thumb {

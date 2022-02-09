@@ -1,6 +1,7 @@
 import ChatIcon from "../ChatIcon";
 import CourseDetail from "../CourseDetail";
 import DasboardIcon from "../DasboardIcon";
+import DownloadIcon from "../Download";
 import Faq from "../Faq";
 import Lens from "../Lens";
 import MyResource from "../MyResource";
@@ -23,7 +24,8 @@ const iconTypes = {
   lens: Lens,
   rightArrow: RightArrow,
   sendIcon: sendIcon,
-  chatIcon: ChatIcon
+  chatIcon: ChatIcon,
+  downloadIcon: DownloadIcon
 };
 
 const Icon = ({ name, ...props }) => {

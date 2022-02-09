@@ -5,6 +5,7 @@ import styles from "../../styles/student.module.css";
 import withAuth from "../../utils/withAuth";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import CourseDetailTab from "../../components/CourseDetailTab/CourseDetailTab";
+import ProgressTab from "../../components/ProgressTab/ProgressTab";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -23,7 +24,7 @@ function Student() {
       component: <CourseDetailTab />
     },
     { id: 3, tab: "My Resources", icon: "myResource", component: "3" },
-    { id: 4, tab: "Progress", icon: "progress", component: "4" },
+    { id: 4, tab: "Progress", icon: "progress", component: <ProgressTab /> },
     { id: 5, tab: "FAQ", icon: "faq", component: "5" },
     {
       id: 6,

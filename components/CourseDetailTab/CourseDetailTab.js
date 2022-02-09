@@ -1,6 +1,7 @@
 import styles from "./CourseDetailTab.module.css";
 import moment from "moment";
 import { Image } from "semantic-ui-react";
+import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 
 export default function CourseDetailTab() {
   const totalDatesInCurrentMonth = Array.from(
@@ -9,6 +10,10 @@ export default function CourseDetailTab() {
   const currentDate = moment().format("D");
   const days = ["Mon", "Tue", "Wed", "Thus", "Fri", "Sat", "Sun"];
   const currentDay = moment().day();
+
+  // if (true) {
+  //   return <StudentDashboardSkelton />;
+  // }
   return (
     <div className={styles.base}>
       <div className={styles.courseName}>Course Name :</div>
