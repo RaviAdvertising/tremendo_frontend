@@ -6,6 +6,7 @@ import withAuth from "../../utils/withAuth";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import CourseDetailTab from "../../components/CourseDetailTab/CourseDetailTab";
 import ProgressTab from "../../components/ProgressTab/ProgressTab";
+import MyResourceTab from "../../components/MyResourceTab/MyResourceTab";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -23,7 +24,12 @@ function Student() {
       icon: "courseDetail",
       component: <CourseDetailTab />
     },
-    { id: 3, tab: "My Resources", icon: "myResource", component: "3" },
+    {
+      id: 3,
+      tab: "My Resources",
+      icon: "myResource",
+      component: <MyResourceTab />
+    },
     { id: 4, tab: "Progress", icon: "progress", component: <ProgressTab /> },
     { id: 5, tab: "FAQ", icon: "faq", component: "5" },
     {
@@ -51,9 +57,6 @@ function Student() {
         selectTab={data => clickOnTab(data)}
         selectedTab={selectedTabIndex}
       />
-      {/* <div>
-        <Icon name="setting" color="#ff9000" />
-      </div> */}
     </div>
   );
 }

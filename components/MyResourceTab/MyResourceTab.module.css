@@ -1,0 +1,232 @@
+.base {
+  padding: 20px 30px;
+}
+.headingWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Poppins;
+  font-size: 18px;
+  color: #0a2227;
+  font-weight: 600;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+.tableHeader {
+  display: flex;
+  font-family: Poppins;
+  font-size: 13px;
+  color: #0a2227;
+  align-items: center;
+  background-color: #fdbe74;
+  width: 100%;
+  font-weight: 600;
+}
+.noHeader {
+  width: 5%;
+  padding: 12px 5px;
+}
+.titleHeader {
+  width: 20%;
+  background-color: #fa9116;
+  padding: 12px 5px;
+  text-align: center;
+}
+.dateHeader {
+  width: 25%;
+  padding: 12px 5px;
+  text-align: center;
+}
+.statusHeader {
+  width: 25%;
+  padding: 12px 5px;
+}
+.checkboxesWrapper {
+  width: 25%;
+  padding: 12px 5px;
+}
+.tableData {
+  display: flex;
+  font-family: Poppins;
+  font-size: 13px;
+  color: #0a2227;
+  align-items: center;
+  background-color: #ffe7ca;
+  width: 100%;
+  margin-bottom: 8px;
+}
+.uploadButtons {
+  display: flex;
+  color: #0a5be2;
+  font-family: Poppins;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 5px;
+  justify-content: space-evenly;
+}
+.uploadBtn {
+  cursor: pointer;
+  border-right: 2px solid;
+  padding-right: 20px;
+}
+.EditBtn {
+  cursor: pointer;
+}
+.tableBody {
+  overflow-y: auto;
+  height: 318px;
+  margin-top: 5px;
+}
+.tableBody::-webkit-scrollbar {
+  display: block;
+  background-color: #c4c4c4;
+  width: 5px;
+}
+
+.tableBody::-webkit-scrollbar-thumb {
+  background-color: #616161;
+}
+.uploadFileSection {
+  width: 20%;
+  background-color: #fdcf98;
+  padding: 12px 5px;
+  text-align: center;
+}
+.finalHeading {
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #7af2da;
+  padding: 10px 22px 10px 5px;
+}
+.finalDateAndTime {
+  width: 25%;
+  text-align: center;
+  padding: 10px 5px;
+}
+.mentorName {
+  width: 25%;
+  text-align: center;
+  padding: 10px 5px;
+  display: flex;
+  align-items: center;
+}
+.finalStatus {
+  width: 25%;
+  padding: 10px 5px;
+}
+.finalAssesmentSection {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #cafff4;
+  font-family: Poppins;
+  font-size: 13px;
+  margin-top: 30px;
+}
+.uploadFileSize {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.uploadFinalAssesmentBtn {
+  cursor: pointer;
+  color: #0a5be2;
+  font-weight: 700;
+}
+.fileSize {
+  color: #6b6b6c;
+}
+.name {
+  margin-left: 10px;
+}
+.completeContainer {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 13px;
+  padding-left: 23px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #177712;
+}
+.notCompleteContainer {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 13px;
+  padding-left: 23px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #f7433e;
+}
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  border: 2px solid #000;
+  border-radius: 3px;
+}
+
+.completeContainer .checkbox:checked ~ .checkmark {
+  background-color: #177712;
+}
+.notCompleteContainer .checkbox:checked ~ .checkmark {
+  background-color: #f7433e;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.completeContainer .checkbox:checked ~ .checkmark:after {
+  display: block;
+}
+
+.completeContainer .checkmark:after {
+  left: 3px;
+  top: -2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 1px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.notCompleteContainer .checkbox:checked ~ .checkmark:after {
+  display: block;
+}
+
+.notCompleteContainer .checkmark:after {
+  left: 3px;
+  top: -2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 1px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.completeCheckbox {
+  margin-bottom: 10px;
+}
+.ebooksSection {
+  display: flex;
+}
