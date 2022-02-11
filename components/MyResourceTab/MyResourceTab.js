@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import styles from "./MyResourceTab.module.css";
 import { Image } from "semantic-ui-react";
+import Icon from "../../assets/Icon/Icon";
 
 export default function MyResourceTab({}) {
   const inputFile = useRef(null);
@@ -176,11 +177,47 @@ export default function MyResourceTab({}) {
       </div>
       <div className={styles.ebooksSection}>
         <div className={styles.syllabusWrapper}>
-          <div className={styles.heading}>Syllabus</div>
-          <div className={styles.syylabusBox}>Syllabus</div>
+          <div className={styles.syllabusHeading}>Syllabus</div>
+          <div className={styles.syylabusBox}>
+            <div className={styles.eflyImage}>
+              <Image src={"/Images/syllabus.png"} alt="user-image" />
+            </div>
+            <div className={styles.pdfDownload}>
+              <Image
+                src={"/Images/pdfImage.png"}
+                alt="user-image"
+                style={{ margin: "auto" }}
+              />
+              <div className={styles.pdfUploadTime}>Feb 7 2022, 10:00AM</div>
+              <div
+                className={styles.downloadIcon}
+                onClick={() => console.log("ss")}
+              >
+                <Icon name="downloadIcon" width="26" height="26" />
+              </div>
+              <div className={styles.fileSize}>167kb</div>
+            </div>
+          </div>
         </div>
         <div className={styles.ebookWrapper}>
-          <div className={styles.heading}>E-Book</div>
+          <div className={styles.syllabusHeading}>E-Book</div>
+          <div className={styles.bookImageWrapper}>
+            <div className={styles.ebookSections}>
+              {[1, 1, 1, 1, 1].map((i, index) => (
+                <Image
+                  key={index}
+                  src={"/Images/e-bookImage.png"}
+                  alt="user-image"
+                  className={styles.eBook}
+                />
+              ))}
+            </div>
+            <Image
+              src={"/Images/e-book.png"}
+              alt="user-image"
+              style={{ margin: "auto" }}
+            />
+          </div>
         </div>
       </div>
     </div>
