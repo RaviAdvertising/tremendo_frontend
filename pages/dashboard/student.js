@@ -7,6 +7,7 @@ import Dashboard from "../../components/Dashboard/Dashboard";
 import CourseDetailTab from "../../components/CourseDetailTab/CourseDetailTab";
 import ProgressTab from "../../components/ProgressTab/ProgressTab";
 import MyResourceTab from "../../components/MyResourceTab/MyResourceTab";
+import FaqTab from "../../components/FaqTab/FaqTab";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -31,7 +32,7 @@ function Student() {
       component: <MyResourceTab />
     },
     { id: 4, tab: "Progress", icon: "progress", component: <ProgressTab /> },
-    { id: 5, tab: "FAQ", icon: "faq", component: "5" },
+    { id: 5, tab: "FAQ", icon: "faq", component: <FaqTab /> },
     {
       id: 6,
       tab: "Term & Condition",
