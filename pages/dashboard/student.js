@@ -8,6 +8,7 @@ import CourseDetailTab from "../../components/CourseDetailTab/CourseDetailTab";
 import ProgressTab from "../../components/ProgressTab/ProgressTab";
 import MyResourceTab from "../../components/MyResourceTab/MyResourceTab";
 import FaqTab from "../../components/FaqTab/FaqTab";
+import ProfileTab from "../../components/ProfileTab/ProfileTab";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -39,7 +40,7 @@ function Student() {
       icon: "termAndCondition",
       component: "6"
     },
-    { id: 7, tab: "Profile", icon: "setting", component: "7" }
+    { id: 7, tab: "Profile", icon: "setting", component: <ProfileTab /> }
   ];
   const [selectedTabIndex, setSelectedTabIndex] = useState(INITIAL_TAB_INDEX);
   const clickOnTab = data => {

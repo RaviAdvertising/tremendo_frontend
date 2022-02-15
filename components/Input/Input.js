@@ -14,6 +14,8 @@ export default function Input(props) {
         style={props.inputStyling}
         onChange={event => handleChange(event)}
         autoComplete="off"
+        value={props.value}
+        disabled={props.disabled}
       />
     </div>
   );

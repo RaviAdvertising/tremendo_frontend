@@ -2,6 +2,7 @@ import styles from "./CourseDetailTab.module.css";
 import moment from "moment";
 import { Image } from "semantic-ui-react";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
+import { useEffect } from "react";
 
 export default function CourseDetailTab() {
   const totalDatesInCurrentMonth = Array.from(
@@ -10,7 +11,12 @@ export default function CourseDetailTab() {
   const currentDate = moment().format("D");
   const days = ["Mon", "Tue", "Wed", "Thus", "Fri", "Sat", "Sun"];
   const currentDay = moment().day();
-
+  useEffect(() => {
+    if (document.getElementById("date_wrapper") && currentDate > 11) {
+      const scrollPixels = parseInt(currentDate) * 10;
+      document.getElementById("date_wrapper").scrollLeft = scrollPixels;
+    }
+  }, []);
   // if (true) {
   //   return <StudentDashboardSkelton />;
   // }
@@ -22,7 +28,7 @@ export default function CourseDetailTab() {
         <div className={styles.courseName}>Date</div>
         <div className={styles.batchName}>{moment().format("MMM")}</div>
       </div>
-      <div className={styles.datesWrapper}>
+      <div className={styles.datesWrapper} id="date_wrapper">
         {totalDatesInCurrentMonth.map(i => (
           <div
             className={styles.date}

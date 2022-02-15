@@ -15,6 +15,7 @@
   border-radius: 10px;
   padding: 20px;
   width: 100%;
+  box-shadow: 1.1px 2.8px 10px 0 rgba(0, 0, 0, 0.15);
 }
 .faqBoxWrapper {
   display: flex;
@@ -52,4 +53,21 @@
   color: #77808b;
   font-family: Poppins;
   font-size: 10px;
+}
+.textAreaWrapper {
+  display: flex;
+  margin-top: 55px;
+  justify-content: space-between;
+}
+.sendButton {
+  width: 86px;
+  margin-top: 25px;
+}
+.textAreaSection {
+  width: 428px;
+  height: 108px;
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #e8e8e8;
+  border: none;
 }

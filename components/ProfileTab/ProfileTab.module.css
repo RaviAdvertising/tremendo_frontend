@@ -1,0 +1,123 @@
+.base {
+  padding: 30px 0 10px 30px;
+  display: flex;
+}
+.profileBox {
+  background-color: #ffecd4;
+  padding: 10px 10px 10px 25px;
+  width: 75%;
+}
+.selectStyling {
+  background-color: #f8f8fa;
+  width: 100%;
+  color: #66666d;
+  font-family: Poppins;
+  border: 1px solid #cecedc;
+  font-size: 12px;
+  height: 31px;
+  padding-left: 8px;
+}
+.selectStyling:focus {
+  outline: none;
+}
+.headingProgressWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+.heading {
+  font-weight: 700;
+  font-size: 16px;
+  color: #323232;
+  font-family: Poppins;
+}
+.progress {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+.status {
+  background-color: #fa9116;
+  height: 8px;
+  border-radius: 2px;
+}
+.progressTitle {
+  color: #66666d;
+  font-size: 10px;
+  width: 60%;
+  margin-left: 12px;
+}
+.progressStrip {
+  height: 8px;
+  width: 100%;
+  background-color: #fecf98;
+  border-radius: 2px;
+}
+.upperSection {
+  display: flex;
+  align-items: center;
+}
+.profileName {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.profileImage {
+  width: 22%;
+}
+.title {
+  color: #66666d;
+  font-size: 12px;
+  width: 32%;
+}
+.nameInput {
+  width: 55%;
+}
+.lastUpdatedBy {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.lastUpdateDate {
+  color: #66666d;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: Poppins;
+}
+.pictureChange {
+  cursor: pointer;
+  color: #15d2cd;
+  font-size: 12px;
+  font-family: Poppins;
+  text-decoration: underline;
+  margin-top: 10px;
+}
+.inputGeneralTitle {
+  color: #66666d;
+  font-size: 12px;
+  font-family: Poppins;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+.personalInfoHeading {
+  font-weight: 700;
+  font-size: 16px;
+  color: #323232;
+  font-family: Poppins;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.firstName {
+  margin-right: 30px;
+  width: 44%;
+}
+.lastName {
+  width: 44%;
+}

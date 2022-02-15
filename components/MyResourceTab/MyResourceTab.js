@@ -92,7 +92,7 @@ export default function MyResourceTab({}) {
                     Upload
                   </div>
                   <div className={styles.EditBtn} onClick={onClick}>
-                    Edit
+                    View
                   </div>
                 </div>
               </div>
