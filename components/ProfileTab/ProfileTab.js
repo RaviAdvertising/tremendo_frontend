@@ -1,10 +1,14 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Image } from "semantic-ui-react";
+import { USER_DETAILS } from "../../utils/constants";
 import Input from "../Input/Input";
 import styles from "./ProfileTab.module.css";
+import DatePicker from "react-datepicker";
 
 export default function ProfileTab({}) {
   const inputFile = useRef(null);
+  const [fields, setFields] = useState({});
+  const [errors, setErrors] = useState({});
   const customInput = ({ placeholder, value, disabled }) => {
     return (
       <Input
@@ -40,6 +44,35 @@ export default function ProfileTab({}) {
   const onClick = e => {
     inputFile.current.click();
   };
+  const handleChange = (type, value) => {
+    setFields({ ...fields, [type]: value });
+    setErrors({});
+  };
+  const DateInput = ({ value, onClick }) => {
+    return (
+      <button
+        className={styles.dateInput}
+        style={{
+          width: "100%",
+          fontSize: "12px",
+          color: "#66666d",
+          border: "1px solid #cecedc",
+          height: "31px",
+          paddingLeft: "8px",
+          fontFamily: "Poppins",
+          backgroundColor: "#f8f8fa",
+          textAlign: "left"
+        }}
+        onClick={onClick}
+      >
+        {value ? value : "DOB"}
+      </button>
+    );
+  };
+  const name =
+    typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
+      ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
+      : "User";
   return (
     <div className={styles.base}>
       <div className={styles.profileBox}>
@@ -81,7 +114,7 @@ export default function ProfileTab({}) {
               <div className={styles.nameInput}>
                 {customInput({
                   placeholder: "Select",
-                  value: "Ankit",
+                  value: `${name.split(" ")[0]}`,
                   disabled: true
                 })}
               </div>
@@ -126,9 +159,17 @@ export default function ProfileTab({}) {
             <div className={styles.firstName}>
               <div className={styles.inputGeneralTitle}>DOB*</div>
               <div>
-                {customInput({
-                  placeholder: "00-00-0000*"
-                })}
+                <DatePicker
+                  selected={fields.dob}
+                  onChange={date => handleChange("dob", date)}
+                  customInput={<DateInput />}
+                  dateFormat="MMMM d, yyyy"
+                  maxDate={new Date()}
+                  peekNextMonth
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
+                />
               </div>
             </div>
             <div className={styles.lastName}>
@@ -136,7 +177,11 @@ export default function ProfileTab({}) {
               <div>
                 {customSelect({
                   placeholder: "Last Name*",
-                  options: [{ name: "Male" }, { name: "Female" }]
+                  options: [
+                    { name: "Male" },
+                    { name: "Female" },
+                    { name: "Others" }
+                  ]
                 })}
               </div>
             </div>
@@ -147,15 +192,15 @@ export default function ProfileTab({}) {
               <div>
                 {customSelect({
                   placeholder: "Last Name*",
-                  options: [{ name: "Male" }, { name: "Female" }]
+                  options: [{ name: "India" }, { name: "America" }]
                 })}
               </div>
             </div>
             <div className={styles.lastName}>
               <div className={styles.inputGeneralTitle}>State*</div>
               <div>
-                {customSelect({
-                  options: [{ name: "Male" }, { name: "Female" }]
+                {customInput({
+                  placeholder: "State"
                 })}
               </div>
             </div>
@@ -201,16 +246,16 @@ export default function ProfileTab({}) {
             <div className={styles.firstName}>
               <div className={styles.inputGeneralTitle}>University</div>
               <div>
-                {customSelect({
-                  options: [{ name: "Male" }, { name: "Female" }]
+                {customInput({
+                  placeholder: ""
                 })}
               </div>
             </div>
             <div className={styles.lastName}>
               <div className={styles.inputGeneralTitle}>Degree</div>
               <div>
-                {customSelect({
-                  options: [{ name: "Male" }, { name: "Female" }]
+                {customInput({
+                  placeholder: ""
                 })}
               </div>
             </div>
@@ -219,22 +264,21 @@ export default function ProfileTab({}) {
             <div className={styles.firstName}>
               <div className={styles.inputGeneralTitle}>Stream</div>
               <div>
-                {customSelect({
-                  options: [{ name: "Male" }, { name: "Female" }]
+                {customInput({
+                  placeholder: ""
                 })}
               </div>
             </div>
             <div className={styles.lastName}>
               <div className={styles.inputGeneralTitle}>Year</div>
               <div>
-                {customSelect({
-                  options: [{ name: "Male" }, { name: "Female" }]
+                {customInput({
+                  placeholder: ""
                 })}
               </div>
             </div>
           </div>
         </div>
-        {/* {customSelect({ placeholder: "Select" })} */}
       </div>
       <div className={styles.imageWrapper}>
         <Image src={"/Images/profiletab_rocket.png"} alt="profiletab_rocket" />

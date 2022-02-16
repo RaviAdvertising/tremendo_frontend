@@ -48,7 +48,7 @@ export default function Reviews() {
   useEffect(() => {
     getReviewData()(dispatch);
   }, []);
-  console.log(homeState);
+
   const header = headerName => {
     return (
       <div className={styles.headerWrapper}>
