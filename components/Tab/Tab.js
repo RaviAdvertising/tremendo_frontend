@@ -43,6 +43,7 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
                 <Icon
                   name={i.icon}
                   color={selectedTab == i.id ? SELECTED_TAB_COLOR : "#2a2a2a"}
+                  fill={selectedTab == i.id}
                 />
               </div>
               <div className={styles.tabName}>{i.tab}</div>
