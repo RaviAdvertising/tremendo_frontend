@@ -1,5 +1,5 @@
 .base {
-  padding: 20px 30px;
+  padding: 20px 50px;
 }
 .headingWrapper {
   display: flex;
@@ -23,19 +23,17 @@
   font-weight: 600;
 }
 .noHeader {
-  width: 5%;
+  width: 4%;
   padding: 12px 5px;
 }
 .titleHeader {
   width: 20%;
   background-color: #fa9116;
-  padding: 12px 5px;
-  text-align: center;
+  padding: 12px;
 }
 .dateHeader {
   width: 25%;
-  padding: 12px 5px;
-  text-align: center;
+  padding: 12px 20px;
 }
 .statusHeader {
   width: 25%;
@@ -62,7 +60,6 @@
   font-size: 13px;
   font-weight: 600;
   margin-top: 5px;
-  justify-content: space-evenly;
 }
 .uploadBtn {
   cursor: pointer;
@@ -71,33 +68,25 @@
 }
 .EditBtn {
   cursor: pointer;
+  margin-left: 18px;
 }
 .tableBody {
   overflow-y: auto;
   height: 318px;
   margin-top: 5px;
 }
-.tableBody::-webkit-scrollbar {
-  display: block;
-  background-color: #c4c4c4;
-  width: 5px;
-}
 
-.tableBody::-webkit-scrollbar-thumb {
-  background-color: #616161;
-}
 .uploadFileSection {
   width: 20%;
   background-color: #fdcf98;
-  padding: 12px 5px;
-  text-align: center;
+  padding: 12px;
 }
 .finalHeading {
-  width: 25%;
+  width: 18%;
   display: flex;
   justify-content: space-between;
   background-color: #7af2da;
-  padding: 10px 22px 10px 5px;
+  padding: 10px 10px 10px 5px;
 }
 .finalDateAndTime {
   width: 25%;
@@ -230,7 +219,7 @@
 .ebooksSection {
   display: flex;
   margin-top: 55px;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .syylabusBox {
   display: flex;

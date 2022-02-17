@@ -96,7 +96,7 @@ export default class FaqTab extends React.Component {
           </div>
         </div>
         <div className={styles.textAreaWrapper}>
-          <div className={styles.textArea}>
+          <div className={styles.textAreaBox}>
             <div className={styles.heading}>Have a question?</div>
             <textarea className={styles.textAreaSection}></textarea>
             <div className={styles.sendButton}>
