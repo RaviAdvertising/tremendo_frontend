@@ -19,14 +19,12 @@
 }
 .faqBoxWrapper {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start;
 }
 .faqBox {
   border: 1px solid #3a86ff;
   padding: 10px;
-  width: 30%;
+  width: 100%;
   margin: 5px;
   float: left;
 }
