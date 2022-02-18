@@ -1,4 +1,6 @@
+import Cookies from "js-cookie";
 import axiosInstance from "../../../utils/axiosInstance";
+import { COOKIE_TOKEN } from "../../../utils/constants";
 import firebase from "../../../utils/firebase-config";
 
 export const LOGIN_REQUEST = "login_request";
@@ -12,6 +14,10 @@ export const SIGNUP_ERROR = "signup_error";
 export const LOGOUT_REQUEST = "logout_request";
 export const LOGOUT_SUCCESS = "logout_success";
 export const LOGOUT_ERROR = "logout_error";
+
+export const GET_USER_PROFILE_REQUEST = "GET_USER_PROFILE_request";
+export const GET_USER_PROFILE_SUCCESS = "GET_USER_PROFILE_success";
+export const GET_USER_PROFILE_ERROR = "GET_USER_PROFILE_error";
 
 export default function socialMediaAuth(provider) {
   return firebase
@@ -100,5 +106,23 @@ export const logoutAuth = token => dispatch => {
         type: LOGOUT_ERROR,
         error: err.response.data
       };
+    });
+};
+
+export const getUserProfile = () => dispatch => {
+  dispatch({ type: GET_USER_PROFILE_REQUEST });
+  return axiosInstance
+    .get(`/getProfile?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .then(res => {
+      dispatch({
+        type: GET_USER_PROFILE_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_USER_PROFILE_ERROR,
+        error: err.response.data
+      });
     });
 };

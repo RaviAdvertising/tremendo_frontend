@@ -5,8 +5,20 @@ import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import styles from "./Dashboard.module.css";
 import StudentDashboardSkelton from "./StudentDashboardSkelton";
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "../../Context/Provider";
+import { getStudentDashboardData } from "../../Context/Actions/Dashboard/DashboardAction";
 
 export default function Dashboard() {
+  const {
+    studentDashboardState,
+    studentDashboardDispatch: dispatch
+  } = useContext(GlobalContext);
+
+  useEffect(() => {
+    getStudentDashboardData()(dispatch);
+  }, []);
+
   const classes = [
     {
       subject_code: "A1-4",
@@ -85,7 +97,8 @@ export default function Dashboard() {
       }
     }
   };
-  // if (true) {
+  console.log(studentDashboardState);
+  // if (studentDashboardState.getStudentDashboardDataLoading) {
   //   return <StudentDashboardSkelton />;
   // }
   return (
