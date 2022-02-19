@@ -12,11 +12,15 @@ import { getStudentDashboardData } from "../../Context/Actions/Dashboard/Dashboa
 export default function Dashboard() {
   const {
     studentDashboardState,
+    authState,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
 
   useEffect(() => {
-    getStudentDashboardData()(dispatch);
+    const currentLanguageCode =
+      authState.userProfileData?.current_language?.code;
+    if (Array.isArray(studentDashboardState.getStudentDashboardData))
+      getStudentDashboardData(currentLanguageCode)(dispatch);
   }, []);
 
   const classes = [
@@ -97,10 +101,10 @@ export default function Dashboard() {
       }
     }
   };
-  console.log(studentDashboardState);
-  // if (studentDashboardState.getStudentDashboardDataLoading) {
-  //   return <StudentDashboardSkelton />;
-  // }
+
+  if (studentDashboardState.getStudentDashboardDataLoading) {
+    return <StudentDashboardSkelton />;
+  }
   return (
     <div className={styles.dashboardBase}>
       <div className={styles.dashboardBanner}>

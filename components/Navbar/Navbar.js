@@ -22,6 +22,7 @@ import {
 import Cookies from "js-cookie";
 import { GlobalContext } from "../../Context/Provider";
 import {
+  getUserProfile,
   logoutAuth,
   LOGOUT_ERROR
 } from "../../Context/Actions/Auth/AuthAction";
@@ -35,15 +36,20 @@ function Navbar({}) {
   const router = useRouter();
   const {
     homeState,
+    authState,
     authDispatch: dispatch,
     homeDispatch: homeDispatch
   } = useContext(GlobalContext);
 
   useEffect(() => {
+    if (Cookies.get(COOKIE_TOKEN) && Array.isArray(authState.userProfileData)) {
+      getUserProfile()(dispatch);
+    }
     if (router.pathname == HOME_PAGE) {
       setSelectedLanguage("LANGUAGES");
       return false;
     }
+
     setLanguageToStore();
   }, [router.pathname]);
 
@@ -165,10 +171,9 @@ function Navbar({}) {
                     trigger={
                       <Image
                         src={
-                          JSON.parse(localStorage.getItem(USER_DETAILS))
-                            .profileUrl
-                            ? JSON.parse(localStorage.getItem(USER_DETAILS))
-                                .profileUrl
+                          !Array.isArray(authState.userProfileData) &&
+                          authState.userProfileData.user_data.user_avatar
+                            ? authState.userProfileData.user_data.user_avatar
                             : "/Images/blank_profile.png"
                         }
                         circular
@@ -182,9 +187,8 @@ function Navbar({}) {
                     style={{ padding: "0px" }}
                   >
                     <div className={styles.profileName}>
-                      {JSON.parse(localStorage.getItem(USER_DETAILS)).name
-                        ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
-                        : JSON.parse(localStorage.getItem(USER_DETAILS)).email}
+                      {!Array.isArray(authState.userProfileData) &&
+                        authState.userProfileData.user_data.profile_name}
                     </div>
                     <div
                       className={styles.profileOptions}

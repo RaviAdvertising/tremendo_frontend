@@ -6,19 +6,32 @@ import ImageComponent from "next/image";
 import { Image } from "semantic-ui-react";
 import { USER_DETAILS } from "../../utils/constants";
 import CustomImage from "../Image/Image";
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "../../Context/Provider";
+import {
+  getBatchMates,
+  getUpcomingTasks
+} from "../../Context/Actions/Dashboard/DashboardAction";
 
 export default function Tab({ tabsData, selectTab, selectedTab }) {
+  const {
+    authState,
+    studentDashboardDispatch: dispatch,
+    studentDashboardState
+  } = useContext(GlobalContext);
   const SELECTED_TAB_COLOR = "#ff9000";
-  const imageUrl =
-    typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
-      ? JSON.parse(localStorage.getItem(USER_DETAILS)).profileUrl
-      : "/Images/blank_profile.png";
-  const name =
-    typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
-      ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
-      : "User";
+  const name = !Array.isArray(authState.userProfileData)
+    ? authState.userProfileData.user_data?.profile_name
+    : "Users";
+
+  useEffect(() => {
+    if (studentDashboardState.getBatchMatesData.length == 0)
+      getBatchMates()(dispatch);
+    if (studentDashboardState.getUpcomingTask.length == 0)
+      getUpcomingTasks()(dispatch);
+  }, []);
+
   return (
-    // <div style={{ backgroundColor: "#fff6eb" }}>
     <div className={styles.base}>
       <div className={styles.leftSection}>
         <div className={styles.flagSection}>
@@ -93,15 +106,6 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
       <div className={styles.rightSection}>
         <div className={styles.topHeader}>
           <div className={styles.profileWrapper}>
-            {/* <div className={styles.profileImage}>
-              <Image
-                src={imageUrl}
-                circular
-                alt="user-image"
-                height={"36px"}
-                width={"36px"}
-              />
-            </div> */}
             <div className={styles.profileName}>{`Hi, ${
               name.split(" ")[0]
             }`}</div>
@@ -211,13 +215,5 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
         </div>
       </div>
     </div>
-    //   <div>
-    //     <CustomImage
-    //       src={"/Images/learn_grow_lead.png"}
-    //       paddingBottom={"15%"}
-    //       alt={"banner logo"}
-    //     />
-    //   </div>
-    // </div>
   );
 }

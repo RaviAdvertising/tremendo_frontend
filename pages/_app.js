@@ -38,6 +38,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
     ? ctx.req.headers["user-agent"]
     : navigator.userAgent
   ).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
+
   return {
     pageProps: {
       ...(Component.getInitialProps

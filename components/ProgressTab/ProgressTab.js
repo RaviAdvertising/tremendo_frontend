@@ -4,8 +4,21 @@ import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "../../Context/Provider";
+import { getProgressTabData } from "../../Context/Actions/Dashboard/DashboardAction";
 
 export default function ProgressTab({}) {
+  const {
+    studentDashboardState,
+    studentDashboardDispatch: dispatch
+  } = useContext(GlobalContext);
+
+  useEffect(() => {
+    if (Array.isArray(studentDashboardState.getProgressTabData))
+      getProgressTabData()(dispatch);
+  }, []);
+  console.log(studentDashboardState.getProgressTabData);
   const options = {
     maintainAspectRatio: false,
     scales: {
@@ -122,9 +135,9 @@ export default function ProgressTab({}) {
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
-  //   if (true) {
-  //     return <StudentDashboardSkelton />;
-  //   }
+  if (studentDashboardState.getProgressTabLoading) {
+    return <StudentDashboardSkelton />;
+  }
   const lineIndication = [
     { name: "Low", color: "#ffb922", height: "34px" },
     { name: "Average", color: "#3bbafb", height: "220px" },

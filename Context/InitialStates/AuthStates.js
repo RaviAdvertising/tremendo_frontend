@@ -6,6 +6,9 @@ const authInitialState = {
   signupLoading: false,
 
   logout: "",
-  logoutLoading: false
+  logoutLoading: false,
+
+  userProfileData: [],
+  userProfileLoading: false
 };
 export default authInitialState;
