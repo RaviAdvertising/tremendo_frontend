@@ -100,7 +100,7 @@ export default function MyResourceTab({}) {
         <div className={styles.finalHeading}>
           <div className={styles.finalDate}>1.</div>
           <div className={styles.finalTime}>
-            <div className={styles.finalDate}>{finalAssesment.title}</div>
+            <div className={styles.finalDate}>{finalAssesment?.title}</div>
             <div className={styles.uploadFileSize}>
               <input
                 type="file"
@@ -116,7 +116,7 @@ export default function MyResourceTab({}) {
           </div>
         </div>
         <div className={styles.finalDateAndTime}>
-          <div className={styles.finalDate}>{finalAssesment.assign_date}</div>
+          <div className={styles.finalDate}>{finalAssesment?.assign_date}</div>
           <div className={styles.finalTime}> 10:00 PM</div>
         </div>
         <div className={styles.mentorName}>
@@ -129,7 +129,7 @@ export default function MyResourceTab({}) {
               width={"24px"}
             />
           </div>
-          <div className={styles.name}>{finalAssesment.mentor_name}</div>
+          <div className={styles.name}>{finalAssesment?.mentor_name}</div>
         </div>
         <div className={styles.finalStatus}>
           <div className={styles.completeCheckbox}>
