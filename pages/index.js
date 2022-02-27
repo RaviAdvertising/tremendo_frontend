@@ -14,7 +14,7 @@ export default function Main(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Image
-        src={isMobileView ? "Images/404_mobile.jpg" : "Images/404_desktop.jpg"}
+        src={isMobileView ? "Images/404_mobile.png" : "Images/404_desktop.png"}
         alt="404 error"
         paddingBottom={isMobileView ? "70%" : "50%"}
       />
