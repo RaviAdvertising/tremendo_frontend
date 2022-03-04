@@ -7,7 +7,12 @@ import { Image } from "semantic-ui-react";
 import { USER_DETAILS } from "../../utils/constants";
 import CustomImage from "../Image/Image";
 
-export default function Tab({ tabsData, selectTab, selectedTab }) {
+export default function Tab({
+  tabsData,
+  selectTab,
+  selectedTab,
+  studentDashboard
+}) {
   const SELECTED_TAB_COLOR = "#ff9000";
   const imageUrl =
     typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
@@ -19,18 +24,27 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
       : "User";
   return (
     // <div style={{ backgroundColor: "#fff6eb" }}>
-    <div className={styles.base}>
+    <div
+      className={styles.base}
+      style={{ backgroundColor: studentDashboard ? "#ecf8f8" : "#ffecd6" }}
+    >
       <div className={styles.leftSection}>
-        <div className={styles.flagSection}>
-          <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/english_flag.png?alt=media&token=426f6879-24af-4182-a3e7-3cbc39f9622c"
-            }
-            alt={"flag"}
-            width={"65px"}
-            height={"35px"}
-          />
-        </div>
+        {studentDashboard ? (
+          <div className={styles.flagSection}>
+            <ImageComponent
+              src={
+                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/english_flag.png?alt=media&token=426f6879-24af-4182-a3e7-3cbc39f9622c"
+              }
+              alt={"flag"}
+              width={"65px"}
+              height={"35px"}
+            />
+          </div>
+        ) : (
+          <div className={styles.mentorBatchDetails}>
+            Batch: 01<br></br> Batch Name
+          </div>
+        )}
         <div className={styles.tabWrapper}>
           {tabsData.map((i, index) => (
             <div
@@ -50,25 +64,38 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
             </div>
           ))}
         </div>
-        <div className={styles.footerBanner}>
-          <div className={styles.footerText}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+        {studentDashboard && (
+          <div className={styles.footerBanner}>
+            <div className={styles.footerText}>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </div>
+            <div className={styles.footerImg}>
+              <ImageComponent
+                src={"/Images/tabFooterImage.png"}
+                alt="tremendo footer image dashboard"
+                width={"165px"}
+                height={"128px"}
+              />
+            </div>
           </div>
-          <div className={styles.footerImg}>
-            <ImageComponent
-              src={"/Images/tabFooterImage.png"}
-              alt="tremendo footer image dashboard"
-              width={"165px"}
-              height={"128px"}
-            />
-          </div>
-        </div>
+        )}
       </div>
-      <div className={styles.centerSection}>
+      <div
+        className={styles.centerSection}
+        style={{ backgroundColor: studentDashboard ? "#fff6eb" : "#f8f7f6" }}
+      >
         <div className={styles.searchHeader}>
-          <div className={styles.lens}>
-            <Icon name={"lens"} />
+          <div
+            className={styles.lens}
+            style={{
+              backgroundColor: studentDashboard ? "#ecf8f8" : "#f8f8f8"
+            }}
+          >
+            <Icon
+              name={"lens"}
+              color={studentDashboard ? "#25908d" : "#3f4242"}
+            />
           </div>
           <div className={styles.search}>
             <Input
@@ -76,7 +103,7 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
               inputStyling={{
                 width: "100%",
                 fontSize: "13px",
-                backgroundColor: "#ecf8f8",
+                backgroundColor: studentDashboard ? "#ecf8f8" : "#f8f8f8",
                 color: "#1b1c1c",
                 padding: "8px 15px"
               }}
@@ -207,7 +234,9 @@ export default function Tab({ tabsData, selectTab, selectedTab }) {
           </div>
         </div>
         <div className={styles.letsTalkSection}>
-          <div className={styles.upcomingTaskHeading}>Batch Mates</div>
+          <div className={styles.upcomingTaskHeading}>
+            {studentDashboard ? "Batch Mates" : "Students"}
+          </div>
         </div>
       </div>
     </div>

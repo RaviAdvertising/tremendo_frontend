@@ -1,0 +1,148 @@
+.base {
+  padding: 20px 30px;
+}
+.chartWrapper {
+  display: flex;
+  width: 100%;
+  margin-top: 35px;
+  justify-content: space-between;
+}
+.chartHeading {
+  font-family: Poppins;
+  font-size: 20px;
+  color: #202323;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.progressChartBox {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  box-shadow: 1.1px 2.8px 10px 0 rgba(119, 119, 119, 0.1);
+}
+
+.progressChart {
+  width: 45%;
+}
+
+.attendenceChart {
+  width: 45%;
+  text-align: center;
+}
+.barChart {
+  width: 100%;
+  height: 250px;
+}
+
+.courseName {
+  color: #202323;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Poppins;
+  margin-bottom: 20px;
+}
+.batchName {
+  color: #202323;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Poppins;
+}
+.dateMonthHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.datesWrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  overflow-x: scroll;
+}
+.date {
+  color: #202323;
+  font-size: 14px;
+  font-family: Poppins;
+  margin-right: 25px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+.datesWrapper::-webkit-scrollbar {
+  display: block;
+  background-color: #c4c4c4;
+  height: 8px;
+}
+
+.datesWrapper::-webkit-scrollbar-thumb {
+  background-color: #616161;
+}
+
+.courseDetailSection {
+  display: flex;
+  width: 100%;
+}
+
+.detailsWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0 10px 10px;
+  position: relative;
+}
+
+.batchCode {
+  width: 20%;
+  font-family: Poppins;
+  font-size: 16px;
+  color: #202323;
+  font-weight: 700;
+}
+.timeCode {
+  width: 40%;
+  font-family: Poppins;
+  font-size: 16px;
+  color: #202323;
+  font-weight: 700;
+}
+
+.overlay {
+  background: #f2efef;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.showProgress {
+  background-color: #055c4d;
+  color: #fff;
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 700;
+  font-family: Open Sans;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.showProgress::after {
+  content: "%";
+}
+
+.canvasWrap {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  box-shadow: 1.3px 8.9px 27px 0 rgba(0, 0, 0, 0.17);
+  border-radius: 50%;
+  margin: auto;
+}

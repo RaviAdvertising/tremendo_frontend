@@ -10,7 +10,7 @@ export default function CourseDetailTab() {
   );
   const currentDate = moment().format("D");
   const days = ["Mon", "Tue", "Wed", "Thus", "Fri", "Sat", "Sun"];
-  const currentDay = moment().day();
+  const currentDay = moment().day() ? moment().day() : 7;
   useEffect(() => {
     if (document.getElementById("date_wrapper") && currentDate > 11) {
       const scrollPixels = parseInt(currentDate) * 10;
@@ -20,6 +20,7 @@ export default function CourseDetailTab() {
   // if (true) {
   //   return <StudentDashboardSkelton />;
   // }
+
   return (
     <div className={styles.base}>
       <div className={styles.courseName}>Course Name :</div>

@@ -5,24 +5,21 @@ import styles from "../../styles/student.module.css";
 import withAuth from "../../utils/withAuth";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import CourseDetailTab from "../../components/CourseDetailTab/CourseDetailTab";
-import ProgressTab from "../../components/ProgressTab/ProgressTab";
-import MyResourceTab from "../../components/MyResourceTab/MyResourceTab";
-import FaqTab from "../../components/FaqTab/FaqTab";
-import ProfileTab from "../../components/ProfileTab/ProfileTab";
+import MentorDashboard from "../../components/Dashboard/MentorDashboard";
 
 const INITIAL_TAB_INDEX = 1;
 
-function Student() {
+function Mentor() {
   const tabs = [
     {
       id: 1,
       tab: "Dashboard",
       icon: "dashboardIcon",
-      component: <Dashboard />
+      component: <MentorDashboard />
     },
     {
       id: 2,
-      tab: "Course Details",
+      tab: "Batch Details",
       icon: "courseDetail",
       component: <CourseDetailTab />
     },
@@ -30,17 +27,17 @@ function Student() {
       id: 3,
       tab: "My Resources",
       icon: "myResource",
-      component: <MyResourceTab />
+      component: null
     },
-    { id: 4, tab: "Progress", icon: "progress", component: <ProgressTab /> },
-    { id: 5, tab: "FAQ", icon: "faq", component: <FaqTab /> },
+    { id: 4, tab: "Progress", icon: "progress", component: null },
+    { id: 5, tab: "FAQ", icon: "faq", component: null },
     {
       id: 6,
       tab: "Term & Condition",
       icon: "termAndCondition",
       component: "6"
     },
-    { id: 7, tab: "Profile", icon: "setting", component: <ProfileTab /> }
+    { id: 7, tab: "Profile", icon: "setting", component: null }
   ];
   const [selectedTabIndex, setSelectedTabIndex] = useState(INITIAL_TAB_INDEX);
   const clickOnTab = data => {
@@ -58,10 +55,10 @@ function Student() {
         tabsData={tabs}
         selectTab={data => clickOnTab(data)}
         selectedTab={selectedTabIndex}
-        studentDashboard={true}
+        studentDashboard={false}
       />
     </div>
   );
 }
 
-export default withAuth(Student);
+export default withAuth(Mentor);

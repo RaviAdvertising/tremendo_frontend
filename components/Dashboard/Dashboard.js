@@ -101,6 +101,17 @@ export default function Dashboard() {
   // if (studentDashboardState.getStudentDashboardDataLoading) {
   //   return <StudentDashboardSkelton />;
   // }
+  if (true) {
+    return (
+      <Image
+        src="/Images/no_data.png"
+        alt="tremendo dashboard banner"
+        height="900px"
+        width="800px"
+        className={styles.banner}
+      />
+    );
+  }
   return (
     <div className={styles.dashboardBase}>
       <div className={styles.dashboardBanner}>
