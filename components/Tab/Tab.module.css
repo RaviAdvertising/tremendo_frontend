@@ -2,6 +2,8 @@
   width: 100%;
   display: flex;
 }
+.mobileBase {
+}
 .leftSection {
   width: 17%;
 }
@@ -184,4 +186,24 @@
   padding: 6px 0px 6px 6px;
   display: flex;
   cursor: pointer;
+}
+.navbarMobile {
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pusherSection {
+  border: none !important;
+}
+.segmentBasic {
+  padding: 0 !important;
+}
+
+@media (max-device-width: 1024px) {
+  .profileName {
+    font-size: 18px;
+    margin-left: 0px;
+    padding-right: 10px;
+  }
 }

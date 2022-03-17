@@ -1,0 +1,180 @@
+.base {
+  padding: 20px 30px;
+}
+.chartHeading {
+  font-family: Poppins;
+  font-size: 20px;
+  color: #202323;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.dateMonthHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.datesWrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  overflow-x: scroll;
+}
+.date {
+  color: #202323;
+  font-size: 14px;
+  font-family: Poppins;
+  margin-right: 25px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+.datesWrapper::-webkit-scrollbar {
+  display: block;
+  background-color: #c4c4c4;
+  height: 8px;
+}
+
+.datesWrapper::-webkit-scrollbar-thumb {
+  background-color: #616161;
+}
+.courseName {
+  color: #202323;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Poppins;
+  margin-bottom: 20px;
+}
+.batchName {
+  color: #202323;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Poppins;
+}
+
+.courseDetailSection {
+  display: flex;
+  width: 100%;
+}
+
+.detailsWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  position: relative;
+}
+.timeCode {
+  width: 40%;
+  font-family: Poppins;
+  font-size: 16px;
+  color: #202323;
+  font-weight: 700;
+}
+
+.overlay {
+  background: #f2efef;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.timeCode {
+  width: 40%;
+  font-family: Poppins;
+  font-size: 16px;
+  color: #202323;
+  font-weight: 700;
+}
+.batchCode {
+  width: 20%;
+  font-family: Poppins;
+  font-size: 16px;
+  color: #202323;
+  font-weight: 700;
+}
+.batchListHeader {
+  background-color: #fa9116;
+  display: flex;
+  padding: 10px;
+}
+.headerOption {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 17px;
+  font-weight: 700;
+  width: 33.33%;
+}
+.batchListBody {
+  display: flex;
+  padding: 12px 10px;
+  background-color: #fbeedf;
+  color: #000;
+  font-family: Poppins;
+  font-size: 17px;
+  box-shadow: -1px 7.9px 8px 0 rgba(0, 0, 0, 0.16);
+  margin-bottom: 10px;
+}
+.bodyOption {
+  width: 33.33%;
+}
+.bodyOptionWithCheckBox {
+  width: 33.33%;
+  display: flex;
+  justify-content: space-around;
+}
+.completeContainer {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 13px;
+  padding-left: 23px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fa9116;
+}
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: 18px;
+  width: 23px;
+  border: 1px solid #000;
+  background-color: #fa9116;
+}
+.completeContainer .checkbox:checked ~ .checkmark {
+  background-color: #fa9116;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.completeContainer .checkbox:checked ~ .checkmark:after {
+  display: block;
+}
+
+.completeContainer .checkmark:after {
+  left: 6px;
+  top: -2px;
+  width: 8px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 2px 3px 0;
+  transform: rotate(37deg);
+  -webkit-transform: rotate(37deg);
+  -ms-transform: rotate(37deg);
+}
+.batchListWrapper {
+  margin-bottom: 40px;
+}

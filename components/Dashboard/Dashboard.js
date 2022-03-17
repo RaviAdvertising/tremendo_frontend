@@ -106,8 +106,8 @@ export default function Dashboard() {
       <Image
         src="/Images/no_data.png"
         alt="tremendo dashboard banner"
-        height="900px"
-        width="800px"
+        height="800px"
+        width="700px"
         className={styles.banner}
       />
     );

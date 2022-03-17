@@ -1,21 +1,14 @@
-import styles from "./MentorDashboard.module.css";
+import { useEffect } from "react";
+import styles from "./MentorProgresstab.module.css";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
-import Button from "../Button/Button";
-import { useEffect } from "react";
 
-export default function MentorDashboard({}) {
-  const totalDatesInCurrentMonth = Array.from(
-    Array(moment().daysInMonth()).keys()
-  );
+export default function MentorProgresstab() {
   useEffect(() => {
     createCircle();
-    if (document.getElementById("date_wrapper") && currentDate > 11) {
-      const scrollPixels = parseInt(currentDate) * 10;
-      document.getElementById("date_wrapper").scrollLeft = scrollPixels;
-    }
   }, []);
 
   const createCircle = () => {
@@ -70,17 +63,6 @@ export default function MentorDashboard({}) {
     }
   };
 
-  const currentDate = moment().format("D");
-  const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday"
-  ];
-  const currentDay = moment().day() ? moment().day() : 7;
   const options = {
     maintainAspectRatio: false,
     scales: {
@@ -110,62 +92,150 @@ export default function MentorDashboard({}) {
     }
   };
 
+  const lineChartOption = {
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Day",
+          color: "#7b7b7b",
+          font: {
+            family: "Poppins",
+            size: 14,
+            weight: "bold"
+          }
+        },
+        ticks: {
+          callback: function(value) {
+            return value + 1;
+          }
+        },
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Score",
+          color: "#7b7b7b",
+          font: {
+            family: "Poppins",
+            size: 14,
+            weight: "bold"
+          }
+        },
+        beginAtZero: true,
+        suggestedMax: 100,
+        grid: {
+          display: false
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        displayColors: false,
+        titleAlign: "center",
+        callbacks: {
+          title: function(context) {
+            return `${context[0].formattedValue}%`;
+          },
+          label: function(context) {
+            return "Total score : 100";
+          },
+          footer: function(context) {
+            return `Score : ${context[0].formattedValue}`;
+          }
+        }
+      }
+    }
+  };
+
+  const totalDatesInCurrentMonth = Array.from(
+    Array(moment().daysInMonth()).keys()
+  );
   //   if (true) {
   //     return <StudentDashboardSkelton />;
   //   }
-
+  const lineIndication = [
+    { name: "Low", color: "#ffb922", height: "34px" },
+    { name: "Average", color: "#3bbafb", height: "220px" },
+    { name: "High", color: "#00a651", height: "180px" }
+  ];
   return (
     <div className={styles.base}>
-      <div className={styles.chartHeading}>Batch Details</div>
-      <div className={styles.dateMonthHeading}>
-        <div className={styles.courseName}>Date</div>
-        <div className={styles.batchName}>{moment().format("MMM")}</div>
-      </div>
-      <div className={styles.datesWrapper} id="date_wrapper">
-        {totalDatesInCurrentMonth.map(i => (
-          <div
-            className={styles.date}
-            style={{ backgroundColor: currentDate == i + 1 && "#fa9116" }}
-            key={i}
-          >
-            {i + 1}
-          </div>
-        ))}
-      </div>
-
-      {days.map((i, index) => (
-        <div className={styles.courseDetailSection} key={index}>
-          <div
-            className={styles.detailsWrapper}
-            style={{
-              backgroundColor: currentDay !== index + 1 ? "#f2efef" : "#25b1ae"
-            }}
-          >
-            <div className={styles.batchCode}>{i}</div>
-            <div className={styles.batchCode}>E2</div>
-            <div className={styles.timeCode}>02:00PM - 03:00PM</div>
-            <div className={styles.batchCode}>
-              <Button
-                label={"Get Started"}
-                height={33}
-                borderRadius={16}
-                backgroundColor={
-                  currentDay !== index + 1 ? "#e6e4e4" : "#51faf6"
+      <div className={styles.chartHeading}>Score</div>
+      <div className={styles.lineChartWrapper}>
+        <div className={styles.lineChart}>
+          <Line
+            data={{
+              labels: totalDatesInCurrentMonth,
+              datasets: [
+                {
+                  data: [
+                    90,
+                    39,
+                    80,
+                    20,
+                    40,
+                    20,
+                    56,
+                    25,
+                    45,
+                    65,
+                    44,
+                    76,
+                    81,
+                    54,
+                    77,
+                    33
+                  ],
+                  backgroundColor: [
+                    "#ffb922",
+                    "#3bbafb",
+                    "#00a651",
+                    "#3bbafb",
+                    "#ffb922",
+                    "#3bbafb",
+                    "#00a651",
+                    "#3bbafb",
+                    "#ffb922",
+                    "#3bbafb",
+                    "#00a651",
+                    "#3bbafb"
+                  ],
+                  fill: {
+                    target: "origin",
+                    above: "#c1ffdf", // Area will be red above the origin
+                    below: "#c1ffdf" // And blue below the origin
+                  },
+                  tension: 2,
+                  showLine: false,
+                  cubicInterpolationMode: "monotone"
                 }
-                textStyle={{
-                  color: "#000",
-                  fontWeight: "bold",
-                  fontFamily: "Open Sans",
-                  fontSize: "15px"
-                }}
-                border="none"
-                onClick={() => console.log("start")}
-              />
-            </div>
-            {currentDay !== index + 1 && <div className={styles.overlay}></div>}
-          </div>
+              ]
+            }}
+            width={500}
+            height={300}
+            options={lineChartOption}
+          />
         </div>
-      ))}
+        <div className={styles.indicationPoints}>
+          {lineIndication.map(i => (
+            <div className={styles.namePointWrapper} key={i.name}>
+              <div className={styles.stepsNames}>{i.name}</div>
+              <div
+                className={styles.pointsSteps}
+                style={{ backgroundColor: i.color, height: i.height }}
+              ></div>
+            </div>
+          ))}
+        </div>
+      </div>
       <div className={styles.chartWrapper}>
         <div className={styles.progressChart}>
           <div className={styles.chartHeading}>Progress</div>

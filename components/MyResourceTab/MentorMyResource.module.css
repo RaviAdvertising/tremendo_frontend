@@ -1,0 +1,40 @@
+.base {
+  padding: 20px 30px;
+}
+.myAssignment {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0.3px 4px 10px 0 rgba(0, 0, 0, 0.15);
+  padding: 15px;
+}
+.myAssignmentHeading {
+  font-family: Poppins;
+  font-size: 20px;
+  color: #202323;
+  font-weight: 700;
+}
+.statusHeadingWrapper {
+  display: flex;
+}
+.statusWrapper {
+  display: flex;
+}
+.statusHeading {
+  font-family: Poppins;
+  font-size: 13px;
+  color: #424242;
+  font-weight: 600;
+}
+.colorTitleWrapper {
+  display: flex;
+  align-items: center;
+}
+.color {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+}
+.title {
+  font-family: Poppins;
+  font-size: 10px;
+}

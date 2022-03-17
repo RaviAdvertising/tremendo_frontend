@@ -3,9 +3,10 @@ import { useContext, useState } from "react";
 import Tab from "../../components/Tab/Tab";
 import styles from "../../styles/student.module.css";
 import withAuth from "../../utils/withAuth";
-import Dashboard from "../../components/Dashboard/Dashboard";
-import CourseDetailTab from "../../components/CourseDetailTab/CourseDetailTab";
 import MentorDashboard from "../../components/Dashboard/MentorDashboard";
+import BatchManagement from "../../components/CourseDetailTab/BatchManagement";
+import MentorMyResource from "../../components/MyResourceTab/MentorMyResource";
+import MentorProgresstab from "../../components/ProgressTab/MentorProgresstab";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -21,15 +22,20 @@ function Mentor() {
       id: 2,
       tab: "Batch Details",
       icon: "courseDetail",
-      component: <CourseDetailTab />
+      component: <BatchManagement />
     },
     {
       id: 3,
       tab: "My Resources",
       icon: "myResource",
-      component: null
+      component: <MentorMyResource />
     },
-    { id: 4, tab: "Progress", icon: "progress", component: null },
+    {
+      id: 4,
+      tab: "Progress",
+      icon: "progress",
+      component: <MentorProgresstab />
+    },
     { id: 5, tab: "FAQ", icon: "faq", component: null },
     {
       id: 6,
