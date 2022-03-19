@@ -1,0 +1,145 @@
+.base {
+  padding: 20px 30px;
+  position: relative;
+}
+.sectionWrapper {
+  display: flex;
+  margin-top: 130px;
+}
+.leftSection {
+  width: 40%;
+  box-shadow: 1.1px 2.8px 5px 0 rgba(0, 0, 0, 0.15);
+  background-color: #d4f6ff;
+  padding: 12px;
+  margin-right: 14px;
+  z-index: 1;
+}
+.rightSection {
+  z-index: 1;
+  width: 60%;
+  padding: 12px;
+  box-shadow: 1.1px 2.8px 5px 0 rgba(0, 0, 0, 0.15);
+  background-color: #d4f6ff;
+}
+.profileImage {
+  position: relative;
+  width: 150px;
+  margin: auto;
+}
+.cameraIcon {
+  position: absolute;
+  cursor: pointer;
+  bottom: 20px;
+  right: 8px;
+}
+.mentorName {
+  color: #3c3c3c;
+  font-size: 18px;
+  font-family: open sans;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 12px;
+}
+.mentorCode {
+  color: #3c3c3c;
+  font-size: 15px;
+  font-family: open sans;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 50px;
+}
+.languagesHeading {
+  color: #3c3c3c;
+  font-size: 16px;
+  font-family: open sans;
+  font-weight: 700;
+  margin-top: 20px;
+}
+.languages {
+  font-size: 15px;
+  font-family: open sans;
+  margin-top: 5px;
+  margin-bottom: 50px;
+}
+.progress {
+  width: 80%;
+}
+.status {
+  background-color: #70bed3;
+  height: 8px;
+  border-radius: 2px;
+}
+.progressTitle {
+  color: #66666d;
+  font-size: 9px;
+  font-family: open sans;
+}
+.progressStrip {
+  height: 8px;
+  width: 100%;
+  background-color: #d9d9d9;
+  border-radius: 2px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.firstName {
+  margin-right: 30px;
+  width: 44%;
+}
+.lastName {
+  width: 44%;
+}
+.inputGeneralTitle {
+  color: #66666d;
+  font-size: 12px;
+  font-family: open sans;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.selectStyling {
+  background-color: #f8f8fa;
+  width: 100%;
+  color: #66666d;
+  font-family: Poppins;
+  border: 1px solid #cecedc;
+  font-size: 12px;
+  height: 31px;
+  padding-left: 8px;
+}
+.selectStyling:focus {
+  outline: none;
+}
+.attachementWrapper {
+  display: flex;
+  margin-top: 8px;
+  margin-bottom: 30px;
+}
+.attachement {
+  background-color: #fff;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.saveBtn {
+  width: 300px;
+  margin: auto;
+  margin-top: 50px;
+}
+.profile_topImage {
+  position: absolute;
+}
+.profile_bottomImage {
+  position: absolute;
+  bottom: -28px;
+}

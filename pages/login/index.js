@@ -123,6 +123,7 @@ export default function Login(props) {
         type: LOGIN_TYPE_EMAIL,
         gg_token: "",
         fb_token: ""
+        // type: selectedTab
       };
       const response = await loginAuth(payload)(dispatch);
       if (response.type == LOGIN_ERROR) {

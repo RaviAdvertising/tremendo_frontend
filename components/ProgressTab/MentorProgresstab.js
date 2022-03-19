@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import styles from "./MentorProgresstab.module.css";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
-import ChartDataLabels from "chartjs-plugin-datalabels";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
 
@@ -91,7 +90,6 @@ export default function MentorProgresstab() {
       }
     }
   };
-
   const lineChartOption = {
     maintainAspectRatio: false,
     scales: {
@@ -154,7 +152,6 @@ export default function MentorProgresstab() {
       }
     }
   };
-
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
@@ -162,83 +159,84 @@ export default function MentorProgresstab() {
   //     return <StudentDashboardSkelton />;
   //   }
   const lineIndication = [
-    { name: "Low", color: "#ffb922", height: "34px" },
-    { name: "Average", color: "#3bbafb", height: "220px" },
-    { name: "High", color: "#00a651", height: "180px" }
+    { name: "High", color: "#00a651" },
+    { name: "Average", color: "#3bbafb" },
+    { name: "Low", color: "#ffb922" }
   ];
   return (
     <div className={styles.base}>
-      <div className={styles.chartHeading}>Score</div>
-      <div className={styles.lineChartWrapper}>
-        <div className={styles.lineChart}>
-          <Line
-            data={{
-              labels: totalDatesInCurrentMonth,
-              datasets: [
-                {
-                  data: [
-                    90,
-                    39,
-                    80,
-                    20,
-                    40,
-                    20,
-                    56,
-                    25,
-                    45,
-                    65,
-                    44,
-                    76,
-                    81,
-                    54,
-                    77,
-                    33
-                  ],
-                  backgroundColor: [
-                    "#ffb922",
-                    "#3bbafb",
-                    "#00a651",
-                    "#3bbafb",
-                    "#ffb922",
-                    "#3bbafb",
-                    "#00a651",
-                    "#3bbafb",
-                    "#ffb922",
-                    "#3bbafb",
-                    "#00a651",
-                    "#3bbafb"
-                  ],
-                  fill: {
-                    target: "origin",
-                    above: "#c1ffdf", // Area will be red above the origin
-                    below: "#c1ffdf" // And blue below the origin
-                  },
-                  tension: 2,
-                  showLine: false,
-                  cubicInterpolationMode: "monotone"
-                }
-              ]
-            }}
-            width={500}
-            height={300}
-            options={lineChartOption}
-          />
-        </div>
-        <div className={styles.indicationPoints}>
-          {lineIndication.map(i => (
-            <div className={styles.namePointWrapper} key={i.name}>
-              <div className={styles.stepsNames}>{i.name}</div>
-              <div
-                className={styles.pointsSteps}
-                style={{ backgroundColor: i.color, height: i.height }}
-              ></div>
-            </div>
-          ))}
+      <div className={styles.scoreChartWrapper}>
+        <div className={styles.chartHeading}>Score</div>
+        <div className={styles.lineChartWrapper}>
+          <div className={styles.lineChart}>
+            <Line
+              data={{
+                labels: totalDatesInCurrentMonth,
+                datasets: [
+                  {
+                    data: [
+                      20,
+                      30,
+                      90,
+                      20,
+                      40,
+                      20,
+                      56,
+                      25,
+                      45,
+                      65,
+                      44,
+                      76,
+                      81,
+                      54,
+                      77,
+                      33
+                    ],
+                    backgroundColor: [
+                      "#ffb922",
+                      "#3bbafb",
+                      "#00a651",
+                      "#3bbafb",
+                      "#ffb922",
+                      "#3bbafb",
+                      "#00a651",
+                      "#3bbafb",
+                      "#ffb922",
+                      "#3bbafb",
+                      "#00a651",
+                      "#3bbafb"
+                    ],
+                    fill: {
+                      target: "origin",
+                      above: "#FFF6E3", // Area will be red above the origin
+                      below: "#FFF6E3" // And blue below the origin
+                    },
+                    borderColor: "#000",
+                    borderWidth: 1
+                  }
+                ]
+              }}
+              width={500}
+              height={300}
+              options={lineChartOption}
+            />
+          </div>
+          <div className={styles.indicationPoints}>
+            {lineIndication.map(i => (
+              <div className={styles.namePointWrapper} key={i.name}>
+                <div
+                  className={styles.pointsSteps}
+                  style={{ backgroundColor: i.color }}
+                ></div>
+                <div className={styles.stepsNames}>{i.name}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className={styles.chartWrapper}>
         <div className={styles.progressChart}>
-          <div className={styles.chartHeading}>Progress</div>
+          <div className={styles.chartHeading}>Batch Progress</div>
           <div className={styles.progressChartBox}>
             <div className={styles.barChart}>
               <Bar

@@ -5,7 +5,7 @@
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0.3px 4px 10px 0 rgba(0, 0, 0, 0.15);
-  padding: 15px;
+  padding: 30px 15px;
 }
 .myAssignmentHeading {
   font-family: Poppins;
@@ -15,9 +15,13 @@
 }
 .statusHeadingWrapper {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 .statusWrapper {
   display: flex;
+  justify-content: space-evenly;
+  width: 40%;
 }
 .statusHeading {
   font-family: Poppins;
@@ -37,4 +41,114 @@
 .title {
   font-family: Poppins;
   font-size: 10px;
+  margin-left: 10px;
+}
+.tableHeader {
+  background-color: #50c1be;
+  padding: 12px;
+  display: flex;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 15px;
+  box-shadow: 0.1px 1px 6px 0 rgba(0, 0, 0, 0.31);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.tableNo {
+  width: 10%;
+}
+.tableAssignmentTitle {
+  width: 25%;
+}
+.tableAssignDate {
+  width: 25%;
+}
+.tableDueDate {
+  width: 25%;
+}
+.tableStatus {
+  width: 15%;
+}
+.tableBodySection {
+  padding: 8px 12px;
+  display: flex;
+  color: #000;
+  font-family: Poppins;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+.tableBodySection:nth-child(even) {
+  background-color: #e4e4e4;
+}
+.tableBodySection:nth-child(odd) {
+  background-color: #f3f3f3;
+}
+.statusBar {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+.statusOption {
+  display: flex;
+  justify-content: space-around;
+}
+.options {
+  color: #424242;
+  font-size: 9px;
+  font-family: Poppins;
+  font-weight: 600;
+  padding: 0px 10px;
+  cursor: pointer;
+}
+.syllabusEbookWrapper {
+  display: flex;
+  margin-top: 60px;
+  justify-content: space-between;
+}
+.mentorSyllabus {
+  position: relative;
+  box-shadow: 0.3px 4px 10px 0 rgba(0, 0, 0, 0.15);
+}
+.mentorEbooks {
+  position: relative;
+  box-shadow: 0.3px 4px 10px 0 rgba(0, 0, 0, 0.15);
+}
+.syllabus {
+  position: absolute;
+  color: #424242;
+  font-size: 18px;
+  font-family: Poppins;
+  font-weight: 700;
+  z-index: 1;
+  top: 18px;
+  left: 20px;
+}
+.pdf {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  z-index: 1;
+}
+.downloadIcon {
+  position: absolute;
+  bottom: 9px;
+  right: 20px;
+  z-index: 1;
+  cursor: pointer;
+}
+.ebookSections {
+  position: absolute;
+  display: flex;
+  margin-bottom: 10px;
+  z-index: 1;
+  flex-wrap: wrap;
+  width: 60%;
+  justify-content: center;
+  top: 60px;
+  left: 60px;
+}
+.eBook {
+  cursor: pointer;
+  padding: 5px;
 }

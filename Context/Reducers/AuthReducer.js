@@ -51,6 +51,20 @@ const authReducer = (state, action) => {
         logoutLoading: false
       });
 
+    case authAction.GET_USER_PROFILE_REQUEST:
+      return Object.assign({}, state, {
+        profileDataLoading: true
+      });
+    case authAction.GET_USER_PROFILE_SUCCESS:
+      return Object.assign({}, state, {
+        profileDataLoading: false,
+        profileData: action.data
+      });
+    case authAction.GET_USER_PROFILE_ERROR:
+      return Object.assign({}, state, {
+        profileDataLoading: false
+      });
+
     default:
       return state;
   }

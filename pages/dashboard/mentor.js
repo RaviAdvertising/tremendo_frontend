@@ -7,6 +7,8 @@ import MentorDashboard from "../../components/Dashboard/MentorDashboard";
 import BatchManagement from "../../components/CourseDetailTab/BatchManagement";
 import MentorMyResource from "../../components/MyResourceTab/MentorMyResource";
 import MentorProgresstab from "../../components/ProgressTab/MentorProgresstab";
+import MentorFaq from "../../components/FaqTab/MentorFaq";
+import MentorProfile from "../../components/ProfileTab/MentorProfile";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -36,14 +38,14 @@ function Mentor() {
       icon: "progress",
       component: <MentorProgresstab />
     },
-    { id: 5, tab: "FAQ", icon: "faq", component: null },
+    { id: 5, tab: "FAQ", icon: "faq", component: <MentorFaq /> },
     {
       id: 6,
       tab: "Term & Condition",
       icon: "termAndCondition",
       component: "6"
     },
-    { id: 7, tab: "Profile", icon: "setting", component: null }
+    { id: 7, tab: "Profile", icon: "setting", component: <MentorProfile /> }
   ];
   const [selectedTabIndex, setSelectedTabIndex] = useState(INITIAL_TAB_INDEX);
   const clickOnTab = data => {

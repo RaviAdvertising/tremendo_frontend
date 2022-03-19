@@ -22,6 +22,7 @@ import {
 import Cookies from "js-cookie";
 import { GlobalContext } from "../../Context/Provider";
 import {
+  getUserProfile,
   logoutAuth,
   LOGOUT_ERROR
 } from "../../Context/Actions/Auth/AuthAction";
@@ -45,6 +46,7 @@ function Navbar({}) {
       return false;
     }
     setLanguageToStore();
+    profileData();
   }, [router.pathname]);
 
   const setLanguageToStore = async () => {
@@ -58,6 +60,10 @@ function Navbar({}) {
         setSelectedLanguage("LANGUAGES");
       }
     }
+  };
+
+  const profileData = async () => {
+    const response = await getUserProfile()(dispatch);
   };
 
   const signUpAndLogout = async () => {
