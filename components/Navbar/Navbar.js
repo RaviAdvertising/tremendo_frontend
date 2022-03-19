@@ -100,7 +100,12 @@ function Navbar({}) {
     JSON.parse(localStorage.getItem(USER_DETAILS));
 
   const goToDashboard = () => {
-    if (userDetails.access_type == LOGIN_STUDENT_TAB) {
+    // if (userDetails.access_type == LOGIN_STUDENT_TAB) {
+    //   router.push(STUDENT_DASHBOARD_PATH);
+    // } else {
+    //   router.push(MENTOR_DASHBOARD_PATH);
+    // }
+    if (userDetails.email !== "admin@gmail.com") {
       router.push(STUDENT_DASHBOARD_PATH);
     } else {
       router.push(MENTOR_DASHBOARD_PATH);
