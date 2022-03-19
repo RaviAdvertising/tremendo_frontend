@@ -2,7 +2,11 @@ import { Fragment, useEffect, useState } from "react";
 import React, { useContext } from "react";
 import styles from "./Navbar.module.css";
 import { Dropdown, Icon, Image, Menu, Popup } from "semantic-ui-react";
-import { COOKIE_TOKEN, USER_DETAILS } from "../../utils/constants";
+import {
+  COOKIE_TOKEN,
+  LOGIN_STUDENT_TAB,
+  USER_DETAILS
+} from "../../utils/constants";
 import { useRouter } from "next/router";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
 import MobileOnly from "../DeviceCheck/MobileOnly";
@@ -17,7 +21,8 @@ import {
   CONTACTUS_PATH,
   FAQS_PATH,
   REVIEW_PATH,
-  STUDENT_DASHBOARD_PATH
+  STUDENT_DASHBOARD_PATH,
+  MENTOR_DASHBOARD_PATH
 } from "../../utils/routes";
 import Cookies from "js-cookie";
 import { GlobalContext } from "../../Context/Provider";
@@ -89,7 +94,18 @@ function Navbar({}) {
     router.push(`${LANGUAGE_DETAIL}${language.id}`);
     setVisible(!visible);
   };
+  const userDetails =
+    typeof window !== "undefined" &&
+    localStorage.getItem(USER_DETAILS) &&
+    JSON.parse(localStorage.getItem(USER_DETAILS));
 
+  const goToDashboard = () => {
+    if (userDetails.access_type == LOGIN_STUDENT_TAB) {
+      router.push(STUDENT_DASHBOARD_PATH);
+    } else {
+      router.push(MENTOR_DASHBOARD_PATH);
+    }
+  };
   const desktopNavbar = () => {
     return (
       <Menu fixed="top" secondary className={styles.menuWrapper}>
@@ -171,10 +187,8 @@ function Navbar({}) {
                     trigger={
                       <Image
                         src={
-                          JSON.parse(localStorage.getItem(USER_DETAILS))
-                            .profileUrl
-                            ? JSON.parse(localStorage.getItem(USER_DETAILS))
-                                .profileUrl
+                          userDetails.profileUrl
+                            ? userDetails.profileUrl
                             : "/Images/blank_profile.png"
                         }
                         circular
@@ -188,13 +202,11 @@ function Navbar({}) {
                     style={{ padding: "0px" }}
                   >
                     <div className={styles.profileName}>
-                      {JSON.parse(localStorage.getItem(USER_DETAILS)).name
-                        ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
-                        : JSON.parse(localStorage.getItem(USER_DETAILS)).email}
+                      {userDetails.name ? userDetails.name : userDetails.email}
                     </div>
                     <div
                       className={styles.profileOptions}
-                      onClick={() => router.push(STUDENT_DASHBOARD_PATH)}
+                      onClick={() => goToDashboard()}
                     >
                       Dashboard
                     </div>
@@ -266,9 +278,7 @@ function Navbar({}) {
                 </div>
               ) : (
                 <div className={styles.mwebMenus}>
-                  {JSON.parse(localStorage.getItem(USER_DETAILS)).name
-                    ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
-                    : JSON.parse(localStorage.getItem(USER_DETAILS)).email}
+                  {userDetails.name ? userDetails.name : userDetails.email}
                 </div>
               )}
               <div

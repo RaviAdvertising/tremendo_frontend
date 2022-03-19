@@ -122,8 +122,8 @@ export default function Login(props) {
         ...fields,
         type: LOGIN_TYPE_EMAIL,
         gg_token: "",
-        fb_token: ""
-        // type: selectedTab
+        fb_token: "",
+        access_type: selectedTab
       };
       const response = await loginAuth(payload)(dispatch);
       if (response.type == LOGIN_ERROR) {
@@ -298,7 +298,7 @@ export default function Login(props) {
             }
             onClick={() => onChangeTabs(LOGIN_STUDENT_TAB)}
           >
-            {LOGIN_STUDENT_TAB}
+            For Student
           </div>
           <div
             className={styles.tab}
@@ -309,7 +309,7 @@ export default function Login(props) {
             }
             onClick={() => onChangeTabs(LOGIN_MENTOR_TAB)}
           >
-            {LOGIN_MENTOR_TAB}
+            For Mentor
           </div>
         </div>
         {loginFormWithImage()}
