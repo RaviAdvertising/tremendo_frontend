@@ -5,3 +5,13 @@
 .inputStyling:focus {
   outline: none;
 }
+.inputStyling::-webkit-outer-spin-button,
+.inputStyling::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.inputStyling[type="number"] {
+  -moz-appearance: textfield;
+}

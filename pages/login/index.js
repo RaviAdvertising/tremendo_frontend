@@ -315,7 +315,7 @@ export default function Login(props) {
         {loginFormWithImage()}
       </div>
       <div className={styles.termAndCondition}>
-        Terms and Conditions (T&Cs) and Privacy Policy.
+        Terms and Conditions and Privacy Policy.
       </div>
     </div>
   );

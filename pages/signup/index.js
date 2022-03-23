@@ -88,11 +88,17 @@ export default function Signup(props) {
     }
     // }
   };
-
+  const hasNumber = myString => {
+    return /\d/.test(myString);
+  };
   const goToSignUp = async () => {
     let errors = { ...errors };
     if (!fields.name) {
       errors["name"] = "Please Enter Name";
+      setErrors(errors);
+      return false;
+    } else if (fields.name && hasNumber(fields.name)) {
+      errors["name"] = "Please Enter Correct Name Format";
       setErrors(errors);
       return false;
     } else if (!fields.dob) {
@@ -213,7 +219,7 @@ export default function Signup(props) {
             </div>
             <div className={styles.inputs}>
               <Input
-                type="text"
+                type="number"
                 placeholder="Phone number"
                 inputStyling={{
                   height: "50px",
@@ -319,7 +325,7 @@ export default function Signup(props) {
             By signing in to Tremendo, I accept the{" "}
           </span>
           <span className={styles.tandC2} onClick={() => router.push("/")}>
-            Terms and Conditions (T&Cs) and Privacy Policy.
+            Terms and Conditions and Privacy Policy.
           </span>
         </div>
       </div>

@@ -46,7 +46,7 @@ function Navbar({}) {
   } = useContext(GlobalContext);
 
   useEffect(() => {
-    if (router.pathname == HOME_PAGE) {
+    if (!router.pathname.includes(LANGUAGE_DETAIL)) {
       setSelectedLanguage("LANGUAGES");
       return false;
     }

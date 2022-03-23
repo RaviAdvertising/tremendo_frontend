@@ -1,11 +1,21 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import ImageComponent from "../../components/Image/Image";
 import styles from "../../styles/AboutUs.module.css";
 import MobileOnly from "../../components/DeviceCheck/MobileOnly";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
+import { useRouter } from "next/router";
 
 export default function AboutUs() {
+  const router = useRouter();
+  useEffect(() => {
+    const scrollID = router.asPath.split("#")[1];
+    if (scrollID)
+      document.getElementById(scrollID).scrollIntoView({
+        behavior: "smooth"
+      });
+  }, []);
   const section1 = () => {
     return (
       <div className={styles.section1Base}>
@@ -19,7 +29,9 @@ export default function AboutUs() {
         </div>
         <div className={styles.textWrapper}>
           <div className={styles.header1Wrapper}>
-            <div className={styles.heading1}>Who we are</div>
+            <div className={styles.heading1} id="whoweare">
+              Who we are
+            </div>
             <div className={styles.borderStyling}></div>
           </div>
           <div className={styles.sectionText}>
@@ -54,7 +66,9 @@ export default function AboutUs() {
         </MobileOnly>
         <div className={styles.textWrapper}>
           <div className={styles.header1Wrapper}>
-            <div className={styles.heading1}>What we do</div>
+            <div className={styles.heading1} id="whatwedo">
+              What we do
+            </div>
             <div className={styles.borderStyling}></div>
           </div>
           <div className={styles.sectionText}>
@@ -104,7 +118,9 @@ export default function AboutUs() {
         </div>
         <div className={styles.textWrapper}>
           <div className={styles.header1Wrapper}>
-            <div className={styles.heading1}>Our mission</div>
+            <div className={styles.heading1} id="ourmission">
+              Our mission
+            </div>
             <div className={styles.borderStyling}></div>
           </div>
           <div className={styles.sectionText}>
@@ -144,7 +160,9 @@ export default function AboutUs() {
         </MobileOnly>
         <div className={styles.textWrapper}>
           <div className={styles.header1Wrapper}>
-            <div className={styles.heading1}>Our vision</div>
+            <div className={styles.heading1} id="ourvision">
+              Our vision
+            </div>
             <div className={styles.borderStyling}></div>
           </div>
           <div className={styles.sectionText}>

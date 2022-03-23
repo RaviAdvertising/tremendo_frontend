@@ -11,6 +11,10 @@ export const SIGNUP_REQUEST = "signup_request";
 export const SIGNUP_SUCCESS = "signup_success";
 export const SIGNUP_ERROR = "signup_error";
 
+export const SUBSCRIBE_REQUEST = "SUBSCRIBE_request";
+export const SUBSCRIBE_SUCCESS = "SUBSCRIBE_success";
+export const SUBSCRIBE_ERROR = "SUBSCRIBE_error";
+
 export const LOGOUT_REQUEST = "logout_request";
 export const LOGOUT_SUCCESS = "logout_success";
 export const LOGOUT_ERROR = "logout_error";
@@ -122,6 +126,26 @@ export const getUserProfile = () => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_USER_PROFILE_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const subscribe = payload => dispatch => {
+  dispatch({ type: SUBSCRIBE_REQUEST });
+  return axiosInstance
+    .post("/subscribe", {
+      email: "jangra.ravi18@gmail.com"
+    })
+    .then(res => {
+      return {
+        type: SUBSCRIBE_SUCCESS,
+        data: res.data
+      };
+    })
+    .catch(err => {
+      dispatch({
+        type: SUBSCRIBE_ERROR,
         error: err.response.data
       });
     });

@@ -102,7 +102,7 @@ export default function Faqs() {
         ) : (
           <div className={styles.contentWrapper}>
             <div className={styles.header}>
-              {header("FREQUNTLY ASKED QUESTIONS")}
+              {header("FREQUENTLY ASKED QUESTIONS")}
             </div>
             <div className={styles.faqStripWrapper}>
               <div className={styles.strips}>

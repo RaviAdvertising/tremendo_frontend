@@ -1,7 +1,14 @@
 import styles from "./Footer.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { LANGUAGE_DETAIL, LOGIN_PATH, SIGN_UP_PATH } from "../../utils/routes";
+import {
+  ABOUTUS_PATH,
+  CONTACTUS_PATH,
+  FAQS_PATH,
+  LANGUAGE_DETAIL,
+  LOGIN_PATH,
+  SIGN_UP_PATH
+} from "../../utils/routes";
 import { useContext } from "react";
 import { GlobalContext } from "../../Context/Provider";
 
@@ -34,10 +41,30 @@ export default function Footer(props) {
         <div className={styles.footerSection}>
           <div className={styles.heading}>Know us better</div>
           <div className={styles.subheading}>
-            <div className={styles.footerItem}>Who we are</div>
-            <div className={styles.footerItem}>What we do</div>
-            <div className={styles.footerItem}>Our mission</div>
-            <div className={styles.footerItem}>Our vision</div>
+            <div
+              className={styles.footerItem}
+              onClick={() => router.push(`${ABOUTUS_PATH}#whoweare`)}
+            >
+              Who we are
+            </div>
+            <div
+              className={styles.footerItem}
+              onClick={() => router.push(`${ABOUTUS_PATH}#whatwedo`)}
+            >
+              What we do
+            </div>
+            <div
+              className={styles.footerItem}
+              onClick={() => router.push(`${ABOUTUS_PATH}#ourmission`)}
+            >
+              Our mission
+            </div>
+            <div
+              className={styles.footerItem}
+              onClick={() => router.push(`${ABOUTUS_PATH}#ourvision`)}
+            >
+              Our vision
+            </div>
           </div>
         </div>
         <div className={styles.footerSection}>
@@ -57,8 +84,18 @@ export default function Footer(props) {
         <div className={styles.footerSection}>
           <div className={styles.heading}>Help</div>
           <div className={styles.subheading}>
-            <div className={styles.footerItem}>FAQ’s</div>
-            <div className={styles.footerItem}> Contact us</div>
+            <div
+              className={styles.footerItem}
+              onClick={() => router.push(FAQS_PATH)}
+            >
+              FAQ’s
+            </div>
+            <div
+              className={styles.footerItem}
+              onClick={() => router.push(CONTACTUS_PATH)}
+            >
+              Contact us
+            </div>
             <div className={styles.socialSection}>
               <div className={styles.heading}>Follow Us</div>
               <div className={styles.followIcons}>
@@ -100,7 +137,7 @@ export default function Footer(props) {
         </div>
       </div>
       <div className={styles.blackFooterbase}>
-        <div className={styles.copyright}>© 2021 Tremendo</div>
+        <div className={styles.copyright}>© 2022 Tremendo</div>
         <div>Terms and Conditions | Privacy Statement</div>
       </div>
     </div>

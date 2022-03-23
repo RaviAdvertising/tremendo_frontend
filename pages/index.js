@@ -27,18 +27,27 @@ import { GlobalContext } from "../Context/Provider";
 import { getLanguages, getPageData } from "../Context/Actions/Home/HomeAction";
 import Button from "../components/Button/Button";
 import PageLoader from "../components/Loader/PageLoader";
+import { subscribe } from "../Context/Actions/Auth/AuthAction";
 
 export default function Home({}) {
   const { isMobileView } = useContext(DeviceContext);
-  const { homeState, homeDispatch: dispatch, authState } = useContext(
-    GlobalContext
-  );
+  const {
+    homeState,
+    homeDispatch: dispatch,
+    authState,
+    authDispatch: authDispatcher
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     if (homeState.pageData.length == 0)
       getPageData(DASHBOARD_PAGE_TYPE)(dispatch);
     if (homeState.getLanguage.length == 0) getLanguages()(dispatch);
   }, []);
+
+  const subscribeBtn = async () => {
+    // const response = await subscribe()(authDispatcher);
+    // console.log(response);
+  };
   return (
     <div>
       <Head>
@@ -195,7 +204,7 @@ export default function Home({}) {
                   fontSize: "12px"
                 }}
                 border="none"
-                onClick={() => goToLogin()}
+                onClick={() => subscribeBtn()}
               />
             </div>
           </div>
