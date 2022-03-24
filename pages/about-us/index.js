@@ -119,7 +119,7 @@ export default function AboutUs() {
         <div className={styles.textWrapper}>
           <div className={styles.header1Wrapper}>
             <div className={styles.heading1} id="ourmission">
-              Our mission?
+              Our mission
             </div>
             <div className={styles.borderStyling}></div>
           </div>
@@ -161,7 +161,7 @@ export default function AboutUs() {
         <div className={styles.textWrapper}>
           <div className={styles.header1Wrapper}>
             <div className={styles.heading1} id="ourvision">
-              Our vision?
+              Our vision
             </div>
             <div className={styles.borderStyling}></div>
           </div>

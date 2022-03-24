@@ -180,9 +180,6 @@ export default function ContactUs() {
                 value={fields.purpose}
                 onChange={e => handleChange("purpose", e.target.value)}
               >
-                <option value={0}>
-                  Why do you want to learn this language?{" "}
-                </option>
                 {whyLearnData.map((i, index) => (
                   <option value={i} key={index}>
                     {i}
