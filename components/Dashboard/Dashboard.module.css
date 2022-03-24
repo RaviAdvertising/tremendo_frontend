@@ -185,6 +185,7 @@
 @media (max-device-width: 1024px) {
   .dashboardBase {
     padding: 10px;
+    margin-top: 15px;
   }
   .bannerTextWrapper {
     top: 24%;
@@ -196,5 +197,30 @@
   }
   .descriptionText {
     font-size: 10px;
+  }
+  .classBoxWrapper {
+    overflow: auto;
+  }
+  .classBox {
+    width: 60%;
+    margin-right: 20px;
+  }
+  .subject {
+    margin-right: 30px;
+  }
+  .chartWrapper {
+    display: initial;
+  }
+  .progressChart {
+    width: 100%;
+  }
+  .attendenceChart {
+    width: 100%;
+  }
+  .barLabels {
+    margin-left: 5px;
+  }
+  .chartHeading {
+    margin-top: 15px;
   }
 }

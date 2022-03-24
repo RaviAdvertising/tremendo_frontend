@@ -146,3 +146,26 @@
   top: 0;
   right: 0;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    padding: 10px;
+  }
+  .courseName {
+    font-size: 17px;
+  }
+  .batchName {
+    font-size: 17px;
+  }
+  .dateMonthHeading {
+    margin-top: 30px;
+  }
+  .days {
+    font-size: 14px;
+  }
+  .batchCode {
+    font-size: 14px;
+  }
+  .mentorProfile {
+    font-size: 14px;
+  }
+}

@@ -97,21 +97,21 @@ export default function Dashboard() {
       }
     }
   };
-  console.log(studentDashboardState);
+
   // if (studentDashboardState.getStudentDashboardDataLoading) {
   //   return <StudentDashboardSkelton />;
   // }
-  if (true) {
-    return (
-      <Image
-        src="/Images/no_data.png"
-        alt="tremendo dashboard banner"
-        height="800px"
-        width="700px"
-        className={styles.banner}
-      />
-    );
-  }
+  // if (true) {
+  //   return (
+  //     <Image
+  //       src="/Images/no_data.png"
+  //       alt="tremendo dashboard banner"
+  //       height="800px"
+  //       width="700px"
+  //       className={styles.banner}
+  //     />
+  //   );
+  // }
   return (
     <div className={styles.dashboardBase}>
       <div className={styles.dashboardBanner}>
