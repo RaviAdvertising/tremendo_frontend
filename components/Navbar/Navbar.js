@@ -56,14 +56,14 @@ function Navbar({}) {
 
   const setLanguageToStore = async () => {
     const currentLanguagePage = router.query.languageId;
-    if (homeState.getLanguage.length == 0) {
-      const response = await getLanguages()(homeDispatch);
-      const selectedLang = response.data.find(i => i.id == currentLanguagePage);
-      if (selectedLang) {
-        setSelectedLanguage(selectedLang.title);
-      } else {
-        setSelectedLanguage("LANGUAGES");
-      }
+    const response = await getLanguages()(homeDispatch);
+
+    const selectedLang = response.data.find(i => i.id == currentLanguagePage);
+
+    if (selectedLang) {
+      setSelectedLanguage(selectedLang.title);
+    } else {
+      setSelectedLanguage("LANGUAGES");
     }
   };
 

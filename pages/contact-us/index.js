@@ -14,6 +14,16 @@ import PageLoader from "../../components/Loader/PageLoader";
 import { DeviceContext } from "../_app";
 
 export default function ContactUs() {
+  const whyLearnData = [
+    "Improve your career prospects",
+    "Meet new and interesting people",
+    ,
+    "Building your confidence and personality",
+    "Building your communication skills",
+    "Making international travel easier",
+    "Enhance your opportunity in government, business, medicine, law, etc. ",
+    "Improve your skills and grades in math, English in your SAT and GRE exams"
+  ];
   const { homeState, homeDispatch: dispatch } = useContext(GlobalContext);
   const { isMobileView } = useContext(DeviceContext);
   const [fields, setFields] = useState({});
@@ -173,9 +183,9 @@ export default function ContactUs() {
                 <option value={0}>
                   Why do you want to learn this language?{" "}
                 </option>
-                {homeState.getLanguage.map((i, index) => (
-                  <option value={i.title} key={index}>
-                    {i.title}
+                {whyLearnData.map((i, index) => (
+                  <option value={i} key={index}>
+                    {i}
                   </option>
                 ))}
               </select>

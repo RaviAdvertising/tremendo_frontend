@@ -53,17 +53,17 @@ export const whyTremendo2 = [
 
 export const promotionsContent = [
   {
-    heading: "Who we are",
+    heading: "Who we are?",
     description:
       "We are a team of highly skilled people fluent in different languages and with great teaching experience. We help people take over the professional world with an extra language skill that results in extremely beneficial career opportunities. With Tremendo you can learn new languages from anywhere in the world, under the guidance of the best mentors.With an increase in Multinational companies in India, companies look forward to hiring people who know more than one language. So, with us you develop a skill which creates the best jobs for you and keep your resume on demand in the market."
   },
   {
-    heading: "What we do",
+    heading: "What we do?",
     description:
       "We offer different language courses starting from the Beginner level so that one could learn from scratch for better understanding. We provide Digital Learning, Quick Growth, Experienced Mentors, Real-Time Feedback, making it easier for our students to get comfortable and improve their understanding.We provide virtual classes that are easier to attend from anywhere, following the batch time provided. The live classes ensure seriousness and help students to ask their queries and get instant solutions from the experts. We also provide digital study material making it convenient for you to study in your free time and grow enthusiastically in the competitive world. When you enroll in a class with us, you are also contributing towards saving the environment. As our program is completely digital, no paper is utilized, and you save on natural energy on the commute."
   },
   {
-    heading: "Our mission",
+    heading: "Our mission?",
     description:
       "Everyone has got their reasons to learn languages. Some acquire knowledge because of their interest, and others want to master them to get better in the professional world.We at Tremendo come up with various ways to make learning new languages easy and fun so that you can follow your ambition and develop a new skill. Learning a language could also be beneficial for you to explore new cultures and traditions across the world. It also helps you re-imagine something which you were not able to understand in the first place. Knowing a second language not only enhances your profile professionally, but also  introduces you to a variety of beliefs and traditions."
   }
