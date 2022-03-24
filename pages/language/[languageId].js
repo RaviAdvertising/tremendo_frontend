@@ -249,7 +249,10 @@ export default function DetailLanguagePage({}) {
                             </div>
                             <div className={styles.priceWrapper}>
                               <div className={styles.priceHeading}>Price :</div>
-                              <div className={styles.price}>$ {i.price}</div>
+                              <div className={styles.price}>
+                                &#x20b9;
+                                {i.price}
+                              </div>
                             </div>
                             <div className={styles.enrollNowBtn}>
                               <Button
