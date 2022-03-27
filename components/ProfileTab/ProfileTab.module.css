@@ -123,3 +123,12 @@
 .lastName {
   width: 44%;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    padding: 10px;
+    display: initial;
+  }
+  .profileBox {
+    width: 100%;
+  }
+}

@@ -152,3 +152,17 @@
   cursor: pointer;
   padding: 5px;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    padding: 10px;
+  }
+  .syllabusEbookWrapper {
+    display: initial;
+  }
+  .mentorEbooks {
+    margin: 20px 0;
+  }
+  .mentorSyllabus {
+    margin: 20px 0;
+  }
+}

@@ -5,16 +5,21 @@ import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
 import Button from "../Button/Button";
 import { useEffect } from "react";
+import { useContext } from "react";
+import { DeviceContext } from "../../pages/_app";
 
 export default function MentorDashboard({}) {
+  const { isMobileView } = useContext(DeviceContext);
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
   useEffect(() => {
     createCircle();
-    if (document.getElementById("date_wrapper") && currentDate > 11) {
-      const scrollPixels = parseInt(currentDate) * 10;
-      document.getElementById("date_wrapper").scrollLeft = scrollPixels;
+    if (document.getElementById("currentDate")) {
+      document.getElementById("currentDate").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
     }
   }, []);
 
@@ -121,12 +126,13 @@ export default function MentorDashboard({}) {
         <div className={styles.courseName}>Date</div>
         <div className={styles.batchName}>{moment().format("MMM")}</div>
       </div>
-      <div className={styles.datesWrapper} id="date_wrapper">
+      <div className={styles.datesWrapper}>
         {totalDatesInCurrentMonth.map(i => (
           <div
             className={styles.date}
             style={{ backgroundColor: currentDate == i + 1 && "#fa9116" }}
             key={i}
+            id={currentDate == i + 1 ? "currentDate" : "otherDate"}
           >
             {i + 1}
           </div>
@@ -141,7 +147,9 @@ export default function MentorDashboard({}) {
               backgroundColor: currentDay !== index + 1 ? "#f2efef" : "#25b1ae"
             }}
           >
-            <div className={styles.batchCode}>{i}</div>
+            <div className={styles.batchCode}>
+              {isMobileView ? i.substring(0, 3) : i}
+            </div>
             <div className={styles.batchCode}>E2</div>
             <div className={styles.timeCode}>02:00PM - 03:00PM</div>
             <div className={styles.batchCode}>
@@ -156,7 +164,7 @@ export default function MentorDashboard({}) {
                   color: "#000",
                   fontWeight: "bold",
                   fontFamily: "Open Sans",
-                  fontSize: "15px"
+                  fontSize: isMobileView ? "10px" : "15px"
                 }}
                 border="none"
                 onClick={() => console.log("start")}

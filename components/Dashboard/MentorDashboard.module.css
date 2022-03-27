@@ -146,3 +146,20 @@
   border-radius: 50%;
   margin: auto;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    padding: 10px;
+  }
+  .chartWrapper {
+    display: initial;
+  }
+  .progressChart {
+    width: 100%;
+  }
+  .attendenceChart {
+    width: 100%;
+  }
+  .chartHeading {
+    margin-top: 20px;
+  }
+}

@@ -4,8 +4,11 @@ import styles from "./MentorProfile.module.css";
 import Input from "../Input/Input";
 import DatePicker from "react-datepicker";
 import Button from "../Button/Button";
+import { useContext } from "react";
+import { DeviceContext } from "../../pages/_app";
 
 export default function MentorProfile() {
+  const { isMobileView } = useContext(DeviceContext);
   const [fields, setFields] = useState({});
   const customInput = ({ placeholder, value, disabled }) => {
     return (
@@ -72,8 +75,8 @@ export default function MentorProfile() {
               src={"/Images/blank_profile.png"}
               circular
               alt="profiletab_rocket"
-              width={"150px"}
-              height={"150px"}
+              width={isMobileView ? "70px" : "150px"}
+              height={isMobileView ? "70px" : "150px"}
             />
             <div className={styles.cameraIcon}>
               <Icon name="camera" />

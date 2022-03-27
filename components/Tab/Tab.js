@@ -283,11 +283,15 @@ export default function Tab({
                 as={Menu}
                 animation="overlay"
                 icon="labeled"
-                inverted
                 onHide={() => setVisible(false)}
                 vertical
                 visible={visible}
                 width="thin"
+                style={{
+                  backgroundColor: studentDashboard
+                    ? "rgb(236, 248, 248)"
+                    : "#ffecd6"
+                }}
               >
                 {tabsData.map((i, index) => (
                   <div key={index} onClick={() => selectTab(i)}>

@@ -2,8 +2,11 @@ import { useEffect } from "react";
 import moment from "moment";
 import Button from "../Button/Button";
 import styles from "./BatchManagement.module.css";
+import { useContext } from "react";
+import { DeviceContext } from "../../pages/_app";
 
 export default function BatchManagement() {
+  const { isMobileView } = useContext(DeviceContext);
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
@@ -81,7 +84,9 @@ export default function BatchManagement() {
               backgroundColor: currentDay !== index + 1 ? "#f2efef" : "#25b1ae"
             }}
           >
-            <div className={styles.batchCode}>{i}</div>
+            <div className={styles.batchCode}>
+              {isMobileView ? i.substring(0, 3) : i}
+            </div>
             <div className={styles.batchCode}>E2</div>
             <div className={styles.timeCode}>02:00PM - 03:00PM</div>
             <div className={styles.batchCode}>
@@ -96,7 +101,7 @@ export default function BatchManagement() {
                   color: "#000",
                   fontWeight: "bold",
                   fontFamily: "Open Sans",
-                  fontSize: "15px"
+                  fontSize: isMobileView ? "10px" : "15px"
                 }}
                 border="none"
                 onClick={() => console.log("start")}

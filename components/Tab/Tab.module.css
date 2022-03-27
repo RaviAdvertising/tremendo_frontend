@@ -195,9 +195,13 @@
 }
 .pusherSection {
   border: none !important;
+  margin-top: 15px !important;
 }
 .segmentBasic {
   padding: 0 !important;
+}
+.sidebarSection {
+  background-color: rgb(236, 248, 248) !important;
 }
 
 @media (max-device-width: 1024px) {

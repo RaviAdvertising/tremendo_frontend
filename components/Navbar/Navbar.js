@@ -282,7 +282,10 @@ function Navbar({}) {
                   Login
                 </div>
               ) : (
-                <div className={styles.mwebMenus}>
+                <div
+                  className={styles.mwebMenus}
+                  onClick={() => goToDashboard()}
+                >
                   {userDetails.name ? userDetails.name : userDetails.email}
                 </div>
               )}

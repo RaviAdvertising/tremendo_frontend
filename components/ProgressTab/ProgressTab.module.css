@@ -153,4 +153,7 @@
   .chartHeading {
     margin-top: 15px;
   }
+  .lineChart {
+    width: 100%;
+  }
 }

@@ -3,6 +3,7 @@ import styles from "./MentorFaq.module.css";
 import { Image } from "semantic-ui-react";
 import Button from "../Button/Button";
 import Icon from "../../assets/Icon/Icon";
+import DesktopOnly from "../DeviceCheck/DesktopOnly";
 
 export default class MentorFaq extends React.Component {
   constructor(props) {
@@ -27,9 +28,11 @@ export default class MentorFaq extends React.Component {
     return (
       <div className={styles.base}>
         <div className={styles.faqWrapper}>
-          <div>
-            <Image src="/Images/mentor_faq.png" alt="mentor faq" />
-          </div>
+          <DesktopOnly>
+            <div>
+              <Image src="/Images/mentor_faq.png" alt="mentor faq" />
+            </div>
+          </DesktopOnly>
           <div className={styles.faqBoxWrapper}>
             <div className={styles.heading}>FAQ</div>
             {[1, 2, 3, 4].map((i, index) => (

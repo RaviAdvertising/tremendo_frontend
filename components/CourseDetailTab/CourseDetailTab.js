@@ -12,9 +12,11 @@ export default function CourseDetailTab() {
   const days = ["Mon", "Tue", "Wed", "Thus", "Fri", "Sat", "Sun"];
   const currentDay = moment().day() ? moment().day() : 7;
   useEffect(() => {
-    if (document.getElementById("date_wrapper") && currentDate > 11) {
-      const scrollPixels = parseInt(currentDate) * 10;
-      document.getElementById("date_wrapper").scrollLeft = scrollPixels;
+    if (document.getElementById("currentDate")) {
+      document.getElementById("currentDate").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
     }
   }, []);
   // if (true) {
@@ -29,12 +31,13 @@ export default function CourseDetailTab() {
         <div className={styles.courseName}>Date</div>
         <div className={styles.batchName}>{moment().format("MMM")}</div>
       </div>
-      <div className={styles.datesWrapper} id="date_wrapper">
+      <div className={styles.datesWrapper}>
         {totalDatesInCurrentMonth.map(i => (
           <div
             className={styles.date}
             style={{ backgroundColor: currentDate == i + 1 && "#fa9116" }}
             key={i}
+            id={currentDate == i + 1 ? "currentDate" : "otherDate"}
           >
             {i + 1}
           </div>

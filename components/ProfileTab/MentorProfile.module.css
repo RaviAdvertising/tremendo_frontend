@@ -143,3 +143,36 @@
   position: absolute;
   bottom: -28px;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    padding: 10px;
+  }
+  .sectionWrapper {
+    margin-top: 50px;
+  }
+  .rightSection {
+    padding: 8px;
+  }
+  .inputWrapper {
+    display: initial;
+  }
+  .firstName {
+    width: 100%;
+  }
+  .lastName {
+    width: 100%;
+  }
+  .inputGeneralTitle {
+    margin-top: 8px;
+  }
+  .cameraIcon {
+    bottom: 0;
+    left: 50px;
+  }
+  .profileImage {
+    width: 70px;
+  }
+  .leftSection {
+    padding: 8px;
+  }
+}

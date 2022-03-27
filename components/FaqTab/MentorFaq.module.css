@@ -69,3 +69,22 @@
   width: 50%;
   margin-left: 55px;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    padding: 10px;
+  }
+  .textAreaBox {
+    width: 100%;
+  }
+  .faqWrapper {
+    padding: 0px;
+    display: initial;
+  }
+  .faqBoxWrapper {
+    width: 100%;
+    margin-left: 0;
+  }
+  .faqBox {
+    width: 100%;
+  }
+}

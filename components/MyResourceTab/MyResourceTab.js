@@ -2,9 +2,12 @@ import React, { useRef } from "react";
 import styles from "./MyResourceTab.module.css";
 import { Image } from "semantic-ui-react";
 import Icon from "../../assets/Icon/Icon";
+import { useContext } from "react";
+import { DeviceContext } from "../../pages/_app";
 
 export default function MyResourceTab({}) {
   const inputFile = useRef(null);
+  const { isMobileView } = useContext(DeviceContext);
   const assignmentData = [
     {
       name: "Assignment 1",
@@ -69,7 +72,9 @@ export default function MyResourceTab({}) {
       <div className={styles.assignmentTable}>
         <div className={styles.tableHeader}>
           <div className={styles.noHeader}>No.</div>
-          <div className={styles.titleHeader}>Assignment Title</div>
+          <div className={styles.titleHeader}>
+            {isMobileView ? "Assg. Title" : "Assignment Title"}
+          </div>
           <div className={styles.dateHeader}>Assign Date</div>
           <div className={styles.dateHeader}>Due Date</div>
           <div className={styles.statusHeader}>Status</div>
@@ -79,7 +84,9 @@ export default function MyResourceTab({}) {
             <div className={styles.tableData} key={index}>
               <div className={styles.noHeader}>{index + 1}.</div>
               <div className={styles.uploadFileSection}>
-                <div className={styles.assignmentName}>{i.name}</div>
+                <div className={styles.assignmentName}>
+                  {isMobileView ? `${i.name.substring(0, 4)}...` : i.name}
+                </div>
                 <div className={styles.uploadButtons}>
                   <input
                     type="file"
@@ -130,7 +137,9 @@ export default function MyResourceTab({}) {
         <div className={styles.finalHeading}>
           <div className={styles.finalDate}>1.</div>
           <div className={styles.finalTime}>
-            <div className={styles.finalDate}>Final assessment </div>
+            <div className={styles.finalDate}>
+              {isMobileView ? "Final" : "Final assessment"}
+            </div>
             <div className={styles.uploadFileSize}>
               <input
                 type="file"
@@ -141,7 +150,7 @@ export default function MyResourceTab({}) {
               <div className={styles.uploadFinalAssesmentBtn} onClick={onClick}>
                 Upload
               </div>
-              <div className={styles.fileSize}>25mb</div>
+              {!isMobileView && <div className={styles.fileSize}>25mb</div>}
             </div>
           </div>
         </div>

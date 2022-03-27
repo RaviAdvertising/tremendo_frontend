@@ -77,3 +77,14 @@
 .imageWrapper {
   width: 25%;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    padding: 10px;
+  }
+  .wrapper {
+    padding: 10px;
+  }
+  .faqBox {
+    margin: 0 0 5px 0;
+  }
+}

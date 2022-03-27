@@ -284,4 +284,14 @@
   .syllabusHeading {
     margin-top: 20px;
   }
+  .uploadButtons {
+    display: initial;
+  }
+  .uploadBtn {
+    padding-right: 0;
+    border: none;
+  }
+  .EditBtn {
+    margin-left: 0;
+  }
 }

@@ -2,8 +2,11 @@ import styles from "./MentorMyResource.module.css";
 import { useEffect } from "react";
 import { Image, Popup, Icon } from "semantic-ui-react";
 import IconComponent from "../../assets/Icon/Icon";
+import { useContext } from "react";
+import { DeviceContext } from "../../pages/_app";
 
 export default function MentorMyResource() {
+  const { isMobileView } = useContext(DeviceContext);
   return (
     <div className={styles.base}>
       <div className={styles.myAssignment}>
@@ -29,7 +32,9 @@ export default function MentorMyResource() {
         </div>
         <div className={styles.tableHeader}>
           <div className={styles.tableNo}>No.</div>
-          <div className={styles.tableAssignmentTitle}>Assignment Title</div>
+          <div className={styles.tableAssignmentTitle}>
+            {isMobileView ? "Assg. Title" : "Assignment Title"}
+          </div>
           <div className={styles.tableAssignDate}>Assign Date</div>
           <div className={styles.tableDueDate}>Due Date</div>
           <div className={styles.tableStatus}>Status</div>
@@ -42,7 +47,9 @@ export default function MentorMyResource() {
         ].map(i => (
           <div className={styles.tableBodySection} key={i.id}>
             <div className={styles.tableNo}>{`0${i.id}`}</div>
-            <div className={styles.tableAssignmentTitle}>Assignment Title</div>
+            <div className={styles.tableAssignmentTitle}>
+              {isMobileView ? "Assg. Title" : "Assignment Title"}
+            </div>
             <div className={styles.tableAssignDate}>
               03-03-2022{" "}
               <span>
@@ -83,7 +90,12 @@ export default function MentorMyResource() {
           <div className={styles.pdf}>
             <Image src={"/Images/pdfImage.png"} alt="user-image" />
           </div>
-          <Image src="/Images/mentor_syllabus.png" alt="image" rounded />
+          <Image
+            src="/Images/mentor_syllabus.png"
+            alt="image"
+            rounded
+            style={{ width: "100%" }}
+          />
           <div className={styles.downloadIcon}>
             <IconComponent name="downloadIcon" width="36" height="36" />
           </div>
@@ -100,7 +112,12 @@ export default function MentorMyResource() {
               />
             ))}
           </div>
-          <Image src="/Images/mentor_ebook.png" alt="image" rounded />
+          <Image
+            src="/Images/mentor_ebook.png"
+            alt="image"
+            rounded
+            style={{ width: "100%" }}
+          />
         </div>
       </div>
     </div>

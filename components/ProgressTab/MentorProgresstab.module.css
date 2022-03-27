@@ -101,3 +101,26 @@
   justify-content: center;
   align-items: center;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    padding: 10px;
+  }
+  .chartWrapper {
+    display: initial;
+  }
+  .progressChart {
+    width: 100%;
+  }
+  .attendenceChart {
+    width: 100%;
+  }
+  .chartHeading {
+    margin-top: 20px;
+  }
+  .scoreChartWrapper {
+    padding: 10px;
+  }
+  .lineChart {
+    padding: 10px;
+  }
+}

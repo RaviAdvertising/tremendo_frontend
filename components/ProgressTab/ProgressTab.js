@@ -4,8 +4,11 @@ import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
+import { useContext } from "react";
+import { DeviceContext } from "../../pages/_app";
 
 export default function ProgressTab({}) {
+  const { isMobileView } = useContext(DeviceContext);
   const options = {
     maintainAspectRatio: false,
     scales: {
@@ -188,17 +191,19 @@ export default function ProgressTab({}) {
             options={lineChartOption}
           />
         </div>
-        <div className={styles.indicationPoints}>
-          {lineIndication.map(i => (
-            <div className={styles.namePointWrapper} key={i.name}>
-              <div className={styles.stepsNames}>{i.name}</div>
-              <div
-                className={styles.pointsSteps}
-                style={{ backgroundColor: i.color, height: i.height }}
-              ></div>
-            </div>
-          ))}
-        </div>
+        {!isMobileView && (
+          <div className={styles.indicationPoints}>
+            {lineIndication.map(i => (
+              <div className={styles.namePointWrapper} key={i.name}>
+                <div className={styles.stepsNames}>{i.name}</div>
+                <div
+                  className={styles.pointsSteps}
+                  style={{ backgroundColor: i.color, height: i.height }}
+                ></div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className={styles.chartWrapper}>
         <div className={styles.progressChart}>

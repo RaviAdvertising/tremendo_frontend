@@ -178,3 +178,14 @@
 .batchListWrapper {
   margin-bottom: 40px;
 }
+@media (max-device-width: 1024px) {
+  .base {
+    padding: 10px;
+  }
+  .bodyOption {
+    text-align: center;
+  }
+  .headerOption {
+    text-align: center;
+  }
+}

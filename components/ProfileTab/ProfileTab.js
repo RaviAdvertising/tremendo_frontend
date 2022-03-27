@@ -4,6 +4,7 @@ import { USER_DETAILS } from "../../utils/constants";
 import Input from "../Input/Input";
 import styles from "./ProfileTab.module.css";
 import DatePicker from "react-datepicker";
+import DesktopOnly from "../DeviceCheck/DesktopOnly";
 
 export default function ProfileTab({}) {
   const inputFile = useRef(null);
@@ -280,9 +281,14 @@ export default function ProfileTab({}) {
           </div>
         </div>
       </div>
-      <div className={styles.imageWrapper}>
-        <Image src={"/Images/profiletab_rocket.png"} alt="profiletab_rocket" />
-      </div>
+      <DesktopOnly>
+        <div className={styles.imageWrapper}>
+          <Image
+            src={"/Images/profiletab_rocket.png"}
+            alt="profiletab_rocket"
+          />
+        </div>
+      </DesktopOnly>
     </div>
   );
 }
