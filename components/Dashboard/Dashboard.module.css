@@ -182,7 +182,7 @@
   font-weight: 700;
   text-align: end;
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .dashboardBase {
     padding: 10px;
   }

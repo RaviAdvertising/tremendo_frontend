@@ -38,7 +38,7 @@
 .contentWrapper {
   padding-bottom: 150px;
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .headerWrapper {
     font-size: 20px;
   }

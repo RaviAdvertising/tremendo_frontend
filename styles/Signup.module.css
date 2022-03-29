@@ -115,7 +115,7 @@
   font-family: Open Sans;
   text-align: left;
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .base {
     padding-right: 0;
     padding: 40px 10px;

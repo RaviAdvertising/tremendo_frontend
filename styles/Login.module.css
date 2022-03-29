@@ -121,7 +121,7 @@
   margin-top: 5px;
   padding-left: 22px;
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .base {
     margin-top: 18px;
   }

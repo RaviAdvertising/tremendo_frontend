@@ -135,7 +135,7 @@
 .profileOptions:hover {
   text-decoration: underline;
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .menuWrapper {
     padding: 5px 10px;
   }

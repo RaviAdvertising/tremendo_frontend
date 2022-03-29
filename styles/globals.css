@@ -28,7 +28,7 @@ main {
 body::-webkit-scrollbar-thumb {
   background-color: #616161;
 } */
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   main {
     padding-top: 75px;
   }

@@ -39,7 +39,7 @@
 .base {
   width: 270px;
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .base {
     margin-bottom: 35px;
   }

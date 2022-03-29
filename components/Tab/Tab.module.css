@@ -204,7 +204,7 @@
   background-color: rgb(236, 248, 248) !important;
 }
 
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .profileName {
     font-size: 18px;
     margin-left: 0px;

@@ -48,7 +48,7 @@
 .footerItem:hover {
   text-decoration: underline;
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .whiteFooter {
     padding: 15px;
     display: inline-block;

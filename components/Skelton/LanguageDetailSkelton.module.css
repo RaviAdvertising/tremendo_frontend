@@ -43,7 +43,7 @@
   border-radius: 20px;
   background-color: rgba(195, 192, 192, 0.25);
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .heading {
     width: 50%;
   }

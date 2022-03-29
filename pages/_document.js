@@ -5,6 +5,7 @@ class Document extends NextDocument {
     return (
       <Html>
         <Head>
+          <meta content="width=device-width, initial-scale=1" name="viewport" />
           <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap"
             rel="stylesheet"

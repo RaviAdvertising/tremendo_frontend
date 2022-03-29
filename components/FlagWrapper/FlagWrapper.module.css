@@ -39,7 +39,7 @@
   box-shadow: 0 8px 6px -7px #00000096;
   height: 50px;
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .base {
     width: 120px;
     height: 115px;

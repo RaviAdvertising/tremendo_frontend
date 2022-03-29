@@ -134,7 +134,7 @@
   justify-content: space-between;
   align-items: center;
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .base {
     padding: 10px;
   }

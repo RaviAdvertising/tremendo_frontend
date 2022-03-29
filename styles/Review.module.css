@@ -43,7 +43,7 @@
   margin-top: 78px;
 }
 
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .headerWrapper {
     font-size: 15px;
   }

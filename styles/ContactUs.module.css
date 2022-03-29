@@ -82,7 +82,7 @@
   transform: rotate(100deg);
   margin-bottom: 8px;
 }
-@media (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .wrapper {
     display: block;
     padding-top: 50px;
