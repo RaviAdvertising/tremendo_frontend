@@ -48,7 +48,7 @@ function Navbar({}) {
   useEffect(() => {
     if (!router.pathname.includes(LANGUAGE_DETAIL)) {
       setSelectedLanguage("LANGUAGES");
-      return false;
+      // return false;
     }
     setLanguageToStore();
     profileData();

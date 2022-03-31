@@ -1,0 +1,66 @@
+.base {
+    width: 100%;
+    display: flex;
+  }
+  
+  .leftSection {
+    width: 17%;
+  }
+  .centerSection {
+    width: 83%;
+  }
+
+  .searchHeader {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px 20px 30px;
+  }
+  .search {
+    width: 50%;
+  }
+  .dateSection {
+    width: 50%;
+    font-family: Poppins;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .flagSection {
+    padding: 20px 0;
+    text-align: center;
+  }
+  .mentorBatchDetails {
+    color: #000;
+    font-size: 20px;
+    font-family: Poppins;
+    margin-top: 25px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .tabs {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 30px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  .tabName {
+    font-family: Poppins;
+    font-size: 14px;
+    margin-left: 15px;
+  }
+  .tabIcon {
+    display: flex;
+  }
+  .tabWrapper {
+    margin-top: 60px;
+  }
+
+  .lens {
+    padding: 6px;
+    display: flex;
+  }
+
+  

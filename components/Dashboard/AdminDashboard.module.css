@@ -1,0 +1,129 @@
+.base {
+  padding: 20px 30px;
+}
+.saleSummaryWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.saleChartWrapper {
+  background-color: #fff;
+  box-shadow: 12px 12px 10px 0 rgba(0, 0, 0, 0.08);
+  width: 55%;
+  padding: 15px;
+}
+.summaryChartWrapper {
+  background-color: #fff;
+  box-shadow: 12px 12px 10px 0 rgba(0, 0, 0, 0.08);
+  width: 40%;
+  position: relative;
+  padding: 15px;
+}
+.chartHeading {
+  color: #000;
+  font-size: 20px;
+  font-family: Poppins;
+  font-weight: 700;
+}
+.saleChart {
+  padding: 20px 12px;
+}
+.summaryChart {
+  position: absolute;
+  bottom: 0;
+  height: 150px;
+  width: 100%;
+}
+.totalEarning {
+  position: absolute;
+  color: #07b8f9;
+  font-size: 30px;
+  line-height: 40px;
+  text-align: center;
+  top: 29%;
+  left: 29%;
+}
+.totalStudentSalesWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 45px;
+}
+.totalStudentChart {
+  height: 300px;
+  padding: 20px 12px;
+}
+.showProgress {
+  background-color: #ebfbf1;
+  color: #055c4d;
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 700;
+  font-family: Open Sans;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.canvasWrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  /* box-shadow: 1.3px 8.9px 27px 0 rgba(0, 0, 0, 0.17); */
+  border-radius: 50%;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.filterBase {
+  display: flex;
+  background-color: #f38e3f;
+  padding: 2px 6px;
+  font-size: 9px;
+  font-family: Open Sans;
+  font-weight: 700;
+  cursor: pointer;
+  width: max-content;
+}
+.filterSelectedTitle {
+  margin-right: 5px;
+}
+.headingFilterWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.transactionInvoiceWrapper {
+  background-color: #fff;
+  box-shadow: 12px 12px 10px 0 rgba(0, 0, 0, 0.08);
+  margin-top: 40px;
+  padding: 15px;
+}
+.tableHeader {
+  display: flex;
+  font-size: 12px;
+  color: #1c1c1c;
+  font-family: Poppins;
+  font-weight: 600;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+.serialNo {
+  text-align: center;
+  width: 16.66%;
+}
+.headerLabel {
+  width: 16.66%;
+}
+.tableBody{
+    display: flex;
+    font-size: 11px;
+    color: #1c1c1c;
+    font-family: Poppins;
+    font-weight: 600;  
+    box-shadow: 0px 3px 3px 0 rgba(119, 119, 119, 0.1);
+    background-color: #f7f7f7;
+    margin-bottom: 7px;
+}
