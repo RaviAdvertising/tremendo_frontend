@@ -6,6 +6,7 @@ import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
 import { useContext } from "react";
 import { DeviceContext } from "../../pages/_app";
+import { Image } from "semantic-ui-react";
 
 export default function ProgressTab({}) {
   const { isMobileView } = useContext(DeviceContext);
@@ -125,6 +126,19 @@ export default function ProgressTab({}) {
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
+  if (true) {
+    return (
+      <div style={{ height: "700px", width: "700px", margin: "auto" }}>
+        <Image
+          src="/Images/no_data.png"
+          alt="tremendo dashboard banner"
+          height="800px"
+          width="700px"
+          className={styles.banner}
+        />
+      </div>
+    );
+  }
   //   if (true) {
   //     return <StudentDashboardSkelton />;
   //   }

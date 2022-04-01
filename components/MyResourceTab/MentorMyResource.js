@@ -7,6 +7,19 @@ import { DeviceContext } from "../../pages/_app";
 
 export default function MentorMyResource() {
   const { isMobileView } = useContext(DeviceContext);
+  if (true) {
+    return (
+      <div style={{ height: "700px", width: "700px", margin: "auto" }}>
+        <Image
+          src="/Images/no_data.png"
+          alt="tremendo dashboard banner"
+          height="800px"
+          width="700px"
+          className={styles.banner}
+        />
+      </div>
+    );
+  }
   return (
     <div className={styles.base}>
       <div className={styles.myAssignment}>

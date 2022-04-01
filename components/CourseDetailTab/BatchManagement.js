@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import styles from "./BatchManagement.module.css";
 import { useContext } from "react";
 import { DeviceContext } from "../../pages/_app";
+import { Image } from "semantic-ui-react";
 
 export default function BatchManagement() {
   const { isMobileView } = useContext(DeviceContext);
@@ -30,7 +31,19 @@ export default function BatchManagement() {
       document.getElementById("date_wrapper").scrollLeft = scrollPixels;
     }
   }, []);
-
+  if (true) {
+    return (
+      <div style={{ height: "700px", width: "700px", margin: "auto" }}>
+        <Image
+          src="/Images/no_data.png"
+          alt="tremendo dashboard banner"
+          height="800px"
+          width="700px"
+          className={styles.banner}
+        />
+      </div>
+    );
+  }
   return (
     <div className={styles.base}>
       <div className={styles.chartHeading}>Batch List</div>

@@ -64,6 +64,7 @@
   padding: 40px;
   background-color: #fff;
   box-shadow: 12px 12px 10px 0 rgba(0, 0, 0, 0.08);
+  height: max-content;
 }
 .blogWrapper {
   width: 40%;

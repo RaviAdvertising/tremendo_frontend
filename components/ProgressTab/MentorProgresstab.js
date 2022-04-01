@@ -4,10 +4,11 @@ import { Bar, Line, Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
+import { Image } from "semantic-ui-react";
 
 export default function MentorProgresstab() {
   useEffect(() => {
-    createCircle();
+    // createCircle();
   }, []);
 
   const createCircle = () => {
@@ -155,6 +156,19 @@ export default function MentorProgresstab() {
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
+  if (true) {
+    return (
+      <div style={{ height: "700px", width: "700px", margin: "auto" }}>
+        <Image
+          src="/Images/no_data.png"
+          alt="tremendo dashboard banner"
+          height="800px"
+          width="700px"
+          className={styles.banner}
+        />
+      </div>
+    );
+  }
   //   if (true) {
   //     return <StudentDashboardSkelton />;
   //   }

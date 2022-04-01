@@ -7,6 +7,7 @@ import Button from "../Button/Button";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { DeviceContext } from "../../pages/_app";
+import { Image } from "semantic-ui-react";
 
 export default function MentorDashboard({}) {
   const { isMobileView } = useContext(DeviceContext);
@@ -14,7 +15,7 @@ export default function MentorDashboard({}) {
     Array(moment().daysInMonth()).keys()
   );
   useEffect(() => {
-    createCircle();
+    // createCircle();
     if (document.getElementById("currentDate")) {
       document.getElementById("currentDate").scrollIntoView({
         behavior: "smooth",
@@ -114,7 +115,19 @@ export default function MentorDashboard({}) {
       }
     }
   };
-
+  if (true) {
+    return (
+      <div style={{ height: "700px", width: "700px", margin: "auto" }}>
+        <Image
+          src="/Images/no_data.png"
+          alt="tremendo dashboard banner"
+          height="800px"
+          width="700px"
+          className={styles.banner}
+        />
+      </div>
+    );
+  }
   //   if (true) {
   //     return <StudentDashboardSkelton />;
   //   }
