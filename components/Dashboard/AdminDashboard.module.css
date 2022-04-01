@@ -126,4 +126,6 @@
     box-shadow: 0px 3px 3px 0 rgba(119, 119, 119, 0.1);
     background-color: #f7f7f7;
     margin-bottom: 7px;
+    padding: 2px;
+    align-items: center;
 }

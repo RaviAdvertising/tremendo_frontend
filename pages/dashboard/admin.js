@@ -2,13 +2,13 @@ import Head from "next/head";
 import { useContext, useState } from "react";
 import styles from "../../styles/student.module.css";
 import withAuth from "../../utils/withAuth";
-import BatchManagement from "../../components/CourseDetailTab/BatchManagement";
 import MentorMyResource from "../../components/MyResourceTab/MentorMyResource";
 import MentorProgresstab from "../../components/ProgressTab/MentorProgresstab";
 import MentorFaq from "../../components/FaqTab/MentorFaq";
 import MentorProfile from "../../components/ProfileTab/MentorProfile";
 import AdminTab from "../../components/Tab/AdminTab";
 import AdminDashboard from "../../components/Dashboard/AdminDashboard";
+import AdminPages from "../../components/AdminPages/AdminPages";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -24,7 +24,7 @@ function Admin() {
       id: 2,
       tab: "Pages",
       icon: "courseDetail",
-      component: <BatchManagement />
+      component: <AdminPages />
     },
     {
       id: 3,
