@@ -65,6 +65,19 @@ const authReducer = (state, action) => {
         profileDataLoading: false
       });
 
+    case authAction.SUBSCRIBE_REQUEST:
+      return Object.assign({}, state, {
+        subscribeLoading: true
+      });
+    case authAction.SUBSCRIBE_SUCCESS:
+      return Object.assign({}, state, {
+        subscribeLoading: false
+      });
+    case authAction.SUBSCRIBE_ERROR:
+      return Object.assign({}, state, {
+        subscribeLoading: false
+      });
+
     default:
       return state;
   }

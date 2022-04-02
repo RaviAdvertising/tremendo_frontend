@@ -135,13 +135,17 @@ export const getUserProfile = accessType => dispatch => {
     });
 };
 
-export const subscribe = payload => dispatch => {
+export const subscribe = email => dispatch => {
   dispatch({ type: SUBSCRIBE_REQUEST });
   return axiosInstance
     .post("/subscribeMe", {
-      email: "jangra.ravi18@gmail.com"
+      email: email
     })
     .then(res => {
+      dispatch({
+        type: SUBSCRIBE_SUCCESS,
+        data: res.data
+      });
       return {
         type: SUBSCRIBE_SUCCESS,
         data: res.data

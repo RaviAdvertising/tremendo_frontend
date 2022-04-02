@@ -9,6 +9,8 @@ const authInitialState = {
   logoutLoading: false,
 
   profileData: "",
-  profileDataLoading: false
+  profileDataLoading: false,
+
+  subscribeLoading: false
 };
 export default authInitialState;

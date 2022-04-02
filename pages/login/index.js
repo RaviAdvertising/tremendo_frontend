@@ -64,7 +64,8 @@ export default function Login(props) {
         email: res.email,
         type: type,
         gg_token: type == LOGIN_TYPE_GOOGLE && res.uid,
-        fb_token: ""
+        fb_token: "",
+        access_type: selectedTab
       };
       profileImage = res.photoURL;
     } else {
@@ -72,7 +73,8 @@ export default function Login(props) {
         email: fbResponse.email,
         type: type,
         gg_token: "",
-        fb_token: fbResponse.accessToken
+        fb_token: fbResponse.accessToken,
+        access_type: selectedTab
       };
       profileImage = fbResponse.picture?.data?.url;
     }

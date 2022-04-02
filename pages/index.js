@@ -27,10 +27,13 @@ import { GlobalContext } from "../Context/Provider";
 import { getLanguages, getPageData } from "../Context/Actions/Home/HomeAction";
 import Button from "../components/Button/Button";
 import PageLoader from "../components/Loader/PageLoader";
-import { subscribe } from "../Context/Actions/Auth/AuthAction";
+import { subscribe, SUBSCRIBE_ERROR } from "../Context/Actions/Auth/AuthAction";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Home({}) {
   const { isMobileView } = useContext(DeviceContext);
+  const [username, setUsername] = useState("");
   const {
     homeState,
     homeDispatch: dispatch,
@@ -45,9 +48,21 @@ export default function Home({}) {
   }, []);
 
   const subscribeBtn = async () => {
-    const response = await subscribe()(authDispatcher);
-    console.log(response);
+    if (username) {
+      const response = await subscribe(username)(authDispatcher);
+
+      if (response.type == SUBSCRIBE_ERROR) {
+        toast.error(response.error.msg, {
+          theme: "colored"
+        });
+      } else {
+        toast.success(response.data.msg, {
+          theme: "colored"
+        });
+      }
+    }
   };
+
   return (
     <div>
       <Head>
@@ -188,7 +203,7 @@ export default function Home({}) {
                   padding: "0 50px 0 24px",
                   fontSize: "12px"
                 }}
-                handleChange={text => console.log(text)}
+                handleChange={text => setUsername(text)}
               />
             </div>
             <div>
@@ -204,6 +219,7 @@ export default function Home({}) {
                   fontSize: "12px"
                 }}
                 border="none"
+                loading={authState.subscribeLoading}
                 onClick={() => subscribeBtn()}
               />
             </div>
