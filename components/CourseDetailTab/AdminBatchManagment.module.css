@@ -1,0 +1,57 @@
+.base {
+  padding: 50px;
+  background-color: #eef1f8;
+}
+.heading {
+  color: #3b3b3b;
+  font-weight: 700;
+  font-size: 19px;
+  font-family: Poppins;
+}
+.batchSelect {
+  width: 20%;
+}
+.batchedDropdown {
+  background-color: #eef1f8 !important;
+}
+.headingDropdownWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.createBtn {
+  width: 20%;
+}
+.tableHeader {
+  display: flex;
+  border-radius: 3px;
+  box-shadow: 1.1px 2.8px 10px 0 rgba(119, 119, 119, 0.1);
+  background-color: #fff;
+  padding: 8px 20px;
+  margin-bottom: 7px;
+  align-items: center;
+}
+.headerName {
+  width: 16.66%;
+  color: #464a53;
+  font-size: 13px;
+  font-family: Poppins;
+  cursor: pointer;
+}
+.tableBody{
+    display: flex;
+    border-radius: 3px;
+    box-shadow: 1.1px 2.8px 10px 0 rgba(119, 119, 119, 0.1);
+    background-color: #fff;
+    padding: 14px 20px;
+    margin-bottom: 7px;
+    align-items: center;
+}
+.tableSection{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.btnPaginationWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

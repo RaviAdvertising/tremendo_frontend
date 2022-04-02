@@ -58,7 +58,7 @@ export default function AdminPages({}) {
             <div className={styles.heading}>Review</div>
             <div className={styles.paginationBox}>05</div>
           </div>
-          {[1, 2].map((i, index) => (
+          {[1, 2, 3].map((i, index) => (
             <div className={styles.imageDetailsWrapper} key={index}>
               <div className={styles.imageSection}></div>
               <div className={styles.detailsWrapper}>

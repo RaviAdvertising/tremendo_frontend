@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import styles from "./MentorProgresstab.module.css";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
 import { Image } from "semantic-ui-react";
+import { DeviceContext } from "../../pages/_app";
 
 export default function MentorProgresstab() {
+  const { isMobileView } = useContext(DeviceContext);
   useEffect(() => {
     // createCircle();
   }, []);
@@ -158,12 +160,18 @@ export default function MentorProgresstab() {
   );
   if (true) {
     return (
-      <div style={{ height: "700px", width: "700px", margin: "auto" }}>
+      <div
+        style={{
+          height: isMobileView ? "300px" : "700px",
+          width: isMobileView ? "300px" : "700px",
+          margin: "auto"
+        }}
+      >
         <Image
           src="/Images/no_data.png"
           alt="tremendo dashboard banner"
-          height="800px"
-          width="700px"
+          height={isMobileView ? "300px" : "800px"}
+          width={isMobileView ? "300px" : "700px"}
           className={styles.banner}
         />
       </div>

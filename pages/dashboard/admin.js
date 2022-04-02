@@ -9,6 +9,9 @@ import MentorProfile from "../../components/ProfileTab/MentorProfile";
 import AdminTab from "../../components/Tab/AdminTab";
 import AdminDashboard from "../../components/Dashboard/AdminDashboard";
 import AdminPages from "../../components/AdminPages/AdminPages";
+import CalenderTab from "../../components/CalenderTab/CalenderTab";
+import AdminBatchManagment from "../../components/CourseDetailTab/AdminBatchManagment";
+import MentorBatchDetails from "../../components/CourseDetailTab/MentorBatchDetails";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -30,20 +33,20 @@ function Admin() {
       id: 3,
       tab: "Batch Details",
       icon: "myResource",
-      component: <MentorMyResource />
+      component: <AdminBatchManagment />
     },
     {
       id: 4,
       tab: "Mentor Details",
       icon: "progress",
-      component: <MentorProgresstab />
+      component: <MentorBatchDetails />
     },
     { id: 5, tab: "Language", icon: "faq", component: <MentorFaq /> },
     {
       id: 6,
       tab: "Calender",
       icon: "termAndCondition",
-      component: "6"
+      component: <CalenderTab />
     },
     { id: 7, tab: "Setting", icon: "setting", component: <MentorProfile /> }
   ];

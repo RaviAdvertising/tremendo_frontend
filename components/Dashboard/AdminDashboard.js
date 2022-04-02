@@ -180,10 +180,10 @@ export default function AdminDashboard({}) {
           <div className={styles.summaryChart}>
             <Line
               data={{
-                labels: [1, 2, 3, 4, 5, 6, 7],
+                labels: [1, 2, 3, 4, 5, 6],
                 datasets: [
                   {
-                    data: [20, 35, 28, 38, 25, 42, 22],
+                    data: [20, 35, 28, 38, 25, 42],
                     fill: {
                       target: "origin",
                       above: "#F2F9E7", // Area will be red above the origin

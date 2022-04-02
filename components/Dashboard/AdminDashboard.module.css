@@ -22,7 +22,7 @@
   color: #000;
   font-size: 20px;
   font-family: Poppins;
-  font-weight: 700;
+  font-weight: 600;
 }
 .saleChart {
   padding: 20px 12px;
@@ -34,6 +34,7 @@
   width: 100%;
 }
 .totalEarning {
+  font-family: Poppins;
   position: absolute;
   color: #07b8f9;
   font-size: 30px;
@@ -81,8 +82,8 @@
 .filterBase {
   display: flex;
   background-color: #f38e3f;
-  padding: 2px 6px;
-  font-size: 9px;
+  padding: 5px 6px;
+  font-size: 14px;
   font-family: Open Sans;
   font-weight: 700;
   cursor: pointer;
