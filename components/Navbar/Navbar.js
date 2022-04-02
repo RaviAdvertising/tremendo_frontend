@@ -5,7 +5,9 @@ import { Dropdown, Icon, Image, Menu, Popup } from "semantic-ui-react";
 import {
   COOKIE_TOKEN,
   LOGIN_STUDENT_TAB,
-  USER_DETAILS
+  LOGIN_MENTOR_TAB,
+  USER_DETAILS,
+  ADMIN_ACCESS_TYPE
 } from "../../utils/constants";
 import { useRouter } from "next/router";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
@@ -22,7 +24,8 @@ import {
   FAQS_PATH,
   REVIEW_PATH,
   STUDENT_DASHBOARD_PATH,
-  MENTOR_DASHBOARD_PATH
+  MENTOR_DASHBOARD_PATH,
+  ADMIN_DASHBOARD_PATH
 } from "../../utils/routes";
 import Cookies from "js-cookie";
 import { GlobalContext } from "../../Context/Provider";
@@ -57,18 +60,22 @@ function Navbar({}) {
   const setLanguageToStore = async () => {
     const currentLanguagePage = router.query.languageId;
     const response = await getLanguages()(homeDispatch);
-
     const selectedLang = response.data.find(i => i.id == currentLanguagePage);
-
     if (selectedLang) {
       setSelectedLanguage(selectedLang.title);
     } else {
       setSelectedLanguage("LANGUAGES");
     }
   };
+  const userDetails =
+    typeof window !== "undefined" &&
+    localStorage.getItem(USER_DETAILS) &&
+    JSON.parse(localStorage.getItem(USER_DETAILS));
 
   const profileData = async () => {
-    const response = await getUserProfile()(dispatch);
+    if (userDetails) {
+      const response = await getUserProfile(userDetails.access_type)(dispatch);
+    }
   };
 
   const signUpAndLogout = async () => {
@@ -94,21 +101,16 @@ function Navbar({}) {
     router.push(`${LANGUAGE_DETAIL}${language.id}`);
     setVisible(!visible);
   };
-  const userDetails =
-    typeof window !== "undefined" &&
-    localStorage.getItem(USER_DETAILS) &&
-    JSON.parse(localStorage.getItem(USER_DETAILS));
 
   const goToDashboard = () => {
-    // if (userDetails.access_type == LOGIN_STUDENT_TAB) {
-    //   router.push(STUDENT_DASHBOARD_PATH);
-    // } else {
-    //   router.push(MENTOR_DASHBOARD_PATH);
-    // }
-    if (userDetails.email !== "admin@gmail.com") {
+    if (userDetails.access_type == LOGIN_STUDENT_TAB) {
       router.push(STUDENT_DASHBOARD_PATH);
-    } else {
+    } else if (userDetails.access_type == LOGIN_MENTOR_TAB) {
       router.push(MENTOR_DASHBOARD_PATH);
+    } else if (userDetails.access_type == ADMIN_ACCESS_TYPE) {
+      router.push(ADMIN_DASHBOARD_PATH);
+    } else {
+      router.push(STUDENT_DASHBOARD_PATH);
     }
   };
   const desktopNavbar = () => {

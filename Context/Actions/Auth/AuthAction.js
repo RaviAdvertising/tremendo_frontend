@@ -113,10 +113,14 @@ export const logoutAuth = token => dispatch => {
     });
 };
 
-export const getUserProfile = () => dispatch => {
+export const getUserProfile = accessType => dispatch => {
   dispatch({ type: GET_USER_PROFILE_REQUEST });
   return axiosInstance
-    .get(`/getProfile?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .get(
+      `/getProfile?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}&access_type=${accessType}`
+    )
     .then(res => {
       dispatch({
         type: GET_USER_PROFILE_SUCCESS,
@@ -134,7 +138,7 @@ export const getUserProfile = () => dispatch => {
 export const subscribe = payload => dispatch => {
   dispatch({ type: SUBSCRIBE_REQUEST });
   return axiosInstance
-    .post("/subscribe", {
+    .post("/subscribeMe", {
       email: "jangra.ravi18@gmail.com"
     })
     .then(res => {

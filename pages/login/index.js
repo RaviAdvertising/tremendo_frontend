@@ -140,11 +140,12 @@ export default function Login(props) {
   };
 
   const actionAfterLogin = () => {
-    if (localStorage.getItem(PREVIOUS_PATH)) {
-      router.replace(localStorage.getItem(PREVIOUS_PATH));
-    } else {
-      router.push(HOME_PAGE);
-    }
+    // if (localStorage.getItem(PREVIOUS_PATH)) {
+    //   router.replace(localStorage.getItem(PREVIOUS_PATH));
+    // } else {
+
+    router.push(HOME_PAGE);
+    // }
   };
 
   const loginFormWithImage = () => {

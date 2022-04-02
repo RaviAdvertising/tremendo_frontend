@@ -11,6 +11,7 @@ import Button from "../../components/Button/Button";
 import {
   COOKIE_TOKEN,
   EMAIL_REGULAR_EXPRESSION,
+  LOGIN_STUDENT_TAB,
   LOGIN_TYPE_EMAIL,
   LOGIN_TYPE_FB,
   LOGIN_TYPE_GOOGLE,
@@ -126,7 +127,8 @@ export default function Signup(props) {
         ...fields,
         type: LOGIN_TYPE_EMAIL,
         gg_token: "",
-        fb_token: ""
+        fb_token: "",
+        access_type: LOGIN_STUDENT_TAB
       };
       const response = await signupAuth(payload)(dispatch);
       if (response.type == SIGNUP_ERROR) {

@@ -45,8 +45,8 @@ export default function Home({}) {
   }, []);
 
   const subscribeBtn = async () => {
-    // const response = await subscribe()(authDispatcher);
-    // console.log(response);
+    const response = await subscribe()(authDispatcher);
+    console.log(response);
   };
   return (
     <div>
