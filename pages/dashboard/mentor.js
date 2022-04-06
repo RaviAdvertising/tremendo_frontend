@@ -64,6 +64,7 @@ function Mentor() {
         selectTab={data => clickOnTab(data)}
         selectedTab={selectedTabIndex}
         studentDashboard={false}
+        sendDataCallback={id => setSelectedTabIndex(id)}
       />
     </div>
   );

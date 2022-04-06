@@ -15,6 +15,9 @@ export default function Input(props) {
         autoComplete="off"
         value={props.value}
         disabled={props.disabled}
+        onFocus={event => {
+          if (props.onHandleFocus) props.onHandleFocus(event);
+        }}
       />
     </div>
   );

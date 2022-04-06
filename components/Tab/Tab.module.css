@@ -19,6 +19,8 @@
   display: flex;
   align-items: center;
   padding: 20px 10px 20px 30px;
+  z-index: 2;
+  position: relative;
 }
 .search {
   width: 50%;
@@ -188,10 +190,12 @@
   cursor: pointer;
 }
 .navbarMobile {
+  position: relative;
   padding-left: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 2;
 }
 .pusherSection {
   border: none !important;
@@ -203,11 +207,40 @@
 .sidebarSection {
   background-color: rgb(236, 248, 248) !important;
 }
+.optionWrapper{
+  border-top: 1px solid #c1bcbc;
+  background-color: #fff;
+  padding: 10px 10px 10px 30px;
+  position: absolute;
+  width: 63%;
+  z-index: 2;
+}
+.searchOptions{
+  cursor: pointer;
+  padding: 5px 0;
+  font-family: Poppins;
+  color: #0c0c0c;
+  font-size: 16px;
+  font-weight: 600;
+}
+.overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 1;
+}
 
 @media (max-width: 1024px) {
   .profileName {
     font-size: 18px;
     margin-left: 0px;
     padding-right: 10px;
+  }
+  .optionWrapper{
+    width: 100%;
   }
 }

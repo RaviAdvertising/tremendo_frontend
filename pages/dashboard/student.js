@@ -59,6 +59,7 @@ function Student() {
         selectTab={data => clickOnTab(data)}
         selectedTab={selectedTabIndex}
         studentDashboard={true}
+        sendDataCallback={id => setSelectedTabIndex(id)}
       />
     </div>
   );

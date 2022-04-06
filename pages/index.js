@@ -63,6 +63,8 @@ export default function Home({}) {
     }
   };
 
+  const goToWhatsapp = () => {};
+
   return (
     <div>
       <Head>
@@ -263,14 +265,23 @@ export default function Home({}) {
         </div>
       </div>
       {/* ---------------------------------------------------------------------------------------------- */}
-      <div className={styles.chat}>
+      <a
+        href={
+          isMobileView
+            ? "https://api.whatsapp.com/send?phone=+917856892827"
+            : "https://web.whatsapp.com/send?phone=+917856892827"
+        }
+        target={"_blank"}
+        rel="noreferrer"
+        className={styles.chat}
+      >
         <Image
           src={"/Images/chat.png"}
           alt={"chat icons"}
           width={isMobileView ? "40px" : "75px"}
           height={isMobileView ? "40px" : "70px"}
         />
-      </div>
+      </a>
     </div>
   );
 }

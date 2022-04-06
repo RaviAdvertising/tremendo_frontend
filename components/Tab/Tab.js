@@ -7,34 +7,43 @@ import { USER_DETAILS } from "../../utils/constants";
 import CustomImage from "../Image/Image";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
 import MobileOnly from "../DeviceCheck/MobileOnly";
-import {
-  Checkbox,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  Menu,
-  Segment,
-  Sidebar
-} from "semantic-ui-react";
+import { Icon, Image, Menu, Segment, Sidebar } from "semantic-ui-react";
 import { useState } from "react";
 
 export default function Tab({
   tabsData,
   selectTab,
   selectedTab,
-  studentDashboard
+  studentDashboard,
+  sendDataCallback
 }) {
   const [visible, setVisible] = useState(false);
+  const [startSearch, setStartSearch] = useState(false);
+  const [inputVal, setInputValue] = useState("");
   const SELECTED_TAB_COLOR = "#ff9000";
-  const imageUrl =
-    typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
-      ? JSON.parse(localStorage.getItem(USER_DETAILS)).profileUrl
-      : "/Images/blank_profile.png";
   const name =
     typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
       ? JSON.parse(localStorage.getItem(USER_DETAILS)).name
       : "User";
+
+  const onChangeSearch = text => {
+    setInputValue(text);
+  };
+  const onFocusHandle = () => {
+    setStartSearch(true);
+  };
+  const optionSelected = data => {
+    setInputValue(data.tab);
+    sendDataCallback(data.id);
+    setStartSearch(false);
+  };
+  let searchOptions = tabsData;
+
+  if (inputVal.length > 1) {
+    searchOptions = tabsData.filter(list =>
+      list.tab.toLowerCase().includes(inputVal.trim().toLowerCase())
+    );
+  }
   return (
     <>
       <DesktopOnly>
@@ -125,12 +134,32 @@ export default function Tab({
                     color: "#1b1c1c",
                     padding: "8px 15px"
                   }}
+                  value={inputVal}
+                  handleChange={text => onChangeSearch(text)}
+                  onHandleFocus={() => onFocusHandle()}
                 />
               </div>
               <div className={styles.dateSection}>{`${moment().format(
                 "dddd"
               )}, ${moment().format("LL")}`}</div>
             </div>
+            {startSearch && (
+              <div className={styles.optionWrapper}>
+                {searchOptions.length > 0 ? (
+                  searchOptions.map((name, index) => (
+                    <div
+                      className={styles.searchOptions}
+                      key={index}
+                      onClick={() => optionSelected(name)}
+                    >
+                      {name.tab}
+                    </div>
+                  ))
+                ) : (
+                  <div className={styles.searchOptions}>No Result</div>
+                )}
+              </div>
+            )}
             <div className={styles.childrenSection}>
               {tabsData[selectedTab - 1].component}
             </div>
@@ -270,13 +299,32 @@ export default function Tab({
                   color: "#1b1c1c",
                   padding: "8px 15px"
                 }}
+                value={inputVal}
+                handleChange={text => onChangeSearch(text)}
+                onHandleFocus={() => onFocusHandle()}
               />
             </div>
             <div className={styles.profileName}>{`Hi, ${
               name.split(" ")[0]
             }`}</div>
           </div>
-
+          {startSearch && (
+            <div className={styles.optionWrapper}>
+              {searchOptions.length > 0 ? (
+                searchOptions.map((name, index) => (
+                  <div
+                    className={styles.searchOptions}
+                    key={index}
+                    onClick={() => optionSelected(name)}
+                  >
+                    {name.tab}
+                  </div>
+                ))
+              ) : (
+                <div className={styles.searchOptions}>No Result</div>
+              )}
+            </div>
+          )}
           <div>
             <Sidebar.Pushable as={Segment} className={styles.pusherSection}>
               <Sidebar
@@ -344,6 +392,12 @@ export default function Tab({
           </div>
         </div>
       </MobileOnly>
+      {startSearch && (
+        <div
+          className={styles.overlay}
+          onClick={() => setStartSearch(!startSearch)}
+        ></div>
+      )}
     </>
   );
 }

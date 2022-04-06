@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Image, Icon } from "semantic-ui-react";
 import styles from "./MentorProfile.module.css";
 import Input from "../Input/Input";
@@ -8,8 +8,11 @@ import { useContext } from "react";
 import { DeviceContext } from "../../pages/_app";
 
 export default function MentorProfile() {
+  const inputFile = useRef(null);
   const { isMobileView } = useContext(DeviceContext);
   const [fields, setFields] = useState({});
+  const [errors, setErrors] = useState({});
+  const [image, setImage] = useState({ preview: "", raw: "" });
   const customInput = ({ placeholder, value, disabled }) => {
     return (
       <Input
@@ -29,6 +32,13 @@ export default function MentorProfile() {
         }}
       />
     );
+  };
+  const handleChange = (type, value) => {
+    setFields({ ...fields, [type]: value });
+    setErrors({});
+  };
+  const onClick = e => {
+    inputFile.current.click();
   };
   const customSelect = ({ placeholder, options }) => {
     return (
@@ -63,6 +73,29 @@ export default function MentorProfile() {
       </button>
     );
   };
+  const handleChangeImage = e => {
+    console.log(e.target.files);
+    if (e.target.files.length) {
+      setImage({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0]
+      });
+    }
+  };
+
+  const handleUpload = async e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", image.raw);
+
+    await fetch("YOUR_URL", {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      body: formData
+    });
+  };
   return (
     <div className={styles.base}>
       <div className={styles.profile_topImage}>
@@ -70,17 +103,29 @@ export default function MentorProfile() {
       </div>
       <div className={styles.sectionWrapper}>
         <div className={styles.leftSection}>
-          <div className={styles.profileImage}>
-            <Image
-              src={"/Images/blank_profile.png"}
-              circular
-              alt="profiletab_rocket"
-              width={isMobileView ? "70px" : "150px"}
-              height={isMobileView ? "70px" : "150px"}
+          <div>
+            <label htmlFor="upload-button">
+              <div className={styles.profileImage}>
+                <Image
+                  src={"/Images/blank_profile.png"}
+                  circular
+                  alt="profiletab_rocket"
+                  width={isMobileView ? "70px" : "150px"}
+                  height={isMobileView ? "70px" : "150px"}
+                />
+                <div className={styles.cameraIcon}>
+                  <Icon name="camera" />
+                </div>
+              </div>
+            </label>
+            <input
+              type="file"
+              id="upload-button"
+              accept="image/x-png,image/gif,image/jpeg"
+              style={{ display: "none" }}
+              onChange={handleChangeImage}
             />
-            <div className={styles.cameraIcon}>
-              <Icon name="camera" />
-            </div>
+            <br />
           </div>
           <div className={styles.mentorName}>Ekta Singh</div>
           <div className={styles.mentorCode}>Mentor code</div>
@@ -90,14 +135,41 @@ export default function MentorProfile() {
           </div>
           <div className={styles.languagesHeading}>Documents</div>
           <div className={styles.attachementWrapper}>
-            <div className={styles.attachement}>
-              <Icon name="attach" size="large" />
+            <div>
+              <input
+                type="file"
+                id="file"
+                ref={inputFile}
+                style={{ display: "none" }}
+              />
+
+              <div className={styles.attachement} onClick={onClick}>
+                <Icon name="attach" size="large" />
+              </div>
             </div>
-            <div className={styles.attachement}>
-              <Icon name="attach" size="large" />
+            <div>
+              <input
+                type="file"
+                id="file"
+                ref={inputFile}
+                style={{ display: "none" }}
+              />
+
+              <div className={styles.attachement} onClick={onClick}>
+                <Icon name="attach" size="large" />
+              </div>
             </div>
-            <div className={styles.attachement}>
-              <Icon name="attach" size="large" />
+            <div>
+              <input
+                type="file"
+                id="file"
+                ref={inputFile}
+                style={{ display: "none" }}
+              />
+
+              <div className={styles.attachement} onClick={onClick}>
+                <Icon name="attach" size="large" />
+              </div>
             </div>
           </div>
           <div className={styles.languagesHeading}>Profile Details</div>
@@ -188,7 +260,7 @@ export default function MentorProfile() {
               </div>
             </div>
             <div className={styles.lastName}>
-              <div className={styles.inputGeneralTitle}>Email</div>
+              <div className={styles.inputGeneralTitle}>Email*</div>
               <div>
                 {customInput({
                   placeholder: "@"
