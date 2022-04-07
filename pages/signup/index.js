@@ -53,7 +53,8 @@ export default function Signup(props) {
         name: res.displayName,
         type: type,
         gg_token: type == LOGIN_TYPE_GOOGLE && res.uid,
-        fb_token: ""
+        fb_token: "",
+        access_type: LOGIN_STUDENT_TAB
       };
       profileImage = res.photoURL;
     } else {
@@ -62,7 +63,8 @@ export default function Signup(props) {
         name: fbResponse.name,
         type: type,
         gg_token: "",
-        fb_token: fbResponse.accessToken
+        fb_token: fbResponse.accessToken,
+        access_type: LOGIN_STUDENT_TAB
       };
       profileImage = fbResponse.picture?.data?.url;
     }

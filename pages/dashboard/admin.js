@@ -12,6 +12,7 @@ import AdminPages from "../../components/AdminPages/AdminPages";
 import CalenderTab from "../../components/CalenderTab/CalenderTab";
 import AdminBatchManagment from "../../components/CourseDetailTab/AdminBatchManagment";
 import MentorBatchDetails from "../../components/CourseDetailTab/MentorBatchDetails";
+import { ADMIN_ACCESS_TYPE, USER_DETAILS } from "../../utils/constants";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -54,6 +55,15 @@ function Admin() {
   const clickOnTab = data => {
     setSelectedTabIndex(data.id);
   };
+
+  const userDetails =
+    typeof window !== "undefined" &&
+    localStorage.getItem(USER_DETAILS) &&
+    JSON.parse(localStorage.getItem(USER_DETAILS));
+
+  if (userDetails.access_type != ADMIN_ACCESS_TYPE) {
+    return false;
+  }
 
   return (
     <div className={styles.base}>

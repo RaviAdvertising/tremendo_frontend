@@ -12,6 +12,11 @@ import {
 import { useContext } from "react";
 import { GlobalContext } from "../../Context/Provider";
 
+const INSTAGRAM_URL = "https://instagram.com/tremendo.in?utm_medium=copy_link";
+const FB_URL = "https://www.facebook.com/tremendoin";
+const LINKDIN_URL = "https://www.linkedin.com/company/tremendo-in";
+const TWITTER_URL = "https://twitter.com/tremendo_in  ";
+
 export default function Footer(props) {
   const { homeState } = useContext(GlobalContext);
   const router = useRouter();
@@ -21,6 +26,9 @@ export default function Footer(props) {
   ) {
     return false;
   }
+  const goToSocialMedia = url => {
+    window.open(url);
+  };
   return (
     <div className={styles.base}>
       <div className={styles.whiteFooter}>
@@ -99,7 +107,10 @@ export default function Footer(props) {
             <div className={styles.socialSection}>
               <div className={styles.heading}>Follow Us</div>
               <div className={styles.followIcons}>
-                <div className={styles.socialIcons}>
+                <div
+                  className={styles.socialIcons}
+                  onClick={() => goToSocialMedia(FB_URL)}
+                >
                   <Image
                     src={"/Images/facebook.png"}
                     alt={"facebook"}
@@ -107,7 +118,10 @@ export default function Footer(props) {
                     width={"50px"}
                   />
                 </div>
-                <div className={styles.socialIcons}>
+                <div
+                  className={styles.socialIcons}
+                  onClick={() => goToSocialMedia(INSTAGRAM_URL)}
+                >
                   <Image
                     src={"/Images/instagram.png"}
                     alt={"instagram"}
@@ -115,7 +129,10 @@ export default function Footer(props) {
                     width={"50px"}
                   />
                 </div>
-                <div className={styles.socialIcons}>
+                <div
+                  className={styles.socialIcons}
+                  onClick={() => goToSocialMedia(TWITTER_URL)}
+                >
                   <Image
                     src={"/Images/twitter.png"}
                     alt={"twitter"}

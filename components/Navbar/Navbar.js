@@ -47,14 +47,17 @@ function Navbar({}) {
     authDispatch: dispatch,
     homeDispatch: homeDispatch
   } = useContext(GlobalContext);
-
+  const userDetails =
+    typeof window !== "undefined" &&
+    localStorage.getItem(USER_DETAILS) &&
+    JSON.parse(localStorage.getItem(USER_DETAILS));
   useEffect(() => {
     if (!router.pathname.includes(LANGUAGE_DETAIL)) {
       setSelectedLanguage("LANGUAGES");
       // return false;
     }
     setLanguageToStore();
-    profileData();
+    if (userDetails) profileData();
   }, [router.pathname]);
 
   const setLanguageToStore = async () => {
@@ -67,10 +70,6 @@ function Navbar({}) {
       setSelectedLanguage("LANGUAGES");
     }
   };
-  const userDetails =
-    typeof window !== "undefined" &&
-    localStorage.getItem(USER_DETAILS) &&
-    JSON.parse(localStorage.getItem(USER_DETAILS));
 
   const profileData = async () => {
     if (userDetails) {

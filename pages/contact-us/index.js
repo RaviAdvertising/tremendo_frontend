@@ -241,7 +241,7 @@ export default function ContactUs() {
                   />
                 </div>
                 <div className={styles.textInfo}>
-                  Lorem Ipsum Lorem Ipsum Lorem Ipsum
+                  Tremendo, Address-Bihar,India, 805131
                 </div>
               </div>
               <div className={styles.infoSec}>
@@ -253,9 +253,7 @@ export default function ContactUs() {
                     height={"37px"}
                   />
                 </div>
-                <div className={styles.textInfo}>
-                  (+91) 000-000-0000, (+91) 000-000-0000
-                </div>
+                <div className={styles.textInfo}>+91 78568 92827</div>
               </div>
               <div className={styles.infoSec}>
                 <div>
@@ -266,9 +264,7 @@ export default function ContactUs() {
                     height={"37px"}
                   />
                 </div>
-                <div className={styles.textInfo}>
-                  Lorem Ipsum Lorem Ipsum Lorem Ipsum
-                </div>
+                <div className={styles.textInfo}>info@tremendo.in</div>
               </div>
             </div>
           </div>

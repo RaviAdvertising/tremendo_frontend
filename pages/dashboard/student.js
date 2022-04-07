@@ -9,6 +9,7 @@ import ProgressTab from "../../components/ProgressTab/ProgressTab";
 import MyResourceTab from "../../components/MyResourceTab/MyResourceTab";
 import FaqTab from "../../components/FaqTab/FaqTab";
 import ProfileTab from "../../components/ProfileTab/ProfileTab";
+import { LOGIN_STUDENT_TAB, USER_DETAILS } from "../../utils/constants";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -46,6 +47,15 @@ function Student() {
   const clickOnTab = data => {
     setSelectedTabIndex(data.id);
   };
+
+  const userDetails =
+    typeof window !== "undefined" &&
+    localStorage.getItem(USER_DETAILS) &&
+    JSON.parse(localStorage.getItem(USER_DETAILS));
+
+  if (userDetails.access_type != LOGIN_STUDENT_TAB) {
+    return false;
+  }
 
   return (
     <div className={styles.base}>

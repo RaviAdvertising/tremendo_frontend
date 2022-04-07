@@ -9,6 +9,9 @@ import MentorMyResource from "../../components/MyResourceTab/MentorMyResource";
 import MentorProgresstab from "../../components/ProgressTab/MentorProgresstab";
 import MentorFaq from "../../components/FaqTab/MentorFaq";
 import MentorProfile from "../../components/ProfileTab/MentorProfile";
+import { LOGIN_MENTOR_TAB, USER_DETAILS } from "../../utils/constants";
+import { useRouter } from "next/router";
+import { HOME_PAGE } from "../../utils/routes";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -51,6 +54,15 @@ function Mentor() {
   const clickOnTab = data => {
     setSelectedTabIndex(data.id);
   };
+  const router = useRouter();
+  const userDetails =
+    typeof window !== "undefined" &&
+    localStorage.getItem(USER_DETAILS) &&
+    JSON.parse(localStorage.getItem(USER_DETAILS));
+
+  if (userDetails.access_type != LOGIN_MENTOR_TAB) {
+    return false;
+  }
 
   return (
     <div className={styles.base}>
