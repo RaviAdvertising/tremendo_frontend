@@ -112,6 +112,9 @@ function Navbar({}) {
       router.push(STUDENT_DASHBOARD_PATH);
     }
   };
+  const inviteFriends = () => {
+    window.open("https://web.whatsapp.com/send?text=https://tremendo.in/");
+  };
   const desktopNavbar = () => {
     return (
       <Menu fixed="top" secondary className={styles.menuWrapper}>
@@ -216,7 +219,12 @@ function Navbar({}) {
                     >
                       Dashboard
                     </div>
-                    <div className={styles.profileOptions}>Invite friends</div>
+                    <div
+                      className={styles.profileOptions}
+                      onClick={() => inviteFriends()}
+                    >
+                      Invite friends
+                    </div>
                     <div
                       className={styles.profileLogout}
                       onClick={() => signUpAndLogout()}
