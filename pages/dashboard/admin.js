@@ -13,6 +13,7 @@ import CalenderTab from "../../components/CalenderTab/CalenderTab";
 import AdminBatchManagment from "../../components/CourseDetailTab/AdminBatchManagment";
 import MentorBatchDetails from "../../components/CourseDetailTab/MentorBatchDetails";
 import { ADMIN_ACCESS_TYPE, USER_DETAILS } from "../../utils/constants";
+import LanguageEdit from "../../components/LanguageEdit/LanguageEdit";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -42,7 +43,7 @@ function Admin() {
       icon: "progress",
       component: <MentorBatchDetails />
     },
-    { id: 5, tab: "Language", icon: "faq", component: <MentorFaq /> },
+    { id: 5, tab: "Language", icon: "faq", component: <LanguageEdit /> },
     {
       id: 6,
       tab: "Calender",
