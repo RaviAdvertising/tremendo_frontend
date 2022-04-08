@@ -126,6 +126,10 @@ export const getUserProfile = accessType => dispatch => {
         type: GET_USER_PROFILE_SUCCESS,
         data: res.data.data
       });
+      return {
+        type: GET_USER_PROFILE_SUCCESS,
+        data: res.data.data
+      };
     })
     .catch(err => {
       dispatch({

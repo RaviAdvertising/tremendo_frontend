@@ -15,6 +15,19 @@ const dashboardReducer = (state, action) => {
         getStudentDashboardDataLoading: false
       });
 
+    case dashboardAction.UPDATE_PROFILE_DATA_REQUEST:
+      return Object.assign({}, state, {
+        profileUpdateLoading: true
+      });
+    case dashboardAction.UPDATE_PROFILE_DATA_SUCCESS:
+      return Object.assign({}, state, {
+        profileUpdateLoading: false
+      });
+    case dashboardAction.UPDATE_PROFILE_DATA_ERROR:
+      return Object.assign({}, state, {
+        profileUpdateLoading: false
+      });
+
     default:
       return state;
   }

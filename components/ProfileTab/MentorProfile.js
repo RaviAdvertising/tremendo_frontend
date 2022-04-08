@@ -10,15 +10,36 @@ import { GlobalContext } from "../../Context/Provider";
 import moment from "moment";
 import { country_list } from "../../utils/countriesList";
 import { phone } from "phone";
-import { EMAIL_REGULAR_EXPRESSION } from "../../utils/constants";
+import {
+  COOKIE_TOKEN,
+  EMAIL_REGULAR_EXPRESSION,
+  LOGIN_MENTOR_TAB
+} from "../../utils/constants";
+import {
+  updateMentorProfile,
+  UPDATE_PROFILE_DATA_SUCCESS
+} from "../../Context/Actions/Dashboard/DashboardAction";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import { getUserProfile } from "../../Context/Actions/Auth/AuthAction";
 
 export default function MentorProfile() {
   const inputFile = useRef(null);
   const { isMobileView } = useContext(DeviceContext);
-  const [fields, setFields] = useState({});
+  const [fields, setFields] = useState({
+    university: "",
+    passout_year: "",
+    stream: "",
+    degree: ""
+  });
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState({ preview: "", raw: "" });
-  const { authState } = useContext(GlobalContext);
+  const {
+    authState,
+    studentDashboardState,
+    studentDashboardDispatch: dispatch,
+    authDispatch: dispatchAuth
+  } = useContext(GlobalContext);
   const customInput = ({
     placeholder,
     value,
@@ -136,7 +157,7 @@ export default function MentorProfile() {
     });
   };
 
-  const updateProfile = () => {
+  const updateProfile = async () => {
     const selectedCountry = country_list.find(i => i.name === fields.country);
     let errors = { ...errors };
     if (!fields.first_name) {
@@ -192,11 +213,28 @@ export default function MentorProfile() {
       setErrors(errors);
       return false;
     } else {
-      console.log("all good");
+      const payload = { ...fields };
+      payload.access_token = Cookies.get(COOKIE_TOKEN);
+      const response = await updateMentorProfile(payload)(dispatch);
+      if (response.type == UPDATE_PROFILE_DATA_SUCCESS) {
+        toast.success("Profile Updated Successfully", {
+          theme: "colored"
+        });
+        const userUpdatedData = await getUserProfile(LOGIN_MENTOR_TAB)(
+          dispatch
+        );
+
+        setFields(userUpdatedData.data.user_data);
+      } else {
+        toast.error("Something Went Wrong", {
+          theme: "colored"
+        });
+      }
     }
   };
   const profileDetails = authState.profileData.user_data;
   const selectedCountry = country_list.find(i => i.name === fields.country);
+  const mentorLanguageData = authState.profileData.all_languages;
 
   return (
     <div className={styles.base}>
@@ -235,7 +273,7 @@ export default function MentorProfile() {
           <div className={styles.mentorCode}>Mentor code</div>
           <div className={styles.languagesHeading}>Languages</div>
           <div className={styles.languages}>
-            English | German | French | Hindi
+            {mentorLanguageData.map(i => i.name).join(" | ")}
           </div>
           <div className={styles.languagesHeading}>Documents</div>
           <div className={styles.attachementWrapper}>
@@ -279,9 +317,14 @@ export default function MentorProfile() {
           <div className={styles.languagesHeading}>Profile Details</div>
           <div className={styles.progress}>
             <div className={styles.progressStrip}>
-              <div className={styles.status} style={{ width: "80%" }}></div>
+              <div
+                className={styles.status}
+                style={{ width: `${profileDetails.profile_completed}%` }}
+              ></div>
             </div>
-            <div className={styles.progressTitle}>Profile updated: 80%</div>
+            <div
+              className={styles.progressTitle}
+            >{`Profile updated: ${profileDetails.profile_completed}%`}</div>
           </div>
         </div>
         <div className={styles.rightSection}>
@@ -390,7 +433,8 @@ export default function MentorProfile() {
                   placeholder: "@",
                   value: fields.email,
                   handleChange: text => onChangeData(text, "email"),
-                  showError: errors["email"]
+                  showError: errors["email"],
+                  disabled: true
                 })}
               </div>
             </div>
@@ -458,8 +502,8 @@ export default function MentorProfile() {
               <div>
                 {customInput({
                   placeholder: "",
-                  value: fields.year,
-                  handleChange: text => onChangeData(text, "year"),
+                  value: fields.passout_year,
+                  handleChange: text => onChangeData(text, "passout_year"),
                   type: "number"
                 })}
               </div>
@@ -482,6 +526,7 @@ export default function MentorProfile() {
             fontFamily: "Montserrat",
             fontSize: "16px"
           }}
+          loading={studentDashboardState.profileUpdateLoading}
           border="none"
           onClick={() => updateProfile()}
         />
