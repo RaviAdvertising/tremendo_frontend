@@ -217,7 +217,7 @@ export default function ProfileTab({}) {
 
   const profileDetails = authState.profileData.user_data;
   const selectedCountry = country_list.find(i => i.name === fields.country);
-  console.log(profileDetails);
+
   return (
     <div className={styles.base}>
       <div className={styles.profileBox}>
@@ -275,7 +275,7 @@ export default function ProfileTab({}) {
               </div>
             </div>
             <div className={styles.profileName}>
-              <div className={styles.title}>Batch No.</div>
+              <div className={styles.title}>Student Id</div>
               <div className={styles.nameInput}>
                 {customInput({
                   placeholder: "Select",

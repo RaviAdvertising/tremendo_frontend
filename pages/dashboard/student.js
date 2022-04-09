@@ -53,9 +53,9 @@ function Student() {
     localStorage.getItem(USER_DETAILS) &&
     JSON.parse(localStorage.getItem(USER_DETAILS));
 
-  // if (userDetails.access_type != LOGIN_STUDENT_TAB) {
-  //   return false;
-  // }
+  if (userDetails.access_type != LOGIN_STUDENT_TAB) {
+    return false;
+  }
 
   return (
     <div className={styles.base}>

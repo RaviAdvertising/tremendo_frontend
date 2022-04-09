@@ -191,7 +191,17 @@ export default function Tab({
             </div>
             <div className={styles.letsTalkSection}>
               <div className={styles.upcomingTaskHeading}>Let’s Talk</div>
-              <div className={styles.upcomingTaskBox}>
+              <div>
+                <iframe
+                  src="https://discord.com/widget?id=960554347324907540&theme=dark"
+                  width={"100%"}
+                  height="500"
+                  allowtransparency="true"
+                  frameBorder={"0"}
+                  sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                ></iframe>
+              </div>
+              {/* <div className={styles.upcomingTaskBox}>
                 <div className={styles.chatBoxWrapper}>
                   <div className={styles.chatNameAndImgWrapper}>
                     <div className={styles.userImg}>
@@ -269,7 +279,7 @@ export default function Tab({
                     <IconComponent name={"sendIcon"} />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className={styles.letsTalkSection}>
               <div className={styles.upcomingTaskHeading}>
