@@ -28,6 +28,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import FacebookLoginComponent from "../../components/FacebookLogin/FacebookLogin";
+import moment from "moment";
 
 export default function Signup(props) {
   const router = useRouter();
@@ -210,7 +211,7 @@ export default function Signup(props) {
                 onChange={date => handleChange("dob", date)}
                 customInput={<DateInput />}
                 dateFormat="MMMM d, yyyy"
-                maxDate={new Date()}
+                maxDate={moment().subtract(14, "years")._d}
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown

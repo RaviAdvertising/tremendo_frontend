@@ -136,6 +136,7 @@ export default function MentorProfile() {
   const handleChangeImage = e => {
     console.log(e.target.files);
     if (e.target.files.length) {
+      setFields({ ...fields, avatar: URL.createObjectURL(e.target.files[0]) });
       setImage({
         preview: URL.createObjectURL(e.target.files[0]),
         raw: e.target.files[0]
@@ -143,11 +144,11 @@ export default function MentorProfile() {
     }
   };
 
-  const handleUpload = async e => {
-    e.preventDefault();
+  const handleUpload = async data => {
+    // e.preventDefault();
     const formData = new FormData();
-    formData.append("image", image.raw);
-
+    formData.append("image", data);
+    console.log(formData);
     await fetch("YOUR_URL", {
       method: "POST",
       headers: {
@@ -221,7 +222,7 @@ export default function MentorProfile() {
           theme: "colored"
         });
         const userUpdatedData = await getUserProfile(LOGIN_MENTOR_TAB)(
-          dispatch
+          dispatchAuth
         );
 
         setFields(userUpdatedData.data.user_data);
@@ -248,7 +249,7 @@ export default function MentorProfile() {
               <div className={styles.profileImage}>
                 <Image
                   src={
-                    image.preview ? image.preview : "/Images/blank_profile.png"
+                    fields.avatar ? fields.avatar : "/Images/blank_profile.png"
                   }
                   circular
                   alt="profiletab_rocket"
@@ -270,7 +271,7 @@ export default function MentorProfile() {
             <br />
           </div>
           <div className={styles.mentorName}>{profileDetails.profile_name}</div>
-          <div className={styles.mentorCode}>Mentor code</div>
+          <div className={styles.mentorCode}>{profileDetails.user_code}</div>
           <div className={styles.languagesHeading}>Languages</div>
           <div className={styles.languages}>
             {mentorLanguageData.map(i => i.name).join(" | ")}
@@ -315,17 +316,19 @@ export default function MentorProfile() {
             </div>
           </div>
           <div className={styles.languagesHeading}>Profile Details</div>
-          <div className={styles.progress}>
-            <div className={styles.progressStrip}>
+          {profileDetails.profile_completed && (
+            <div className={styles.progress}>
+              <div className={styles.progressStrip}>
+                <div
+                  className={styles.status}
+                  style={{ width: `${profileDetails.profile_completed}%` }}
+                ></div>
+              </div>
               <div
-                className={styles.status}
-                style={{ width: `${profileDetails.profile_completed}%` }}
-              ></div>
+                className={styles.progressTitle}
+              >{`Profile updated: ${profileDetails.profile_completed}%`}</div>
             </div>
-            <div
-              className={styles.progressTitle}
-            >{`Profile updated: ${profileDetails.profile_completed}%`}</div>
-          </div>
+          )}
         </div>
         <div className={styles.rightSection}>
           <div className={styles.languagesHeading}>Personal Information</div>

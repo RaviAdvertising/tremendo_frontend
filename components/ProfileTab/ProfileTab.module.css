@@ -66,7 +66,7 @@
   margin-bottom: 16px;
 }
 .profileImage {
-  width: 22%;
+ 
 }
 .title {
   color: #66666d;
@@ -122,6 +122,11 @@
 }
 .lastName {
   width: 44%;
+}
+.saveBtn{
+  width: 35%;
+  margin: auto;
+  margin-top: 30px;
 }
 @media (max-width: 1024px) {
   .base {
