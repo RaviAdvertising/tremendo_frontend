@@ -279,7 +279,7 @@ export default function ProfileTab({}) {
               <div className={styles.nameInput}>
                 {customInput({
                   placeholder: "Select",
-                  value: profileDetails.batch_no,
+                  value: profileDetails.user_code,
                   disabled: true
                 })}
               </div>

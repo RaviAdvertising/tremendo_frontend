@@ -7,6 +7,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 
+import "@fullcalendar/common/main.css";
+import "@fullcalendar/daygrid/main.css";
+import "@fullcalendar/timegrid/main.css";
+
 export const DeviceContext = createContext({});
 
 function MyApp({ Component, pageProps, isMobileView }) {

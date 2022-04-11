@@ -8,6 +8,12 @@
     "analyse": "ANALYZE=true next build"
   },
   "dependencies": {
+    "@babel/preset-react": "^7.16.7",
+    "@fullcalendar/common": "^5.11.0",
+    "@fullcalendar/daygrid": "^5.11.0",
+    "@fullcalendar/interaction": "^5.11.0",
+    "@fullcalendar/react": "^5.11.0",
+    "@fullcalendar/timegrid": "^5.11.0",
     "@next/bundle-analyzer": "^12.0.8",
     "@researchgate/react-intersection-observer": "^1.3.5",
     "axios": "^0.24.0",
@@ -17,6 +23,7 @@
     "js-cookie": "^3.0.1",
     "moment": "^2.29.1",
     "next": "12.0.3",
+    "next-transpile-modules": "^9.0.0",
     "phone": "^3.1.15",
     "react": "17.0.2",
     "react-chartjs-2": "^4.0.1",
