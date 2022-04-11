@@ -10,3 +10,4 @@ export const CONTACTUS_PATH = "/contact-us";
 export const STUDENT_DASHBOARD_PATH = "/dashboard/student";
 export const MENTOR_DASHBOARD_PATH = "/dashboard/mentor";
 export const ADMIN_DASHBOARD_PATH = "/dashboard/admin";
+export const PAYMENT_PATH = "/order";

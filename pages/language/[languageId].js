@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { GlobalContext } from "../../Context/Provider";
 import { getLangaugeDetails } from "../../Context/Actions/Language/LanguageAction";
 import LanguageDetailSkelton from "../../components/Skelton/LanguageDetailSkelton";
+import { PAYMENT_PATH } from "../../utils/routes";
 
 export default function DetailLanguagePage({}) {
   const [openTab, setOpenTab] = useState(null);
@@ -44,7 +45,7 @@ export default function DetailLanguagePage({}) {
     );
   };
   const registerNow = () => {
-    //
+    router.push(PAYMENT_PATH);
   };
   const details = languageState.getLanguageDetails;
   return (
