@@ -13,7 +13,7 @@ import { LOGIN_MENTOR_TAB, USER_DETAILS } from "../../utils/constants";
 import { useRouter } from "next/router";
 import { HOME_PAGE } from "../../utils/routes";
 
-const INITIAL_TAB_INDEX = 1;
+const INITIAL_TAB_INDEX = 7;
 
 function Mentor() {
   const tabs = [

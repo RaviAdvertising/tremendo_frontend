@@ -361,7 +361,7 @@ export default function MentorProfile() {
               <div className={styles.inputGeneralTitle}>DOB*</div>
               <div>
                 <DatePicker
-                  selected={moment(fields.dob)._d}
+                  selected={fields.dob ? moment(fields.dob)._d : ""}
                   onChange={date => onChangeData(moment(date).format(), "dob")}
                   customInput={<DateInput />}
                   dateFormat="MMMM d, yyyy"

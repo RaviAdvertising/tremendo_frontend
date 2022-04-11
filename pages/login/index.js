@@ -16,7 +16,12 @@ import Head from "next/head";
 import Input from "../../components/Input/Input";
 import { Checkbox, Divider } from "semantic-ui-react";
 import { useRouter } from "next/router";
-import { HOME_PAGE, SIGN_UP_PATH } from "../../utils/routes";
+import {
+  HOME_PAGE,
+  MENTOR_DASHBOARD_PATH,
+  SIGN_UP_PATH,
+  STUDENT_DASHBOARD_PATH
+} from "../../utils/routes";
 import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import { toast } from "react-toastify";
@@ -96,7 +101,7 @@ export default function Login(props) {
       toast.success(response.data.msg, {
         theme: "colored"
       });
-      actionAfterLogin();
+      actionAfterLogin(response.data);
     }
   };
 
@@ -136,18 +141,17 @@ export default function Login(props) {
         toast.success(response.data.msg, {
           theme: "colored"
         });
-        actionAfterLogin();
+        actionAfterLogin(response.data);
       }
     }
   };
 
-  const actionAfterLogin = () => {
-    // if (localStorage.getItem(PREVIOUS_PATH)) {
-    //   router.replace(localStorage.getItem(PREVIOUS_PATH));
-    // } else {
-
-    router.push(HOME_PAGE);
-    // }
+  const actionAfterLogin = response => {
+    if (response.data.access_type == LOGIN_MENTOR_TAB) {
+      router.push(MENTOR_DASHBOARD_PATH);
+    } else {
+      router.push(STUDENT_DASHBOARD_PATH);
+    }
   };
 
   const loginFormWithImage = () => {

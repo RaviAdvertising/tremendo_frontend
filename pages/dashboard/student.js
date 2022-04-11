@@ -11,7 +11,7 @@ import FaqTab from "../../components/FaqTab/FaqTab";
 import ProfileTab from "../../components/ProfileTab/ProfileTab";
 import { LOGIN_STUDENT_TAB, USER_DETAILS } from "../../utils/constants";
 
-const INITIAL_TAB_INDEX = 1;
+const INITIAL_TAB_INDEX = 7;
 
 function Student() {
   const tabs = [
