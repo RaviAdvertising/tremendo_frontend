@@ -65,11 +65,28 @@ export default function CalenderTab({}) {
               className: styles.dateClass
             },
             {
+              title: "",
+              start: "2022-04-13T14:30:00",
+              end: "2022-04-13T16:30:00",
+              backgroundColor: "#EEF4FF",
+              textColor: "#3D8BFF"
+              // className: styles.dateClass
+            },
+
+            {
               title: "Nisha Rai -151-14",
               date: "2022-04-17",
               backgroundColor: "#F5FAF0",
               textColor: "#8FCB4D",
               className: styles.dateClass
+            },
+            {
+              title: "",
+              start: "2022-04-17T14:30:00",
+              end: "2022-04-17T16:30:00",
+              backgroundColor: "#F5FAF0",
+              textColor: "#8FCB4D"
+              // className: styles.dateClass
             },
             {
               title: "Ranjan -151-13",
@@ -79,13 +96,36 @@ export default function CalenderTab({}) {
               className: styles.dateClass
             },
             {
+              title: "",
+              start: "2022-04-26T14:30:00",
+              end: "2022-04-26T16:30:00",
+              backgroundColor: "#FEF7F1",
+              textColor: "orange"
+              // className: styles.dateClass
+            },
+            {
               title: "Neha -151-16",
               date: "2022-04-23",
               backgroundColor: "#FDF7FC",
               textColor: "#F4C5E7",
               className: styles.dateClass
+            },
+            {
+              title: "",
+              start: "2022-04-23T14:30:00",
+              end: "2022-04-23T16:30:00",
+              backgroundColor: "#FDF7FC",
+              textColor: "#F4C5E7"
+              // className: styles.dateClass
             }
           ]}
+          displayEventTime={true}
+          displayEventEnd={true}
+          eventTimeFormat={{
+            hour: "numeric",
+            minute: "2-digit",
+            meridiem: false
+          }}
           eventClick={onClickEvent}
         />
       </div>

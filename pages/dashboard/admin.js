@@ -62,9 +62,9 @@ function Admin() {
     localStorage.getItem(USER_DETAILS) &&
     JSON.parse(localStorage.getItem(USER_DETAILS));
 
-  // if (userDetails.access_type != ADMIN_ACCESS_TYPE) {
-  //   return false;
-  // }
+  if (userDetails.access_type != ADMIN_ACCESS_TYPE) {
+    return false;
+  }
 
   return (
     <div className={styles.base}>
