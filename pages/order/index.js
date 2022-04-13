@@ -14,7 +14,6 @@ function loadScript(src) {
   });
 }
 
-const __DEV__ = document.domain === "localhost";
 export default function Order({}) {
   useEffect(() => {
     displayRazorpay();
@@ -29,19 +28,19 @@ export default function Order({}) {
       return;
     }
 
-    const data = await fetch("http://localhost:5555/razorpay", {
+    const data = await fetch("http://3.111.13.2:5555/razorpay", {
       method: "POST"
     }).then(t => t.json());
 
     console.log(data);
 
     const options = {
-      key: __DEV__ ? "rzp_test_gyvo1RLOGSiqAB" : "PRODUCTION_KEY",
+      key: "rzp_test_gyvo1RLOGSiqAB",
       currency: data.currency,
       amount: data.amount.toString(),
       order_id: data.id,
-      name: "Donation",
-      description: "Thank you for nothing. Please give us some money",
+      name: "Tremendo",
+      description: "Purchase japanese language",
       image: "http://localhost:1337/logo.svg",
       handler: function(response) {
         alert(response.razorpay_payment_id);
