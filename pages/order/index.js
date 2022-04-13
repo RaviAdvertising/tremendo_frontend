@@ -28,7 +28,7 @@ export default function Order({}) {
       return;
     }
 
-    const data = await fetch("https://3.111.13.2:5555/razorpay", {
+    const data = await fetch("https://tremendo.in:5555/razorpay", {
       method: "POST"
     }).then(t => t.json());
 
