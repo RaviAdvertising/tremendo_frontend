@@ -22,6 +22,7 @@ import {
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { getUserProfile } from "../../Context/Actions/Auth/AuthAction";
+import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 
 export default function MentorProfile() {
   const inputFile = useRef(null);
@@ -30,7 +31,8 @@ export default function MentorProfile() {
     university: "",
     passout_year: "",
     stream: "",
-    degree: ""
+    degree: "",
+    country: "India"
   });
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState({ preview: "", raw: "" });
@@ -72,9 +74,13 @@ export default function MentorProfile() {
     updateFieldsValue();
   }, []);
 
-  const updateFieldsValue = () => {
-    const profileDetails = authState.profileData.user_data;
-    setFields(profileDetails);
+  const updateFieldsValue = async () => {
+    const userUpdatedData = await getUserProfile(LOGIN_MENTOR_TAB)(
+      dispatchAuth
+    );
+    const profileDetails = userUpdatedData.data.user_data;
+
+    setFields({ ...fields, ...profileDetails });
   };
 
   const onChangeData = (value, type) => {
@@ -236,7 +242,9 @@ export default function MentorProfile() {
   const profileDetails = authState.profileData.user_data;
   const selectedCountry = country_list.find(i => i.name === fields.country);
   const mentorLanguageData = authState.profileData.all_languages;
-
+  if (authState.profileDataLoading) {
+    return <StudentDashboardSkelton />;
+  }
   return (
     <div className={styles.base}>
       <div className={styles.profile_topImage}>
@@ -270,11 +278,13 @@ export default function MentorProfile() {
             />
             <br />
           </div>
-          <div className={styles.mentorName}>{profileDetails.profile_name}</div>
-          <div className={styles.mentorCode}>{profileDetails.user_code}</div>
+          <div className={styles.mentorName}>
+            {profileDetails?.profile_name}
+          </div>
+          <div className={styles.mentorCode}>{profileDetails?.user_code}</div>
           <div className={styles.languagesHeading}>Languages</div>
           <div className={styles.languages}>
-            {mentorLanguageData.map(i => i.name).join(" | ")}
+            {mentorLanguageData?.map(i => i.name).join(" | ")}
           </div>
           <div className={styles.languagesHeading}>Documents</div>
           <div className={styles.attachementWrapper}>
@@ -316,7 +326,7 @@ export default function MentorProfile() {
             </div>
           </div>
           <div className={styles.languagesHeading}>Profile Details</div>
-          {profileDetails.profile_completed && (
+          {profileDetails?.profile_completed && (
             <div className={styles.progress}>
               <div className={styles.progressStrip}>
                 <div

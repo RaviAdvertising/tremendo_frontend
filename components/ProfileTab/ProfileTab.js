@@ -23,13 +23,15 @@ import {
   updateMentorProfile,
   UPDATE_PROFILE_DATA_SUCCESS
 } from "../../Context/Actions/Dashboard/DashboardAction";
+import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 
 export default function ProfileTab({}) {
   const [fields, setFields] = useState({
     university: "",
     passout_year: "",
     stream: "",
-    degree: ""
+    degree: "",
+    country: "India"
   });
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState({ preview: "", raw: "" });
@@ -98,9 +100,13 @@ export default function ProfileTab({}) {
     updateFieldsValue();
   }, []);
 
-  const updateFieldsValue = () => {
-    const profileDetails = authState.profileData.user_data;
-    setFields(profileDetails);
+  const updateFieldsValue = async () => {
+    const userUpdatedData = await getUserProfile(LOGIN_STUDENT_TAB)(
+      dispatchAuth
+    );
+    const profileDetails = userUpdatedData.data.user_data;
+
+    setFields({ ...fields, ...profileDetails });
   };
 
   const onChangeData = (value, type) => {
@@ -216,14 +222,17 @@ export default function ProfileTab({}) {
   };
 
   const profileDetails = authState.profileData.user_data;
-  const selectedCountry = country_list.find(i => i.name === fields.country);
+  const selectedCountry = country_list.find(i => i.name == fields.country);
 
+  if (authState.profileDataLoading) {
+    return <StudentDashboardSkelton />;
+  }
   return (
     <div className={styles.base}>
       <div className={styles.profileBox}>
         <div className={styles.headingProgressWrapper}>
           <div className={styles.heading}>Profile Details</div>
-          {profileDetails.profile_completed && (
+          {profileDetails?.profile_completed && (
             <div className={styles.progress}>
               <div className={styles.progressStrip}>
                 <div
@@ -269,7 +278,7 @@ export default function ProfileTab({}) {
               <div className={styles.nameInput}>
                 {customInput({
                   placeholder: "Select",
-                  value: profileDetails.profile_name,
+                  value: profileDetails?.profile_name,
                   disabled: true
                 })}
               </div>
@@ -279,7 +288,7 @@ export default function ProfileTab({}) {
               <div className={styles.nameInput}>
                 {customInput({
                   placeholder: "Select",
-                  value: profileDetails.user_code,
+                  value: profileDetails?.user_code,
                   disabled: true
                 })}
               </div>
@@ -287,7 +296,7 @@ export default function ProfileTab({}) {
             <div className={styles.lastUpdatedBy}>
               <div className={styles.title}>Last Updated By:</div>
               <div className={styles.lastUpdateDate}>
-                {moment(profileDetails.updated_at).format("DD.MM.YYYY")}
+                {moment(profileDetails?.updated_at).format("DD.MM.YYYY")}
               </div>
             </div>
           </div>
