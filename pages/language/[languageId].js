@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "../../styles/LanguageDetail.module.css";
 import StatusBar from "../../components/StatusBar/StatusBar";
 import ImageComponent from "../../components/Image/Image";
-import { USER_DETAILS } from "../../utils/constants";
+import { COOKIE_TOKEN, USER_DETAILS } from "../../utils/constants";
 import Image from "next/image";
 import Button from "../../components/Button/Button";
 import { useRouter } from "next/router";
 import { GlobalContext } from "../../Context/Provider";
 import { getLangaugeDetails } from "../../Context/Actions/Language/LanguageAction";
 import LanguageDetailSkelton from "../../components/Skelton/LanguageDetailSkelton";
+import { PAYMENT_PATH } from "../../utils/routes";
+import Cookies from "js-cookie";
 
 export default function DetailLanguagePage({}) {
   const [openTab, setOpenTab] = useState(null);
@@ -44,7 +46,7 @@ export default function DetailLanguagePage({}) {
     );
   };
   const registerNow = () => {
-    //
+    router.push(PAYMENT_PATH);
   };
   const details = languageState.getLanguageDetails;
   return (
@@ -254,22 +256,24 @@ export default function DetailLanguagePage({}) {
                                 {i.price}
                               </div>
                             </div>
-                            <div className={styles.enrollNowBtn}>
-                              <Button
-                                label={i.cta_title}
-                                height={35}
-                                borderRadius={5}
-                                backgroundColor={"#f78f1e"}
-                                textStyle={{
-                                  color: "#fff",
-                                  fontFamily: "Open Sans",
-                                  fontSize: "16px",
-                                  fontWeight: "bold"
-                                }}
-                                border="none"
-                                onClick={() => registerNow()}
-                              />
-                            </div>
+                            {Cookies.get(COOKIE_TOKEN) && (
+                              <div className={styles.enrollNowBtn}>
+                                <Button
+                                  label={i.cta_title}
+                                  height={35}
+                                  borderRadius={5}
+                                  backgroundColor={"#f78f1e"}
+                                  textStyle={{
+                                    color: "#fff",
+                                    fontFamily: "Open Sans",
+                                    fontSize: "16px",
+                                    fontWeight: "bold"
+                                  }}
+                                  border="none"
+                                  onClick={() => registerNow()}
+                                />
+                              </div>
+                            )}
                           </div>
                         </div>
                       )}

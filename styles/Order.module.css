@@ -1,0 +1,84 @@
+.base {
+  padding: 22px;
+  /* border: solid 1px #171717; */
+  width: 470px;
+  box-shadow: 1.1px 2.8px 10px 0 rgba(0, 0, 0, 0.15);
+  margin: auto;
+  margin-top: 60px;
+}
+.heading {
+  color: #313131;
+  font-family: Poppins;
+  font-weight: bold;
+  font-size: 35px;
+  margin-bottom: 60px;
+}
+.imageDetailWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.details {
+  font-size: 18px;
+  color: #313131;
+  font-family: Poppins;
+  font-weight: 600;
+  width: 60%;
+}
+.description {
+  margin-top: 10px;
+  line-height: 22px;
+}
+
+.priceWrapper {
+  margin-top: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  color: #3c3c3c;
+  font-family: Poppins;
+}
+.orignalPriceHeading {
+  width: 70%;
+}
+.price {
+  width: 30%;
+  text-align: end;
+}
+.totalPriceWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  color: #3c3c3c;
+  font-family: Poppins;
+  font-weight: 600;
+  border-top: solid 1px #171717;
+  border-bottom: solid 1px #171717;
+  padding: 5px 0;
+  margin-top: 20px;
+}
+.continueBtn {
+  width: 321px;
+  margin: auto;
+  margin-top: 80px;
+}
+.termAndCondition{
+    color: #0d0d0d;
+    font-size: 20px;
+    font-family: Poppins;
+    margin-top: 80px;
+    text-align: center;
+}
+/* .modalStyles{
+    background: none !important;
+} */
+@media (max-width: 1024px) {
+    .base{
+        margin-top: 0;
+    }
+    .termAndCondition{
+        margin-left: 20px;
+    }
+}
