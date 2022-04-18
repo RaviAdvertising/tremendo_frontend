@@ -24,7 +24,7 @@ export default function LanguageEdit({}) {
       value: lang.id
     };
   });
-  console.log(languageState.getLanguageDetails);
+
   const details = languageState.getLanguageDetails;
   return (
     <>
