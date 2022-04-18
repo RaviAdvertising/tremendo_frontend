@@ -14,7 +14,6 @@ import ButtonComponent from "../Button/Button";
 import axiosInstance from "../../utils/axiosInstance";
 import Cookies from "js-cookie";
 import { COOKIE_TOKEN } from "../../utils/constants";
-import { getBlogs, getFaqs } from "../../Context/Actions/Home/HomeAction";
 
 const ADD = "Add";
 const EDIT = "Edit";
@@ -128,6 +127,7 @@ export default function AdminPages({}) {
                 placeholder="Add Question..."
                 size="large"
                 onChange={(e, data) => onHandleFaqChange(data, "faq")}
+                style={{ width: "100%" }}
               />
             </div>
             <div>
@@ -135,6 +135,7 @@ export default function AdminPages({}) {
                 placeholder="Add Answer..."
                 size="large"
                 onChange={(e, data) => onHandleFaqChange(data, "answer")}
+                style={{ width: "100%" }}
               />
             </div>
           </Modal.Description>
@@ -180,6 +181,7 @@ export default function AdminPages({}) {
                 size="large"
                 onChange={(e, data) => onHandleFaqChange(data, "faq")}
                 value={addFaqFeilds && addFaqFeilds.faq}
+                style={{ width: "100%" }}
               />
             </div>
             <div>
@@ -188,6 +190,7 @@ export default function AdminPages({}) {
                 size="large"
                 onChange={(e, data) => onHandleFaqChange(data, "answer")}
                 value={addFaqFeilds && addFaqFeilds.answer}
+                style={{ width: "100%" }}
               />
             </div>
           </Modal.Description>
@@ -210,22 +213,43 @@ export default function AdminPages({}) {
   };
 
   const onSaveEditBlog = async () => {
-    setLoading(true);
-    const payload = {
-      ...addBlogFeild,
-      access_token: Cookies.get(COOKIE_TOKEN),
-      lang: "ch",
-      image_url:
-        "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/blog2.png?alt=media&token=a4791bb8-d395-4711-91d6-c4accb3c279b"
-    };
-    try {
-      const response = await axiosInstance.post(`/addCourseBlog`, payload);
-      getBlogs();
-      setLoading(false);
-      setOpenBLogModal(null);
-    } catch (err) {
-      setLoading(false);
-      setOpenBLogModal(null);
+    if (openBlogModal == ADD) {
+      setLoading(true);
+      const payload = {
+        ...addBlogFeild,
+        access_token: Cookies.get(COOKIE_TOKEN),
+        lang: "ch",
+        image_url:
+          "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/blog2.png?alt=media&token=a4791bb8-d395-4711-91d6-c4accb3c279b"
+      };
+      try {
+        const response = await axiosInstance.post(`/addCourseBlog`, payload);
+        getBlogs();
+        setLoading(false);
+        setOpenBLogModal(null);
+      } catch (err) {
+        setLoading(false);
+        setOpenBLogModal(null);
+      }
+    } else {
+      setLoading(true);
+      const payload = {
+        ...addBlogFeild,
+        access_token: Cookies.get(COOKIE_TOKEN),
+        lang: "ch",
+        image_url:
+          "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/blog2.png?alt=media&token=a4791bb8-d395-4711-91d6-c4accb3c279b",
+        blogId: addBlogFeild.blog_id
+      };
+      try {
+        const response = await axiosInstance.post(`/updateCourseBlog`, payload);
+        getBlogs();
+        setLoading(false);
+        setOpenBLogModal(null);
+      } catch (err) {
+        setLoading(false);
+        setOpenBLogModal(null);
+      }
     }
   };
   const onEditBlogs = blog => {
@@ -236,6 +260,7 @@ export default function AdminPages({}) {
 
     setOpenBLogModal(EDIT);
   };
+
   const editAddBlogs = () => {
     return (
       <Modal

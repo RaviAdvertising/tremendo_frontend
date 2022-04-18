@@ -1,8 +1,13 @@
-import { Dropdown, Icon, Pagination } from "semantic-ui-react";
+import React, { useState, useEffect } from "react";
+import { Dropdown, Icon, Pagination, Modal, Input } from "semantic-ui-react";
 import Button from "../Button/Button";
 import styles from "./AdminBatchManagment.module.css";
 
 export default function AdminBatchManagment({}) {
+  const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [addFaqFeilds, setAddFaqFeilds] = useState({});
+
   const batches = [
     {
       text: "Batches - EG001",
@@ -21,6 +26,9 @@ export default function AdminBatchManagment({}) {
       value: "Batches - EG004"
     }
   ];
+  const onHandleChangeBatch = async () => {
+    setAddFaqFeilds({ ...addFaqFeilds, [type]: data.value });
+  };
   return (
     <div className={styles.base}>
       <div className={styles.headingDropdownWrapper}>
@@ -72,7 +80,7 @@ export default function AdminBatchManagment({}) {
               fontSize: "18px"
             }}
             border="none"
-            onClick={() => console.log("start")}
+            onClick={() => setOpenModal(true)}
           />
         </div>
         {/* <div className={styles.pagination}>
@@ -87,6 +95,49 @@ export default function AdminBatchManagment({}) {
           />
         </div> */}
       </div>
+      <Modal
+        onClose={() => setOpenModal(false)}
+        open={openModal}
+        closeIcon
+        size={"tiny"}
+      >
+        <Modal.Header>Edit FAQ</Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Add Question..."
+                size="large"
+                onChange={(e, data) => onHandleChangeBatch(data, "faq")}
+                value={addFaqFeilds && addFaqFeilds.faq}
+                style={{ width: "100%" }}
+              />
+            </div>
+            <div>
+              <Input
+                placeholder="Add Answer..."
+                size="large"
+                onChange={(e, data) => onHandleChangeBatch(data, "answer")}
+                value={addFaqFeilds && addFaqFeilds.answer}
+                style={{ width: "100%" }}
+              />
+            </div>
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="black" onClick={() => setOpenModal(false)}>
+            Close
+          </Button>
+          <Button
+            content="Edit"
+            labelPosition="right"
+            icon="checkmark"
+            onClick={() => onEditFaqSave()}
+            positive
+            loading={loading}
+          />
+        </Modal.Actions>
+      </Modal>
     </div>
   );
 }

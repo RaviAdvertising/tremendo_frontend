@@ -49,8 +49,7 @@ function Admin() {
       tab: "Calender",
       icon: "termAndCondition",
       component: <CalenderTab />
-    },
-    { id: 7, tab: "Setting", icon: "setting", component: <MentorProfile /> }
+    }
   ];
   const [selectedTabIndex, setSelectedTabIndex] = useState(INITIAL_TAB_INDEX);
   const clickOnTab = data => {
