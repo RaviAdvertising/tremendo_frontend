@@ -6,6 +6,10 @@
   box-shadow: 12px 12px 10px 0 rgba(0, 0, 0, 0.08);
   background-color: #fff;
 }
+.headingBtnWrapper{
+  display: flex;
+  justify-content: space-between;
+}
 .heading {
   color: #2c2c2c;
   font-size: 22px;
@@ -114,6 +118,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    border-bottom: 1px solid #cfd3d7;
 }
 .blogName{
     color: #283646;
@@ -127,6 +132,9 @@
     color: #77808b;
     font-family: Poppins;
     margin-bottom: 10px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 .BlogOption{
     color: #283646;
@@ -135,8 +143,9 @@
     font-weight: 600;
 }
 .blogDetails{
-    border-bottom: 1px solid #cfd3d7;
+   
     padding-bottom: 15px;
+    width: 70%;
 }
 .blogImage{
     width: 65px;
