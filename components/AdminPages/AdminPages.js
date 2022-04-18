@@ -14,6 +14,7 @@ import ButtonComponent from "../Button/Button";
 import axiosInstance from "../../utils/axiosInstance";
 import Cookies from "js-cookie";
 import { COOKIE_TOKEN } from "../../utils/constants";
+import { getReviewDetails } from "../../Context/Actions/Home/HomeAction";
 
 const ADD = "Add";
 const EDIT = "Edit";
@@ -28,10 +29,12 @@ export default function AdminPages({}) {
   const [addBlogFeild, setAddBlogFeild] = useState({});
   const [faqList, setFaqList] = useState([]);
   const [blogsList, setBlogList] = useState([]);
+  const [reviewList, setReviewList] = useState([]);
 
   useEffect(() => {
     getFaqs();
     getBlogs();
+    getReviewList();
   }, []);
 
   const getFaqs = async () => {
@@ -49,6 +52,17 @@ export default function AdminPages({}) {
     try {
       const response = await axiosInstance.get(`/getCourseBlogList`);
       setBlogList(response.data.data);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
+  const getReviewList = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `/getCourseReview?access_token=${Cookies.get(COOKIE_TOKEN)}`
+      );
+      setReviewList(response.data.data);
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -448,26 +462,23 @@ export default function AdminPages({}) {
             <div className={styles.heading}>Review</div>
             <div className={styles.paginationBox}>01</div>
           </div>
-          {[1, 2, 3].map((i, index) => (
+          {reviewList.map((i, index) => (
             <div className={styles.imageDetailsWrapper} key={index}>
               <div className={styles.imageSection}></div>
               <div className={styles.detailsWrapper}>
                 <div className={styles.nameStarWrapper}>
-                  <div className={styles.name}>Mas Yhanto</div>
-                  <div className={styles.nameStarWrapper}>
+                  <div className={styles.name}>{i.user_name}</div>
+                  <div className={""}>
                     <Rating
                       icon="star"
                       defaultRating={5}
-                      maxRating={5}
+                      maxRating={i.rating}
                       size="medium"
                       disabled
                     />
                   </div>
                 </div>
-                <div className={styles.description}>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
-                </div>
+                <div className={styles.description}>{i.review_desc}</div>
                 <div className={styles.nameStarWrapper}>
                   <div className={styles.nameStarWrapper}>
                     <List celled horizontal link>
