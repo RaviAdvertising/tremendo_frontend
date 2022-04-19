@@ -239,7 +239,7 @@ export default function AdminBatchManagment({}) {
       <div className={styles.tableSection}>
         <div className={styles.tableHeader}>
           <div className={styles.headerName}>Student Name</div>
-          {/* <div className={styles.headerName}>Joining Date</div> */}
+          <div className={styles.headerName}>Joining Date</div>
           <div className={styles.headerName}>Student Id</div>
           <div className={styles.headerName}>
             Replacement <br></br>(Batch no.)
@@ -250,7 +250,7 @@ export default function AdminBatchManagment({}) {
         {[1, 2, 3, 4, 5, 6, 7, 8].map((i, index) => (
           <div className={styles.tableBody} key={index}>
             <div className={styles.headerName}>Aman Bhatia</div>
-            {/* <div className={styles.headerName}>20 Mar, 2018</div> */}
+            <div className={styles.headerName}>20 Mar, 2018</div>
             <div className={styles.headerName}>155-29</div>
             <div className={styles.headerName}>EG001</div>
             <div className={styles.headerName}>Aarushi Patel</div>

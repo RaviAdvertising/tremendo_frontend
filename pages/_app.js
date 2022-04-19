@@ -41,7 +41,9 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   let isMobileView = (ctx.req
     ? ctx.req.headers["user-agent"]
     : navigator.userAgent
-  ).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
+  ).match(
+    /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|ipad|android|android 3.0|xoom|sch-i800|playbook|tablet|kindle|WPDesktop/i
+  );
   return {
     pageProps: {
       ...(Component.getInitialProps

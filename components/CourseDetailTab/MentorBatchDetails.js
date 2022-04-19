@@ -1,29 +1,36 @@
 import styles from "./MentorBatchDetails.module.css";
+import { useContext, useState, useEffect } from "react";
 import { Dropdown, Icon, Pagination } from "semantic-ui-react";
 import Button from "../Button/Button";
+import { GlobalContext } from "../../Context/Provider";
+import axiosInstance from "../../utils/axiosInstance";
+import jsCookie from "js-cookie";
+import { COOKIE_TOKEN } from "../../utils/constants";
 const PENDING = "Pending";
 const APPROVE = "Approved";
-const DESAPPROVE = "Disapproved";
+const DESAPPROVE = "Reject";
 
 export default function MentorBatchDetails({}) {
-  const batches = [
-    {
-      text: "Batches - EG001",
-      value: "Batches - EG001"
-    },
-    {
-      text: "Batches - EG002",
-      value: "Batches - EG002"
-    },
-    {
-      text: "Batches - EG003",
-      value: "Batches - EG003"
-    },
-    {
-      text: "Batches - EG004",
-      value: "Batches - EG004"
-    }
-  ];
+  const { homeState } = useContext(GlobalContext);
+  const [mentorList, setMentorList] = useState([]);
+  const languageArray = homeState.getLanguage.map(i => {
+    return {
+      text: i.title,
+      value: i.title
+    };
+  });
+  useEffect(() => {
+    getMentorList(homeState.getLanguage[0].id);
+  }, []);
+
+  const getMentorList = async code => {
+    try {
+      const response = await axiosInstance.get(
+        `/getMentorList?access_token=${jsCookie.get(COOKIE_TOKEN)}&lang=${code}`
+      );
+      setMentorList(response.data.data);
+    } catch (err) {}
+  };
   const dummyData = [
     {
       id: 1,
@@ -67,7 +74,7 @@ export default function MentorBatchDetails({}) {
       date: "18 Apr, 2018",
       mentor_id: "154-26",
       batch: "EG001",
-      leave: "Disapproved",
+      leave: "Reject",
       isSelectedLeave: true
     },
     {
@@ -108,13 +115,18 @@ export default function MentorBatchDetails({}) {
       value: "Approved"
     },
     {
-      text: "Disapproved",
-      value: "Disapproved"
+      text: "Reject",
+      value: "Reject"
     }
   ];
   const onSelectLeaveOption = data => {
     console.log(data);
   };
+  const onChangeLanguage = data => {
+    const languageCode = homeState.getLanguage.find(i => i.title == data.value);
+    getMentorList(languageCode.id);
+  };
+  console.log(mentorList);
   return (
     <div className={styles.base}>
       <div className={styles.headingDropdownWrapper}>
@@ -124,8 +136,9 @@ export default function MentorBatchDetails({}) {
             className={styles.batchedDropdown}
             fluid
             selection
-            defaultValue={batches[0].value}
-            options={batches}
+            defaultValue={languageArray[0].value}
+            options={languageArray}
+            onChange={(e, data) => onChangeLanguage(data)}
           />
         </div>
       </div>
