@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import moment from "moment";
 import React, { useState, useEffect, useContext } from "react";
 import {
   Dropdown,
@@ -6,7 +7,8 @@ import {
   Pagination,
   Modal,
   Input,
-  Button
+  Button,
+  Message
 } from "semantic-ui-react";
 import { GlobalContext } from "../../Context/Provider";
 import axiosInstance from "../../utils/axiosInstance";
@@ -17,10 +19,14 @@ import styles from "./AdminBatchManagment.module.css";
 export default function AdminBatchManagment({}) {
   const { homeState } = useContext(GlobalContext);
   const [openModal, setOpenModal] = useState(false);
+  const [batchReplacementModal, setBatchReplacementModal] = useState(null);
   const [loading, setLoading] = useState(false);
   const [createBatchData, setCreateBatchData] = useState({});
   const [mentorList, setMentorList] = useState([]);
   const [batchList, setBatchList] = useState([]);
+  const [studentList, setStudentList] = useState([]);
+  const [newBatchCode, setNewBatchCode] = useState("");
+  const [selectedBatch, setSelectedBatch] = useState("");
 
   useEffect(() => {
     getMentorList();
@@ -35,15 +41,31 @@ export default function AdminBatchManagment({}) {
       setMentorList(response.data.data);
     } catch (err) {}
   };
+
+  const getStudentsAccordingToBatch = async id => {
+    try {
+      const response = await axiosInstance.get(
+        `/getBatchStudentList?access_token=${Cookies.get(
+          COOKIE_TOKEN
+        )}&batch_id=${id}`
+      );
+      setStudentList(response.data.data);
+    } catch (err) {}
+  };
   const getBatchList = async () => {
     try {
       const response = await axiosInstance.get(
         `/getBatchList?access_token=${Cookies.get(COOKIE_TOKEN)}&lang=all`
       );
       setBatchList(response.data.data);
+      getStudentsAccordingToBatch(response.data.data[0].batch_id);
     } catch (err) {}
   };
-
+  const onChangeBatchFilter = async id => {
+    const selectedId = id.split("-")[1];
+    getStudentsAccordingToBatch(selectedId);
+    setSelectedBatch(selectedId);
+  };
   const batches = batchList.map(i => {
     return {
       text: `${i.batch_language}-${i.batch_id}`,
@@ -221,7 +243,76 @@ export default function AdminBatchManagment({}) {
       </Modal>
     );
   };
-
+  const onUpdateBatch = async () => {
+    setLoading(true);
+    const payload = {
+      access_token: Cookies.get(COOKIE_TOKEN),
+      new_batch_id: newBatchCode.split("-")[1],
+      student_batch_id: batchReplacementModal.student_batch_id
+    };
+    try {
+      const response = await axiosInstance.post(`/updateStudentBatch`, payload);
+      setLoading(false);
+      setBatchReplacementModal(null);
+      getStudentsAccordingToBatch(selectedBatch);
+    } catch (err) {
+      setLoading(false);
+      setBatchReplacementModal(null);
+    }
+  };
+  const batchReplacementModalSection = () => {
+    return (
+      <Modal
+        onClose={() => setBatchReplacementModal(null)}
+        open={batchReplacementModal != null ? true : false}
+        closeIcon
+        size={"tiny"}
+      >
+        <Modal.Header>Swap Batches</Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                value={batchReplacementModal?.batch_id}
+                disabled
+                style={{ width: "100%" }}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Dropdown
+                fluid
+                selection
+                placeholder="New batch"
+                options={batches}
+                onChange={(event, data) => setNewBatchCode(data.value)}
+              />
+            </div>
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="black" onClick={() => setBatchReplacementModal(null)}>
+            Close
+          </Button>
+          <Button
+            content="Update Batch"
+            labelPosition="right"
+            icon="checkmark"
+            onClick={() => onUpdateBatch()}
+            positive
+            loading={loading}
+          />
+        </Modal.Actions>
+      </Modal>
+    );
+  };
+  const noDataSection = () => {
+    return (
+      <Message>
+        <Message.Header>Oops</Message.Header>
+        <p>Please add some student into batches</p>
+      </Message>
+    );
+  };
   return (
     <div className={styles.base}>
       <div className={styles.headingDropdownWrapper}>
@@ -231,8 +322,10 @@ export default function AdminBatchManagment({}) {
             className={styles.batchedDropdown}
             fluid
             selection
+            placeholder="Select batches"
             defaultValue={batches[0] && batches[0].value}
             options={batches}
+            onChange={(event, data) => onChangeBatchFilter(data.value)}
           />
         </div>
       </div>
@@ -247,18 +340,28 @@ export default function AdminBatchManagment({}) {
           <div className={styles.headerName}>Mentor</div>
           <div className={styles.headerName}></div>
         </div>
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((i, index) => (
-          <div className={styles.tableBody} key={index}>
-            <div className={styles.headerName}>Aman Bhatia</div>
-            <div className={styles.headerName}>20 Mar, 2018</div>
-            <div className={styles.headerName}>155-29</div>
-            <div className={styles.headerName}>EG001</div>
-            <div className={styles.headerName}>Aarushi Patel</div>
-            {/* <div className={styles.headerName}>
+        {studentList.length > 0
+          ? studentList?.map((i, index) => (
+              <div className={styles.tableBody} key={index}>
+                <div className={styles.headerName}>{i.user_name}</div>
+                <div className={styles.headerName}>
+                  {moment(i.created_at).format("DD MMM,YYYY")}
+                </div>
+                <div className={styles.headerName}>{i.student_batch_id}</div>
+                <div
+                  className={styles.headerName}
+                  style={{ textDecoration: "underline" }}
+                  onClick={() => setBatchReplacementModal(i)}
+                >
+                  {i.batch_id}
+                </div>
+                <div className={styles.headerName}>{i.mentor_name}</div>
+                {/* <div className={styles.headerName}>
               <Icon name="trash alternate" size="large" color="red" />
             </div> */}
-          </div>
-        ))}
+              </div>
+            ))
+          : noDataSection()}
       </div>
       <div className={styles.btnPaginationWrapper}>
         <div className={styles.createBtn}>
@@ -289,6 +392,7 @@ export default function AdminBatchManagment({}) {
         </div> */}
       </div>
       {addNewBatchModal()}
+      {batchReplacementModalSection()}
     </div>
   );
 }

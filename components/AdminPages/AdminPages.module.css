@@ -82,6 +82,11 @@
   border-radius: 50%;
   background-color: #a2a9b0;
 }
+.listSection{
+  height: 700px;
+  overflow: auto;
+  margin-top: 18px;
+}
 .nameStarWrapper {
   display: flex;
   justify-content: space-between;

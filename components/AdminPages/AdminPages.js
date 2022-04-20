@@ -8,7 +8,8 @@ import {
   Modal,
   Header,
   Button,
-  Input
+  Input,
+  Dropdown
 } from "semantic-ui-react";
 import ButtonComponent from "../Button/Button";
 import axiosInstance from "../../utils/axiosInstance";
@@ -125,6 +126,20 @@ export default function AdminPages({}) {
       getFaqs();
     } catch (err) {}
   };
+  const user_type = [
+    {
+      text: "Student",
+      value: "Student"
+    },
+    {
+      text: "Mentor",
+      value: "Mentor"
+    },
+    {
+      text: "Common",
+      value: "Common"
+    }
+  ];
   const addFaqsModals = () => {
     return (
       <Modal
@@ -144,12 +159,22 @@ export default function AdminPages({}) {
                 style={{ width: "100%" }}
               />
             </div>
-            <div>
+            <div style={{ marginBottom: "20px" }}>
               <Input
                 placeholder="Add Answer..."
                 size="large"
                 onChange={(e, data) => onHandleFaqChange(data, "answer")}
                 style={{ width: "100%" }}
+              />
+            </div>
+            <div>
+              <Dropdown
+                className={styles.batchedDropdown}
+                fluid
+                selection
+                placeholder="Select User type"
+                options={user_type}
+                onChange={(e, data) => onHandleFaqChange(data, "faq_type")}
               />
             </div>
           </Modal.Description>
@@ -411,50 +436,51 @@ export default function AdminPages({}) {
             />
           </div>
         </div>
-
-        {faqList.length > 0 &&
-          faqList.map((faq, index) => (
-            <div
-              className={styles.faqStripWrapper}
-              key={index}
-              onClick={() => toggleSelectedOption(index)}
-            >
-              <div className={styles.stripIconWrapper}>
-                <div
-                  className={styles.faqStrip}
-                  style={{ color: selected == index ? "#218dfa" : "#333333" }}
-                >
-                  <span>{index + 1}.</span>
-                  <span>{faq.faq}</span>
-                </div>
-                <div className={styles.faqStrip}>
-                  <Popup
-                    trigger={<Icon name="ellipsis vertical" size="large" />}
-                    flowing
-                    hoverable
-                    position="bottom right"
-                    style={{ padding: "0px" }}
+        <div className={styles.listSection}>
+          {faqList.length > 0 &&
+            faqList.map((faq, index) => (
+              <div
+                className={styles.faqStripWrapper}
+                key={index}
+                onClick={() => toggleSelectedOption(index)}
+              >
+                <div className={styles.stripIconWrapper}>
+                  <div
+                    className={styles.faqStrip}
+                    style={{ color: selected == index ? "#218dfa" : "#333333" }}
                   >
-                    <div
-                      className={styles.options}
-                      onClick={() => onEditFaq(faq)}
+                    <span>{index + 1}.</span>
+                    <span>{faq.faq}</span>
+                  </div>
+                  <div className={styles.faqStrip}>
+                    <Popup
+                      trigger={<Icon name="ellipsis vertical" size="large" />}
+                      flowing
+                      hoverable
+                      position="bottom right"
+                      style={{ padding: "0px" }}
                     >
-                      Edit
-                    </div>
-                    <div
-                      className={styles.options}
-                      onClick={() => onDeleteFaq(faq.faq_id)}
-                    >
-                      Delete
-                    </div>
-                  </Popup>
+                      <div
+                        className={styles.options}
+                        onClick={() => onEditFaq(faq)}
+                      >
+                        Edit
+                      </div>
+                      <div
+                        className={styles.options}
+                        onClick={() => onDeleteFaq(faq.faq_id)}
+                      >
+                        Delete
+                      </div>
+                    </Popup>
+                  </div>
                 </div>
+                {selected == index && (
+                  <div className={styles.answerWrapper}>{faq.answer}</div>
+                )}
               </div>
-              {selected == index && (
-                <div className={styles.answerWrapper}>{faq.answer}</div>
-              )}
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
       <div className={styles.reviewBlogWrapper}>
         <div className={styles.reviewWrapper}>

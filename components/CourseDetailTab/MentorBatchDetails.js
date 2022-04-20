@@ -1,11 +1,12 @@
 import styles from "./MentorBatchDetails.module.css";
 import { useContext, useState, useEffect } from "react";
-import { Dropdown, Icon, Pagination } from "semantic-ui-react";
+import { Dropdown, Icon, Pagination, Message } from "semantic-ui-react";
 import Button from "../Button/Button";
 import { GlobalContext } from "../../Context/Provider";
 import axiosInstance from "../../utils/axiosInstance";
 import jsCookie from "js-cookie";
 import { COOKIE_TOKEN } from "../../utils/constants";
+import moment from "moment";
 const PENDING = "Pending";
 const APPROVE = "Approved";
 const DESAPPROVE = "Reject";
@@ -31,80 +32,15 @@ export default function MentorBatchDetails({}) {
       setMentorList(response.data.data);
     } catch (err) {}
   };
-  const dummyData = [
-    {
-      id: 1,
-      name: "Namita Gupta",
-      date: "18 Apr, 2018",
-      mentor_id: "154-26",
-      batch: "EG001",
-      leave: "Not Applied",
-      isSelectedLeave: false
-    },
-    {
-      id: 2,
-      name: "Namita Gupta",
-      date: "18 Apr, 2018",
-      mentor_id: "154-26",
-      batch: "EG001",
-      leave: "Not Applied",
-      isSelectedLeave: false
-    },
-    {
-      id: 3,
-      name: "Namita Gupta",
-      date: "18 Apr, 2018",
-      mentor_id: "154-26",
-      batch: "EG001",
-      leave: "Pending",
-      isSelectedLeave: true
-    },
-    {
-      id: 4,
-      name: "Namita Gupta",
-      date: "18 Apr, 2018",
-      mentor_id: "154-26",
-      batch: "EG001",
-      leave: "Approved",
-      isSelectedLeave: true
-    },
-    {
-      id: 5,
-      name: "Namita Gupta",
-      date: "18 Apr, 2018",
-      mentor_id: "154-26",
-      batch: "EG001",
-      leave: "Reject",
-      isSelectedLeave: true
-    },
-    {
-      id: 6,
-      name: "Namita Gupta",
-      date: "18 Apr, 2018",
-      mentor_id: "154-26",
-      batch: "EG001",
-      leave: "Not Applied",
-      isSelectedLeave: false
-    },
-    {
-      id: 7,
-      name: "Namita Gupta",
-      date: "18 Apr, 2018",
-      mentor_id: "154-26",
-      batch: "EG001",
-      leave: "Not Applied",
-      isSelectedLeave: false
-    },
-    {
-      id: 8,
-      name: "Namita Gupta",
-      date: "18 Apr, 2018",
-      mentor_id: "154-26",
-      batch: "EG001",
-      leave: "Not Applied",
-      isSelectedLeave: false
-    }
-  ];
+  const noDataSection = () => {
+    return (
+      <Message>
+        <Message.Header>Oops</Message.Header>
+        <p>Please add some Mentors</p>
+      </Message>
+    );
+  };
+
   const leaveOptions = [
     {
       text: "Pending",
@@ -126,7 +62,9 @@ export default function MentorBatchDetails({}) {
     const languageCode = homeState.getLanguage.find(i => i.title == data.value);
     getMentorList(languageCode.id);
   };
-  console.log(mentorList);
+  const deleteMentor = async id => {
+    //id
+  };
   return (
     <div className={styles.base}>
       <div className={styles.headingDropdownWrapper}>
@@ -147,27 +85,28 @@ export default function MentorBatchDetails({}) {
           <div className={styles.headerName}>Mentor Name</div>
           <div className={styles.headerName}>Joining Date</div>
           <div className={styles.headerName}>Mentor Id</div>
-          <div className={styles.headerName}>
-            Replacement <br></br>(Batch no.)
-          </div>
-          <div className={styles.headerName}>Leave</div>
+          <div className={styles.headerName}>Batch no.</div>
+          <div className={styles.headerName}>Delete</div>
           <div className={styles.headerName}></div>
         </div>
-        {dummyData.map((i, index) => {
-          let backgroundColor = "#FFF7EB",
-            color = "#f88312";
-          if (i.leave == APPROVE) {
-            (backgroundColor = "#EAFCFA"), (color = "#1d8180");
-          } else if (i.leave == DESAPPROVE) {
-            (backgroundColor = "#FCEBEB"), (color = "#f81712");
-          }
-          return (
-            <div className={styles.tableBody} key={index}>
-              <div className={styles.headerName}>{i.name}</div>
-              <div className={styles.headerName}>{i.date}</div>
-              <div className={styles.headerName}>{i.mentor_id}</div>
-              <div className={styles.headerName}>{i.batch}</div>
-              <div className={styles.headerName}>
+        {mentorList.length > 0
+          ? mentorList.map((i, index) => {
+              let backgroundColor = "#FFF7EB",
+                color = "#f88312";
+              if (i.leave == APPROVE) {
+                (backgroundColor = "#EAFCFA"), (color = "#1d8180");
+              } else if (i.leave == DESAPPROVE) {
+                (backgroundColor = "#FCEBEB"), (color = "#f81712");
+              }
+              return (
+                <div className={styles.tableBody} key={index}>
+                  <div className={styles.headerName}>{i.name}</div>
+                  <div className={styles.headerName}>
+                    {moment(i.created_at).format("DD MMM,YYYY")}
+                  </div>
+                  <div className={styles.headerName}>{i.user_code}</div>
+                  <div className={styles.headerName}>{i.user_code}</div>
+                  {/* <div className={styles.headerName}>
                 {i.isSelectedLeave ? (
                   <div className={styles.leaveOptionSelect}>
                     <Dropdown
@@ -187,13 +126,17 @@ export default function MentorBatchDetails({}) {
                 ) : (
                   i.leave
                 )}
-              </div>
-              <div className={styles.headerName}>
-                <Icon name="trash alternate" size="large" color="red" />
-              </div>
-            </div>
-          );
-        })}
+              </div> */}
+                  <div
+                    className={styles.headerName}
+                    onClick={() => deleteMentor(i.user_code)}
+                  >
+                    <Icon name="trash alternate" size="large" color="red" />
+                  </div>
+                </div>
+              );
+            })
+          : noDataSection()}
       </div>
       <div className={styles.btnPaginationWrapper}>
         <div className={styles.createBtn}>
