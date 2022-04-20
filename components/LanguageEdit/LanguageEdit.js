@@ -1,22 +1,49 @@
 import styles from "./LanguageEdit.module.css";
-import { useContext, useEffect } from "react";
-import { Dropdown, Image, Icon } from "semantic-ui-react";
-import Button from "../Button/Button";
+import { useContext, useEffect, useState } from "react";
+import { Dropdown, Image, Icon, Modal, Input, Button } from "semantic-ui-react";
+import ButtonComponent from "../Button/Button";
 import { GlobalContext } from "../../Context/Provider";
 import { getLangaugeDetails } from "../../Context/Actions/Language/LanguageAction";
 import PageLoader from "../Loader/PageLoader";
+
+const EDIT = "Edit";
+const ADD = "Add";
 
 export default function LanguageEdit({}) {
   const { homeState, languageState, languageDispatch: dispatch } = useContext(
     GlobalContext
   );
+  const [feilds, setFeilds] = useState({});
+  const [addLangFeilds, setAddLangFeilds] = useState({});
+  const [openModal, setOpenModal] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const details = languageState.getLanguageDetails;
   useEffect(() => {
     const id = homeState.getLanguage[0].id;
     getLangaugeDetails(id)(dispatch);
   }, []);
+  useEffect(() => {
+    setFieldsIntoState();
+  }, [details]);
   const onChangeLanguage = data => {
-    console.log(data.value);
     getLangaugeDetails(data.value)(dispatch);
+  };
+  const setFieldsIntoState = () => {
+    setFeilds({
+      ...feilds,
+      title: details.culture?.title,
+      description: details.culture?.description
+    });
+  };
+  const handleChange = (data, type) => {
+    setFeilds({
+      ...feilds,
+      [type]: data
+    });
+  };
+  const onChangeLanguageFeild = (data, type) => {
+    setAddLangFeilds({ ...addLangFeilds, [type]: data.value });
   };
   const newLanguages = homeState.getLanguage.map(lang => {
     return {
@@ -24,8 +51,130 @@ export default function LanguageEdit({}) {
       value: lang.id
     };
   });
+  const onEditLang = () => {
+    setAddLangFeilds({ ...details, ...details.culture });
+    setOpenModal(EDIT);
+  };
+  const onCloseModal = () => {
+    setOpenModal(null);
+    setAddLangFeilds({});
+  };
 
-  const details = languageState.getLanguageDetails;
+  const openAddLanguageModal = () => {
+    return (
+      <Modal
+        onClose={() => onCloseModal()}
+        open={openModal != null ? true : false}
+        closeIcon
+        size={"tiny"}
+      >
+        <Modal.Header>{`${openModal} Language`}</Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Language Name"
+                onChange={(e, data) => onChangeLanguageFeild(data, "name")}
+                style={{ width: "100%" }}
+                value={addLangFeilds.title?.split(" ")[0]}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Banner Image URL"
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "banner_large")
+                }
+                style={{ width: "100%" }}
+                value={addLangFeilds.banner_large}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Title"
+                onChange={(e, data) => onChangeLanguageFeild(data, "title")}
+                style={{ width: "100%" }}
+                value={addLangFeilds.title}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Description"
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "description")
+                }
+                style={{ width: "100%" }}
+                value={addLangFeilds.description}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Banner 1 image URL"
+                onChange={(e, data) => onChangeLanguageFeild(data, "password")}
+                style={{ width: "100%" }}
+                value={addLangFeilds.banners?.[0].image_url}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Banner 1 Title"
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "banners[0].title")
+                }
+                style={{ width: "100%" }}
+                value={addLangFeilds.banners?.[0].title}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Banner 1 Description"
+                onChange={(e, data) => onChangeLanguageFeild(data, "password")}
+                style={{ width: "100%" }}
+                value={addLangFeilds.banners?.[0].description}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Banner 2 image URL"
+                onChange={(e, data) => onChangeLanguageFeild(data, "password")}
+                style={{ width: "100%" }}
+                value={addLangFeilds.banners?.[1].image_url}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Banner 2 Title"
+                onChange={(e, data) => onChangeLanguageFeild(data, "password")}
+                style={{ width: "100%" }}
+                value={addLangFeilds.banners?.[1].title}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Banner 2 Description"
+                onChange={(e, data) => onChangeLanguageFeild(data, "password")}
+                style={{ width: "100%" }}
+                value={addLangFeilds.banners?.[1].description}
+              />
+            </div>
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="black" onClick={() => onCloseModal()}>
+            Close
+          </Button>
+          <Button
+            content={`${openModal} Language`}
+            labelPosition="right"
+            icon="checkmark"
+            onClick={() => onCreateMentor()}
+            positive
+            loading={loading}
+          />
+        </Modal.Actions>
+      </Modal>
+    );
+  };
   return (
     <>
       {languageState.getLangaugeDetailsLoading && <PageLoader />}
@@ -42,7 +191,7 @@ export default function LanguageEdit({}) {
             />
           </div>
           <div className={styles.addNewbtn}>
-            <Button
+            <ButtonComponent
               label={"Add new"}
               height={39}
               backgroundColor={"#f7e903"}
@@ -53,7 +202,7 @@ export default function LanguageEdit({}) {
                 fontSize: "18px"
               }}
               border="none"
-              onClick={() => console.log("start")}
+              onClick={() => setOpenModal(ADD)}
             />
           </div>
         </div>
@@ -102,8 +251,8 @@ export default function LanguageEdit({}) {
         </div>
         <div className={styles.saveAndDeleteBtn}>
           <div className={styles.saveBtn}>
-            <Button
-              label={"Save"}
+            <ButtonComponent
+              label={"Edit"}
               height={39}
               backgroundColor={"#f78f1e"}
               textStyle={{
@@ -113,11 +262,11 @@ export default function LanguageEdit({}) {
                 fontSize: "18px"
               }}
               border="none"
-              onClick={() => console.log("start")}
+              onClick={() => onEditLang()}
             />
           </div>
           <div className={styles.deleteBtn}>
-            <Button
+            <ButtonComponent
               label={"Delete"}
               height={39}
               backgroundColor={"#ffebd6"}
@@ -133,6 +282,7 @@ export default function LanguageEdit({}) {
           </div>
         </div>
       </div>
+      {openModal != null && openAddLanguageModal()}
     </>
   );
 }

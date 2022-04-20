@@ -149,7 +149,7 @@ export default function AdminDashboard({}) {
                 datasets: [
                   {
                     label: "Sale",
-                    data: [20, 39, 30, 40, 50, 25, 56, 25, 45, 65],
+                    data: [],
                     fill: false,
                     tension: 2,
                     borderColor: "#71d875",
@@ -174,7 +174,7 @@ export default function AdminDashboard({}) {
             <div>{filterSection("Weekly")}</div>
           </div>
           <div className={styles.totalEarning}>
-            <span style={{ fontWeight: "bold" }}>₹ 4,000,00</span> <br></br>
+            <span style={{ fontWeight: "bold" }}>₹ 0</span> <br></br>
             Total Earning
           </div>
           <div className={styles.summaryChart}>
@@ -183,7 +183,7 @@ export default function AdminDashboard({}) {
                 labels: [1, 2, 3, 4, 5, 6],
                 datasets: [
                   {
-                    data: [20, 35, 28, 38, 25, 42],
+                    data: [],
                     fill: {
                       target: "origin",
                       above: "#F2F9E7", // Area will be red above the origin
@@ -237,7 +237,7 @@ export default function AdminDashboard({}) {
                 labels: saleLabel,
                 datasets: [
                   {
-                    data: [90, 39, 80, 34, 54, 73, 67, 44, 65, 76],
+                    data: [],
                     backgroundColor: [
                       "#055c4d",
                       "#e78109",
@@ -267,19 +267,19 @@ export default function AdminDashboard({}) {
               id="canvas"
               width="200"
               height="200"
-              data-percent="40"
+              data-percent="0"
             ></canvas>
             <div className={styles.showProgress} id="procent"></div>
           </div>
           <div className={styles.chartHeading} style={{ textAlign: "center" }}>
-            Total - 4,00,000
+            Total - 0
           </div>
         </div>
       </div>
       <div className={styles.transactionInvoiceWrapper}>
         <div className={styles.headingFilterWrapper}>
           <div className={styles.chartHeading}>Transaction Invoice</div>
-          <div>{filterSection("Last Month")}</div>
+          {/* <div>{filterSection("Last Month")}</div> */}
         </div>
         <div className={styles.tableHeader}>
           <div className={styles.serialNo}>No</div>
@@ -289,7 +289,7 @@ export default function AdminDashboard({}) {
           <div className={styles.headerLabel}>Date</div>
           <div className={styles.headerLabel}></div>
         </div>
-        {[1, 2, 3, 4, 5].map((transaction, index) => (
+        {[].map((transaction, index) => (
           <div className={styles.tableBody} key={index}>
             <div className={styles.serialNo}>{index + 1}</div>
             <div className={styles.headerLabel}>Ekta Singh</div>

@@ -54,14 +54,14 @@ export default function Tab({
           <div className={styles.leftSection}>
             {studentDashboard ? (
               <div className={styles.flagSection}>
-                <ImageComponent
+                {/* <ImageComponent
                   src={
                     "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/english_flag.png?alt=media&token=426f6879-24af-4182-a3e7-3cbc39f9622c"
                   }
                   alt={"flag"}
                   width={"65px"}
                   height={"35px"}
-                />
+                /> */}
               </div>
             ) : (
               <div className={styles.mentorBatchDetails}>
@@ -178,7 +178,7 @@ export default function Tab({
             <div className={styles.upcomingTaskSection}>
               <div className={styles.upcomingTaskHeading}>Upcoming Task</div>
               <div className={styles.upcomingTaskBox}>
-                {[1, 1, 1, 1].map((i, index) => (
+                {[].map((i, index) => (
                   <div className={styles.taskWrapper} key={index}>
                     <div className={styles.taskImage}></div>
                     <div className={styles.taskDetail}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./CalenderTab.module.css";
 import moment from "moment";
 import { Icon, Dropdown } from "semantic-ui-react";
@@ -6,30 +6,33 @@ import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import timeGridPlugin from "@fullcalendar/timegrid";
+import axiosInstance from "../../utils/axiosInstance";
+import jsCookie from "js-cookie";
+import { COOKIE_TOKEN } from "../../utils/constants";
 
 export default function CalenderTab({}) {
   const [info, setInfo] = useState({});
+  const [batchList, setBatchList] = useState([]);
   // if (true) {
   //   return <StudentDashboardSkelton />;
   // }
-  const batched = [
-    {
-      text: "Batches - EG001",
-      value: "Batches - EG001"
-    },
-    {
-      text: "Batches - EG002",
-      value: "Batches - EG002"
-    },
-    {
-      text: "Batches - EG003",
-      value: "Batches - EG003"
-    },
-    {
-      text: "Batches - EG004",
-      value: "Batches - EG004"
-    }
-  ];
+  useEffect(() => {
+    getBatchList();
+  }, []);
+  const getBatchList = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `/getBatchList?access_token=${jsCookie.get(COOKIE_TOKEN)}&lang=all`
+      );
+      setBatchList(response.data.data);
+    } catch (err) {}
+  };
+  const batched = batchList.map(i => {
+    return {
+      text: `${i.batch_language}-${i.batch_id}`,
+      value: `${i.batch_language}-${i.batch_id}`
+    };
+  });
   const handleDateClick = arg => {
     console.log(arg.dateStr);
   };
@@ -45,7 +48,7 @@ export default function CalenderTab({}) {
           className={styles.batchedDropdown}
           fluid
           selection
-          defaultValue={batched[0].value}
+          defaultValue={batched?.[0]?.value}
           options={batched}
         />
       </div>
