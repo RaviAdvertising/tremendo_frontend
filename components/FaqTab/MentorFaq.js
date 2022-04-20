@@ -4,14 +4,30 @@ import { Image } from "semantic-ui-react";
 import Button from "../Button/Button";
 import Icon from "../../assets/Icon/Icon";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
+import axiosInstance from "../../utils/axiosInstance";
 
 export default class MentorFaq extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      openState: [1]
+      openState: [1],
+      faqList: []
     };
   }
+
+  componentDidMount() {
+    this.getFaqs();
+  }
+  getFaqs = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `/getCourseFaqs?faq_type=mentor`
+      );
+      this.setState({
+        faqList: response.data.data
+      });
+    } catch (err) {}
+  };
   openSection = id => {
     let currentState = this.state.openState;
     const findId = currentState.indexOf(id);
@@ -25,19 +41,19 @@ export default class MentorFaq extends React.Component {
     });
   };
   render() {
-    if (true) {
-      return (
-        <div style={{ height: "700px", width: "700px", margin: "auto" }}>
-          <Image
-            src="/Images/no_data.png"
-            alt="tremendo dashboard banner"
-            height="800px"
-            width="700px"
-            className={styles.banner}
-          />
-        </div>
-      );
-    }
+    // if (true) {
+    //   return (
+    //     <div style={{ height: "700px", width: "700px", margin: "auto" }}>
+    //       <Image
+    //         src="/Images/no_data.png"
+    //         alt="tremendo dashboard banner"
+    //         height="800px"
+    //         width="700px"
+    //         className={styles.banner}
+    //       />
+    //     </div>
+    //   );
+    // }
     return (
       <div className={styles.base}>
         <div className={styles.faqWrapper}>
@@ -48,30 +64,26 @@ export default class MentorFaq extends React.Component {
           </DesktopOnly>
           <div className={styles.faqBoxWrapper}>
             <div className={styles.heading}>FAQ</div>
-            {[1, 2, 3, 4].map((i, index) => (
+            {this.state.faqList.map((i, index) => (
               <div className={styles.faqBox} key={index}>
                 <div className={styles.questionWrapper}>
                   <div className={styles.questionName}>
-                    {`1. Lorem Ipsum is simply dummy text?`}
+                    {`${index + 1}. ${i.faq}`}
                   </div>
                   <div
                     className={styles.arrowIcon}
                     style={{
                       transform: "rotate(0deg)"
                     }}
-                    onClick={() => this.openSection(i)}
+                    onClick={() => this.openSection(i.faq_id)}
                   >
                     <Icon name="downArrow" />
                   </div>
                 </div>
-                {this.state.openState.includes(i) && (
+                {this.state.openState.includes(i.faq_id) && (
                   <div className={styles.answerWrapper}>
                     <div className={styles.borderTop}></div>
-                    <div className={styles.answer}>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industrys
-                      standard.
-                    </div>
+                    <div className={styles.answer}>{i.answer}</div>
                   </div>
                 )}
               </div>

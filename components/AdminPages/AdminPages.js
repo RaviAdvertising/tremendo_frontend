@@ -40,9 +40,7 @@ export default function AdminPages({}) {
 
   const getFaqs = async () => {
     try {
-      const response = await axiosInstance.get(
-        `/getCourseFaqs?faq_type=common`
-      );
+      const response = await axiosInstance.get(`/getCourseFaqs`);
       setFaqList(response.data.data);
       setLoading(false);
     } catch (err) {
@@ -129,15 +127,15 @@ export default function AdminPages({}) {
   const user_type = [
     {
       text: "Student",
-      value: "Student"
+      value: "student"
     },
     {
       text: "Mentor",
-      value: "Mentor"
+      value: "mentor"
     },
     {
       text: "Common",
-      value: "Common"
+      value: "common"
     }
   ];
   const addFaqsModals = () => {

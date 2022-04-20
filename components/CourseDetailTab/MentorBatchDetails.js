@@ -1,11 +1,21 @@
 import styles from "./MentorBatchDetails.module.css";
 import { useContext, useState, useEffect } from "react";
-import { Dropdown, Icon, Pagination, Message } from "semantic-ui-react";
-import Button from "../Button/Button";
+import {
+  Dropdown,
+  Icon,
+  Pagination,
+  Message,
+  Modal,
+  Input,
+  Button,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
+import ButtonComponent from "../Button/Button";
 import { GlobalContext } from "../../Context/Provider";
 import axiosInstance from "../../utils/axiosInstance";
 import jsCookie from "js-cookie";
-import { COOKIE_TOKEN } from "../../utils/constants";
+import { COOKIE_TOKEN, LOGIN_MENTOR_TAB } from "../../utils/constants";
 import moment from "moment";
 const PENDING = "Pending";
 const APPROVE = "Approved";
@@ -14,6 +24,11 @@ const DESAPPROVE = "Reject";
 export default function MentorBatchDetails({}) {
   const { homeState } = useContext(GlobalContext);
   const [mentorList, setMentorList] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [createBatchData, setCreateBatchData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [selectedLang, setSelectedLang] = useState("");
+
   const languageArray = homeState.getLanguage.map(i => {
     return {
       text: i.title,
@@ -25,12 +40,102 @@ export default function MentorBatchDetails({}) {
   }, []);
 
   const getMentorList = async code => {
+    setLoading(true);
     try {
       const response = await axiosInstance.get(
         `/getMentorList?access_token=${jsCookie.get(COOKIE_TOKEN)}&lang=${code}`
       );
       setMentorList(response.data.data);
-    } catch (err) {}
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
+  const onHandleChangeBatch = (data, type) => {
+    setCreateBatchData({ ...createBatchData, [type]: data.value });
+  };
+  const onCreateMentor = async () => {
+    setLoading(true);
+    const lang_code = homeState.getLanguage.find(
+      i => i.title == createBatchData.language
+    );
+    const payload = {
+      ...createBatchData,
+      access_type: LOGIN_MENTOR_TAB,
+      dob: "",
+      phone_number: "",
+      lang_code: lang_code.id
+    };
+    try {
+      await axiosInstance.post(`/signup`, payload);
+      setLoading(false);
+      setOpenModal(false);
+      getMentorList(selectedLang);
+    } catch (err) {
+      setLoading(false);
+      setOpenModal(false);
+    }
+  };
+  const addNewBatchModal = () => {
+    return (
+      <Modal
+        onClose={() => setOpenModal(false)}
+        open={openModal}
+        closeIcon
+        size={"tiny"}
+      >
+        <Modal.Header>Create New Mentor</Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Name"
+                onChange={(e, data) => onHandleChangeBatch(data, "name")}
+                style={{ width: "100%" }}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Dropdown
+                fluid
+                selection
+                options={languageArray}
+                onChange={(event, data) =>
+                  onHandleChangeBatch(data, "language")
+                }
+                placeholder="Languages"
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Email"
+                onChange={(e, data) => onHandleChangeBatch(data, "email")}
+                style={{ width: "100%" }}
+              />
+            </div>
+            <div>
+              <Input
+                placeholder="Password"
+                onChange={(e, data) => onHandleChangeBatch(data, "password")}
+                style={{ width: "100%" }}
+              />
+            </div>
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="black" onClick={() => setOpenModal(false)}>
+            Close
+          </Button>
+          <Button
+            content="Create Mentor"
+            labelPosition="right"
+            icon="checkmark"
+            onClick={() => onCreateMentor()}
+            positive
+            loading={loading}
+          />
+        </Modal.Actions>
+      </Modal>
+    );
   };
   const noDataSection = () => {
     return (
@@ -61,12 +166,18 @@ export default function MentorBatchDetails({}) {
   const onChangeLanguage = data => {
     const languageCode = homeState.getLanguage.find(i => i.title == data.value);
     getMentorList(languageCode.id);
+    setSelectedLang(languageCode.id);
   };
   const deleteMentor = async id => {
     //id
   };
   return (
     <div className={styles.base}>
+      {loading && (
+        <Dimmer active>
+          <Loader />
+        </Dimmer>
+      )}
       <div className={styles.headingDropdownWrapper}>
         <div className={styles.heading}>Mentor Batch Details </div>
         <div className={styles.batchSelect}>
@@ -140,7 +251,7 @@ export default function MentorBatchDetails({}) {
       </div>
       <div className={styles.btnPaginationWrapper}>
         <div className={styles.createBtn}>
-          <Button
+          <ButtonComponent
             label={"Create new ID"}
             height={45}
             backgroundColor={"#f98e46"}
@@ -151,7 +262,7 @@ export default function MentorBatchDetails({}) {
               fontSize: "18px"
             }}
             border="none"
-            onClick={() => console.log("start")}
+            onClick={() => setOpenModal(true)}
           />
         </div>
         {/* <div className={styles.pagination}>
@@ -166,6 +277,7 @@ export default function MentorBatchDetails({}) {
               />
             </div> */}
       </div>
+      {addNewBatchModal()}
     </div>
   );
 }

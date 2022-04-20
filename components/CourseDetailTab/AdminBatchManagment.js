@@ -8,7 +8,9 @@ import {
   Modal,
   Input,
   Button,
-  Message
+  Message,
+  Dimmer,
+  Loader
 } from "semantic-ui-react";
 import { GlobalContext } from "../../Context/Provider";
 import axiosInstance from "../../utils/axiosInstance";
@@ -43,6 +45,7 @@ export default function AdminBatchManagment({}) {
   };
 
   const getStudentsAccordingToBatch = async id => {
+    setLoading(true);
     try {
       const response = await axiosInstance.get(
         `/getBatchStudentList?access_token=${Cookies.get(
@@ -50,7 +53,10 @@ export default function AdminBatchManagment({}) {
         )}&batch_id=${id}`
       );
       setStudentList(response.data.data);
-    } catch (err) {}
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   };
   const getBatchList = async () => {
     try {
@@ -315,6 +321,11 @@ export default function AdminBatchManagment({}) {
   };
   return (
     <div className={styles.base}>
+      {loading && (
+        <Dimmer active>
+          <Loader />
+        </Dimmer>
+      )}
       <div className={styles.headingDropdownWrapper}>
         <div className={styles.heading}>Student Batch Details </div>
         <div className={styles.batchSelect}>

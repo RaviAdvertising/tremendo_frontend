@@ -13,7 +13,7 @@ import { LOGIN_MENTOR_TAB, USER_DETAILS } from "../../utils/constants";
 import { useRouter } from "next/router";
 import { HOME_PAGE } from "../../utils/routes";
 
-const INITIAL_TAB_INDEX = 7;
+const INITIAL_TAB_INDEX = 6;
 
 function Mentor() {
   const tabs = [
@@ -42,13 +42,7 @@ function Mentor() {
       component: <MentorProgresstab />
     },
     { id: 5, tab: "FAQ", icon: "faq", component: <MentorFaq /> },
-    {
-      id: 6,
-      tab: "Term & Condition",
-      icon: "termAndCondition",
-      component: "6"
-    },
-    { id: 7, tab: "Profile", icon: "setting", component: <MentorProfile /> }
+    { id: 6, tab: "Profile", icon: "setting", component: <MentorProfile /> }
   ];
   const [selectedTabIndex, setSelectedTabIndex] = useState(INITIAL_TAB_INDEX);
   const clickOnTab = data => {

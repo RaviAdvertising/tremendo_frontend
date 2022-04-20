@@ -11,7 +11,7 @@ import FaqTab from "../../components/FaqTab/FaqTab";
 import ProfileTab from "../../components/ProfileTab/ProfileTab";
 import { LOGIN_STUDENT_TAB, USER_DETAILS } from "../../utils/constants";
 
-const INITIAL_TAB_INDEX = 7;
+const INITIAL_TAB_INDEX = 6;
 
 function Student() {
   const tabs = [
@@ -35,13 +35,7 @@ function Student() {
     },
     { id: 4, tab: "Progress", icon: "progress", component: <ProgressTab /> },
     { id: 5, tab: "FAQ", icon: "faq", component: <FaqTab /> },
-    {
-      id: 6,
-      tab: "Term & Condition",
-      icon: "termAndCondition",
-      component: "6"
-    },
-    { id: 7, tab: "Profile", icon: "setting", component: <ProfileTab /> }
+    { id: 6, tab: "Profile", icon: "setting", component: <ProfileTab /> }
   ];
   const [selectedTabIndex, setSelectedTabIndex] = useState(INITIAL_TAB_INDEX);
   const clickOnTab = data => {

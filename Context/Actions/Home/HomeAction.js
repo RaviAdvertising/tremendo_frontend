@@ -273,7 +273,7 @@ export const getBlogs = () => dispatch => {
 export const getFaqs = () => dispatch => {
   dispatch({ type: GET_FAQS_REQUEST });
   return axiosInstance
-    .get(`/getCourseFaqs`)
+    .get(`/getCourseFaqs?faq_type=common`)
     .then(res => {
       dispatch({
         type: GET_FAQS_SUCCESS,
