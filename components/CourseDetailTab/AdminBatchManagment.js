@@ -231,6 +231,26 @@ export default function AdminBatchManagment({}) {
                 />
               </div>
             </div>
+            <div className={styles.inputCreateWrapper}>
+              <div>
+                <Input
+                  placeholder="Batch Purchase Price"
+                  onChange={(e, data) =>
+                    onHandleChangeBatch(data, "batch_purchase_price")
+                  }
+                  style={{ width: "100%" }}
+                />
+              </div>
+              <div>
+                <Input
+                  placeholder="Batch Orignal Price"
+                  onChange={(e, data) =>
+                    onHandleChangeBatch(data, "batch_original_price")
+                  }
+                  style={{ width: "100%" }}
+                />
+              </div>
+            </div>
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>

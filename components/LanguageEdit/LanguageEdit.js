@@ -20,7 +20,7 @@ export default function LanguageEdit({}) {
 
   const details = languageState.getLanguageDetails;
   useEffect(() => {
-    const id = homeState.getLanguage[0].id;
+    const id = homeState.getLanguage[0].languge_id;
     getLangaugeDetails(id)(dispatch);
   }, []);
   useEffect(() => {

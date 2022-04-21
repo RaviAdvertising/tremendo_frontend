@@ -100,7 +100,7 @@ export default function Home({}) {
                   language={i.title}
                   languageDescription={i.welcome_text}
                   flagSrc={i.flag_url}
-                  id={i.id}
+                  languge_id={i.languge_id}
                 />
               </div>
             ))}

@@ -12,7 +12,7 @@ export default function FlagWrapper(props) {
     <div className={styles.base}>
       <div className={styles.flagImage}>
         <Image
-          src={props.flagSrc}
+          src={props.flagSrc && props.flagSrc}
           alt={props.language}
           width={isMobileView ? "70px" : "100px"}
           height={isMobileView ? "30px" : "50px"}
@@ -21,7 +21,7 @@ export default function FlagWrapper(props) {
       <div className={styles.language}>{props.language}</div>
       <div
         className={styles.languageDescription}
-        onClick={() => router.push(`${LANGUAGE_DETAIL}${props.id}`)}
+        onClick={() => router.push(`${LANGUAGE_DETAIL}${props.languge_id}`)}
       >
         {props.languageDescription}
       </div>

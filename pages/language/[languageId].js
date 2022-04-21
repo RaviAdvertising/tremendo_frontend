@@ -49,6 +49,7 @@ export default function DetailLanguagePage({}) {
     router.push(PAYMENT_PATH);
   };
   const details = languageState.getLanguageDetails;
+
   return (
     <div className={styles.base}>
       <div className={styles.topBannerWrapper}>
@@ -154,7 +155,7 @@ export default function DetailLanguagePage({}) {
                           {i.description}
                         </div>
                         <div className={styles.batchDays}>
-                          {i.days.map(i => i).join("  ")}
+                          {i.days?.map(i => i).join("  ")}
                         </div>
                         <div className={styles.batchCodes}>{i.batch_code}</div>
                         <div className={styles.batchSeats}>

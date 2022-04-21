@@ -82,7 +82,7 @@ export default function Footer(props) {
               <div
                 key={index}
                 className={styles.footerItem}
-                onClick={() => router.push(`${LANGUAGE_DETAIL}${i.id}`)}
+                onClick={() => router.push(`${LANGUAGE_DETAIL}${i.languge_id}`)}
               >
                 {i.title}
               </div>
