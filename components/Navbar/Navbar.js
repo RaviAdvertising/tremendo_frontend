@@ -97,7 +97,7 @@ function Navbar({}) {
 
   const goToLanguage = language => {
     setSelectedLanguage(language.title);
-    router.push(`${LANGUAGE_DETAIL}${language.id}`);
+    router.push(`${LANGUAGE_DETAIL}${language.languge_id}`);
     setVisible(!visible);
   };
 

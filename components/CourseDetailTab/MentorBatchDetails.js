@@ -36,7 +36,7 @@ export default function MentorBatchDetails({}) {
     };
   });
   useEffect(() => {
-    getMentorList(homeState.getLanguage[0].id);
+    getMentorList(homeState.getLanguage[0]?.id);
   }, []);
 
   const getMentorList = async code => {
@@ -185,7 +185,7 @@ export default function MentorBatchDetails({}) {
             className={styles.batchedDropdown}
             fluid
             selection
-            defaultValue={languageArray[0].value}
+            defaultValue={languageArray[0]?.value}
             options={languageArray}
             onChange={(e, data) => onChangeLanguage(data)}
           />

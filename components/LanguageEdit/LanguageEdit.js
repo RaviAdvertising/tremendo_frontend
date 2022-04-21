@@ -5,6 +5,9 @@ import ButtonComponent from "../Button/Button";
 import { GlobalContext } from "../../Context/Provider";
 import { getLangaugeDetails } from "../../Context/Actions/Language/LanguageAction";
 import PageLoader from "../Loader/PageLoader";
+import jsCookie from "js-cookie";
+import { COOKIE_TOKEN } from "../../utils/constants";
+import axiosInstance from "../../utils/axiosInstance";
 
 const EDIT = "Edit";
 const ADD = "Add";
@@ -17,16 +20,19 @@ export default function LanguageEdit({}) {
   const [addLangFeilds, setAddLangFeilds] = useState({});
   const [openModal, setOpenModal] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedLangId, setSelectedLangId] = useState("");
 
   const details = languageState.getLanguageDetails;
   useEffect(() => {
-    const id = homeState.getLanguage[0].languge_id;
+    const id = homeState.getLanguage[0]?.languge_id;
+    setSelectedLangId(id);
     getLangaugeDetails(id)(dispatch);
   }, []);
   useEffect(() => {
     setFieldsIntoState();
   }, [details]);
   const onChangeLanguage = data => {
+    setSelectedLangId(data.value);
     getLangaugeDetails(data.value)(dispatch);
   };
   const setFieldsIntoState = () => {
@@ -36,28 +42,100 @@ export default function LanguageEdit({}) {
       description: details.culture?.description
     });
   };
-  const handleChange = (data, type) => {
-    setFeilds({
-      ...feilds,
-      [type]: data
-    });
-  };
+
   const onChangeLanguageFeild = (data, type) => {
     setAddLangFeilds({ ...addLangFeilds, [type]: data.value });
   };
   const newLanguages = homeState.getLanguage.map(lang => {
     return {
       text: lang.title,
-      value: lang.id
+      value: lang.languge_id
     };
   });
   const onEditLang = () => {
-    setAddLangFeilds({ ...details, ...details.culture });
+    setAddLangFeilds({
+      ...details,
+      lang_code: details.code,
+      culture_title: details.culture.title,
+      culture_description: details.culture.description,
+      culture_banner1_title: details.culture.banners[0].title,
+      culture_banner1_description: details.culture.banners[0].description,
+      culture_banner1_image_url: details.culture.banners[0].image_url,
+      culture_banner2_title: details.culture.banners[1].title,
+      culture_banner2_description: details.culture.banners[1].description,
+      culture_banner2_image_url: details.culture.banners[1].image_url
+    });
     setOpenModal(EDIT);
   };
   const onCloseModal = () => {
     setOpenModal(null);
     setAddLangFeilds({});
+  };
+
+  const onAddLanguage = async () => {
+    setLoading(true);
+    const updatePayload = {
+      access_token: jsCookie.get(COOKIE_TOKEN),
+      language_id: addLangFeilds.languge_id,
+      lang_code: addLangFeilds.lang_code,
+      title: addLangFeilds.name,
+      description: "description",
+      flag_url: addLangFeilds.flag_url,
+      welcome_text: addLangFeilds.welcome_text,
+      banner_large: addLangFeilds.banner_large,
+      banner_small: addLangFeilds.banner_small,
+      culture_title: addLangFeilds.culture_title,
+      culture_description: addLangFeilds.culture_description,
+      culture_banner1_title: addLangFeilds.culture_banner1_title,
+      culture_banner1_description: addLangFeilds.culture_banner1_description,
+      culture_banner1_image_url: addLangFeilds.culture_banner1_image_url,
+      culture_banner2_title: addLangFeilds.culture_banner2_title,
+      culture_banner2_description: addLangFeilds.culture_banner2_description,
+      culture_banner2_image_url: addLangFeilds.culture_banner2_image_url
+    };
+    if (openModal == ADD) {
+      delete updatePayload.language_id;
+      try {
+        const response = await axiosInstance.post(
+          `/addLanguages`,
+          updatePayload
+        );
+        setLoading(false);
+        getLangaugeDetails(selectedLangId)(dispatch);
+        onCloseModal();
+      } catch (err) {
+        setLoading(false);
+        onCloseModal();
+      }
+    } else {
+      try {
+        const response = await axiosInstance.post(
+          `/updateLanguageDetails`,
+          updatePayload
+        );
+        setLoading(false);
+        getLangaugeDetails(selectedLangId)(dispatch);
+        onCloseModal();
+      } catch (err) {
+        setLoading(false);
+        onCloseModal();
+      }
+    }
+  };
+
+  const onDeleteLang = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.delete(
+        `/deleteLanguage?access_token=${jsCookie.get(
+          COOKIE_TOKEN
+        )}&languageId=${selectedLangId}`
+      );
+      setLoading(false);
+      getLangaugeDetails(selectedLangId)(dispatch);
+    } catch (err) {
+      setLoading(false);
+    }
   };
 
   const openAddLanguageModal = () => {
@@ -76,12 +154,38 @@ export default function LanguageEdit({}) {
                 placeholder="Language Name"
                 onChange={(e, data) => onChangeLanguageFeild(data, "name")}
                 style={{ width: "100%" }}
-                value={addLangFeilds.title?.split(" ")[0]}
+                value={addLangFeilds.name}
               />
             </div>
             <div style={{ marginBottom: "20px" }}>
               <Input
-                placeholder="Banner Image URL"
+                placeholder="Language Code"
+                onChange={(e, data) => onChangeLanguageFeild(data, "lang_code")}
+                style={{ width: "100%" }}
+                value={addLangFeilds.lang_code}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Flag Url"
+                onChange={(e, data) => onChangeLanguageFeild(data, "flag_url")}
+                style={{ width: "100%" }}
+                value={addLangFeilds.flag_url}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Welcome Text"
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "welcome_text")
+                }
+                style={{ width: "100%" }}
+                value={addLangFeilds.welcome_text}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Banner Image URL For Desktop"
                 onChange={(e, data) =>
                   onChangeLanguageFeild(data, "banner_large")
                 }
@@ -91,70 +195,92 @@ export default function LanguageEdit({}) {
             </div>
             <div style={{ marginBottom: "20px" }}>
               <Input
-                placeholder="Title"
-                onChange={(e, data) => onChangeLanguageFeild(data, "title")}
+                placeholder="Banner Image URL For Mobile"
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "banner_small")
+                }
                 style={{ width: "100%" }}
-                value={addLangFeilds.title}
+                value={addLangFeilds.banner_small}
+              />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Title"
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "culture_title")
+                }
+                style={{ width: "100%" }}
+                value={addLangFeilds.culture_title}
               />
             </div>
             <div style={{ marginBottom: "20px" }}>
               <Input
                 placeholder="Description"
                 onChange={(e, data) =>
-                  onChangeLanguageFeild(data, "description")
+                  onChangeLanguageFeild(data, "culture_description")
                 }
                 style={{ width: "100%" }}
-                value={addLangFeilds.description}
+                value={addLangFeilds.culture_description}
               />
             </div>
             <div style={{ marginBottom: "20px" }}>
               <Input
                 placeholder="Banner 1 image URL"
-                onChange={(e, data) => onChangeLanguageFeild(data, "password")}
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "culture_banner1_image_url")
+                }
                 style={{ width: "100%" }}
-                value={addLangFeilds.banners?.[0].image_url}
+                value={addLangFeilds.culture_banner1_image_url}
               />
             </div>
             <div style={{ marginBottom: "20px" }}>
               <Input
                 placeholder="Banner 1 Title"
                 onChange={(e, data) =>
-                  onChangeLanguageFeild(data, "banners[0].title")
+                  onChangeLanguageFeild(data, "culture_banner1_title")
                 }
                 style={{ width: "100%" }}
-                value={addLangFeilds.banners?.[0].title}
+                value={addLangFeilds.culture_banner1_title}
               />
             </div>
             <div style={{ marginBottom: "20px" }}>
               <Input
                 placeholder="Banner 1 Description"
-                onChange={(e, data) => onChangeLanguageFeild(data, "password")}
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "culture_banner1_description")
+                }
                 style={{ width: "100%" }}
-                value={addLangFeilds.banners?.[0].description}
+                value={addLangFeilds.culture_banner1_description}
               />
             </div>
             <div style={{ marginBottom: "20px" }}>
               <Input
                 placeholder="Banner 2 image URL"
-                onChange={(e, data) => onChangeLanguageFeild(data, "password")}
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "culture_banner2_image_url")
+                }
                 style={{ width: "100%" }}
-                value={addLangFeilds.banners?.[1].image_url}
+                value={addLangFeilds.culture_banner2_image_url}
               />
             </div>
             <div style={{ marginBottom: "20px" }}>
               <Input
                 placeholder="Banner 2 Title"
-                onChange={(e, data) => onChangeLanguageFeild(data, "password")}
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "culture_banner2_title")
+                }
                 style={{ width: "100%" }}
-                value={addLangFeilds.banners?.[1].title}
+                value={addLangFeilds.culture_banner2_title}
               />
             </div>
             <div style={{ marginBottom: "20px" }}>
               <Input
                 placeholder="Banner 2 Description"
-                onChange={(e, data) => onChangeLanguageFeild(data, "password")}
+                onChange={(e, data) =>
+                  onChangeLanguageFeild(data, "culture_banner2_description")
+                }
                 style={{ width: "100%" }}
-                value={addLangFeilds.banners?.[1].description}
+                value={addLangFeilds.culture_banner2_description}
               />
             </div>
           </Modal.Description>
@@ -167,7 +293,7 @@ export default function LanguageEdit({}) {
             content={`${openModal} Language`}
             labelPosition="right"
             icon="checkmark"
-            onClick={() => onCreateMentor()}
+            onClick={() => onAddLanguage()}
             positive
             loading={loading}
           />
@@ -185,7 +311,7 @@ export default function LanguageEdit({}) {
               className={styles.batchedDropdown}
               fluid
               selection
-              defaultValue={newLanguages[0].value}
+              defaultValue={newLanguages[0]?.value}
               options={newLanguages}
               onChange={(event, data) => onChangeLanguage(data)}
             />
@@ -207,11 +333,11 @@ export default function LanguageEdit({}) {
           </div>
         </div>
         <div className={styles.bannerWrapper}>
-          <div className={styles.overlay}>
+          {/* <div className={styles.overlay}>
             <div className={styles.uploadIcon}>
               <Icon name="cloud upload" size="huge" color="#fff" />
             </div>
-          </div>
+          </div> */}
           <Image src={details.banner_large} alt="banner" />
         </div>
         <div className={styles.title}>{details.culture?.title}</div>
@@ -224,14 +350,14 @@ export default function LanguageEdit({}) {
               key={index}
             >
               <div className={styles.boxImage}>
-                <div
+                {/* <div
                   className={styles.overlay}
                   style={{ borderRadius: "20px", opacity: "0.7" }}
                 >
                   <div className={styles.uploadIcon}>
                     <Icon name="cloud upload" size="huge" />
                   </div>
-                </div>
+                </div> */}
                 <Image alt="" src={i.image_url} />
               </div>
               <div
@@ -276,8 +402,9 @@ export default function LanguageEdit({}) {
                 fontFamily: "Poppins",
                 fontSize: "18px"
               }}
+              loading={loading}
               border="none"
-              onClick={() => console.log("start")}
+              onClick={() => onDeleteLang()}
             />
           </div>
         </div>

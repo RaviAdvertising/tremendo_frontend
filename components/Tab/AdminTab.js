@@ -38,7 +38,7 @@ export default function AdminTab({ tabsData, selectTab, selectedTab }) {
           }}
         >
           <div className={styles.searchHeader}>
-            <div
+            {/* <div
               className={styles.lens}
               style={{
                 backgroundColor: "#ebecec"
@@ -57,7 +57,7 @@ export default function AdminTab({ tabsData, selectTab, selectedTab }) {
                   padding: "8px 15px"
                 }}
               />
-            </div>
+            </div> */}
             <div className={styles.dateSection}>{`${moment().format(
               "dddd"
             )}, ${moment().format("LL")}`}</div>
