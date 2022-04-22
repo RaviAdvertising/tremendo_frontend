@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CalenderTab.module.css";
 import moment from "moment";
-import { Icon, Dropdown } from "semantic-ui-react";
+import {
+  Icon,
+  Dropdown,
+  Dimmer,
+  Loader,
+  Modal,
+  Button,
+  Input
+} from "semantic-ui-react";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
@@ -11,26 +19,53 @@ import jsCookie from "js-cookie";
 import { COOKIE_TOKEN } from "../../utils/constants";
 
 export default function CalenderTab({}) {
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState("");
   const [batchList, setBatchList] = useState([]);
-  // if (true) {
-  //   return <StudentDashboardSkelton />;
-  // }
+  const [loading, setLoading] = useState(false);
+  const [selectedBatch, setSelectedBatch] = useState("");
+  const [classes, setClasses] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+
   useEffect(() => {
     getBatchList();
   }, []);
+
   const getBatchList = async () => {
     try {
       const response = await axiosInstance.get(
         `/getBatchList?access_token=${jsCookie.get(COOKIE_TOKEN)}&lang=all`
       );
       setBatchList(response.data.data);
+      setSelectedBatch(response.data.data[0].batch_id);
+      getCalenderData(response.data.data[0].batch_id);
     } catch (err) {}
+  };
+  const getCalenderData = async id => {
+    setLoading(true);
+    var date = new Date();
+    const firstDay = moment(
+      new Date(date.getFullYear(), date.getMonth(), 1)
+    ).format("x");
+    const lastDay = moment(
+      new Date(date.getFullYear(), date.getMonth() + 1, 0)
+    ).format("x");
+
+    try {
+      const response = await axiosInstance.get(
+        `/getAdminCalendar?access_token=${jsCookie.get(
+          COOKIE_TOKEN
+        )}&batch_id=${id}&startsAt=${firstDay}&endsAt=${lastDay}`
+      );
+      setClasses(response.data.data);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   };
   const batched = batchList.map(i => {
     return {
       text: `${i.batch_language}-${i.batch_id}`,
-      value: `${i.batch_language}-${i.batch_id}`
+      value: i.batch_id
     };
   });
   const handleDateClick = arg => {
@@ -38,18 +73,48 @@ export default function CalenderTab({}) {
   };
 
   const onClickEvent = info => {
-    console.log(info);
+    const selectedClasses = classes.find(i => i.class_id == info.event.id);
+    setInfo(selectedClasses);
+    setOpenModal(true);
   };
-  console.log(info);
+  const onChangeBatch = async data => {
+    setSelectedBatch(data.value);
+    await getCalenderData(data.value);
+  };
+  const goToLink = link => {
+    const url = link.includes("https") ? link : `https://${link}`;
+    window.open(url, "_blank");
+  };
+  const classes_name = [];
+  const classes_timing = [];
+
+  classes.forEach((i, index) => {
+    return classes_name.push({
+      id: i.class_id,
+      title: `${i.class_start_time}:${i.class_end_time}:${i.batch_mentor}`,
+      start: moment(i.class_date).format("YYYY-MM-DD"),
+      end: moment(i.class_date).format("YYYY-MM-DD"),
+      backgroundColor: "#EEF4FF",
+      textColor: "#3D8BFF",
+      className: styles.dateClass
+    });
+  });
+
   return (
     <div className={styles.base}>
+      {loading && (
+        <Dimmer active>
+          <Loader />
+        </Dimmer>
+      )}
       <div className={styles.batchSelect}>
         <Dropdown
           className={styles.batchedDropdown}
           fluid
           selection
-          defaultValue={batched?.[0]?.value}
+          value={selectedBatch}
           options={batched}
+          onChange={(e, data) => onChangeBatch(data)}
         />
       </div>
       <div className={styles.calenderWrapper}>
@@ -58,70 +123,7 @@ export default function CalenderTab({}) {
           initialView="dayGridMonth"
           dateClick={handleDateClick}
           height={600}
-          events={[
-            {
-              title: "Arun Gupta -151-12",
-              start: "2022-04-13",
-              end: "2022-04-13",
-              backgroundColor: "#EEF4FF",
-              textColor: "#3D8BFF",
-              className: styles.dateClass
-            },
-            {
-              title: "",
-              start: "2022-04-13T14:30:00",
-              end: "2022-04-13T16:30:00",
-              backgroundColor: "#EEF4FF",
-              textColor: "#3D8BFF"
-              // className: styles.dateClass
-            },
-
-            {
-              title: "Nisha Rai -151-14",
-              date: "2022-04-17",
-              backgroundColor: "#F5FAF0",
-              textColor: "#8FCB4D",
-              className: styles.dateClass
-            },
-            {
-              title: "",
-              start: "2022-04-17T14:30:00",
-              end: "2022-04-17T16:30:00",
-              backgroundColor: "#F5FAF0",
-              textColor: "#8FCB4D"
-              // className: styles.dateClass
-            },
-            {
-              title: "Ranjan -151-13",
-              date: "2022-04-26",
-              backgroundColor: "#FEF7F1",
-              textColor: "orange",
-              className: styles.dateClass
-            },
-            {
-              title: "",
-              start: "2022-04-26T14:30:00",
-              end: "2022-04-26T16:30:00",
-              backgroundColor: "#FEF7F1",
-              textColor: "orange"
-              // className: styles.dateClass
-            },
-            {
-              title: "Neha -151-16",
-              date: "2022-04-23",
-              backgroundColor: "#FDF7FC",
-              textColor: "#F4C5E7",
-              className: styles.dateClass
-            },
-            {
-              title: "",
-              start: "2022-04-23T14:30:00",
-              end: "2022-04-23T16:30:00",
-              backgroundColor: "#FDF7FC",
-              textColor: "#F4C5E7"
-              // className: styles.dateClass
-            }
-          ]}
+          events={classes_name.concat(classes_timing)}
           displayEventTime={true}
           displayEventEnd={true}
           eventTimeFormat={{
@@ -131,6 +133,49 @@ export default function CalenderTab({}) {
           }}
           eventClick={onClickEvent}
         />
+      </div>
+      <div>
+        <Modal
+          onClose={() => setOpenModal(false)}
+          open={openModal}
+          closeIcon
+          size={"tiny"}
+        >
+          <Modal.Header>Link</Modal.Header>
+          <Modal.Content>
+            <Modal.Description>
+              <div style={{ marginBottom: "20px" }}>
+                <Input
+                  value={info.batch_language}
+                  disabled
+                  style={{ width: "100%" }}
+                />
+              </div>
+              <div style={{ marginBottom: "20px" }}>
+                <Input
+                  value={info.batch_mentor}
+                  disabled
+                  style={{ width: "100%" }}
+                />
+              </div>
+              <div style={{ marginBottom: "20px" }}>
+                <Input value={info.class_link} style={{ width: "100%" }} />
+              </div>
+            </Modal.Description>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="black" onClick={() => setOpenModal(false)}>
+              Close
+            </Button>
+            <Button
+              content="Go to Link"
+              labelPosition="right"
+              icon="checkmark"
+              onClick={() => goToLink(info.class_link)}
+              positive
+            />
+          </Modal.Actions>
+        </Modal>
       </div>
     </div>
   );

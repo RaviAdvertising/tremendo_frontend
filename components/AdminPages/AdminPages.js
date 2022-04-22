@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./AdminPages.module.css";
 import {
   List,
@@ -9,16 +9,23 @@ import {
   Header,
   Button,
   Input,
-  Dropdown
+  Dropdown,
+  TextArea
 } from "semantic-ui-react";
 import ButtonComponent from "../Button/Button";
 import axiosInstance from "../../utils/axiosInstance";
 import Cookies from "js-cookie";
 import { COOKIE_TOKEN } from "../../utils/constants";
-import { getReviewDetails } from "../../Context/Actions/Home/HomeAction";
+import {
+  addReviewComments,
+  getReviewDetails
+} from "../../Context/Actions/Home/HomeAction";
+import { GlobalContext } from "../../Context/Provider";
 
 const ADD = "Add";
 const EDIT = "Edit";
+const STUDENT_COLOR = "#ABA9C3";
+const MENTOR_COLOR = "#DCCCBB";
 
 export default function AdminPages({}) {
   const [selected, setSelected] = useState(0);
@@ -31,6 +38,9 @@ export default function AdminPages({}) {
   const [faqList, setFaqList] = useState([]);
   const [blogsList, setBlogList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
+  const [reviewValue, setReviewValue] = useState("");
+  const [reviewState, openReview] = useState("");
+  const { homeDispatch: dispatch } = useContext(GlobalContext);
 
   useEffect(() => {
     getFaqs();
@@ -158,11 +168,11 @@ export default function AdminPages({}) {
               />
             </div>
             <div style={{ marginBottom: "20px" }}>
-              <Input
+              <TextArea
                 placeholder="Add Answer..."
                 size="large"
                 onChange={(e, data) => onHandleFaqChange(data, "answer")}
-                style={{ width: "100%" }}
+                style={{ width: "100%", minHeight: 100 }}
               />
             </div>
             <div>
@@ -222,12 +232,12 @@ export default function AdminPages({}) {
               />
             </div>
             <div>
-              <Input
+              <TextArea
                 placeholder="Add Answer..."
                 size="large"
                 onChange={(e, data) => onHandleFaqChange(data, "answer")}
                 value={addFaqFeilds && addFaqFeilds.answer}
-                style={{ width: "100%" }}
+                style={{ width: "100%", minHeight: 100 }}
               />
             </div>
           </Modal.Description>
@@ -411,7 +421,21 @@ export default function AdminPages({}) {
       getBlogs();
     } catch (err) {}
   };
-
+  const sendReview = async id => {
+    const payload = {
+      course_review_id: id,
+      comment: reviewValue,
+      access_token: Cookies.get(COOKIE_TOKEN)
+    };
+    await addReviewComments(payload)(dispatch);
+    openReview("");
+    setReviewValue("");
+  };
+  const colorObj = {
+    student: STUDENT_COLOR,
+    mentor: MENTOR_COLOR,
+    common: "#f7f7f7"
+  };
   return (
     <div className={styles.base}>
       <div className={styles.faqWrapper}>
@@ -441,6 +465,7 @@ export default function AdminPages({}) {
                 className={styles.faqStripWrapper}
                 key={index}
                 onClick={() => toggleSelectedOption(index)}
+                style={{ backgroundColor: colorObj[faq.faq_type] }}
               >
                 <div className={styles.stripIconWrapper}>
                   <div
@@ -506,16 +531,47 @@ export default function AdminPages({}) {
                 <div className={styles.nameStarWrapper}>
                   <div className={styles.nameStarWrapper}>
                     <List celled horizontal link>
-                      <List.Item as="a">Reply</List.Item>
+                      <List.Item
+                        as="a"
+                        onClick={() => openReview(i.course_review_id)}
+                      >
+                        Reply
+                      </List.Item>
                       {/* <List.Item as="a">Edit</List.Item>
                       <List.Item as="a">Delete</List.Item> */}
                     </List>
                   </div>
                   <div className={styles.likeThumb}>
                     <Icon name={"thumbs up"} size="small" color={"orange"} />
-                    <span className={styles.likes}>120 Likes</span>
+                    <span className={styles.likes}>2 Likes</span>
                   </div>
                 </div>
+                {reviewState == i.course_review_id && (
+                  <div className={styles.sendReplyWrapper}>
+                    <div className={styles.sendReplyInput}>
+                      <input
+                        className={styles.replyInput}
+                        value={reviewValue}
+                        onChange={event => setReviewValue(event.target.value)}
+                      />
+                    </div>
+                    <div className={styles.sendReplyBtn}>
+                      <ButtonComponent
+                        label={"Send"}
+                        height={25}
+                        borderRadius={2}
+                        backgroundColor={"#f98e46"}
+                        textStyle={{
+                          color: "#fff",
+                          fontFamily: "Open Sans",
+                          fontSize: "12px"
+                        }}
+                        border="none"
+                        onClick={() => sendReview(i.course_review_id)}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}

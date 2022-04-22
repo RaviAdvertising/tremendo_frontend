@@ -169,7 +169,18 @@ export default function MentorBatchDetails({}) {
     setSelectedLang(languageCode.id);
   };
   const deleteMentor = async id => {
-    //id
+    setLoading(true);
+    try {
+      const response = await axiosInstance.delete(
+        `/deleteUserAccount?access_token=${jsCookie.get(
+          COOKIE_TOKEN
+        )}&user_id=${id}`
+      );
+      getMentorList(selectedLang);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   };
   return (
     <div className={styles.base}>

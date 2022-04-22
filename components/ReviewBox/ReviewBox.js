@@ -57,7 +57,7 @@ export default function ReviewBox(props) {
               color={props.thumbLike && "blue"}
             />
           </div>
-          {props.isOpen != props.id && (
+          {/* {props.isOpen != props.id && (
             <div>
               <Button
                 label={"Reply"}
@@ -74,7 +74,7 @@ export default function ReviewBox(props) {
                 onClick={() => props.clickOnReply()}
               />
             </div>
-          )}
+          )} */}
         </div>
       </div>
       {props.comments && props.comments.course_review_id == props.id && (

@@ -1,15 +1,37 @@
 import styles from "./AdminDashboard.module.css";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { GlobalContext } from "../../Context/Provider";
 import Icon from "../../assets/Icon/Icon";
+import axiosInstance from "../../utils/axiosInstance";
+import jsCookie from "js-cookie";
+import { COOKIE_TOKEN } from "../../utils/constants";
+import { Image, Dropdown } from "semantic-ui-react";
+import moment from "moment";
 
 export default function AdminDashboard({}) {
   const { homeState } = useContext(GlobalContext);
+  const [loading, setLoading] = useState(false);
+  const [dashboardData, setDashboardData] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("ja");
   useEffect(() => {
     createCircle();
+    getAdminDashboardData();
   }, []);
+
+  const getAdminDashboardData = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(
+        `/getAdminDashboard?access_token=${jsCookie.get(COOKIE_TOKEN)}`
+      );
+      setDashboardData(response.data.data);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
 
   const createCircle = () => {
     let can = document.getElementById("canvas"),
@@ -61,6 +83,9 @@ export default function AdminDashboard({}) {
         if (deegres >= result) clearInterval(acrInterval);
       }, fps);
     }
+  };
+  const onChangeFilter = data => {
+    setSelectedFilter(data.value);
   };
 
   const filterSection = data => {
@@ -133,8 +158,32 @@ export default function AdminDashboard({}) {
     }
   };
 
-  const saleLabel = homeState.getLanguage.map(language =>
-    language.title.toLowerCase()
+  const saleLabel = dashboardData?.sales_data?.map(language => language.title);
+  const salesCount = dashboardData?.sales_data?.map(
+    language => language.transcation_count
+  );
+  const studentCount = dashboardData?.student_data?.map(
+    student => student.student_count
+  );
+  const summaryAmount = dashboardData?.summary_data?.amount;
+  const transactionData = dashboardData?.transaction_data;
+  const salesPerLanguageCode = dashboardData?.sales_per_language_data?.map(
+    i => {
+      return {
+        text: i.title,
+        value: i.code
+      };
+    }
+  );
+  const salesOfSelectedLang = dashboardData?.sales_per_language_data?.find(
+    j => j.code == selectedFilter
+  );
+  const totalSale = dashboardData?.sales_per_language_data?.reduce(
+    (acc, item) => {
+      acc += item.transcation_count;
+      return acc;
+    },
+    0
   );
 
   return (
@@ -149,7 +198,7 @@ export default function AdminDashboard({}) {
                 datasets: [
                   {
                     label: "Sale",
-                    data: [],
+                    data: salesCount,
                     fill: false,
                     tension: 2,
                     borderColor: "#71d875",
@@ -171,56 +220,18 @@ export default function AdminDashboard({}) {
         <div className={styles.summaryChartWrapper}>
           <div className={styles.headingFilterWrapper}>
             <div className={styles.chartHeading}>Summary</div>
-            <div>{filterSection("Weekly")}</div>
+            {/* <div>{filterSection("Weekly")}</div> */}
           </div>
           <div className={styles.totalEarning}>
-            <span style={{ fontWeight: "bold" }}>₹ 0</span> <br></br>
+            <span style={{ fontWeight: "bold" }}>₹ {summaryAmount}</span>{" "}
+            <br></br>
             Total Earning
           </div>
           <div className={styles.summaryChart}>
-            <Line
-              data={{
-                labels: [1, 2, 3, 4, 5, 6],
-                datasets: [
-                  {
-                    data: [],
-                    fill: {
-                      target: "origin",
-                      above: "#F2F9E7", // Area will be red above the origin
-                      below: "#F2F9E7" // And blue below the origin
-                    },
-                    tension: 2,
-                    borderColor: "#a6c92a",
-                    borderWidth: 1,
-                    cubicInterpolationMode: "monotone",
-                    datalabels: {
-                      display: true,
-                      font: { size: "12", weight: "bold" }
-                    }
-                  }
-                ]
-              }}
-              width={200}
-              height={100}
-              options={{
-                maintainAspectRatio: false,
-                scales: {
-                  x: {
-                    display: false
-                  },
-                  y: {
-                    display: false
-                  }
-                },
-                plugins: {
-                  legend: {
-                    display: false
-                  },
-                  tooltip: {
-                    display: false
-                  }
-                }
-              }}
+            <Image
+              src="/Images/admin_graph.png"
+              alt="admin graph"
+              width="96%"
             />
           </div>
         </div>
@@ -229,7 +240,7 @@ export default function AdminDashboard({}) {
         <div className={styles.saleChartWrapper}>
           <div className={styles.headingFilterWrapper}>
             <div className={styles.chartHeading}>Total Students</div>
-            <div>{filterSection("March, 2022")}</div>
+            {/* <div>{filterSection("March, 2022")}</div> */}
           </div>
           <div className={styles.totalStudentChart}>
             <Bar
@@ -237,7 +248,7 @@ export default function AdminDashboard({}) {
                 labels: saleLabel,
                 datasets: [
                   {
-                    data: [],
+                    data: studentCount,
                     backgroundColor: [
                       "#055c4d",
                       "#e78109",
@@ -260,19 +271,28 @@ export default function AdminDashboard({}) {
         <div className={styles.summaryChartWrapper}>
           <div className={styles.headingFilterWrapper}>
             <div className={styles.chartHeading}>Sales Per Language</div>
-            <div>{filterSection("Japanese")}</div>
+            <div style={{ width: "30%" }}>
+              <Dropdown
+                fluid
+                selection
+                defaultValue={"ja"}
+                options={salesPerLanguageCode}
+                onChange={(event, data) => onChangeFilter(data)}
+                className={styles.filterBase}
+              />
+            </div>
           </div>
           <div className={styles.canvasWrap}>
             <canvas
               id="canvas"
               width="200"
               height="200"
-              data-percent="0"
+              data-percent={salesOfSelectedLang?.transcation_count}
             ></canvas>
             <div className={styles.showProgress} id="procent"></div>
           </div>
           <div className={styles.chartHeading} style={{ textAlign: "center" }}>
-            Total - 0
+            Total - {totalSale}
           </div>
         </div>
       </div>
@@ -289,16 +309,22 @@ export default function AdminDashboard({}) {
           <div className={styles.headerLabel}>Date</div>
           <div className={styles.headerLabel}></div>
         </div>
-        {[].map((transaction, index) => (
+        {transactionData?.map((transaction, index) => (
           <div className={styles.tableBody} key={index}>
             <div className={styles.serialNo}>{index + 1}</div>
             <div className={styles.headerLabel}>Ekta Singh</div>
-            <div className={styles.headerLabel}>0070025489647 </div>
-            <div className={styles.headerLabel}>40,000/- </div>
-            <div className={styles.headerLabel}>22/03/2022</div>
             <div className={styles.headerLabel}>
-              <Icon name="downloadIcon" width="16" height="16" />
+              {transaction.transacation_id}{" "}
             </div>
+            <div className={styles.headerLabel}>
+              {transaction.pay_amount}/-{" "}
+            </div>
+            <div className={styles.headerLabel}>
+              {moment(transaction.created_at).format("DD/MM/yyyy")}
+            </div>
+            {/* <div className={styles.headerLabel}>
+              <Icon name="downloadIcon" width="16" height="16" />
+            </div> */}
           </div>
         ))}
       </div>

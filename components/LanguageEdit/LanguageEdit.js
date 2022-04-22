@@ -8,14 +8,18 @@ import PageLoader from "../Loader/PageLoader";
 import jsCookie from "js-cookie";
 import { COOKIE_TOKEN } from "../../utils/constants";
 import axiosInstance from "../../utils/axiosInstance";
+import { getLanguages } from "../../Context/Actions/Home/HomeAction";
 
 const EDIT = "Edit";
 const ADD = "Add";
 
 export default function LanguageEdit({}) {
-  const { homeState, languageState, languageDispatch: dispatch } = useContext(
-    GlobalContext
-  );
+  const {
+    homeState,
+    languageState,
+    languageDispatch: dispatch,
+    homeDispatch: homeDispatch
+  } = useContext(GlobalContext);
   const [feilds, setFeilds] = useState({});
   const [addLangFeilds, setAddLangFeilds] = useState({});
   const [openModal, setOpenModal] = useState(null);
@@ -78,7 +82,7 @@ export default function LanguageEdit({}) {
       access_token: jsCookie.get(COOKIE_TOKEN),
       language_id: addLangFeilds.languge_id,
       lang_code: addLangFeilds.lang_code,
-      title: addLangFeilds.name,
+      title: addLangFeilds.title,
       description: "description",
       flag_url: addLangFeilds.flag_url,
       welcome_text: addLangFeilds.welcome_text,
@@ -100,6 +104,7 @@ export default function LanguageEdit({}) {
           `/addLanguages`,
           updatePayload
         );
+        await getLanguages()(homeDispatch);
         setLoading(false);
         getLangaugeDetails(selectedLangId)(dispatch);
         onCloseModal();
@@ -113,6 +118,7 @@ export default function LanguageEdit({}) {
           `/updateLanguageDetails`,
           updatePayload
         );
+        await getLanguages()(homeDispatch);
         setLoading(false);
         getLangaugeDetails(selectedLangId)(dispatch);
         onCloseModal();
@@ -125,14 +131,17 @@ export default function LanguageEdit({}) {
 
   const onDeleteLang = async () => {
     setLoading(true);
+    const id = homeState.getLanguage[0]?.languge_id;
     try {
       const response = await axiosInstance.delete(
         `/deleteLanguage?access_token=${jsCookie.get(
           COOKIE_TOKEN
         )}&languageId=${selectedLangId}`
       );
+      await getLanguages()(homeDispatch);
       setLoading(false);
-      getLangaugeDetails(selectedLangId)(dispatch);
+      getLangaugeDetails(id)(dispatch);
+      setSelectedLangId(id);
     } catch (err) {
       setLoading(false);
     }
@@ -152,9 +161,9 @@ export default function LanguageEdit({}) {
             <div style={{ marginBottom: "20px" }}>
               <Input
                 placeholder="Language Name"
-                onChange={(e, data) => onChangeLanguageFeild(data, "name")}
+                onChange={(e, data) => onChangeLanguageFeild(data, "title")}
                 style={{ width: "100%" }}
-                value={addLangFeilds.name}
+                value={addLangFeilds.title}
               />
             </div>
             <div style={{ marginBottom: "20px" }}>

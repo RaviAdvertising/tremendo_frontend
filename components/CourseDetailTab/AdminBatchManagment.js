@@ -251,6 +251,13 @@ export default function AdminBatchManagment({}) {
                 />
               </div>
             </div>
+            <div>
+              <Input
+                placeholder="Meeting Link"
+                onChange={(e, data) => onHandleChangeBatch(data, "class_link")}
+                style={{ width: "100%" }}
+              />
+            </div>
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>

@@ -30,7 +30,6 @@
 .summaryChart {
   position: absolute;
   bottom: 0;
-  height: 150px;
   width: 100%;
 }
 .totalEarning {
@@ -81,13 +80,13 @@
 }
 .filterBase {
   display: flex;
-  background-color: #f38e3f;
+  background-color: #f38e3f !important;
   padding: 5px 6px;
-  font-size: 14px;
-  font-family: Open Sans;
-  font-weight: 700;
+  font-size: 14px !important;
+  font-family: Open Sans !important;
+  font-weight: 700 !important;
   cursor: pointer;
-  width: max-content;
+  width: max-content !important;
 }
 .filterSelectedTitle {
   margin-right: 5px;

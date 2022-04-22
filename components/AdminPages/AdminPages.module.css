@@ -17,7 +17,6 @@
   font-family: Poppins;
 }
 .faqStripWrapper {
-  background-color: #f7f7f7;
   padding: 15px 20px;
   margin-top: 18px;
   cursor: pointer;
@@ -162,4 +161,17 @@
     width: 80%;
     margin: auto;
     margin-top: 20px;
+}
+.sendReplyWrapper{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  align-items: center;
+}
+.replyInput{
+  border: none;
+  border-bottom: 1px solid ;
+}
+.replyInput:focus{
+  outline: none;
 }
