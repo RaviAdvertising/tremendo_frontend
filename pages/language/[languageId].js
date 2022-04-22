@@ -45,8 +45,8 @@ export default function DetailLanguagePage({}) {
       </div>
     );
   };
-  const registerNow = () => {
-    router.push(PAYMENT_PATH);
+  const enrollNow = batchID => {
+    router.replace(`${PAYMENT_PATH}?id=${batchID}`);
   };
   const details = languageState.getLanguageDetails;
 
@@ -54,9 +54,9 @@ export default function DetailLanguagePage({}) {
     <div className={styles.base}>
       <div className={styles.topBannerWrapper}>
         <ImageComponent src={details.banner_large} paddingBottom={"21%"} />
-        {details.banner_title && (
+        {details.welcome_text && (
           <div className={styles.profileName}>{`${
-            details.banner_title
+            details.welcome_text
           } ${name && name.split(" ")[0]}`}</div>
         )}
       </div>
@@ -148,27 +148,27 @@ export default function DetailLanguagePage({}) {
                     <div className={styles.batchDetailsWrapper}>
                       <div
                         className={styles.batchDetails}
-                        onClick={() => openDetailSection(i.batch_code)}
+                        onClick={() => openDetailSection(i.batch_id)}
                       >
-                        <div className={styles.batchNo}>{i.title}</div>
+                        <div className={styles.batchNo}>Batch {index + 1}</div>
                         <div className={styles.batchTiming}>
-                          {i.description}
+                          {i.batch_week_type}
                         </div>
                         <div className={styles.batchDays}>
                           {i.days?.map(i => i).join("  ")}
                         </div>
-                        <div className={styles.batchCodes}>{i.batch_code}</div>
+                        <div className={styles.batchCodes}>{i.batch_id}</div>
                         <div className={styles.batchSeats}>
                           <div
                             style={{ fontWeight: "bold", marginRight: "5px" }}
                           >
-                            {i.seats_left}{" "}
+                            {i.batch_capcity}{" "}
                           </div>{" "}
                           SEATS LEFT{" "}
                           <div
                             style={{
                               transform:
-                                openTab != i.batch_code && "rotate(-90deg)",
+                                openTab != i.batch_id && "rotate(-90deg)",
                               marginLeft: "10px"
                             }}
                           >
@@ -181,7 +181,7 @@ export default function DetailLanguagePage({}) {
                           </div>
                         </div>
                       </div>
-                      {openTab == i.batch_code && (
+                      {openTab == i.batch_id && (
                         <div className={styles.detailsWrapper}>
                           <div className={styles.dateClassWrapper}>
                             <div className={styles.startDateWrapper}>
@@ -189,7 +189,7 @@ export default function DetailLanguagePage({}) {
                                 Start Date :
                               </div>
                               <div className={styles.startDate}>
-                                {i.batch_start_date}
+                                {i.batch_starting_date}
                               </div>
                             </div>
                             <div className={styles.startDateWrapper}>
@@ -205,7 +205,7 @@ export default function DetailLanguagePage({}) {
                                 Total Classes :
                               </div>
                               <div className={styles.startDate}>
-                                {i.total_classes}
+                                {i.batch_total_classes}
                               </div>
                             </div>
                             <div className={styles.startDateWrapper}>
@@ -213,7 +213,7 @@ export default function DetailLanguagePage({}) {
                                 Exam Date :
                               </div>
                               <div className={styles.startDate}>
-                                {i.batch_exam_date}
+                                {i.batch_end_date}
                               </div>
                             </div>
                           </div>
@@ -230,7 +230,7 @@ export default function DetailLanguagePage({}) {
                               <span style={{ fontWeight: "bold" }}>
                                 TOTAL DURATION:{" "}
                               </span>{" "}
-                              <span>{i.total_duration}</span>
+                              <span>{i.batch_total_time}</span>
                             </div>
                           </div>
                           <div className={styles.timeWrapper}>
@@ -254,13 +254,13 @@ export default function DetailLanguagePage({}) {
                               <div className={styles.priceHeading}>Price :</div>
                               <div className={styles.price}>
                                 &#x20b9;
-                                {i.price}
+                                {i.batch_purchase_price}
                               </div>
                             </div>
                             {Cookies.get(COOKIE_TOKEN) && (
                               <div className={styles.enrollNowBtn}>
                                 <Button
-                                  label={i.cta_title}
+                                  label={"Enroll Now"}
                                   height={35}
                                   borderRadius={5}
                                   backgroundColor={"#f78f1e"}
@@ -271,7 +271,7 @@ export default function DetailLanguagePage({}) {
                                     fontWeight: "bold"
                                   }}
                                   border="none"
-                                  onClick={() => registerNow()}
+                                  onClick={() => enrollNow(i.batch_id)}
                                 />
                               </div>
                             )}

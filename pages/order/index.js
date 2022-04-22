@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { Header, Image, Modal } from "semantic-ui-react";
+import { Header, Image, Modal, Dimmer, Loader } from "semantic-ui-react";
 import Button from "../../components/Button/Button";
 import styles from "../../styles/Order.module.css";
 import { useRouter } from "next/router";
-import { USER_DETAILS } from "../../utils/constants";
+import { COOKIE_TOKEN, USER_DETAILS } from "../../utils/constants";
 import { toast } from "react-toastify";
 import { STUDENT_DASHBOARD_PATH } from "../../utils/routes";
+import axiosInstance from "../../utils/axiosInstance";
+import jsCookie from "js-cookie";
 
 function loadScript(src) {
   return new Promise(resolve => {
@@ -24,7 +26,45 @@ function loadScript(src) {
 export default function Order({}) {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [orderDetails, setOrderDetails] = useState({});
 
+  useEffect(() => {
+    getPaymentDetails();
+  }, []);
+
+  const getPaymentDetails = async () => {
+    setLoading(true);
+    const batchId = router.query.id;
+    try {
+      const response = await axiosInstance.get(
+        `/getCoursePurchaseDetail?batch_id=${batchId}`
+      );
+      setOrderDetails(response.data.data);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
+  const setFinalPayment = async transacation_id => {
+    setLoading(true);
+    const payload = {
+      access_token: jsCookie.get(COOKIE_TOKEN),
+      attampt_id: "",
+      transacation_id: transacation_id,
+      amount: orderDetails.batch_purchase_price,
+      pay_amount: orderDetails.batch_purchase_price,
+      lang: orderDetails.language_code,
+      batch_id: orderDetails.batch_id
+    };
+    try {
+      const response = await axiosInstance.post(`/makeCoursePayment`, payload);
+      setLoading(false);
+      setOpenModal(true);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
   async function displayRazorpay() {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
@@ -37,7 +77,7 @@ export default function Order({}) {
       return;
     }
 
-    const data = await fetch("https://tremendo.in:5555/razorpay", {
+    const data = await fetch(`https://tremendo.in:5555/razorpay`, {
       method: "POST"
     }).then(t => t.json());
 
@@ -52,13 +92,13 @@ export default function Order({}) {
       amount: data.amount.toString(),
       order_id: data.id,
       name: "Tremendo",
-      description: "Purchase japanese language",
+      description: `Purchase ${orderDetails.batch_language} language`,
       image: `${window.location.origin}/Images/tremendo_logo.png`,
       handler: function(response) {
         // alert(response.razorpay_payment_id);
         // alert(response.razorpay_order_id);
         // alert(response.razorpay_signature);
-        setOpenModal(true);
+        setFinalPayment(response.razorpay_payment_id);
       },
       prefill: {
         name: userDetails.name,
@@ -79,8 +119,14 @@ export default function Order({}) {
     setOpenModal(false);
     router.replace(STUDENT_DASHBOARD_PATH);
   };
+
   return (
     <>
+      {loading && (
+        <Dimmer active>
+          <Loader />
+        </Dimmer>
+      )}
       <div className={styles.base}>
         <div className={styles.heading}>Summary</div>
         <div className={styles.imageDetailWrapper}>
@@ -93,20 +139,27 @@ export default function Order({}) {
             />
           </div>
           <div className={styles.details}>
-            <div className={styles.courseName}>English Course - Batch-2</div>
+            <div
+              className={styles.courseName}
+            >{`${orderDetails.batch_language} Course - Batch-${orderDetails.batch_id}`}</div>
             <div className={styles.description}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
+              {`You are purchasing for ${orderDetails.batch_language} language which is starting from ${orderDetails.batch_starting_date}. Are you want to purchase?`}
             </div>
           </div>
         </div>
         <div className={styles.priceWrapper}>
           <div className={styles.orignalPriceHeading}>Orignal Price:</div>
-          <div className={styles.price}> &#x20b9; 100</div>
+          <div className={styles.price}>
+            {" "}
+            &#x20b9; {orderDetails.batch_purchase_price}
+          </div>
         </div>
         <div className={styles.totalPriceWrapper}>
           <div className={styles.orignalPriceHeading}>Total:</div>
-          <div className={styles.price}> &#x20b9; 100</div>
+          <div className={styles.price}>
+            {" "}
+            &#x20b9; {orderDetails.batch_purchase_price}
+          </div>
         </div>
         <div className={styles.continueBtn}>
           <Button

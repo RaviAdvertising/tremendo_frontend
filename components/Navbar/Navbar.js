@@ -63,7 +63,9 @@ function Navbar({}) {
   const setLanguageToStore = async () => {
     const currentLanguagePage = router.query.languageId;
     const response = await getLanguages()(homeDispatch);
-    const selectedLang = response.data.find(i => i.id == currentLanguagePage);
+    const selectedLang = response.data.find(
+      i => i.languge_id == currentLanguagePage
+    );
     if (selectedLang) {
       setSelectedLanguage(selectedLang.title);
     } else {
