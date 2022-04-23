@@ -103,25 +103,25 @@ export default function Dashboard() {
   // if (studentDashboardState.getStudentDashboardDataLoading) {
   //   return <StudentDashboardSkelton />;
   // }
-  if (true) {
-    return (
-      <div
-        style={{
-          height: isMobileView ? "300px" : "700px",
-          width: isMobileView ? "300px" : "700px",
-          margin: "auto"
-        }}
-      >
-        <Image
-          src="/Images/no_data.png"
-          alt="tremendo dashboard banner"
-          height={isMobileView ? "300px" : "800px"}
-          width={isMobileView ? "300px" : "700px"}
-          className={styles.banner}
-        />
-      </div>
-    );
-  }
+  // if (true) {
+  //   return (
+  //     <div
+  //       style={{
+  //         height: isMobileView ? "300px" : "700px",
+  //         width: isMobileView ? "300px" : "700px",
+  //         margin: "auto"
+  //       }}
+  //     >
+  //       <Image
+  //         src="/Images/no_data.png"
+  //         alt="tremendo dashboard banner"
+  //         height={isMobileView ? "300px" : "800px"}
+  //         width={isMobileView ? "300px" : "700px"}
+  //         className={styles.banner}
+  //       />
+  //     </div>
+  //   );
+  // }
   return (
     <div className={styles.dashboardBase}>
       <div className={styles.dashboardBanner}>
