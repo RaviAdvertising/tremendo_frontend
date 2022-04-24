@@ -106,6 +106,7 @@
   width: 33.33%;
 }
 .batchListBody {
+  cursor: pointer;
   display: flex;
   padding: 12px 10px;
   background-color: #fbeedf;
@@ -177,6 +178,33 @@
 }
 .batchListWrapper {
   margin-bottom: 40px;
+}
+.tableHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b6fcfa;
+  color: #000;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 5px;
+}
+.headerName{
+  width: 25%;
+}
+.tableBody{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+  font-family: Poppins;
+  font-size: 18px;
+  padding: 10px;
+}
+.bodyName{
+  width: 25%;
 }
 @media (max-width: 1024px) {
   .base {

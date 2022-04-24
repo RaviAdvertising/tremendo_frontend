@@ -1,36 +1,52 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import Button from "../Button/Button";
 import styles from "./BatchManagement.module.css";
 import { useContext } from "react";
 import { DeviceContext } from "../../pages/_app";
-import { Image } from "semantic-ui-react";
+import { Image, Dropdown } from "semantic-ui-react";
 import { GlobalContext } from "../../Context/Provider";
+import axiosInstance from "../../utils/axiosInstance";
+import jsCookie from "js-cookie";
+import { COOKIE_TOKEN } from "../../utils/constants";
 
 export default function BatchManagement() {
   const { isMobileView } = useContext(DeviceContext);
+  const [loading, setLoading] = useState(false);
+  const [studentList, setStudentList] = useState([]);
   const {
     studentDashboardState,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
-  const totalDatesInCurrentMonth = Array.from(
-    Array(moment().daysInMonth()).keys()
-  );
+  const onChangeAttendence = data => {
+    //data
+  };
 
-  const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday"
-  ];
+  const getStudentsAccordingToBatch = async id => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(
+        `/getBatchStudentList?access_token=${jsCookie.get(
+          COOKIE_TOKEN
+        )}&batch_id=${id}`
+      );
+      setStudentList(response.data.data);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
+  const getBatchStudents = async id => {
+    await getStudentsAccordingToBatch(id);
+  };
 
-  const currentDate = moment().format("D");
-  const currentDay = moment().day() ? moment().day() : 7;
-
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (studentDashboardState.mentorBatches.length > 0) {
+      getStudentsAccordingToBatch(
+        studentDashboardState.mentorBatches[0].batch_id
+      );
+    }
+  }, []);
   // if (true) {
   //   return (
   //     <div
@@ -50,6 +66,7 @@ export default function BatchManagement() {
   //     </div>
   //   );
   // }
+
   return (
     <div className={styles.base}>
       <div className={styles.chartHeading}>Batch List</div>
@@ -60,7 +77,11 @@ export default function BatchManagement() {
           <div className={styles.headerOption}>Total Classes</div>
         </div>
         {studentDashboardState.mentorBatches?.map(i => (
-          <div className={styles.batchListBody} key={i}>
+          <div
+            className={styles.batchListBody}
+            key={i}
+            onClick={() => getBatchStudents(i.batch_id)}
+          >
             <div className={styles.bodyOption}>{i.batch_language}</div>
             <div className={styles.bodyOption}>{i.batch_capcity}</div>
             <div className={styles.bodyOptionWithCheckBox}>
@@ -79,54 +100,29 @@ export default function BatchManagement() {
           </div>
         ))}
       </div>
-      <div className={styles.chartHeading}>Batch Details</div>
-      <div className={styles.dateMonthHeading}>
-        <div className={styles.courseName}>Date</div>
-        <div className={styles.batchName}>{moment().format("MMM")}</div>
+      <div className={styles.chartHeading}>Student Attendence</div>
+      <div className={styles.tableHeader}>
+        <div className={styles.headerName}>S no.</div>
+        <div className={styles.headerName}>Name.</div>
+        <div className={styles.headerName}>ID</div>
+        <div className={styles.headerName}>Status</div>
       </div>
-      <div className={styles.datesWrapper} id="date_wrapper">
-        {totalDatesInCurrentMonth.map(i => (
-          <div
-            className={styles.date}
-            style={{ backgroundColor: currentDate == i + 1 && "#fa9116" }}
-            key={i}
-          >
-            {i + 1}
-          </div>
-        ))}
-      </div>
-      {days.map((i, index) => (
-        <div className={styles.courseDetailSection} key={index}>
-          <div
-            className={styles.detailsWrapper}
-            style={{
-              backgroundColor: currentDay !== index + 1 ? "#f2efef" : "#25b1ae"
-            }}
-          >
-            <div className={styles.batchCode}>
-              {isMobileView ? i.substring(0, 3) : i}
-            </div>
-            <div className={styles.batchCode}>E2</div>
-            <div className={styles.timeCode}>02:00PM - 03:00PM</div>
-            <div className={styles.batchCode}>
-              <Button
-                label={"Get Started"}
-                height={33}
-                borderRadius={16}
-                backgroundColor={
-                  currentDay !== index + 1 ? "#e6e4e4" : "#51faf6"
-                }
-                textStyle={{
-                  color: "#000",
-                  fontWeight: "bold",
-                  fontFamily: "Open Sans",
-                  fontSize: isMobileView ? "10px" : "15px"
-                }}
-                border="none"
-                onClick={() => console.log("start")}
-              />
-            </div>
-            {currentDay !== index + 1 && <div className={styles.overlay}></div>}
+      {studentList.map((i, index) => (
+        <div className={styles.tableBody} key={index}>
+          <div className={styles.bodyName}>{index + 1}.</div>
+          <div className={styles.bodyName}>{i.user_name}</div>
+          <div className={styles.bodyName}>{i.student_batch_id}</div>
+          <div className={styles.bodyName}>
+            <Dropdown
+              fluid
+              selection
+              options={[
+                { text: "Present", value: "present" },
+                { text: "Absent", value: "absent" }
+              ]}
+              onChange={(event, data) => onChangeAttendence(data)}
+              placeholder="Attendence"
+            />
           </div>
         </div>
       ))}

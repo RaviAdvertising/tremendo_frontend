@@ -63,7 +63,7 @@ function Mentor() {
   }, []);
   const getInitalData = async () => {
     const batches = await getMentorBatches()(dispatch);
-    const firstBatchId = batches.data[0].batch_id;
+    const firstBatchId = batches.data.length > 0 && batches.data[0].batch_id;
     await getMentorStudentList(firstBatchId)(dispatch);
   };
   const userDetails =
@@ -71,7 +71,7 @@ function Mentor() {
     localStorage.getItem(USER_DETAILS) &&
     JSON.parse(localStorage.getItem(USER_DETAILS));
 
-  if (userDetails.access_type != LOGIN_MENTOR_TAB) {
+  if (userDetails && userDetails.access_type != LOGIN_MENTOR_TAB) {
     return false;
   }
 

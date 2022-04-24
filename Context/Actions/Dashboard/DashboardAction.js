@@ -29,6 +29,21 @@ export const GET_MENTOR_DASHBOARD_DATA_SUCCESS =
 export const GET_MENTOR_DASHBOARD_DATA_ERROR =
   "GET_MENTOR_DASHBOARD_DATA_error";
 
+export const DELETE_ASSIGNEMNT_REQUEST = "DELETE_ASSIGNEMNT_request";
+export const DELETE_ASSIGNEMNT_SUCCESS = "DELETE_ASSIGNEMNT_success";
+export const DELETE_ASSIGNEMNT_ERROR = "DELETE_ASSIGNEMNT_error";
+
+export const UPDATE_STUDENT_SCORE_REQUEST = "UPDATE_STUDENT_SCORE_request";
+export const UPDATE_STUDENT_SCORE_SUCCESS = "UPDATE_STUDENT_SCORE_success";
+export const UPDATE_STUDENT_SCORE_ERROR = "UPDATE_STUDENT_SCORE_error";
+
+export const SUBMITTED_ASSIGNMENT_LIST_REQUEST =
+  "SUBMITTED_ASSIGNMENT_LIST_request";
+export const SUBMITTED_ASSIGNMENT_LIST_SUCCESS =
+  "SUBMITTED_ASSIGNMENT_LIST_success";
+export const SUBMITTED_ASSIGNMENT_LIST_ERROR =
+  "SUBMITTED_ASSIGNMENT_LIST_error";
+
 export const getStudentDashboardData = languageCode => dispatch => {
   dispatch({ type: GET_STUDENT_DASHBOARD_DATA_REQUEST });
   return axiosInstance
@@ -142,6 +157,68 @@ export const getMentorDashboardData = (
     .catch(err => {
       dispatch({
         type: GET_MENTOR_DASHBOARD_DATA_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const deleteAssignment = assignmentId => dispatch => {
+  dispatch({ type: DELETE_ASSIGNEMNT_REQUEST });
+  return axiosInstance
+    .delete(
+      `/deleteAssignment?assignment_id=${assignmentId}&access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}`
+    )
+    .then(res => {
+      dispatch({
+        type: DELETE_ASSIGNEMNT_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: DELETE_ASSIGNEMNT_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const updateStudentAssignmentScore = payload => dispatch => {
+  dispatch({ type: UPDATE_STUDENT_SCORE_REQUEST });
+  return axiosInstance
+    .post(`/updateStudentAssignmentScore`, payload)
+    .then(res => {
+      dispatch({
+        type: UPDATE_STUDENT_SCORE_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: UPDATE_STUDENT_SCORE_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const getSubmittedAssignmentList = assignment_id => dispatch => {
+  dispatch({ type: SUBMITTED_ASSIGNMENT_LIST_REQUEST });
+  return axiosInstance
+    .get(
+      `/getSubmittedAssignmentList?assignment_id=${assignment_id}&access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}`
+    )
+    .then(res => {
+      dispatch({
+        type: SUBMITTED_ASSIGNMENT_LIST_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: SUBMITTED_ASSIGNMENT_LIST_ERROR,
         error: err.response.data
       });
     });

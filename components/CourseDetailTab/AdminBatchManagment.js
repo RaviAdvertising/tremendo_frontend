@@ -81,6 +81,7 @@ export default function AdminBatchManagment({}) {
   const onHandleChangeBatch = (data, type) => {
     setCreateBatchData({ ...createBatchData, [type]: data.value });
   };
+
   const onCreateBatch = async () => {
     setLoading(true);
     const languageCode = homeState.getLanguage.find(
@@ -93,7 +94,8 @@ export default function AdminBatchManagment({}) {
       ...createBatchData,
       access_token: Cookies.get(COOKIE_TOKEN),
       language_code: languageCode.id,
-      batch_mentor_id: mentorId.user_code
+      batch_mentor_id: mentorId.user_code,
+      batch_class_days: createBatchData.batch_class_days?.join(",")
     };
     try {
       const response = await axiosInstance.post(`/createNewBatch`, payload);
@@ -117,6 +119,15 @@ export default function AdminBatchManagment({}) {
       value: i.name
     };
   });
+  const options = [
+    { key: "Monday", text: "Monday", value: "Monday" },
+    { key: "Tuesday", text: "Tuesday", value: "Tuesday" },
+    { key: "Wednesday", text: "Wednesday", value: "Wednesday" },
+    { key: "Thursday", text: "Thursday", value: "Thursday" },
+    { key: "Friday", text: "Friday", value: "Friday" },
+    { key: "Saturday", text: "Saturday", value: "Saturday" },
+    { key: "Sunday", text: "Sunday", value: "Sunday" }
+  ];
 
   const addNewBatchModal = () => {
     return (
@@ -251,10 +262,25 @@ export default function AdminBatchManagment({}) {
                 />
               </div>
             </div>
-            <div>
+
+            <div style={{ marginBottom: "20px" }}>
               <Input
                 placeholder="Meeting Link"
                 onChange={(e, data) => onHandleChangeBatch(data, "class_link")}
+                style={{ width: "100%" }}
+              />
+            </div>
+
+            <div>
+              <Dropdown
+                placeholder="Batch Class Days"
+                fluid
+                multiple
+                selection
+                onChange={(e, data) =>
+                  onHandleChangeBatch(data, "batch_class_days")
+                }
+                options={options}
                 style={{ width: "100%" }}
               />
             </div>
