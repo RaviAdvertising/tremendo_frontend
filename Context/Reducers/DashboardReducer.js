@@ -70,6 +70,34 @@ const dashboardReducer = (state, action) => {
         mentorDashboardDataLoading: false
       });
 
+    case dashboardAction.GET_MENTOR_ASSIGNMENT_LIST_REQUEST:
+      return Object.assign({}, state, {
+        mentorDashboardAssignmentListLoading: true
+      });
+    case dashboardAction.GET_MENTOR_ASSIGNMENT_LIST_SUCCESS:
+      return Object.assign({}, state, {
+        mentorDashboardAssignmentListLoading: false,
+        mentorDashboardAssignmentList: action.data
+      });
+    case dashboardAction.GET_MENTOR_ASSIGNMENT_LIST_ERROR:
+      return Object.assign({}, state, {
+        mentorDashboardAssignmentListLoading: false
+      });
+
+    case dashboardAction.SUBMITTED_ASSIGNMENT_LIST_REQUEST:
+      return Object.assign({}, state, {
+        getSubmittedAssignemntListLoading: true
+      });
+    case dashboardAction.SUBMITTED_ASSIGNMENT_LIST_SUCCESS:
+      return Object.assign({}, state, {
+        getSubmittedAssignemntListLoading: false,
+        getSubmittedAssignemntList: action.data
+      });
+    case dashboardAction.SUBMITTED_ASSIGNMENT_LIST_ERROR:
+      return Object.assign({}, state, {
+        getSubmittedAssignemntListLoading: false
+      });
+
     default:
       return state;
   }

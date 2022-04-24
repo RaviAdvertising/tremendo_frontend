@@ -26,7 +26,6 @@ export default function MentorDashboard({}) {
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
-  useEffect(() => {}, [studentDashboardState.mentorDashboardDataLoading]);
 
   useEffect(() => {
     if (document.getElementById("currentDate")) {

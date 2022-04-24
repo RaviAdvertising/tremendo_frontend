@@ -8,6 +8,10 @@ const dashboardIntialState = {
   mentorStudentList: [],
   mentorStudentListLoading: false,
   mentorDashboardData: [],
-  mentorDashboardDataLoading: false
+  mentorDashboardDataLoading: false,
+  mentorDashboardAssignmentList: [],
+  mentorDashboardAssignmentListLoading: false,
+  getSubmittedAssignemntList: [],
+  getSubmittedAssignemntListLoading: false
 };
 export default dashboardIntialState;

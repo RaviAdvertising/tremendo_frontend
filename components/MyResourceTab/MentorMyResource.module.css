@@ -71,6 +71,7 @@
   width: 15%;
 }
 .tableBodySection {
+  cursor: pointer;
   padding: 8px 12px;
   display: flex;
   color: #000;
@@ -151,6 +152,42 @@
 .eBook {
   cursor: pointer;
   padding: 5px;
+}
+.inputCreateWrapper{
+  display: flex;
+  justify-content: space-between;
+
+}
+.assigmentListTableHeader{
+  background-color: #ebebeb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #343434;
+  font-family: Poppins;
+  font-size: 12px;
+  padding: 10px;
+  font-weight: 600;
+}
+.tableHeaderName{
+  width: 20%;
+}
+.assigmentListTableBody{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #343434;
+  font-family: Poppins;
+  font-size: 12px;
+  padding: 10px;
+}
+.tableBodyOption{
+  width: 20%;
+}
+.heading{
+  font-family: Poppins;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 @media (max-width: 1024px) {
   .base {
