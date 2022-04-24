@@ -123,9 +123,9 @@ export default function AdminLogin(props) {
                 <div className={styles.errorMsg}>{errors["password"]}</div>
               )}
             </div>
-            <div className={styles.remeberMeAndForgotPwd}>
+            {/* <div className={styles.remeberMeAndForgotPwd}>
               <div className={styles.forgotPwd}>Forgot Password?</div>
-            </div>
+            </div> */}
             <Button
               label={"LOG IN"}
               height={55}

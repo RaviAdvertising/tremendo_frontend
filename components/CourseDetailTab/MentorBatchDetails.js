@@ -227,7 +227,7 @@ export default function MentorBatchDetails({}) {
                     {moment(i.created_at).format("DD MMM,YYYY")}
                   </div>
                   <div className={styles.headerName}>{i.user_code}</div>
-                  <div className={styles.headerName}>{i.user_code}</div>
+                  <div className={styles.headerName}>{i.batch_id}</div>
                   {/* <div className={styles.headerName}>
                 {i.isSelectedLeave ? (
                   <div className={styles.leaveOptionSelect}>

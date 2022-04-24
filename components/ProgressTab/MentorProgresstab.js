@@ -10,7 +10,7 @@ import { DeviceContext } from "../../pages/_app";
 export default function MentorProgresstab() {
   const { isMobileView } = useContext(DeviceContext);
   useEffect(() => {
-    // createCircle();
+    createCircle();
   }, []);
 
   const createCircle = () => {

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Tab from "../../components/Tab/Tab";
 import styles from "../../styles/student.module.css";
 import withAuth from "../../utils/withAuth";
@@ -12,6 +12,11 @@ import MentorProfile from "../../components/ProfileTab/MentorProfile";
 import { LOGIN_MENTOR_TAB, USER_DETAILS } from "../../utils/constants";
 import { useRouter } from "next/router";
 import { HOME_PAGE } from "../../utils/routes";
+import { GlobalContext } from "../../Context/Provider";
+import {
+  getMentorBatches,
+  getMentorStudentList
+} from "../../Context/Actions/Dashboard/DashboardAction";
 
 const INITIAL_TAB_INDEX = 6;
 
@@ -45,10 +50,22 @@ function Mentor() {
     { id: 6, tab: "Profile", icon: "setting", component: <MentorProfile /> }
   ];
   const [selectedTabIndex, setSelectedTabIndex] = useState(INITIAL_TAB_INDEX);
+  const {
+    studentDashboardState,
+    studentDashboardDispatch: dispatch
+  } = useContext(GlobalContext);
   const clickOnTab = data => {
     setSelectedTabIndex(data.id);
   };
   const router = useRouter();
+  useEffect(() => {
+    getInitalData();
+  }, []);
+  const getInitalData = async () => {
+    const batches = await getMentorBatches()(dispatch);
+    const firstBatchId = batches.data[0].batch_id;
+    await getMentorStudentList(firstBatchId)(dispatch);
+  };
   const userDetails =
     typeof window !== "undefined" &&
     localStorage.getItem(USER_DETAILS) &&

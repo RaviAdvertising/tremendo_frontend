@@ -8,21 +8,42 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { DeviceContext } from "../../pages/_app";
 import { Image } from "semantic-ui-react";
+import { getMentorDashboardData } from "../../Context/Actions/Dashboard/DashboardAction";
+import { GlobalContext } from "../../Context/Provider";
 
 export default function MentorDashboard({}) {
   const { isMobileView } = useContext(DeviceContext);
+  const {
+    studentDashboardState,
+    studentDashboardDispatch: dispatch
+  } = useContext(GlobalContext);
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
+  useEffect(() => {}, [studentDashboardState.mentorDashboardDataLoading]);
+
   useEffect(() => {
-    // createCircle();
+    createCircle();
     if (document.getElementById("currentDate")) {
       document.getElementById("currentDate").scrollIntoView({
         behavior: "smooth",
         block: "center"
       });
     }
+    getDashboardData();
   }, []);
+
+  const getDashboardData = () => {
+    const curr = new Date(); // get current date
+    const first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+    const last = first + 6; // last day is the first day + 6
+
+    const firstday = moment(new Date(curr.setDate(first))).format("x");
+    const lastday = moment(new Date(curr.setDate(last))).format("x");
+
+    const id = studentDashboardState.mentorBatches[0].batch_id;
+    getMentorDashboardData(id, firstday, lastday)(dispatch);
+  };
 
   const createCircle = () => {
     let can = document.getElementById("canvas"),
@@ -115,29 +136,37 @@ export default function MentorDashboard({}) {
       }
     }
   };
-  // if (true) {
-  //   return (
-  //     <div
-  //       style={{
-  //         height: isMobileView ? "300px" : "700px",
-  //         width: isMobileView ? "300px" : "700px",
-  //         margin: "auto"
-  //       }}
-  //     >
-  //       <Image
-  //         src="/Images/no_data.png"
-  //         alt="tremendo dashboard banner"
-  //         height={isMobileView ? "300px" : "800px"}
-  //         width={isMobileView ? "300px" : "700px"}
-  //         className={styles.banner}
-  //       />
-  //     </div>
-  //   );
-  // }
-  //   if (true) {
-  //     return <StudentDashboardSkelton />;
-  //   }
+  const dashboardData = studentDashboardState.mentorDashboardData;
+  if (dashboardData.batch_details?.length == 0) {
+    return (
+      <div
+        style={{
+          height: isMobileView ? "300px" : "700px",
+          width: isMobileView ? "300px" : "700px",
+          margin: "auto"
+        }}
+      >
+        <Image
+          src="/Images/no_data.png"
+          alt="tremendo dashboard banner"
+          height={isMobileView ? "300px" : "800px"}
+          width={isMobileView ? "300px" : "700px"}
+          className={styles.banner}
+        />
+      </div>
+    );
+  }
+  if (studentDashboardState.mentorDashboardDataLoading) {
+    return <StudentDashboardSkelton />;
+  }
 
+  console.log(dashboardData.batch_details);
+  const attendencePercentage =
+    (dashboardData.attandance_data?.count /
+      dashboardData.attandance_data?.total) *
+    100;
+  const chartLabel = dashboardData.progress_data?.map(i => i.userName);
+  const marks = dashboardData.progress_data?.map(i => i.score);
   return (
     <div className={styles.base}>
       <div className={styles.chartHeading}>Batch Details</div>
@@ -200,19 +229,10 @@ export default function MentorDashboard({}) {
             <div className={styles.barChart}>
               <Bar
                 data={{
-                  labels: [
-                    "Stu 1",
-                    "Stu 2",
-                    "Stu 3",
-                    "Stu 4",
-                    "Stu 5",
-                    "Stu 6",
-                    "Stu 5",
-                    "Stu 6"
-                  ],
+                  labels: chartLabel,
                   datasets: [
                     {
-                      data: [60, 39, 80, 55, 45, 65, 57, 88],
+                      data: marks,
                       backgroundColor: [
                         "#8BDCDB",
                         "#8BDCDB",
@@ -226,10 +246,9 @@ export default function MentorDashboard({}) {
                       order: 2
                     },
                     {
-                      data: [60, 39, 80, 55, 45, 65, 57, 88],
+                      data: marks,
                       backgroundColor: "#fff",
                       borderColor: "#fa9116",
-
                       order: 1,
                       type: "line"
                     }
@@ -247,7 +266,7 @@ export default function MentorDashboard({}) {
               id="canvas"
               width="240"
               height="240"
-              data-percent="61"
+              data-percent={attendencePercentage}
             ></canvas>
             <div className={styles.showProgress} id="procent"></div>
           </div>

@@ -7,8 +7,21 @@ import { USER_DETAILS } from "../../utils/constants";
 import CustomImage from "../Image/Image";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
 import MobileOnly from "../DeviceCheck/MobileOnly";
-import { Icon, Image, Menu, Segment, Sidebar } from "semantic-ui-react";
-import { useState } from "react";
+import {
+  Icon,
+  Image,
+  Menu,
+  Segment,
+  Sidebar,
+  Dropdown,
+  Label
+} from "semantic-ui-react";
+import { useState, useContext, useEffect } from "react";
+import { GlobalContext } from "../../Context/Provider";
+import {
+  getMentorDashboardData,
+  getMentorStudentList
+} from "../../Context/Actions/Dashboard/DashboardAction";
 
 export default function Tab({
   tabsData,
@@ -20,6 +33,11 @@ export default function Tab({
   const [visible, setVisible] = useState(false);
   const [startSearch, setStartSearch] = useState(false);
   const [inputVal, setInputValue] = useState("");
+  const [selectedBatch, setSelectedBatches] = useState("");
+  const {
+    studentDashboardState,
+    studentDashboardDispatch: dispatch
+  } = useContext(GlobalContext);
   const SELECTED_TAB_COLOR = "#ff9000";
   const name =
     typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
@@ -37,6 +55,15 @@ export default function Tab({
     sendDataCallback(data.id);
     setStartSearch(false);
   };
+  useEffect(() => {
+    if (
+      studentDashboardState.mentorBatches &&
+      studentDashboardState.mentorBatches.length > 0
+    ) {
+      const id = studentDashboardState.mentorBatches[0].batch_id;
+      onHandleChangeBatch(id);
+    }
+  }, []);
   let searchOptions = tabsData;
 
   if (inputVal.length > 1) {
@@ -44,6 +71,24 @@ export default function Tab({
       list.tab.toLowerCase().includes(inputVal.trim().toLowerCase())
     );
   }
+  const mentorBatches = studentDashboardState.mentorBatches.map(i => {
+    return {
+      text: `${i.batch_language}-${i.batch_id}`,
+      value: i.batch_id
+    };
+  });
+  const onHandleChangeBatch = async id => {
+    const curr = new Date(); // get current date
+    const first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+    const last = first + 6; // last day is the first day + 6
+
+    const firstday = moment(new Date(curr.setDate(first))).format("x");
+    const lastday = moment(new Date(curr.setDate(last))).format("x");
+    setSelectedBatches(id);
+    await getMentorStudentList(id)(dispatch);
+    getMentorDashboardData(id, firstday, lastday)(dispatch);
+  };
+
   return (
     <>
       <DesktopOnly>
@@ -65,7 +110,14 @@ export default function Tab({
               </div>
             ) : (
               <div className={styles.mentorBatchDetails}>
-                Batch: 01<br></br> Batch Name
+                <Dropdown
+                  className={styles.batchesDropDown}
+                  fluid
+                  selection
+                  value={selectedBatch}
+                  options={mentorBatches}
+                  onChange={(e, data) => onHandleChangeBatch(data.value)}
+                />
               </div>
             )}
             <div className={styles.tabWrapper}>
@@ -284,6 +336,13 @@ export default function Tab({
             <div className={styles.letsTalkSection}>
               <div className={styles.upcomingTaskHeading}>
                 {studentDashboard ? "Batch Mates" : "Students"}
+              </div>
+              <div style={{ marginTop: "10px" }}>
+                {studentDashboardState.mentorStudentList.map(i => (
+                  <Label key={i.student_batch_id} as="a">
+                    {i.user_name}
+                  </Label>
+                ))}
               </div>
             </div>
           </div>

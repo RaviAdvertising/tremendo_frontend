@@ -5,9 +5,14 @@ import styles from "./BatchManagement.module.css";
 import { useContext } from "react";
 import { DeviceContext } from "../../pages/_app";
 import { Image } from "semantic-ui-react";
+import { GlobalContext } from "../../Context/Provider";
 
 export default function BatchManagement() {
   const { isMobileView } = useContext(DeviceContext);
+  const {
+    studentDashboardState,
+    studentDashboardDispatch: dispatch
+  } = useContext(GlobalContext);
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
@@ -25,12 +30,7 @@ export default function BatchManagement() {
   const currentDate = moment().format("D");
   const currentDay = moment().day() ? moment().day() : 7;
 
-  useEffect(() => {
-    if (document.getElementById("date_wrapper") && currentDate > 11) {
-      const scrollPixels = parseInt(currentDate) * 10;
-      document.getElementById("date_wrapper").scrollLeft = scrollPixels;
-    }
-  }, []);
+  useEffect(() => {}, []);
   // if (true) {
   //   return (
   //     <div
@@ -59,12 +59,12 @@ export default function BatchManagement() {
           <div className={styles.headerOption}>Total students</div>
           <div className={styles.headerOption}>Total Classes</div>
         </div>
-        {[1, 2, 3].map(i => (
+        {studentDashboardState.mentorBatches?.map(i => (
           <div className={styles.batchListBody} key={i}>
-            <div className={styles.bodyOption}>Lorem Ipsum</div>
-            <div className={styles.bodyOption}>15</div>
+            <div className={styles.bodyOption}>{i.batch_language}</div>
+            <div className={styles.bodyOption}>{i.batch_capcity}</div>
             <div className={styles.bodyOptionWithCheckBox}>
-              <div>20</div>
+              <div>{i.batch_total_classes}</div>
               <div className={styles.completeCheckbox}>
                 <label className={styles.completeContainer}>
                   <input

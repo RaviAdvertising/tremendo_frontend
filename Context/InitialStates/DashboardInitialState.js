@@ -2,6 +2,12 @@ const dashboardIntialState = {
   getStudentDashboardData: [],
   getStudentDashboardDataLoading: false,
   profileUpdateLoading: false,
-  profileUpdatedData: ""
+  profileUpdatedData: "",
+  mentorBatches: [],
+  mentorBatchesLoading: false,
+  mentorStudentList: [],
+  mentorStudentListLoading: false,
+  mentorDashboardData: [],
+  mentorDashboardDataLoading: false
 };
 export default dashboardIntialState;

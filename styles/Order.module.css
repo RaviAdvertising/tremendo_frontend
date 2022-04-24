@@ -13,6 +13,11 @@
   font-size: 35px;
   margin-bottom: 60px;
 }
+.flagImage{
+  box-shadow: 0 8px 6px -7px #00000096;
+  border: 1px solid;
+  border-radius: 5px;
+}
 .imageDetailWrapper {
   display: flex;
   justify-content: space-between;

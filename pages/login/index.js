@@ -219,7 +219,7 @@ export default function Login(props) {
               <div className={styles.rememberMe}>
                 <Checkbox label="Remember me" />
               </div>
-              <div className={styles.forgotPwd}>Forgot Password?</div>
+              {/* <div className={styles.forgotPwd}>Forgot Password?</div> */}
             </div>
             <Button
               label={"LOG IN"}

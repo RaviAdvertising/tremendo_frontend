@@ -76,10 +76,10 @@ export default function Order({}) {
       });
       return;
     }
-
-    const data = await fetch(`https://tremendo.in:5555/razorpay`, {
-      method: "POST"
-    }).then(t => t.json());
+    const response = await axiosInstance.post(`/initRazorpay`, {
+      access_token: jsCookie.get(COOKIE_TOKEN),
+      amount: orderDetails.batch_purchase_price
+    });
 
     const userDetails =
       typeof window !== "undefined" &&
@@ -88,9 +88,9 @@ export default function Order({}) {
 
     const options = {
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
-      currency: data.currency,
-      amount: data.amount.toString(),
-      order_id: data.id,
+      currency: response.data.currency,
+      amount: response.data.amount.toString(),
+      order_id: response.data.id,
       name: "Tremendo",
       description: `Purchase ${orderDetails.batch_language} language`,
       image: `${window.location.origin}/Images/tremendo_logo.png`,
@@ -130,13 +130,8 @@ export default function Order({}) {
       <div className={styles.base}>
         <div className={styles.heading}>Summary</div>
         <div className={styles.imageDetailWrapper}>
-          <div className={styles.images}>
-            <Image
-              src={
-                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/english_flag.png?alt=media&token=426f6879-24af-4182-a3e7-3cbc39f9622c"
-              }
-              alt={"flag"}
-            />
+          <div className={styles.flagImage}>
+            <Image src={orderDetails.flag_url} alt={"flag"} />
           </div>
           <div className={styles.details}>
             <div

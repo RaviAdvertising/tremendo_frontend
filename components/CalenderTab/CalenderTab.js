@@ -42,7 +42,7 @@ export default function CalenderTab({}) {
   };
   const getCalenderData = async id => {
     setLoading(true);
-    var date = new Date();
+    const date = new Date();
     const firstDay = moment(
       new Date(date.getFullYear(), date.getMonth(), 1)
     ).format("x");

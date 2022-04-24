@@ -28,6 +28,48 @@ const dashboardReducer = (state, action) => {
         profileUpdateLoading: false
       });
 
+    case dashboardAction.GET_MENTOR_BATCHLIST_REQUEST:
+      return Object.assign({}, state, {
+        mentorBatchesLoading: true
+      });
+    case dashboardAction.GET_MENTOR_BATCHLIST_SUCCESS:
+      return Object.assign({}, state, {
+        mentorBatchesLoading: false,
+        mentorBatches: action.data
+      });
+    case dashboardAction.GET_MENTOR_BATCHLIST_ERROR:
+      return Object.assign({}, state, {
+        mentorBatchesLoading: false
+      });
+
+    case dashboardAction.GET_MENTOR_STUDENTLIST_REQUEST:
+      return Object.assign({}, state, {
+        mentorStudentListLoading: true
+      });
+    case dashboardAction.GET_MENTOR_STUDENTLIST_SUCCESS:
+      return Object.assign({}, state, {
+        mentorStudentListLoading: false,
+        mentorStudentList: action.data
+      });
+    case dashboardAction.GET_MENTOR_STUDENTLIST_ERROR:
+      return Object.assign({}, state, {
+        mentorStudentListLoading: false
+      });
+
+    case dashboardAction.GET_MENTOR_DASHBOARD_DATA_REQUEST:
+      return Object.assign({}, state, {
+        mentorDashboardDataLoading: true
+      });
+    case dashboardAction.GET_MENTOR_DASHBOARD_DATA_SUCCESS:
+      return Object.assign({}, state, {
+        mentorDashboardDataLoading: false,
+        mentorDashboardData: action.data
+      });
+    case dashboardAction.GET_MENTOR_DASHBOARD_DATA_ERROR:
+      return Object.assign({}, state, {
+        mentorDashboardDataLoading: false
+      });
+
     default:
       return state;
   }
