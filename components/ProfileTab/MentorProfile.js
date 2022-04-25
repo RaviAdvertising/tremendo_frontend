@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Image, Icon } from "semantic-ui-react";
+import { Image, Icon, Dimmer, Loader } from "semantic-ui-react";
 import styles from "./MentorProfile.module.css";
 import Input from "../Input/Input";
 import DatePicker from "react-datepicker";
@@ -23,6 +23,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { getUserProfile } from "../../Context/Actions/Auth/AuthAction";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
+import { storage } from "../../utils/firebase-config";
 
 export default function MentorProfile() {
   const inputFile = useRef(null);
@@ -35,7 +36,8 @@ export default function MentorProfile() {
     country: "India"
   });
   const [errors, setErrors] = useState({});
-  const [image, setImage] = useState({ preview: "", raw: "" });
+  const [uploadLoading, setUploadLoading] = useState(false);
+
   const {
     authState,
     studentDashboardState,
@@ -73,7 +75,34 @@ export default function MentorProfile() {
   useEffect(() => {
     updateFieldsValue();
   }, []);
-
+  const uploadFiles = (image, type) => {
+    setUploadLoading(true);
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log("here");
+      },
+      error => {
+        setUploadLoading(false);
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            setFields({ ...fields, avatar: url });
+            setUploadLoading(false);
+            console.log(url);
+          });
+      }
+    );
+  };
   const updateFieldsValue = async () => {
     const userUpdatedData = await getUserProfile(LOGIN_MENTOR_TAB)(
       dispatchAuth
@@ -140,14 +169,7 @@ export default function MentorProfile() {
   };
 
   const handleChangeImage = e => {
-    console.log(e.target.files);
-    if (e.target.files.length) {
-      setFields({ ...fields, avatar: URL.createObjectURL(e.target.files[0]) });
-      setImage({
-        preview: URL.createObjectURL(e.target.files[0]),
-        raw: e.target.files[0]
-      });
-    }
+    uploadFiles(e.target.files[0], "avatar");
   };
 
   const handleUpload = async data => {
@@ -247,6 +269,11 @@ export default function MentorProfile() {
   }
   return (
     <div className={styles.base}>
+      {uploadLoading && (
+        <Dimmer active>
+          <Loader />
+        </Dimmer>
+      )}
       <div className={styles.profile_topImage}>
         <Image src={"/Images/profile_top.png"} alt="profiletab_rocket" />
       </div>

@@ -1,5 +1,5 @@
 import styles from "./MentorMyResource.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Image,
   Popup,
@@ -29,10 +29,14 @@ import {
   getSubmittedAssignmentList
 } from "../../Context/Actions/Dashboard/DashboardAction";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
+import { storage } from "../../utils/firebase-config";
 
 const IDLE_STATUS = "idle";
 const UPLOAD_STATUS = "published";
 export default function MentorMyResource() {
+  const uploadAssignmentRef = useRef(null);
+  const uploadSyllabusRef = useRef(null);
+  const uploadEbookRef = useRef(null);
   const { isMobileView } = useContext(DeviceContext);
   const {
     studentDashboardState,
@@ -43,7 +47,9 @@ export default function MentorMyResource() {
     false
   );
   const [loading, setLoading] = useState(false);
+  const [uploadLoading, setUploadLoading] = useState("");
   const [feilds, setFeilds] = useState({});
+  const [openUploadModal, setOpenUploadModal] = useState(false);
   // if (true) {
   //   return (
   //     <div
@@ -67,6 +73,34 @@ export default function MentorMyResource() {
     getDashboardData();
     getMentorAssignmentList()(dispatch);
   }, []);
+
+  const uploadFiles = (image, type) => {
+    setUploadLoading(type);
+    const uploadTask = storage.ref(`docs/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log("here");
+      },
+      error => {
+        setUploadLoading("");
+        console.log(error, "error");
+      },
+      () => {
+        storage
+          .ref("docs")
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            setFeilds({ ...feilds, [type]: url });
+            setUploadLoading("");
+          });
+      }
+    );
+  };
 
   const getDashboardData = async () => {
     const curr = new Date(); // get current date
@@ -109,6 +143,25 @@ export default function MentorMyResource() {
       setLoading(false);
     }
   };
+  const uploadSyllabusEbook = async () => {
+    setLoading(true);
+    const payload = {
+      access_token: jsCookie.get(COOKIE_TOKEN),
+      batch_id: studentDashboardState.mentorDashboardData.batch_data.batch_id,
+      syllabus_url: feilds.syllabus_url,
+      e_book_url: feilds.e_book_url
+    };
+    try {
+      const response = await axiosInstance.post(`/updateBatchEBook`, payload);
+
+      setOpenUploadModal(false);
+      setLoading(false);
+      setFeilds({});
+    } catch (err) {
+      setOpenUploadModal(false);
+      setLoading(false);
+    }
+  };
   const DateInput = ({ value, onClick, placeholder }) => {
     return (
       <button
@@ -129,6 +182,15 @@ export default function MentorMyResource() {
         {value ? value : placeholder}
       </button>
     );
+  };
+  const uploadAssignment = e => {
+    uploadFiles(e.target.files[0], "doc_urls");
+  };
+  const uploadSyllabusUrl = e => {
+    uploadFiles(e.target.files[0], "syllabus_url");
+  };
+  const uploadEbookUrl = e => {
+    uploadFiles(e.target.files[0], "e_book_url");
   };
 
   const addAssignment = () => {
@@ -184,13 +246,34 @@ export default function MentorMyResource() {
                 dropdownMode="select"
               />
             </div>
-            <div style={{ marginBottom: "20px" }}>
+            <div
+              style={{
+                marginBottom: "20px",
+                display: "flex",
+                justifyContent: "space-between"
+              }}
+            >
               <Input
                 value={feilds?.doc_urls}
-                style={{ width: "100%" }}
+                style={{ width: "50%" }}
                 placeholder="Document Url"
                 onChange={(e, data) => onHandleChange(data.value, "doc_urls")}
               />
+              <div>
+                <Button
+                  content="Choose File"
+                  labelPosition="left"
+                  icon="file"
+                  loading={uploadLoading == "doc_urls"}
+                  onClick={() => uploadAssignmentRef.current.click()}
+                />
+                <input
+                  ref={uploadAssignmentRef}
+                  type="file"
+                  hidden
+                  onChange={event => uploadAssignment(event)}
+                />
+              </div>
             </div>
             <div style={{ marginBottom: "20px" }}>
               <Dropdown
@@ -369,6 +452,95 @@ export default function MentorMyResource() {
       </Modal>
     );
   };
+  const uploadEbbokModal = () => {
+    return (
+      <Modal
+        onClose={() => setOpenUploadModal(false)}
+        open={openUploadModal}
+        closeIcon
+        size="tiny"
+      >
+        <Modal.Header>Upload Syllabus and E-Books</Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            <div
+              style={{
+                marginBottom: "20px",
+                display: "flex",
+                justifyContent: "space-between"
+              }}
+            >
+              <Input
+                value={feilds?.syllabus_url}
+                style={{ width: "50%" }}
+                placeholder="Syllabus Url"
+                onChange={(e, data) =>
+                  onHandleChange(data.value, "syllabus_url")
+                }
+              />
+              <div>
+                <Button
+                  content="Choose File"
+                  labelPosition="left"
+                  icon="file"
+                  loading={uploadLoading == "syllabus_url"}
+                  onClick={() => uploadSyllabusRef.current.click()}
+                />
+                <input
+                  ref={uploadSyllabusRef}
+                  type="file"
+                  hidden
+                  onChange={event => uploadSyllabusUrl(event)}
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                marginBottom: "20px",
+                display: "flex",
+                justifyContent: "space-between"
+              }}
+            >
+              <Input
+                value={feilds?.e_book_url}
+                style={{ width: "50%" }}
+                placeholder="E-Book Url"
+                onChange={(e, data) => onHandleChange(data.value, "e_book_url")}
+              />
+              <div>
+                <Button
+                  content="Choose File"
+                  labelPosition="left"
+                  icon="file"
+                  loading={uploadLoading == "e_book_url"}
+                  onClick={() => uploadEbookRef.current.click()}
+                />
+                <input
+                  ref={uploadEbookRef}
+                  type="file"
+                  hidden
+                  onChange={event => uploadEbookUrl(event)}
+                />
+              </div>
+            </div>
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="red" onClick={() => setOpenUploadModal(false)}>
+            Close
+          </Button>
+          <Button
+            content="Upload"
+            labelPosition="right"
+            icon="checkmark"
+            onClick={() => uploadSyllabusEbook()}
+            positive
+            loading={loading}
+          />
+        </Modal.Actions>
+      </Modal>
+    );
+  };
   const statusColors = {
     idle: "#fabf59",
     published: "#368825"
@@ -407,7 +579,7 @@ export default function MentorMyResource() {
   if (studentDashboardState.mentorDashboardAssignmentListLoading) {
     return <StudentDashboardSkelton />;
   }
-
+  const batchData = studentDashboardState.mentorDashboardData?.batch_data;
   return (
     <div className={styles.base}>
       {loading && (
@@ -503,7 +675,16 @@ export default function MentorMyResource() {
                         Upload
                       </div>
                     )}
-                    <div className={styles.options}>Download</div>
+                    <div className={styles.options}>
+                      <a
+                        href={i.doc_urls}
+                        download="assignemnt"
+                        target={"_blank"}
+                        rel="noreferrer"
+                      >
+                        Download
+                      </a>
+                    </div>
                     <div
                       className={styles.options}
                       onClick={() => onDeleteAssignment(i.assignment_id)}
@@ -530,19 +711,33 @@ export default function MentorMyResource() {
             style={{ width: "100%" }}
           />
           <div className={styles.downloadIcon}>
-            <IconComponent name="downloadIcon" width="36" height="36" />
+            <a
+              href={batchData.syllabus_url}
+              download="assignemnt"
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              <IconComponent name="downloadIcon" width="36" height="36" />
+            </a>
           </div>
         </div>
         <div className={styles.mentorEbooks}>
           <div className={styles.syllabus}>E-Book</div>
           <div className={styles.ebookSections}>
-            {[1, 1, 1, 1, 1].map((i, index) => (
-              <Image
+            {[1].map((i, index) => (
+              <a
                 key={index}
-                src={"/Images/e-bookImage.png"}
-                alt="user-image"
-                className={styles.eBook}
-              />
+                href={batchData.e_book_url}
+                download="assignemnt"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                <Image
+                  src={"/Images/e-bookImage.png"}
+                  alt="user-image"
+                  className={styles.eBook}
+                />
+              </a>
             ))}
           </div>
           <Image
@@ -553,8 +748,25 @@ export default function MentorMyResource() {
           />
         </div>
       </div>
+      <div className={styles.uploadSyllabusBtn}>
+        <ButtonComponent
+          label={"Upload Syllabus & books"}
+          height={30}
+          borderRadius={8}
+          backgroundColor={"#f98e46"}
+          textStyle={{
+            color: "#fff",
+            fontWeight: "bold",
+            fontFamily: "Open Sans",
+            fontSize: "12px"
+          }}
+          border="none"
+          onClick={() => setOpenUploadModal(true)}
+        />
+      </div>
       {addAssignment()}
       {studentAssigmentModal()}
+      {uploadEbbokModal()}
     </div>
   );
 }

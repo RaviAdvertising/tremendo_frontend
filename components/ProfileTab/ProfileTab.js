@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { Image, Icon } from "semantic-ui-react";
+import { Image, Icon, Dimmer, Loader } from "semantic-ui-react";
 import {
   COOKIE_TOKEN,
   EMAIL_REGULAR_EXPRESSION,
@@ -35,8 +35,8 @@ export default function ProfileTab({}) {
     country: "India"
   });
   const [errors, setErrors] = useState({});
-  const [progress, setProgress] = useState(0);
-  const [image, setImage] = useState({ preview: "", raw: "" });
+  const [uploadLoading, setUploadLoading] = useState(false);
+
   const {
     authState,
     studentDashboardState,
@@ -98,6 +98,7 @@ export default function ProfileTab({}) {
     );
   };
   const uploadFiles = image => {
+    setUploadLoading(true);
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
       "state_changed",
@@ -106,9 +107,9 @@ export default function ProfileTab({}) {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
         console.log("here");
-        setProgress(progress);
       },
       error => {
+        setUploadLoading(false);
         console.log(error);
       },
       () => {
@@ -117,7 +118,8 @@ export default function ProfileTab({}) {
           .child(image.name)
           .getDownloadURL()
           .then(url => {
-            console.log(url);
+            setFields({ ...fields, avatar: url });
+            setUploadLoading(false);
           });
       }
     );
@@ -140,7 +142,6 @@ export default function ProfileTab({}) {
     setErrors({});
   };
   const handleChangeImage = e => {
-    console.log(e.target.files);
     uploadFiles(e.target.files[0]);
   };
 
@@ -249,6 +250,11 @@ export default function ProfileTab({}) {
   }
   return (
     <div className={styles.base}>
+      {uploadLoading && (
+        <Dimmer active>
+          <Loader />
+        </Dimmer>
+      )}
       <div className={styles.profileBox}>
         <div className={styles.headingProgressWrapper}>
           <div className={styles.heading}>Profile Details</div>

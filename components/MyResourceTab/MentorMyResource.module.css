@@ -189,6 +189,11 @@
   font-size: 16px;
   margin-bottom: 20px;
 }
+.uploadSyllabusBtn{
+  width: 35%;
+  margin: auto;
+  margin-top: 35px;
+}
 @media (max-width: 1024px) {
   .base {
     padding: 10px;
