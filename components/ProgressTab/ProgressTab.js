@@ -4,12 +4,21 @@ import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DeviceContext } from "../../pages/_app";
 import { Image } from "semantic-ui-react";
+import { GlobalContext } from "../../Context/Provider";
+import { getStudentProgress } from "../../Context/Actions/Dashboard/DashboardAction";
 
 export default function ProgressTab({}) {
   const { isMobileView } = useContext(DeviceContext);
+  const {
+    studentDashboardState,
+    studentDashboardDispatch: dispatch
+  } = useContext(GlobalContext);
+  useEffect(() => {
+    getStudentProgress()(dispatch);
+  }, []);
   const options = {
     maintainAspectRatio: false,
     scales: {
@@ -126,28 +135,43 @@ export default function ProgressTab({}) {
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
-  // if (true) {
-  //   return (
-  //     <div
-  //       style={{
-  //         height: isMobileView ? "300px" : "700px",
-  //         width: isMobileView ? "300px" : "700px",
-  //         margin: "auto"
-  //       }}
-  //     >
-  //       <Image
-  //         src="/Images/no_data.png"
-  //         alt="tremendo dashboard banner"
-  //         height={isMobileView ? "300px" : "800px"}
-  //         width={isMobileView ? "300px" : "700px"}
-  //         className={styles.banner}
-  //       />
-  //     </div>
-  //   );
-  // }
-  //   if (true) {
-  //     return <StudentDashboardSkelton />;
-  //   }
+  if (studentDashboardState.getStudentProgress?.score?.length == 0) {
+    return (
+      <div
+        style={{
+          height: isMobileView ? "300px" : "700px",
+          width: isMobileView ? "300px" : "700px",
+          margin: "auto"
+        }}
+      >
+        <Image
+          src="/Images/no_data.png"
+          alt="tremendo dashboard banner"
+          height={isMobileView ? "300px" : "800px"}
+          width={isMobileView ? "300px" : "700px"}
+          className={styles.banner}
+        />
+      </div>
+    );
+  }
+
+  if (studentDashboardState.getStudentProgressLoading) {
+    return <StudentDashboardSkelton />;
+  }
+  const scores = studentDashboardState.getStudentProgress?.score.map(
+    i => i.my_score
+  );
+  const studentProgress =
+    studentDashboardState.getStudentProgress.batch_progress;
+  const studentAttendence = studentDashboardState.getStudentProgress.attandance;
+  const presentPercentage = (
+    (studentAttendence?.present / studentAttendence?.total_days) *
+    100
+  )?.toFixed(2);
+  const absentPercentage = (
+    (studentAttendence?.absent / studentAttendence?.total_days) *
+    100
+  )?.toFixed(2);
   const lineIndication = [
     { name: "Low", color: "#ffb922", height: "34px" },
     { name: "Average", color: "#3bbafb", height: "220px" },
@@ -163,24 +187,7 @@ export default function ProgressTab({}) {
               labels: totalDatesInCurrentMonth,
               datasets: [
                 {
-                  data: [
-                    90,
-                    39,
-                    80,
-                    20,
-                    40,
-                    20,
-                    56,
-                    25,
-                    45,
-                    65,
-                    44,
-                    76,
-                    81,
-                    54,
-                    77,
-                    33
-                  ],
+                  data: scores,
                   backgroundColor: [
                     "#ffb922",
                     "#3bbafb",
@@ -235,7 +242,11 @@ export default function ProgressTab({}) {
                   labels: ["Highest", "Average", "My"],
                   datasets: [
                     {
-                      data: [90, 39, 80],
+                      data: [
+                        studentProgress?.highiest_score,
+                        studentProgress?.average_score,
+                        studentProgress?.my_score
+                      ],
                       backgroundColor: ["#055c4d", "#e78109", "#0289d6"]
                     }
                   ]
@@ -268,7 +279,7 @@ export default function ProgressTab({}) {
                   labels: ["Present", "Absent"],
                   datasets: [
                     {
-                      data: [80, 20],
+                      data: [presentPercentage, absentPercentage],
                       backgroundColor: ["#F1B71B", "#ED4F32"],
                       datalabels: {
                         display: true,

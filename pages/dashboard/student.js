@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Tab from "../../components/Tab/Tab";
 import styles from "../../styles/student.module.css";
 import withAuth from "../../utils/withAuth";
@@ -10,6 +10,11 @@ import MyResourceTab from "../../components/MyResourceTab/MyResourceTab";
 import FaqTab from "../../components/FaqTab/FaqTab";
 import ProfileTab from "../../components/ProfileTab/ProfileTab";
 import { LOGIN_STUDENT_TAB, USER_DETAILS } from "../../utils/constants";
+import { GlobalContext } from "../../Context/Provider";
+import {
+  studentBatchMates,
+  studentUpcomingTasks
+} from "../../Context/Actions/Dashboard/DashboardAction";
 
 const INITIAL_TAB_INDEX = 6;
 
@@ -38,9 +43,14 @@ function Student() {
     { id: 6, tab: "Profile", icon: "setting", component: <ProfileTab /> }
   ];
   const [selectedTabIndex, setSelectedTabIndex] = useState(INITIAL_TAB_INDEX);
+  const { studentDashboardDispatch: dispatch } = useContext(GlobalContext);
   const clickOnTab = data => {
     setSelectedTabIndex(data.id);
   };
+  useEffect(() => {
+    studentUpcomingTasks()(dispatch);
+    studentBatchMates()(dispatch);
+  }, []);
 
   const userDetails =
     typeof window !== "undefined" &&

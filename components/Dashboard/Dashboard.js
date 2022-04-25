@@ -9,6 +9,7 @@ import { useContext, useEffect } from "react";
 import { GlobalContext } from "../../Context/Provider";
 import { getStudentDashboardData } from "../../Context/Actions/Dashboard/DashboardAction";
 import { DeviceContext } from "../../pages/_app";
+import moment from "moment";
 
 export default function Dashboard() {
   const {
@@ -20,34 +21,6 @@ export default function Dashboard() {
   useEffect(() => {
     getStudentDashboardData()(dispatch);
   }, []);
-
-  const classes = [
-    {
-      subject_code: "A1-4",
-      date: "Sunday, January 23",
-      time: " 02:00-04:00PM"
-    },
-    {
-      subject_code: "A1-4",
-      date: "Sunday, January 23",
-      time: " 02:00-04:00PM"
-    },
-    {
-      subject_code: "A1-4",
-      date: "Sunday, January 23",
-      time: " 02:00-04:00PM"
-    }
-    // {
-    //   subject_code: "A1-4",
-    //   date: "Sunday, January 23",
-    //   time: " 02:00-04:00PM"
-    // },
-    // {
-    //   subject_code: "A1-4",
-    //   date: "Sunday, January 23",
-    //   time: " 02:00-04:00PM"
-    // }
-  ];
 
   const options = {
     maintainAspectRatio: false,
@@ -100,28 +73,42 @@ export default function Dashboard() {
     }
   };
 
-  // if (studentDashboardState.getStudentDashboardDataLoading) {
-  //   return <StudentDashboardSkelton />;
-  // }
-  // if (true) {
-  //   return (
-  //     <div
-  //       style={{
-  //         height: isMobileView ? "300px" : "700px",
-  //         width: isMobileView ? "300px" : "700px",
-  //         margin: "auto"
-  //       }}
-  //     >
-  //       <Image
-  //         src="/Images/no_data.png"
-  //         alt="tremendo dashboard banner"
-  //         height={isMobileView ? "300px" : "800px"}
-  //         width={isMobileView ? "300px" : "700px"}
-  //         className={styles.banner}
-  //       />
-  //     </div>
-  //   );
-  // }
+  if (studentDashboardState.getStudentDashboardDataLoading) {
+    return <StudentDashboardSkelton />;
+  }
+  if (studentDashboardState.getStudentDashboardData?.classes?.length == 0) {
+    return (
+      <div
+        style={{
+          height: isMobileView ? "300px" : "700px",
+          width: isMobileView ? "300px" : "700px",
+          margin: "auto"
+        }}
+      >
+        <Image
+          src="/Images/no_data.png"
+          alt="tremendo dashboard banner"
+          height={isMobileView ? "300px" : "800px"}
+          width={isMobileView ? "300px" : "700px"}
+          className={styles.banner}
+        />
+      </div>
+    );
+  }
+  console.log(studentDashboardState.getStudentDashboardData);
+  const studentClasses = studentDashboardState.getStudentDashboardData.classes;
+  const studentProgress =
+    studentDashboardState.getStudentDashboardData.progress;
+  const studentAttendence =
+    studentDashboardState.getStudentDashboardData.attandance;
+  const presentPercentage = (
+    (studentAttendence?.present / studentAttendence?.total_days) *
+    100
+  )?.toFixed(2);
+  const absentPercentage = (
+    (studentAttendence?.absent / studentAttendence?.total_days) *
+    100
+  )?.toFixed(2);
   return (
     <div className={styles.dashboardBase}>
       <div className={styles.dashboardBanner}>
@@ -141,20 +128,20 @@ export default function Dashboard() {
       <div className={styles.classesWrapper}>
         <div className={styles.titleWrapper}>
           <div className={styles.classTitle}>Classes</div>
-          <div className={styles.arrowIcon}>
+          {/* <div className={styles.arrowIcon}>
             <Icon name="rightArrow" width="24" height="24" />
-          </div>
+          </div> */}
         </div>
         <div className={styles.classBoxWrapper}>
-          {classes.map((i, index) => (
+          {studentClasses?.map((i, index) => (
             <div className={styles.classBox} key={index}>
               <div className={styles.classDetail}>
-                <div className={styles.subject}>Subject</div>
-                <div className={styles.subjectCode}>{i.subject_code}</div>
+                <div className={styles.subject}>{i.subject}</div>
+                <div className={styles.subjectCode}>{i.batch_code}</div>
               </div>
               <div className={styles.classTime}>
-                <div className={styles.data}> {i.date}</div>
-                <div className={styles.time}> {i.time}</div>
+                <div className={styles.data}>{i.batch_date}</div>
+                <div className={styles.time}> {i.batch_time}</div>
               </div>
             </div>
           ))}
@@ -170,7 +157,11 @@ export default function Dashboard() {
                   labels: ["Highest", "Average", "My"],
                   datasets: [
                     {
-                      data: [90, 39, 80],
+                      data: [
+                        studentProgress?.highiest_score,
+                        studentProgress?.average_score,
+                        studentProgress?.my_score
+                      ],
                       backgroundColor: ["#055c4d", "#e78109", "#0289d6"]
                     }
                   ]
@@ -203,7 +194,7 @@ export default function Dashboard() {
                   labels: ["Present", "Absent"],
                   datasets: [
                     {
-                      data: [80, 20],
+                      data: [presentPercentage, absentPercentage],
                       backgroundColor: ["#F1B71B", "#ED4F32"],
                       datalabels: {
                         display: true,
@@ -234,7 +225,9 @@ export default function Dashboard() {
                 <div className={styles.pielabelText}>Absent</div>
               </div>
             </div>
-            <div className={styles.totalDays}>Total Days: 60</div>
+            <div className={styles.totalDays}>
+              Total Days: {studentAttendence?.total_days}
+            </div>
           </div>
         </div>
       </div>

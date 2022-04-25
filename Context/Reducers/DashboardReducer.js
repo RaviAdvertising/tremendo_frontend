@@ -98,6 +98,62 @@ const dashboardReducer = (state, action) => {
         getSubmittedAssignemntListLoading: false
       });
 
+    case dashboardAction.STUDENT_UPCOMING_TASKS_REQUEST:
+      return Object.assign({}, state, {
+        studentUpcomingTaskLoading: true
+      });
+    case dashboardAction.STUDENT_UPCOMING_TASKS_SUCCESS:
+      return Object.assign({}, state, {
+        studentUpcomingTaskLoading: false,
+        studentUpcomingTasks: action.data
+      });
+    case dashboardAction.STUDENT_UPCOMING_TASKS_ERROR:
+      return Object.assign({}, state, {
+        studentUpcomingTaskLoading: false
+      });
+
+    case dashboardAction.STUDENT_BATCH_MATES_REQUEST:
+      return Object.assign({}, state, {
+        studentBatchMatesLoading: true
+      });
+    case dashboardAction.STUDENT_BATCH_MATES_SUCCESS:
+      return Object.assign({}, state, {
+        studentBatchMatesLoading: false,
+        studentBatchMates: action.data
+      });
+    case dashboardAction.STUDENT_BATCH_MATES_ERROR:
+      return Object.assign({}, state, {
+        studentBatchMatesLoading: false
+      });
+
+    case dashboardAction.GET_STUDENT_ASSIGNMENT_LIST_REQUEST:
+      return Object.assign({}, state, {
+        studentAssignmentListLoading: true
+      });
+    case dashboardAction.GET_STUDENT_ASSIGNMENT_LIST_SUCCESS:
+      return Object.assign({}, state, {
+        studentAssignmentListLoading: false,
+        studentAssignmentList: action.data
+      });
+    case dashboardAction.GET_STUDENT_ASSIGNMENT_LIST_ERROR:
+      return Object.assign({}, state, {
+        studentAssignmentListLoading: false
+      });
+
+    case dashboardAction.GET_STUDENT_PROGRESS_REQUEST:
+      return Object.assign({}, state, {
+        getStudentProgressLoading: true
+      });
+    case dashboardAction.GET_STUDENT_PROGRESS_SUCCESS:
+      return Object.assign({}, state, {
+        getStudentProgressLoading: false,
+        getStudentProgress: action.data
+      });
+    case dashboardAction.GET_STUDENT_PROGRESS_ERROR:
+      return Object.assign({}, state, {
+        getStudentProgressLoading: false
+      });
+
     default:
       return state;
   }

@@ -227,20 +227,24 @@ export default function Tab({
                 <IconComponent name="notification" color="#ff9000" />
               </div>
             </div>
-            <div className={styles.upcomingTaskSection}>
-              <div className={styles.upcomingTaskHeading}>Upcoming Task</div>
-              <div className={styles.upcomingTaskBox}>
-                {[].map((i, index) => (
-                  <div className={styles.taskWrapper} key={index}>
-                    <div className={styles.taskImage}></div>
-                    <div className={styles.taskDetail}>
-                      <div className={styles.taskName}>Lorem Ipsum Lorem</div>
-                      <div className={styles.taskTime}>Time & Date</div>
-                    </div>
-                  </div>
-                ))}
+            {studentDashboardState.studentUpcomingTasks?.length > 0 && (
+              <div className={styles.upcomingTaskSection}>
+                <div className={styles.upcomingTaskHeading}>Upcoming Task</div>
+                <div className={styles.upcomingTaskBox}>
+                  {studentDashboardState.studentUpcomingTasks?.map(
+                    (i, index) => (
+                      <div className={styles.taskWrapper} key={index}>
+                        <div className={styles.taskImage}></div>
+                        <div className={styles.taskDetail}>
+                          <div className={styles.taskName}>{i.title}</div>
+                          <div className={styles.taskTime}>{i.start_date}</div>
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
-            </div>
+            )}
             <div className={styles.letsTalkSection}>
               <div className={styles.upcomingTaskHeading}>Let’s Talk</div>
               <div>
@@ -338,11 +342,17 @@ export default function Tab({
                 {studentDashboard ? "Batch Mates" : "Students"}
               </div>
               <div style={{ marginTop: "10px" }}>
-                {studentDashboardState.mentorStudentList.map(i => (
-                  <Label key={i.student_batch_id} as="a">
-                    {i.user_name}
-                  </Label>
-                ))}
+                {studentDashboard
+                  ? studentDashboardState.studentBatchMates?.map(i => (
+                      <Label key={i.name} as="a">
+                        {i.name}
+                      </Label>
+                    ))
+                  : studentDashboardState.mentorStudentList.map(i => (
+                      <Label key={i.student_batch_id} as="a">
+                        {i.user_name}
+                      </Label>
+                    ))}
               </div>
             </div>
           </div>

@@ -1,68 +1,29 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import styles from "./MyResourceTab.module.css";
 import { Image } from "semantic-ui-react";
 import Icon from "../../assets/Icon/Icon";
-import { useContext } from "react";
 import { DeviceContext } from "../../pages/_app";
+import { GlobalContext } from "../../Context/Provider";
+import { getStudentAssignmentList } from "../../Context/Actions/Dashboard/DashboardAction";
+import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 
 export default function MyResourceTab({}) {
   const inputFile = useRef(null);
+  const {
+    studentDashboardState,
+    studentDashboardDispatch: dispatch
+  } = useContext(GlobalContext);
   const { isMobileView } = useContext(DeviceContext);
-  const assignmentData = [
-    {
-      name: "Assignment 1",
-      issue_date: "Feb 04, 2022 12:00 PM",
-      due_date: "Feb 10, 2022 12:00 PM"
-    },
-    {
-      name: "Assignment 2",
-      issue_date: "Feb 04, 2022 12:00 PM",
-      due_date: "Feb 10, 2022 12:00 PM"
-    },
-    {
-      name: "Assignment 3",
-      issue_date: "Feb 04, 2022 12:00 PM",
-      due_date: "Feb 10, 2022 12:00 PM"
-    },
-    {
-      name: "Assignment 4",
-      issue_date: "Feb 04, 2022 12:00 PM",
-      due_date: "Feb 10, 2022 12:00 PM"
-    },
-    {
-      name: "Assignment 5",
-      issue_date: "Feb 04, 2022 12:00 PM",
-      due_date: "Feb 10, 2022 12:00 PM"
-    },
-    {
-      name: "Assignment 6",
-      issue_date: "Feb 04, 2022 12:00 PM",
-      due_date: "Feb 10, 2022 12:00 PM"
-    },
-    {
-      name: "Assignment 7",
-      issue_date: "Feb 04, 2022 12:00 PM",
-      due_date: "Feb 10, 2022 12:00 PM"
-    },
-    {
-      name: "Assignment 8",
-      issue_date: "Feb 04, 2022 12:00 PM",
-      due_date: "Feb 10, 2022 12:00 PM"
-    },
-    {
-      name: "Assignment 9",
-      issue_date: "Feb 04, 2022 12:00 PM",
-      due_date: "Feb 10, 2022 12:00 PM"
-    },
-    {
-      name: "Assignment 10",
-      issue_date: "Feb 04, 2022 12:00 PM",
-      due_date: "Feb 10, 2022 12:00 PM"
-    }
-  ];
+  useEffect(() => {
+    getStudentAssignmentList()(dispatch);
+  }, []);
+
   const onClick = e => {
     inputFile.current.click();
   };
+  if (studentDashboardState.studentAssignmentListLoading) {
+    return <StudentDashboardSkelton />;
+  }
   // if (true) {
   //   return (
   //     <div
@@ -82,11 +43,15 @@ export default function MyResourceTab({}) {
   //     </div>
   //   );
   // }
+  console.log(studentDashboardState.studentAssignmentList);
+  const assignmentList = studentDashboardState.studentAssignmentList?.assigment;
+  const finalAssesment =
+    studentDashboardState.studentAssignmentList?.final_assessment;
   return (
     <div className={styles.base}>
       <div className={styles.headingWrapper}>
         <div className={styles.heading}>Assignments</div>
-        <div className={styles.heading}> Total: 07</div>
+        <div className={styles.heading}> Total: {assignmentList?.length}</div>
       </div>
       <div className={styles.assignmentTable}>
         <div className={styles.tableHeader}>
@@ -99,12 +64,12 @@ export default function MyResourceTab({}) {
           <div className={styles.statusHeader}>Status</div>
         </div>
         <div className={styles.tableBody}>
-          {assignmentData.map((i, index) => (
+          {assignmentList?.map((i, index) => (
             <div className={styles.tableData} key={index}>
               <div className={styles.noHeader}>{index + 1}.</div>
               <div className={styles.uploadFileSection}>
                 <div className={styles.assignmentName}>
-                  {isMobileView ? `${i.name.substring(0, 4)}...` : i.name}
+                  {isMobileView ? `${i.title.substring(0, 4)}...` : i.title}
                 </div>
                 <div className={styles.uploadButtons}>
                   <input
@@ -122,8 +87,8 @@ export default function MyResourceTab({}) {
                   </div>
                 </div>
               </div>
-              <div className={styles.dateHeader}>{i.issue_date}</div>
-              <div className={styles.dateHeader}>{i.due_date}</div>
+              <div className={styles.dateHeader}>{i.assign_date}</div>
+              <div className={styles.dateHeader}>{i.due_data}</div>
               <div className={styles.checkboxesWrapper}>
                 <div className={styles.completeCheckbox}>
                   <label className={styles.completeContainer}>
@@ -156,9 +121,7 @@ export default function MyResourceTab({}) {
         <div className={styles.finalHeading}>
           <div className={styles.finalDate}>1.</div>
           <div className={styles.finalTime}>
-            <div className={styles.finalDate}>
-              {isMobileView ? "Final" : "Final assessment"}
-            </div>
+            <div className={styles.finalDate}>{finalAssesment?.title}</div>
             <div className={styles.uploadFileSize}>
               <input
                 type="file"
@@ -174,7 +137,7 @@ export default function MyResourceTab({}) {
           </div>
         </div>
         <div className={styles.finalDateAndTime}>
-          <div className={styles.finalDate}>Feb 10, 2022</div>
+          <div className={styles.finalDate}>{finalAssesment?.assign_date}</div>
           <div className={styles.finalTime}> 10:00 PM</div>
         </div>
         <div className={styles.mentorName}>
@@ -187,7 +150,7 @@ export default function MyResourceTab({}) {
               width={"24px"}
             />
           </div>
-          <div className={styles.name}>Mentor Name</div>
+          <div className={styles.name}>{finalAssesment?.mentor_name}</div>
         </div>
         <div className={styles.finalStatus}>
           <div className={styles.completeCheckbox}>

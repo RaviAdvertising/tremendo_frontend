@@ -25,6 +25,7 @@ export default class FaqTab extends React.Component {
       });
     } catch (err) {}
   };
+
   openSection = id => {
     let currentState = this.state.openState;
     const findId = currentState.indexOf(id);

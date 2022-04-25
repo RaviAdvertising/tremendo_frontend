@@ -51,11 +51,66 @@ export const GET_MENTOR_ASSIGNMENT_LIST_SUCCESS =
 export const GET_MENTOR_ASSIGNMENT_LIST_ERROR =
   "GET_MENTOR_ASSIGNMENT_LIST_error";
 
+export const STUDENT_UPCOMING_TASKS_REQUEST = "STUDENT_UPCOMING_TASKS_request";
+export const STUDENT_UPCOMING_TASKS_SUCCESS = "STUDENT_UPCOMING_TASKS_success";
+export const STUDENT_UPCOMING_TASKS_ERROR = "STUDENT_UPCOMING_TASKS_error";
+
+export const STUDENT_BATCH_MATES_REQUEST = "STUDENT_BATCH_MATES_request";
+export const STUDENT_BATCH_MATES_SUCCESS = "STUDENT_BATCH_MATES_success";
+export const STUDENT_BATCH_MATES_ERROR = "STUDENT_BATCH_MATES_error";
+
+export const GET_STUDENT_ASSIGNMENT_LIST_REQUEST =
+  "GET_STUDENT_ASSIGNMENT_LIST_request";
+export const GET_STUDENT_ASSIGNMENT_LIST_SUCCESS =
+  "GET_STUDENT_ASSIGNMENT_LIST_success";
+export const GET_STUDENT_ASSIGNMENT_LIST_ERROR =
+  "GET_STUDENT_ASSIGNMENT_LIST_error";
+
+export const GET_STUDENT_PROGRESS_REQUEST = "GET_STUDENT_PROGRESS_request";
+export const GET_STUDENT_PROGRESS_SUCCESS = "GET_STUDENT_PROGRESS_success";
+export const GET_STUDENT_PROGRESS_ERROR = "GET_STUDENT_ASSIGNMENT_LIST_error";
+
+export const getStudentProgress = languageCode => dispatch => {
+  dispatch({ type: GET_STUDENT_PROGRESS_REQUEST });
+  return axiosInstance
+    .get(`/getUserProgress?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .then(res => {
+      dispatch({
+        type: GET_STUDENT_PROGRESS_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_STUDENT_PROGRESS_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const getStudentAssignmentList = languageCode => dispatch => {
+  dispatch({ type: GET_STUDENT_ASSIGNMENT_LIST_REQUEST });
+  return axiosInstance
+    .get(`/getUserAssignments?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .then(res => {
+      dispatch({
+        type: GET_STUDENT_ASSIGNMENT_LIST_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_STUDENT_ASSIGNMENT_LIST_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
 export const getStudentDashboardData = languageCode => dispatch => {
   dispatch({ type: GET_STUDENT_DASHBOARD_DATA_REQUEST });
   return axiosInstance
     .get(
-      `/getStudentDashboardData?access_token=${Cookies.get(
+      `/getUserDashboardData?access_token=${Cookies.get(
         COOKIE_TOKEN
       )}&lang=${languageCode}`
     )
@@ -68,6 +123,40 @@ export const getStudentDashboardData = languageCode => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_STUDENT_DASHBOARD_DATA_ERROR,
+        error: err.response.data
+      });
+    });
+};
+export const studentUpcomingTasks = () => dispatch => {
+  dispatch({ type: STUDENT_UPCOMING_TASKS_REQUEST });
+  return axiosInstance
+    .get(`/getUserUpcomingTask?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .then(res => {
+      dispatch({
+        type: STUDENT_UPCOMING_TASKS_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: STUDENT_UPCOMING_TASKS_ERROR,
+        error: err.response.data
+      });
+    });
+};
+export const studentBatchMates = () => dispatch => {
+  dispatch({ type: STUDENT_BATCH_MATES_REQUEST });
+  return axiosInstance
+    .get(`/getStudentBatchMatesList?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .then(res => {
+      dispatch({
+        type: STUDENT_BATCH_MATES_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: STUDENT_BATCH_MATES_ERROR,
         error: err.response.data
       });
     });
