@@ -5,13 +5,17 @@ import Button from "../Button/Button";
 import Icon from "../../assets/Icon/Icon";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
 import axiosInstance from "../../utils/axiosInstance";
+import jsCookie from "js-cookie";
+import { COOKIE_TOKEN } from "../../utils/constants";
 
 export default class MentorFaq extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       openState: [1],
-      faqList: []
+      faqList: [],
+      loading: false,
+      faqFeilds: {}
     };
   }
 
@@ -28,6 +32,22 @@ export default class MentorFaq extends React.Component {
       });
     } catch (err) {}
   };
+  sendQuestion = async () => {
+    await this.setState({ loading: true });
+    const payload = {
+      ...this.state.faqFeilds,
+      access_token: jsCookie.get(COOKIE_TOKEN),
+      lang: "common",
+      faq_type: "student"
+    };
+    try {
+      const response = await axiosInstance.post(`/addCourseFaq`, payload);
+      this.getFaqs();
+      this.setState({ loading: false });
+    } catch (err) {
+      this.setState({ loading: false });
+    }
+  };
   openSection = id => {
     let currentState = this.state.openState;
     const findId = currentState.indexOf(id);
@@ -40,7 +60,13 @@ export default class MentorFaq extends React.Component {
       openState: currentState
     });
   };
+  onHandleFaqChange = (data, type) => {
+    let fields = this.state.faqFeilds;
+    fields[type] = data;
+    this.setState({ faqFeilds: fields });
+  };
   render() {
+    console.log(this.state.faqFeilds);
     // if (true) {
     //   return (
     //     <div style={{ height: "700px", width: "700px", margin: "auto" }}>
@@ -92,8 +118,17 @@ export default class MentorFaq extends React.Component {
         </div>
         <div className={styles.textAreaWrapper}>
           <div className={styles.textAreaBox}>
-            <div className={styles.heading}>Have a question?</div>
-            <textarea className={styles.textAreaSection}></textarea>
+            <div className={styles.heading}>Add Frequently Asked Question?</div>
+            <textarea
+              className={styles.textAreaSection}
+              placeholder="Question"
+              onChange={e => this.onHandleFaqChange(e.target.value, "faq")}
+            ></textarea>
+            <textarea
+              className={styles.textAreaSection}
+              placeholder="Answer"
+              onChange={e => this.onHandleFaqChange(e.target.value, "answer")}
+            ></textarea>
             <div className={styles.sendButton}>
               <Button
                 label={"Send"}
@@ -107,7 +142,8 @@ export default class MentorFaq extends React.Component {
                   fontSize: "16px"
                 }}
                 border="none"
-                onClick={() => sendQuestion()}
+                loading={this.state.loading}
+                onClick={() => this.sendQuestion()}
               />
             </div>
           </div>
