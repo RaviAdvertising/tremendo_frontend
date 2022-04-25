@@ -175,7 +175,11 @@ export const studentUpcomingTasks = () => dispatch => {
 export const studentBatchMates = () => dispatch => {
   dispatch({ type: STUDENT_BATCH_MATES_REQUEST });
   return axiosInstance
-    .get(`/getStudentBatchMatesList?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .get(
+      `/getStudentBatchMatesList?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}&batch_id=${"bth_1001"}`
+    )
     .then(res => {
       dispatch({
         type: STUDENT_BATCH_MATES_SUCCESS,

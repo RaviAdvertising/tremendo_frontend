@@ -56,6 +56,14 @@ const authReducer = (state, action) => {
         profileDataLoading: true
       });
     case authAction.GET_USER_PROFILE_SUCCESS:
+      const localstorageValue =
+        localStorage.getItem(USER_DETAILS) &&
+        JSON.parse(localStorage.getItem(USER_DETAILS));
+      const updatedLocalstorage = {
+        ...localstorageValue,
+        profileUrl: action.data.user_data.avatar
+      };
+      localStorage.setItem(USER_DETAILS, JSON.stringify(updatedLocalstorage));
       return Object.assign({}, state, {
         profileDataLoading: false,
         profileData: action.data
