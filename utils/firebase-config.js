@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCjtr5UbOtW_5hGVCNvVRPT_txoZlOAcPg",
@@ -15,5 +16,6 @@ if (!firebase.apps.length) {
 } else {
   firebase.app(); // if already initialized, use that one
 }
+const storage = firebase.storage();
 
-export default firebase;
+export { storage, firebase as default };

@@ -20,6 +20,7 @@
 .faqBoxWrapper {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .faqBox {
   border: 1px solid #3a86ff;

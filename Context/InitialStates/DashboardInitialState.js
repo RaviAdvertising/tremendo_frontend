@@ -20,6 +20,8 @@ const dashboardIntialState = {
   studentAssignmentList: [],
   studentAssignmentListLoading: false,
   getStudentProgress: [],
-  getStudentProgressLoading: false
+  getStudentProgressLoading: false,
+  getStudentCourseDetails: [],
+  getStudentCourseDetailsLoading: false
 };
 export default dashboardIntialState;

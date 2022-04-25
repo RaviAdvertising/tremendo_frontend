@@ -4,25 +4,56 @@ import styles from "./FaqTab.module.css";
 import { Image } from "semantic-ui-react";
 import Button from "../Button/Button";
 import axiosInstance from "../../utils/axiosInstance";
+import jsCookie from "js-cookie";
+import { COOKIE_TOKEN } from "../../utils/constants";
+import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 export default class FaqTab extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       openState: [],
-      faqList: []
+      faqList: [],
+      question: "",
+      loading: false
     };
   }
   componentDidMount() {
     this.getFaqs();
+    this.userFaqs();
   }
   getFaqs = async () => {
+    await this.setState({ loading: true });
     try {
       const response = await axiosInstance.get(
         `/getCourseFaqs?faq_type=student`
       );
       this.setState({
-        faqList: response.data.data
+        faqList: response.data.data.concat(this.state.faqList),
+        loading: false
       });
+    } catch (err) {
+      await this.setState({ loading: false });
+    }
+  };
+  userFaqs = async () => {
+    await this.setState({ loading: true });
+    try {
+      const response = await axiosInstance.get(
+        `/getUserFaqs?access_token=${jsCookie.get(COOKIE_TOKEN)}`
+      );
+      this.setState({
+        faqList: response.data.data.concat(this.state.faqList),
+        loading: false
+      });
+    } catch (err) {
+      await this.setState({ loading: false });
+    }
+  };
+  addFaqs = async payload => {
+    try {
+      const response = await axiosInstance.post(`/addUserFaq`, payload);
+      this.userFaqs();
+      this.getFaqs();
     } catch (err) {}
   };
 
@@ -38,8 +69,22 @@ export default class FaqTab extends React.Component {
       openState: currentState
     });
   };
+  sendQuestion = async () => {
+    await this.setState({ faqList: [], loading: true });
+    if (this.state.question != "") {
+      const payload = {
+        faq: this.state.question,
+        access_token: jsCookie.get(COOKIE_TOKEN)
+      };
 
+      await this.addFaqs(payload);
+    }
+  };
   render() {
+    if (this.state.loading) {
+      return <StudentDashboardSkelton />;
+    }
+
     // if (true) {
     //   return (
     //     <div style={{ height: "700px", width: "700px", margin: "auto" }}>
@@ -89,7 +134,12 @@ export default class FaqTab extends React.Component {
         <div className={styles.textAreaWrapper}>
           <div className={styles.textAreaBox}>
             <div className={styles.heading}>Have a question?</div>
-            <textarea className={styles.textAreaSection}></textarea>
+            <textarea
+              className={styles.textAreaSection}
+              onChange={event =>
+                this.setState({ question: event.target.value })
+              }
+            ></textarea>
             <div className={styles.sendButton}>
               <Button
                 label={"Send"}
@@ -103,7 +153,7 @@ export default class FaqTab extends React.Component {
                   fontSize: "15px"
                 }}
                 border="none"
-                onClick={() => sendQuestion()}
+                onClick={() => this.sendQuestion()}
               />
             </div>
           </div>

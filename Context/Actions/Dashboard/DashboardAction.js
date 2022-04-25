@@ -68,8 +68,36 @@ export const GET_STUDENT_ASSIGNMENT_LIST_ERROR =
 
 export const GET_STUDENT_PROGRESS_REQUEST = "GET_STUDENT_PROGRESS_request";
 export const GET_STUDENT_PROGRESS_SUCCESS = "GET_STUDENT_PROGRESS_success";
-export const GET_STUDENT_PROGRESS_ERROR = "GET_STUDENT_ASSIGNMENT_LIST_error";
+export const GET_STUDENT_PROGRESS_ERROR = "GET_STUDENT_PROGRESS_error";
 
+export const GET_STUDENT_COURSE_DETAILS_REQUEST =
+  "GET_STUDENT_COURSE_DETAILS_request";
+export const GET_STUDENT_COURSE_DETAILS_SUCCESS =
+  "GET_STUDENT_COURSE_DETAILS_success";
+export const GET_STUDENT_COURSE_DETAILS_ERROR =
+  "GET_STUDENT_COURSE_DETAILS_error";
+
+export const getStudentCourseDetails = languageCode => dispatch => {
+  dispatch({ type: GET_STUDENT_COURSE_DETAILS_REQUEST });
+  return axiosInstance
+    .get(
+      `/getStudentBatchDetails?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}&batch_id=bth_1001`
+    )
+    .then(res => {
+      dispatch({
+        type: GET_STUDENT_COURSE_DETAILS_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_STUDENT_COURSE_DETAILS_ERROR,
+        error: err.response.data
+      });
+    });
+};
 export const getStudentProgress = languageCode => dispatch => {
   dispatch({ type: GET_STUDENT_PROGRESS_REQUEST });
   return axiosInstance

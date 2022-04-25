@@ -4,15 +4,23 @@ import { Image } from "semantic-ui-react";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import { useEffect, useContext } from "react";
 import { DeviceContext } from "../../pages/_app";
+import { GlobalContext } from "../../Context/Provider";
+import { getStudentCourseDetails } from "../../Context/Actions/Dashboard/DashboardAction";
 
 export default function CourseDetailTab() {
   const { isMobileView } = useContext(DeviceContext);
+  const {
+    studentDashboardState,
+    studentDashboardDispatch: dispatch
+  } = useContext(GlobalContext);
+
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
   const currentDate = moment().format("D");
   const days = ["Mon", "Tue", "Wed", "Thus", "Fri", "Sat", "Sun"];
   const currentDay = moment().day() ? moment().day() : 7;
+
   useEffect(() => {
     if (document.getElementById("currentDate")) {
       document.getElementById("currentDate").scrollIntoView({
@@ -20,34 +28,53 @@ export default function CourseDetailTab() {
         block: "center"
       });
     }
+    getStudentCourseDetails()(dispatch);
   }, []);
-  // if (true) {
-  //   return <StudentDashboardSkelton />;
-  // }
-  // if (true) {
-  //   return (
-  //     <div
-  //       style={{
-  //         height: isMobileView ? "300px" : "700px",
-  //         width: isMobileView ? "300px" : "700px",
-  //         margin: "auto"
-  //       }}
-  //     >
-  //       <Image
-  //         src="/Images/no_data.png"
-  //         alt="tremendo dashboard banner"
-  //         height={isMobileView ? "300px" : "800px"}
-  //         width={isMobileView ? "300px" : "700px"}
-  //         className={styles.banner}
-  //       />
-  //     </div>
-  //   );
-  // }
 
+  const goToLink = link => {
+    const url = link.includes("https") ? link : `https://${link}`;
+    window.open(url, "_blank");
+  };
+
+  if (studentDashboardState.getStudentCourseDetailsLoading) {
+    return <StudentDashboardSkelton />;
+  }
+  const todays_class = studentDashboardState.getStudentCourseDetails?.class_details?.find(
+    i =>
+      moment(i.class_date).format("DD/MM/YYYY") ===
+      moment().format("DD/MM/YYYY")
+  );
+
+  if (
+    studentDashboardState.getStudentCourseDetails?.class_details?.length == 0
+  ) {
+    return (
+      <div
+        style={{
+          height: isMobileView ? "300px" : "700px",
+          width: isMobileView ? "300px" : "700px",
+          margin: "auto"
+        }}
+      >
+        <Image
+          src="/Images/no_data.png"
+          alt="tremendo dashboard banner"
+          height={isMobileView ? "300px" : "800px"}
+          width={isMobileView ? "300px" : "700px"}
+          className={styles.banner}
+        />
+      </div>
+    );
+  }
+  const batch_data = studentDashboardState.getStudentCourseDetails?.batch_data;
   return (
     <div className={styles.base}>
-      <div className={styles.courseName}>Course Name :</div>
-      <div className={styles.batchName}>Student Batch No. :</div>
+      <div className={styles.courseName}>
+        Course Name : {batch_data?.batch_language}
+      </div>
+      <div className={styles.batchName}>
+        Student Batch No. : {batch_data?.batch_id}
+      </div>
       <div className={styles.dateMonthHeading}>
         <div className={styles.courseName}>Date</div>
         <div className={styles.batchName}>{moment().format("MMM")}</div>
@@ -81,8 +108,12 @@ export default function CourseDetailTab() {
             <div className={styles.border}></div>
           </div>
           <div className={styles.detailsWrapper}>
-            <div className={styles.batchCode}>E2</div>
-            <div className={styles.batchCode}>02:00PM - 03:00PM</div>
+            <div className={styles.batchCode}>{batch_data?.batch_id}</div>
+            <div className={styles.batchCode}>
+              {todays_class?.class_start_time
+                ? `${todays_class?.class_start_time} - ${todays_class?.class_end_time}`
+                : `${batch_data?.batch_start_time} - ${batch_data?.batch_end_time}`}
+            </div>
             <div className={styles.mentorProfile}>
               <div className={styles.profile}>
                 <Image
@@ -93,12 +124,22 @@ export default function CourseDetailTab() {
                   width={"24px"}
                 />
               </div>
-              <div className={styles.name}>Mentor Name</div>
+              <div className={styles.name}>
+                {todays_class?.batch_mentor
+                  ? todays_class.batch_mentor
+                  : batch_data?.batch_mentor}
+              </div>
             </div>
-            <div className={styles.joiningLink}>
+            <div
+              className={styles.joiningLink}
+              onClick={() => goToLink(todays_class?.class_link)}
+            >
               <Image src={"/Images/google_meet.png"} alt="user-image" />
             </div>
-            {currentDay !== index + 1 && <div className={styles.overlay}></div>}
+            {(currentDay !== index + 1 ||
+              (todays_class && Object.keys(todays_class)?.length == 0)) && (
+              <div className={styles.overlay}></div>
+            )}
           </div>
         </div>
       ))}

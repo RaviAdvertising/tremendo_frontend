@@ -158,7 +158,7 @@ export default function ProgressTab({}) {
   if (studentDashboardState.getStudentProgressLoading) {
     return <StudentDashboardSkelton />;
   }
-  const scores = studentDashboardState.getStudentProgress?.score.map(
+  const scores = studentDashboardState.getStudentProgress?.score?.map(
     i => i.my_score
   );
   const studentProgress =

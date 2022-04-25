@@ -154,6 +154,20 @@ const dashboardReducer = (state, action) => {
         getStudentProgressLoading: false
       });
 
+    case dashboardAction.GET_STUDENT_COURSE_DETAILS_REQUEST:
+      return Object.assign({}, state, {
+        getStudentCourseDetailsLoading: true
+      });
+    case dashboardAction.GET_STUDENT_COURSE_DETAILS_SUCCESS:
+      return Object.assign({}, state, {
+        getStudentCourseDetailsLoading: false,
+        getStudentCourseDetails: action.data
+      });
+    case dashboardAction.GET_STUDENT_COURSE_DETAILS_ERROR:
+      return Object.assign({}, state, {
+        getStudentCourseDetailsLoading: false
+      });
+
     default:
       return state;
   }

@@ -24,6 +24,7 @@ import {
   UPDATE_PROFILE_DATA_SUCCESS
 } from "../../Context/Actions/Dashboard/DashboardAction";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
+import { storage } from "../../utils/firebase-config";
 
 export default function ProfileTab({}) {
   const [fields, setFields] = useState({
@@ -34,6 +35,7 @@ export default function ProfileTab({}) {
     country: "India"
   });
   const [errors, setErrors] = useState({});
+  const [progress, setProgress] = useState(0);
   const [image, setImage] = useState({ preview: "", raw: "" });
   const {
     authState,
@@ -95,7 +97,31 @@ export default function ProfileTab({}) {
       </select>
     );
   };
-
+  const uploadFiles = image => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log("here");
+        setProgress(progress);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            console.log(url);
+          });
+      }
+    );
+  };
   useEffect(() => {
     updateFieldsValue();
   }, []);
@@ -115,13 +141,7 @@ export default function ProfileTab({}) {
   };
   const handleChangeImage = e => {
     console.log(e.target.files);
-    if (e.target.files.length) {
-      setFields({ ...fields, avatar: URL.createObjectURL(e.target.files[0]) });
-      setImage({
-        preview: URL.createObjectURL(e.target.files[0]),
-        raw: e.target.files[0]
-      });
-    }
+    uploadFiles(e.target.files[0]);
   };
 
   const updateProfile = async () => {
