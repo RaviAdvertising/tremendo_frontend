@@ -32,16 +32,18 @@
   padding: 12px;
 }
 .dateHeader {
-  width: 25%;
+  width: 20%;
   padding: 12px 20px;
 }
 .statusHeader {
-  width: 25%;
+  width: 15%;
   padding: 12px 5px;
+  text-align: center;
 }
 .checkboxesWrapper {
-  width: 25%;
+  width: 15%;
   padding: 12px 5px;
+  text-align: center;
 }
 .tableData {
   display: flex;

@@ -158,7 +158,7 @@ export const getStudentDashboardData = languageCode => dispatch => {
 export const studentUpcomingTasks = () => dispatch => {
   dispatch({ type: STUDENT_UPCOMING_TASKS_REQUEST });
   return axiosInstance
-    .get(`/getUserUpcomingTask?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .get(`/getStudentUpcomingTask?access_token=${Cookies.get(COOKIE_TOKEN)}`)
     .then(res => {
       dispatch({
         type: STUDENT_UPCOMING_TASKS_SUCCESS,

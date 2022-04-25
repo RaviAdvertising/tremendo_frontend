@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect } from "react";
+import React, { useRef, useContext, useEffect, useState } from "react";
 import styles from "./MyResourceTab.module.css";
 import { Image } from "semantic-ui-react";
 import Icon from "../../assets/Icon/Icon";
@@ -6,6 +6,12 @@ import { DeviceContext } from "../../pages/_app";
 import { GlobalContext } from "../../Context/Provider";
 import { getStudentAssignmentList } from "../../Context/Actions/Dashboard/DashboardAction";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
+import Button from "../Button/Button";
+import axiosInstance from "../../utils/axiosInstance";
+import jsCookie from "js-cookie";
+import { COOKIE_TOKEN } from "../../utils/constants";
+import PageLoader from "../Loader/PageLoader";
+import { storage } from "../../utils/firebase-config";
 
 export default function MyResourceTab({}) {
   const inputFile = useRef(null);
@@ -14,6 +20,8 @@ export default function MyResourceTab({}) {
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
   const { isMobileView } = useContext(DeviceContext);
+  const [loading, setLoading] = useState(false);
+  const [assignmentUrls, setAssignmentUrls] = useState({});
   useEffect(() => {
     getStudentAssignmentList()(dispatch);
   }, []);
@@ -21,6 +29,57 @@ export default function MyResourceTab({}) {
   const onClick = e => {
     inputFile.current.click();
   };
+
+  const uploadFiles = (image, id) => {
+    //setUploadLoading(type);
+    const uploadTask = storage.ref(`docs/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log("here");
+      },
+      error => {
+        //setUploadLoading("");
+        console.log(error, "error");
+      },
+      () => {
+        storage
+          .ref("docs")
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            setAssignmentUrls({ ...assignmentUrls, [id]: url });
+            // setUploadLoading("");
+          });
+      }
+    );
+  };
+
+  const submitAssigmentResult = async data => {
+    setLoading(true);
+    const payload = {
+      access_token: jsCookie.get(COOKIE_TOKEN),
+      student_assignment_id: data.assignment_id,
+      answer_doc_url: assignmentUrls[data.assignment_id]
+    };
+    try {
+      const response = await axiosInstance.post(
+        `/submitStudentAssignment`,
+        payload
+      );
+      getStudentAssignmentList()(dispatch);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
+  const uploadAssigment = (e, data) => {
+    uploadFiles(e.target.files[0], data.assignment_id);
+  };
+
   if (studentDashboardState.studentAssignmentListLoading) {
     return <StudentDashboardSkelton />;
   }
@@ -43,12 +102,15 @@ export default function MyResourceTab({}) {
   //     </div>
   //   );
   // }
-  console.log(studentDashboardState.studentAssignmentList);
+
   const assignmentList = studentDashboardState.studentAssignmentList?.assigment;
   const finalAssesment =
     studentDashboardState.studentAssignmentList?.final_assessment;
+
+  const resourse_data = studentDashboardState.studentAssignmentList;
   return (
     <div className={styles.base}>
+      {loading && <PageLoader />}
       <div className={styles.headingWrapper}>
         <div className={styles.heading}>Assignments</div>
         <div className={styles.heading}> Total: {assignmentList?.length}</div>
@@ -61,6 +123,7 @@ export default function MyResourceTab({}) {
           </div>
           <div className={styles.dateHeader}>Assign Date</div>
           <div className={styles.dateHeader}>Due Date</div>
+          <div className={styles.statusHeader}>Score</div>
           <div className={styles.statusHeader}>Status</div>
         </div>
         <div className={styles.tableBody}>
@@ -73,23 +136,29 @@ export default function MyResourceTab({}) {
                 </div>
                 <div className={styles.uploadButtons}>
                   <input
-                    type="file"
-                    id="file"
                     ref={inputFile}
-                    style={{ display: "none" }}
+                    type="file"
+                    hidden
+                    onChange={event => uploadAssigment(event, i)}
                   />
-
                   <div className={styles.uploadBtn} onClick={onClick}>
                     Upload
                   </div>
-                  <div className={styles.EditBtn} onClick={onClick}>
-                    View
+                  <div className={styles.EditBtn}>
+                    <a
+                      href={assignmentUrls[i.assignment_id]}
+                      download="assignemnt"
+                      target={"_blank"}
+                      rel="noreferrer"
+                    >
+                      View
+                    </a>
                   </div>
                 </div>
               </div>
               <div className={styles.dateHeader}>{i.assign_date}</div>
               <div className={styles.dateHeader}>{i.due_data}</div>
-              <div className={styles.checkboxesWrapper}>
+              {/* <div className={styles.checkboxesWrapper}>
                 <div className={styles.completeCheckbox}>
                   <label className={styles.completeContainer}>
                     Complete
@@ -112,6 +181,23 @@ export default function MyResourceTab({}) {
                     <span className={styles.checkmark}></span>
                   </label>
                 </div>
+              </div> */}
+              <div className={styles.checkboxesWrapper}>20/100</div>
+              <div className={styles.checkboxesWrapper}>
+                <Button
+                  label={"Submit"}
+                  height={30}
+                  borderRadius={8}
+                  backgroundColor={"#f98e46"}
+                  textStyle={{
+                    color: "#fff",
+                    fontWeight: "bold",
+                    fontFamily: "Open Sans",
+                    fontSize: "12px"
+                  }}
+                  border="none"
+                  onClick={() => submitAssigmentResult(i)}
+                />
               </div>
             </div>
           ))}
@@ -123,12 +209,12 @@ export default function MyResourceTab({}) {
           <div className={styles.finalTime}>
             <div className={styles.finalDate}>{finalAssesment?.title}</div>
             <div className={styles.uploadFileSize}>
-              <input
+              {/* <input
                 type="file"
                 id="file"
                 ref={inputFile}
                 style={{ display: "none" }}
-              />
+              /> */}
               <div className={styles.uploadFinalAssesmentBtn} onClick={onClick}>
                 Upload
               </div>
@@ -180,11 +266,15 @@ export default function MyResourceTab({}) {
                 style={{ margin: "auto" }}
               />
               <div className={styles.pdfUploadTime}>Feb 7 2022, 10:00AM</div>
-              <div
-                className={styles.downloadIcon}
-                onClick={() => console.log("ss")}
-              >
-                <Icon name="downloadIcon" width="26" height="26" />
+              <div className={styles.downloadIcon}>
+                <a
+                  href={resourse_data?.syllabus?.doc_url}
+                  download="assignemnt"
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <Icon name="downloadIcon" width="26" height="26" />
+                </a>
               </div>
               <div className={styles.fileSize}>167kb</div>
             </div>
@@ -194,13 +284,20 @@ export default function MyResourceTab({}) {
           <div className={styles.syllabusHeading}>E-Book</div>
           <div className={styles.bookImageWrapper}>
             <div className={styles.ebookSections}>
-              {[1, 1, 1, 1, 1].map((i, index) => (
-                <Image
+              {[1].map((i, index) => (
+                <a
                   key={index}
-                  src={"/Images/e-bookImage.png"}
-                  alt="user-image"
-                  className={styles.eBook}
-                />
+                  href={resourse_data?.e_book?.doc_url}
+                  download="assignemnt"
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <Image
+                    src={"/Images/e-bookImage.png"}
+                    alt="user-image"
+                    className={styles.eBook}
+                  />
+                </a>
               ))}
             </div>
             <Image
