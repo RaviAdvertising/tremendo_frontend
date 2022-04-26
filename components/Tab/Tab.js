@@ -22,6 +22,7 @@ import {
   getMentorDashboardData,
   getMentorStudentList
 } from "../../Context/Actions/Dashboard/DashboardAction";
+import { setStudentSelectedLanguage } from "../../Context/Actions/Language/LanguageAction";
 
 export default function Tab({
   tabsData,
@@ -37,6 +38,8 @@ export default function Tab({
   const {
     studentDashboardState,
     authState,
+    languageState,
+    languageDispatch: langDispatch,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
   const SELECTED_TAB_COLOR = "#ff9000";
@@ -65,6 +68,11 @@ export default function Tab({
       onHandleChangeBatch(id);
     }
   }, []);
+  useEffect(() => {
+    setStudentSelectedLanguage(authState.profileData.current_language)(
+      langDispatch
+    );
+  }, [authState.profileData]);
   let searchOptions = tabsData;
 
   if (inputVal.length > 1) {
@@ -89,7 +97,13 @@ export default function Tab({
     await getMentorStudentList(id)(dispatch);
     getMentorDashboardData(id, firstday, lastday)(dispatch);
   };
-  console.log(authState.profileData.all_languages);
+  const onChangeStudentBatch = value => {
+    const selectedBatch = authState.profileData.all_languages.find(
+      i => i.batch_id == value
+    );
+    setStudentSelectedLanguage(selectedBatch)(langDispatch);
+  };
+
   const countryOptions = authState.profileData?.all_languages?.map(i => {
     return { key: i.code, value: i.batch_id, flag: i.flag, text: i.name };
   });
@@ -107,8 +121,9 @@ export default function Tab({
                 <Dropdown
                   fluid
                   selection
+                  value={languageState.setStudentSelectedLanguage?.batch_id}
                   options={countryOptions}
-                  //onChange={(e, data) => onHandleChangeBatch(data.value)}
+                  onChange={(e, data) => onChangeStudentBatch(data.value)}
                 />
               </div>
             ) : (
@@ -240,7 +255,9 @@ export default function Tab({
                         <div className={styles.taskImage}></div>
                         <div className={styles.taskDetail}>
                           <div className={styles.taskName}>{i.title}</div>
-                          <div className={styles.taskTime}>{i.start_date}</div>
+                          <div className={styles.taskTime}>
+                            {moment(i.start_date).format("LL")}
+                          </div>
                         </div>
                       </div>
                     )

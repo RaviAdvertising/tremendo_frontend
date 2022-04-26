@@ -11,6 +11,7 @@ export default function CourseDetailTab() {
   const { isMobileView } = useContext(DeviceContext);
   const {
     studentDashboardState,
+    languageState,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
 
@@ -28,7 +29,9 @@ export default function CourseDetailTab() {
         block: "center"
       });
     }
-    getStudentCourseDetails()(dispatch);
+    getStudentCourseDetails(languageState.setStudentSelectedLanguage.batch_id)(
+      dispatch
+    );
   }, []);
 
   const goToLink = link => {

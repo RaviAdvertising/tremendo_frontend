@@ -14,10 +14,13 @@ export default function ProgressTab({}) {
   const { isMobileView } = useContext(DeviceContext);
   const {
     studentDashboardState,
+    languageState,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
   useEffect(() => {
-    getStudentProgress()(dispatch);
+    getStudentProgress(languageState.setStudentSelectedLanguage.batch_id)(
+      dispatch
+    );
   }, []);
   const options = {
     maintainAspectRatio: false,

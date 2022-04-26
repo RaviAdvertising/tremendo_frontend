@@ -77,13 +77,13 @@ export const GET_STUDENT_COURSE_DETAILS_SUCCESS =
 export const GET_STUDENT_COURSE_DETAILS_ERROR =
   "GET_STUDENT_COURSE_DETAILS_error";
 
-export const getStudentCourseDetails = languageCode => dispatch => {
+export const getStudentCourseDetails = batch_id => dispatch => {
   dispatch({ type: GET_STUDENT_COURSE_DETAILS_REQUEST });
   return axiosInstance
     .get(
       `/getStudentBatchDetails?access_token=${Cookies.get(
         COOKIE_TOKEN
-      )}&batch_id=bth_1001`
+      )}&batch_id=${batch_id}`
     )
     .then(res => {
       dispatch({
@@ -98,10 +98,14 @@ export const getStudentCourseDetails = languageCode => dispatch => {
       });
     });
 };
-export const getStudentProgress = languageCode => dispatch => {
+export const getStudentProgress = batch_id => dispatch => {
   dispatch({ type: GET_STUDENT_PROGRESS_REQUEST });
   return axiosInstance
-    .get(`/getUserProgress?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .get(
+      `/getUserProgress?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}&batch_id=${batch_id}`
+    )
     .then(res => {
       dispatch({
         type: GET_STUDENT_PROGRESS_SUCCESS,
@@ -116,10 +120,14 @@ export const getStudentProgress = languageCode => dispatch => {
     });
 };
 
-export const getStudentAssignmentList = languageCode => dispatch => {
+export const getStudentAssignmentList = batch_id => dispatch => {
   dispatch({ type: GET_STUDENT_ASSIGNMENT_LIST_REQUEST });
   return axiosInstance
-    .get(`/getUserAssignments?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .get(
+      `/getUserAssignments?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}&batch_id=${batch_id}`
+    )
     .then(res => {
       dispatch({
         type: GET_STUDENT_ASSIGNMENT_LIST_SUCCESS,
@@ -134,13 +142,13 @@ export const getStudentAssignmentList = languageCode => dispatch => {
     });
 };
 
-export const getStudentDashboardData = languageCode => dispatch => {
+export const getStudentDashboardData = batch_id => dispatch => {
   dispatch({ type: GET_STUDENT_DASHBOARD_DATA_REQUEST });
   return axiosInstance
     .get(
       `/getUserDashboardData?access_token=${Cookies.get(
         COOKIE_TOKEN
-      )}&lang=${languageCode}`
+      )}&batch_id=${batch_id}`
     )
     .then(res => {
       dispatch({
@@ -155,10 +163,14 @@ export const getStudentDashboardData = languageCode => dispatch => {
       });
     });
 };
-export const studentUpcomingTasks = () => dispatch => {
+export const studentUpcomingTasks = batch_id => dispatch => {
   dispatch({ type: STUDENT_UPCOMING_TASKS_REQUEST });
   return axiosInstance
-    .get(`/getStudentUpcomingTask?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .get(
+      `/getStudentUpcomingTask?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}&batch_id=${batch_id}`
+    )
     .then(res => {
       dispatch({
         type: STUDENT_UPCOMING_TASKS_SUCCESS,
@@ -172,13 +184,13 @@ export const studentUpcomingTasks = () => dispatch => {
       });
     });
 };
-export const studentBatchMates = () => dispatch => {
+export const studentBatchMates = batch_id => dispatch => {
   dispatch({ type: STUDENT_BATCH_MATES_REQUEST });
   return axiosInstance
     .get(
       `/getStudentBatchMatesList?access_token=${Cookies.get(
         COOKIE_TOKEN
-      )}&batch_id=${"bth_1001"}`
+      )}&batch_id=${batch_id}`
     )
     .then(res => {
       dispatch({

@@ -43,14 +43,19 @@ function Student() {
     { id: 6, tab: "Profile", icon: "setting", component: <ProfileTab /> }
   ];
   const [selectedTabIndex, setSelectedTabIndex] = useState(INITIAL_TAB_INDEX);
-  const { studentDashboardDispatch: dispatch } = useContext(GlobalContext);
+  const { languageState, studentDashboardDispatch: dispatch } = useContext(
+    GlobalContext
+  );
   const clickOnTab = data => {
     setSelectedTabIndex(data.id);
   };
   useEffect(() => {
-    studentUpcomingTasks()(dispatch);
-    studentBatchMates()(dispatch);
-  }, []);
+    const batch_id = languageState.setStudentSelectedLanguage?.batch_id;
+    if (batch_id) {
+      studentUpcomingTasks(batch_id)(dispatch);
+      studentBatchMates(batch_id)(dispatch);
+    }
+  }, [languageState.setStudentSelectedLanguage]);
 
   const userDetails =
     typeof window !== "undefined" &&

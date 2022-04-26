@@ -14,6 +14,10 @@ const languageReducer = (state, action) => {
       return Object.assign({}, state, {
         getLangaugeDetailsLoading: false
       });
+    case languageAction.SET_STUDENT_SELECTED_LANGUAGE:
+      return Object.assign({}, state, {
+        setStudentSelectedLanguage: action.data
+      });
 
     default:
       return state;

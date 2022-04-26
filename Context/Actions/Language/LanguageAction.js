@@ -4,6 +4,8 @@ export const GET_LANGUAGE_DETAILS_REQUEST = "get_language_details_request";
 export const GET_LANGUAGE_DETAILS_SUCCESS = "get_language_details_success";
 export const GET_LANGUAGE_DETAILS_ERROR = "get_language_details_error";
 
+export const SET_STUDENT_SELECTED_LANGUAGE = "setStudentSelectedLnagugae";
+
 export const getLangaugeDetails = languageCode => dispatch => {
   dispatch({ type: GET_LANGUAGE_DETAILS_REQUEST });
   return axiosInstance
@@ -28,4 +30,11 @@ export const getLangaugeDetails = languageCode => dispatch => {
         error: err.response.data
       };
     });
+};
+
+export const setStudentSelectedLanguage = languageObj => dispatch => {
+  dispatch({
+    type: SET_STUDENT_SELECTED_LANGUAGE,
+    data: languageObj
+  });
 };

@@ -14,12 +14,15 @@ import moment from "moment";
 export default function Dashboard() {
   const {
     studentDashboardState,
+    languageState,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
   const { isMobileView } = useContext(DeviceContext);
 
   useEffect(() => {
-    getStudentDashboardData()(dispatch);
+    getStudentDashboardData(languageState.setStudentSelectedLanguage.batch_id)(
+      dispatch
+    );
   }, []);
 
   const options = {
@@ -95,7 +98,7 @@ export default function Dashboard() {
       </div>
     );
   }
-  console.log(studentDashboardState.getStudentDashboardData);
+
   const studentClasses = studentDashboardState.getStudentDashboardData.classes;
   const studentProgress =
     studentDashboardState.getStudentDashboardData.progress;
@@ -109,6 +112,7 @@ export default function Dashboard() {
     (studentAttendence?.absent / studentAttendence?.total_days) *
     100
   )?.toFixed(2);
+  console.log(moment(1650944308023).format("LL"));
   return (
     <div className={styles.dashboardBase}>
       <div className={styles.dashboardBanner}>
@@ -136,12 +140,16 @@ export default function Dashboard() {
           {studentClasses?.map((i, index) => (
             <div className={styles.classBox} key={index}>
               <div className={styles.classDetail}>
-                <div className={styles.subject}>{i.subject}</div>
-                <div className={styles.subjectCode}>{i.batch_code}</div>
+                <div className={styles.subject}>{i.batch_language}</div>
+                <div className={styles.subjectCode}>{i.batch_id}</div>
               </div>
               <div className={styles.classTime}>
-                <div className={styles.data}>{i.batch_date}</div>
-                <div className={styles.time}> {i.batch_time}</div>
+                <div className={styles.data}>
+                  {moment(i.class_date).format("LL")}
+                </div>
+                <div className={styles.time}>
+                  {`${i.class_start_time}-${i.class_end_time}`}
+                </div>
               </div>
             </div>
           ))}
@@ -158,7 +166,7 @@ export default function Dashboard() {
                   datasets: [
                     {
                       data: [
-                        studentProgress?.highiest_score,
+                        studentProgress?.total_score,
                         studentProgress?.average_score,
                         studentProgress?.my_score
                       ],

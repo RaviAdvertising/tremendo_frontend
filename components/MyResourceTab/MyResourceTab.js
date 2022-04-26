@@ -12,18 +12,22 @@ import jsCookie from "js-cookie";
 import { COOKIE_TOKEN } from "../../utils/constants";
 import PageLoader from "../Loader/PageLoader";
 import { storage } from "../../utils/firebase-config";
+import moment from "moment";
 
 export default function MyResourceTab({}) {
   const inputFile = useRef(null);
   const {
     studentDashboardState,
+    languageState,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
   const { isMobileView } = useContext(DeviceContext);
   const [loading, setLoading] = useState(false);
   const [assignmentUrls, setAssignmentUrls] = useState({});
   useEffect(() => {
-    getStudentAssignmentList()(dispatch);
+    getStudentAssignmentList(languageState.setStudentSelectedLanguage.batch_id)(
+      dispatch
+    );
   }, []);
 
   const onClick = e => {
@@ -62,7 +66,7 @@ export default function MyResourceTab({}) {
     setLoading(true);
     const payload = {
       access_token: jsCookie.get(COOKIE_TOKEN),
-      student_assignment_id: data.assignment_id,
+      student_assignment_id: data.student_assignment_id,
       answer_doc_url: assignmentUrls[data.assignment_id]
     };
     try {
@@ -70,7 +74,9 @@ export default function MyResourceTab({}) {
         `/submitStudentAssignment`,
         payload
       );
-      getStudentAssignmentList()(dispatch);
+      getStudentAssignmentList(
+        languageState.setStudentSelectedLanguage.batch_id
+      )(dispatch);
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -103,7 +109,8 @@ export default function MyResourceTab({}) {
   //   );
   // }
 
-  const assignmentList = studentDashboardState.studentAssignmentList?.assigment;
+  const assignmentList =
+    studentDashboardState.studentAssignmentList?.assighment;
   const finalAssesment =
     studentDashboardState.studentAssignmentList?.final_assessment;
 
@@ -156,8 +163,12 @@ export default function MyResourceTab({}) {
                   </div>
                 </div>
               </div>
-              <div className={styles.dateHeader}>{i.assign_date}</div>
-              <div className={styles.dateHeader}>{i.due_data}</div>
+              <div className={styles.dateHeader}>
+                {moment(i.start_date).format("LL")}
+              </div>
+              <div className={styles.dateHeader}>
+                {moment(i.due_date).format("LL")}
+              </div>
               {/* <div className={styles.checkboxesWrapper}>
                 <div className={styles.completeCheckbox}>
                   <label className={styles.completeContainer}>
@@ -182,7 +193,9 @@ export default function MyResourceTab({}) {
                   </label>
                 </div>
               </div> */}
-              <div className={styles.checkboxesWrapper}>20/100</div>
+              <div className={styles.checkboxesWrapper}>
+                {i.student_score}/{i.max_score}
+              </div>
               <div className={styles.checkboxesWrapper}>
                 <Button
                   label={"Submit"}
@@ -203,18 +216,18 @@ export default function MyResourceTab({}) {
           ))}
         </div>
       </div>
-      <div className={styles.finalAssesmentSection}>
+      {/* <div className={styles.finalAssesmentSection}>
         <div className={styles.finalHeading}>
           <div className={styles.finalDate}>1.</div>
           <div className={styles.finalTime}>
             <div className={styles.finalDate}>{finalAssesment?.title}</div>
             <div className={styles.uploadFileSize}>
-              {/* <input
+              <input
                 type="file"
                 id="file"
                 ref={inputFile}
                 style={{ display: "none" }}
-              /> */}
+              />
               <div className={styles.uploadFinalAssesmentBtn} onClick={onClick}>
                 Upload
               </div>
@@ -251,7 +264,7 @@ export default function MyResourceTab({}) {
             </label>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className={styles.ebooksSection}>
         <div className={styles.syllabusWrapper}>
           <div className={styles.syllabusHeading}>Syllabus</div>

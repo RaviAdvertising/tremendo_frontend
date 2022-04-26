@@ -1,5 +1,6 @@
 const languageInitialStates = {
   getLanguageDetails: [],
-  getLangaugeDetailsLoading: false
+  getLangaugeDetailsLoading: false,
+  setStudentSelectedLanguage: {}
 };
 export default languageInitialStates;
