@@ -36,6 +36,7 @@ export default function Tab({
   const [selectedBatch, setSelectedBatches] = useState("");
   const {
     studentDashboardState,
+    authState,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
   const SELECTED_TAB_COLOR = "#ff9000";
@@ -88,6 +89,10 @@ export default function Tab({
     await getMentorStudentList(id)(dispatch);
     getMentorDashboardData(id, firstday, lastday)(dispatch);
   };
+  console.log(authState.profileData.all_languages);
+  const countryOptions = authState.profileData?.all_languages?.map(i => {
+    return { key: i.code, value: i.batch_id, flag: i.flag, text: i.name };
+  });
 
   return (
     <>
@@ -99,14 +104,12 @@ export default function Tab({
           <div className={styles.leftSection}>
             {studentDashboard ? (
               <div className={styles.flagSection}>
-                {/* <ImageComponent
-                  src={
-                    "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/english_flag.png?alt=media&token=426f6879-24af-4182-a3e7-3cbc39f9622c"
-                  }
-                  alt={"flag"}
-                  width={"65px"}
-                  height={"35px"}
-                /> */}
+                <Dropdown
+                  fluid
+                  selection
+                  options={countryOptions}
+                  //onChange={(e, data) => onHandleChangeBatch(data.value)}
+                />
               </div>
             ) : (
               <div className={styles.mentorBatchDetails}>

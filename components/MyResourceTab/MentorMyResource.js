@@ -712,7 +712,7 @@ export default function MentorMyResource() {
           />
           <div className={styles.downloadIcon}>
             <a
-              href={batchData.syllabus_url}
+              href={batchData?.syllabus_url}
               download="assignemnt"
               target={"_blank"}
               rel="noreferrer"
@@ -727,7 +727,7 @@ export default function MentorMyResource() {
             {[1].map((i, index) => (
               <a
                 key={index}
-                href={batchData.e_book_url}
+                href={batchData?.e_book_url}
                 download="assignemnt"
                 target={"_blank"}
                 rel="noreferrer"

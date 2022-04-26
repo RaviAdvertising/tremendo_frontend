@@ -19,7 +19,12 @@ export default function AdminDashboard({}) {
     createCircle();
     getAdminDashboardData();
   }, []);
-
+  const salesOfSelectedLang = dashboardData?.sales_per_language_data?.find(
+    j => j.code == selectedFilter
+  );
+  useEffect(() => {
+    createCircle();
+  }, [selectedFilter, salesOfSelectedLang]);
   const getAdminDashboardData = async () => {
     setLoading(true);
     try {
@@ -175,16 +180,10 @@ export default function AdminDashboard({}) {
       };
     }
   );
-  const salesOfSelectedLang = dashboardData?.sales_per_language_data?.find(
-    j => j.code == selectedFilter
-  );
-  const totalSale = dashboardData?.sales_per_language_data?.reduce(
-    (acc, item) => {
-      acc += item.transcation_count;
-      return acc;
-    },
-    0
-  );
+
+  const percentageSale =
+    (salesOfSelectedLang?.lang_amount / salesOfSelectedLang?.overall_amount) *
+    100;
 
   return (
     <div className={styles.base}>
@@ -287,12 +286,12 @@ export default function AdminDashboard({}) {
               id="canvas"
               width="200"
               height="200"
-              data-percent={salesOfSelectedLang?.transcation_count}
+              data-percent={percentageSale ? percentageSale : "0"}
             ></canvas>
             <div className={styles.showProgress} id="procent"></div>
           </div>
           <div className={styles.chartHeading} style={{ textAlign: "center" }}>
-            Total - {totalSale}
+            Total - {salesOfSelectedLang?.overall_amount}
           </div>
         </div>
       </div>
@@ -312,7 +311,7 @@ export default function AdminDashboard({}) {
         {transactionData?.map((transaction, index) => (
           <div className={styles.tableBody} key={index}>
             <div className={styles.serialNo}>{index + 1}</div>
-            <div className={styles.headerLabel}>Ekta Singh</div>
+            <div className={styles.headerLabel}>{transaction.user_name}</div>
             <div className={styles.headerLabel}>
               {transaction.transacation_id}{" "}
             </div>
