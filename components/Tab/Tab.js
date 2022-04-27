@@ -22,7 +22,10 @@ import {
   getMentorDashboardData,
   getMentorStudentList
 } from "../../Context/Actions/Dashboard/DashboardAction";
-import { setStudentSelectedLanguage } from "../../Context/Actions/Language/LanguageAction";
+import {
+  setStudentSelectedLanguage,
+  storeMentorBatch
+} from "../../Context/Actions/Language/LanguageAction";
 
 export default function Tab({
   tabsData,
@@ -69,9 +72,13 @@ export default function Tab({
     }
   }, []);
   useEffect(() => {
-    setStudentSelectedLanguage(authState.profileData.current_language)(
-      langDispatch
-    );
+    if (studentDashboard) {
+      setStudentSelectedLanguage(authState.profileData.current_language)(
+        langDispatch
+      );
+    } else {
+      storeMentorBatch(authState.profileData.current_language)(langDispatch);
+    }
   }, [authState.profileData]);
   let searchOptions = tabsData;
 
@@ -93,7 +100,10 @@ export default function Tab({
 
     const firstday = moment(new Date(curr.setDate(first))).format("x");
     const lastday = moment(new Date(curr.setDate(last))).format("x");
-    setSelectedBatches(id);
+    const selectedBatch = authState.profileData.all_languages.find(
+      i => i.batch_id == id
+    );
+    storeMentorBatch(selectedBatch)(langDispatch);
     await getMentorStudentList(id)(dispatch);
     getMentorDashboardData(id, firstday, lastday)(dispatch);
   };
@@ -132,7 +142,7 @@ export default function Tab({
                   className={styles.batchesDropDown}
                   fluid
                   selection
-                  value={selectedBatch}
+                  value={languageState.storedMentorBatch?.batch_id}
                   options={mentorBatches}
                   onChange={(e, data) => onHandleChangeBatch(data.value)}
                 />
@@ -245,26 +255,51 @@ export default function Tab({
                 <IconComponent name="notification" color="#ff9000" />
               </div>
             </div>
-            {studentDashboardState.studentUpcomingTasks?.length > 0 && (
-              <div className={styles.upcomingTaskSection}>
-                <div className={styles.upcomingTaskHeading}>Upcoming Task</div>
-                <div className={styles.upcomingTaskBox}>
-                  {studentDashboardState.studentUpcomingTasks?.map(
-                    (i, index) => (
-                      <div className={styles.taskWrapper} key={index}>
-                        <div className={styles.taskImage}></div>
-                        <div className={styles.taskDetail}>
-                          <div className={styles.taskName}>{i.title}</div>
-                          <div className={styles.taskTime}>
-                            {moment(i.start_date).format("LL")}
+            {studentDashboard
+              ? studentDashboardState.studentUpcomingTasks?.length > 0 && (
+                  <div className={styles.upcomingTaskSection}>
+                    <div className={styles.upcomingTaskHeading}>
+                      Upcoming Task
+                    </div>
+                    <div className={styles.upcomingTaskBox}>
+                      {studentDashboardState.studentUpcomingTasks?.map(
+                        (i, index) => (
+                          <div className={styles.taskWrapper} key={index}>
+                            <div className={styles.taskImage}></div>
+                            <div className={styles.taskDetail}>
+                              <div className={styles.taskName}>{i.title}</div>
+                              <div className={styles.taskTime}>
+                                {moment(i.start_date).format("LL")}
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-            )}
+                        )
+                      )}
+                    </div>
+                  </div>
+                )
+              : studentDashboardState.mentorUpcomingTask?.length > 0 && (
+                  <div className={styles.upcomingTaskSection}>
+                    <div className={styles.upcomingTaskHeading}>
+                      Upcoming Task
+                    </div>
+                    <div className={styles.upcomingTaskBox}>
+                      {studentDashboardState.mentorUpcomingTask?.map(
+                        (i, index) => (
+                          <div className={styles.taskWrapper} key={index}>
+                            <div className={styles.taskImage}></div>
+                            <div className={styles.taskDetail}>
+                              <div className={styles.taskName}>{i.title}</div>
+                              <div className={styles.taskTime}>
+                                {moment(i.start_date).format("LL")}
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                )}
             <div className={styles.letsTalkSection}>
               <div className={styles.upcomingTaskHeading}>Let’s Talk</div>
               <div>

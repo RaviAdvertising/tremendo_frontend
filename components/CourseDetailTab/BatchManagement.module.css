@@ -206,6 +206,14 @@
 .bodyName{
   width: 25%;
 }
+.attendenceBody{
+  width: 75% !important;
+}
+.headingSubmitBtnWrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 @media (max-width: 1024px) {
   .base {
     padding: 10px;

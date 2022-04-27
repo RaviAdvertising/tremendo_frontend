@@ -26,7 +26,8 @@ import {
   deleteAssignment,
   getMentorAssignmentList,
   getMentorDashboardData,
-  getSubmittedAssignmentList
+  getSubmittedAssignmentList,
+  updateStudentAssignmentScore
 } from "../../Context/Actions/Dashboard/DashboardAction";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import { storage } from "../../utils/firebase-config";
@@ -50,6 +51,7 @@ export default function MentorMyResource() {
   const [uploadLoading, setUploadLoading] = useState("");
   const [feilds, setFeilds] = useState({});
   const [openUploadModal, setOpenUploadModal] = useState(false);
+  const [scoreList, setScoreList] = useState({});
   // if (true) {
   //   return (
   //     <div
@@ -101,6 +103,20 @@ export default function MentorMyResource() {
       }
     );
   };
+
+  const onChangeScore = (value, type) => {
+    setScoreList({ ...scoreList, [type]: value });
+  };
+  const updateAssignmentScore = async i => {
+    const payload = {
+      access_token: jsCookie.get(COOKIE_TOKEN),
+      student_assignment_id: i.student_assignment_id,
+      student_user_id: i.user_id,
+      score: scoreList[i.user_id]
+    };
+    updateStudentAssignmentScore(payload)(dispatch);
+  };
+  console.log(scoreList);
 
   const getDashboardData = async () => {
     const curr = new Date(); // get current date
@@ -229,7 +245,7 @@ export default function MentorMyResource() {
                 placeholderText="Assignment Start Date"
                 customInput={<DateInput />}
                 dateFormat="MMMM d, yyyy"
-                maxDate={Date.now()}
+                minDate={Date.now()}
                 dropdownMode="select"
               />
             </div>
@@ -242,7 +258,7 @@ export default function MentorMyResource() {
                 placeholderText="Assignment Due Date"
                 customInput={<DateInput />}
                 dateFormat="MMMM d, yyyy"
-                maxDate={Date.now()}
+                minDate={Date.now()}
                 dropdownMode="select"
               />
             </div>
@@ -327,7 +343,7 @@ export default function MentorMyResource() {
             Close
           </Button>
           <Button
-            content="Update Class"
+            content="Add Assignment"
             labelPosition="right"
             icon="checkmark"
             onClick={() => addAssignmentBtn()}
@@ -394,16 +410,27 @@ export default function MentorMyResource() {
                   </div>
                   <div className={styles.tableBodyOption}>{i.user_id}</div>
                   <div className={styles.tableBodyOption}>
-                    {" "}
-                    <IconComponent name="downloadIcon" width="36" height="36" />
+                    <a
+                      href={i.doc_urls}
+                      download="assignemnt"
+                      target={"_blank"}
+                      rel="noreferrer"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <IconComponent
+                        name="downloadIcon"
+                        width="32"
+                        height="32"
+                      />
+                    </a>
                   </div>
                   <div className={styles.tableBodyOption}>
                     <div>
                       <Input
-                        value={i.student_score}
+                        // value={i.student_score}
                         placeholder="Score"
                         onChange={(e, data) =>
-                          onHandleChange(data.value, "title")
+                          onChangeScore(data.value, i.user_id)
                         }
                       />
                     </div>
@@ -421,8 +448,9 @@ export default function MentorMyResource() {
                           fontFamily: "Open Sans",
                           fontSize: "12px"
                         }}
+                        loading={studentDashboardState.updateScoreLoading}
                         border="none"
-                        onClick={() => setOpenModal(true)}
+                        onClick={() => updateAssignmentScore(i)}
                       />
                     </div>
                   </div>

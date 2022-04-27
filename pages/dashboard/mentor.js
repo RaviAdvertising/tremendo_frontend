@@ -15,7 +15,8 @@ import { HOME_PAGE } from "../../utils/routes";
 import { GlobalContext } from "../../Context/Provider";
 import {
   getMentorBatches,
-  getMentorStudentList
+  getMentorStudentList,
+  mentorUpcomingTasks
 } from "../../Context/Actions/Dashboard/DashboardAction";
 
 const INITIAL_TAB_INDEX = 6;
@@ -65,6 +66,7 @@ function Mentor() {
     const batches = await getMentorBatches()(dispatch);
     const firstBatchId = batches.data.length > 0 && batches.data[0].batch_id;
     await getMentorStudentList(firstBatchId)(dispatch);
+    await mentorUpcomingTasks()(dispatch);
   };
   const userDetails =
     typeof window !== "undefined" &&

@@ -77,6 +77,28 @@ export const GET_STUDENT_COURSE_DETAILS_SUCCESS =
 export const GET_STUDENT_COURSE_DETAILS_ERROR =
   "GET_STUDENT_COURSE_DETAILS_error";
 
+export const MENTOR_UPCOMING_TASKS_REQUEST = "MENTOR_UPCOMING_TASKS_request";
+export const MENTOR_UPCOMING_TASKS_SUCCESS = "MENTOR_UPCOMING_TASKS_success";
+export const MENTOR_UPCOMING_TASKS_ERROR = "MENTOR_UPCOMING_TASKS_error";
+
+export const mentorUpcomingTasks = () => dispatch => {
+  dispatch({ type: MENTOR_UPCOMING_TASKS_REQUEST });
+  return axiosInstance
+    .get(`/getMentorUpcomingTask?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .then(res => {
+      dispatch({
+        type: MENTOR_UPCOMING_TASKS_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: MENTOR_UPCOMING_TASKS_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
 export const getStudentCourseDetails = batch_id => dispatch => {
   dispatch({ type: GET_STUDENT_COURSE_DETAILS_REQUEST });
   return axiosInstance

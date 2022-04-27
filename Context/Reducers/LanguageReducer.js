@@ -18,6 +18,10 @@ const languageReducer = (state, action) => {
       return Object.assign({}, state, {
         setStudentSelectedLanguage: action.data
       });
+    case languageAction.SET_MENTOR_BATCH_DETAIL:
+      return Object.assign({}, state, {
+        storedMentorBatch: action.data
+      });
 
     default:
       return state;

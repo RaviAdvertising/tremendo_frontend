@@ -168,6 +168,33 @@ const dashboardReducer = (state, action) => {
         getStudentCourseDetailsLoading: false
       });
 
+    case dashboardAction.MENTOR_UPCOMING_TASKS_REQUEST:
+      return Object.assign({}, state, {
+        mentorUpcomingTasksLoading: true
+      });
+    case dashboardAction.MENTOR_UPCOMING_TASKS_SUCCESS:
+      return Object.assign({}, state, {
+        mentorUpcomingTasksLoading: false,
+        mentorUpcomingTask: action.data
+      });
+    case dashboardAction.MENTOR_UPCOMING_TASKS_ERROR:
+      return Object.assign({}, state, {
+        mentorUpcomingTasksLoading: false
+      });
+
+    case dashboardAction.UPDATE_STUDENT_SCORE_REQUEST:
+      return Object.assign({}, state, {
+        updateScoreLoading: true
+      });
+    case dashboardAction.UPDATE_STUDENT_SCORE_SUCCESS:
+      return Object.assign({}, state, {
+        updateScoreLoading: false
+      });
+    case dashboardAction.UPDATE_STUDENT_SCORE_ERROR:
+      return Object.assign({}, state, {
+        updateScoreLoading: false
+      });
+
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
-import Button from "../Button/Button";
+import ButtonComponent from "../Button/Button";
 import styles from "./BatchManagement.module.css";
 import { useContext } from "react";
 import { DeviceContext } from "../../pages/_app";
@@ -16,6 +16,7 @@ export default function BatchManagement() {
   const [studentList, setStudentList] = useState([]);
   const {
     studentDashboardState,
+    languageState,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
   const onChangeAttendence = data => {
@@ -42,9 +43,7 @@ export default function BatchManagement() {
 
   useEffect(() => {
     if (studentDashboardState.mentorBatches.length > 0) {
-      getStudentsAccordingToBatch(
-        studentDashboardState.mentorBatches[0].batch_id
-      );
+      getStudentsAccordingToBatch(languageState.storedMentorBatch.batch_id);
     }
   }, []);
   // if (true) {
@@ -100,7 +99,25 @@ export default function BatchManagement() {
           </div>
         ))}
       </div>
-      <div className={styles.chartHeading}>Student Attendence</div>
+      <div className={styles.headingSubmitBtnWrapper}>
+        <div className={styles.chartHeading}>Student Attendence</div>
+        <div className={styles.createFaqgbtn}>
+          <ButtonComponent
+            label={"Submit Attendence"}
+            height={25}
+            borderRadius={8}
+            backgroundColor={"#f98e46"}
+            textStyle={{
+              color: "#fff",
+              fontWeight: "bold",
+              fontFamily: "Open Sans",
+              fontSize: "12px"
+            }}
+            border="none"
+            onClick={() => submitAttendence(true)}
+          />
+        </div>
+      </div>
       <div className={styles.tableHeader}>
         <div className={styles.headerName}>S no.</div>
         <div className={styles.headerName}>Name.</div>
@@ -115,11 +132,11 @@ export default function BatchManagement() {
           <div className={styles.bodyName}>
             <Dropdown
               fluid
-              selection
               options={[
                 { text: "Present", value: "present" },
                 { text: "Absent", value: "absent" }
               ]}
+              className={styles.attendenceBody}
               onChange={(event, data) => onChangeAttendence(data)}
               placeholder="Attendence"
             />

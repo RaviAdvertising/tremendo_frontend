@@ -1,6 +1,7 @@
 const languageInitialStates = {
   getLanguageDetails: [],
   getLangaugeDetailsLoading: false,
-  setStudentSelectedLanguage: {}
+  setStudentSelectedLanguage: {},
+  storedMentorBatch: {}
 };
 export default languageInitialStates;

@@ -5,6 +5,7 @@ export const GET_LANGUAGE_DETAILS_SUCCESS = "get_language_details_success";
 export const GET_LANGUAGE_DETAILS_ERROR = "get_language_details_error";
 
 export const SET_STUDENT_SELECTED_LANGUAGE = "setStudentSelectedLnagugae";
+export const SET_MENTOR_BATCH_DETAIL = "setMentorBatchDetails";
 
 export const getLangaugeDetails = languageCode => dispatch => {
   dispatch({ type: GET_LANGUAGE_DETAILS_REQUEST });
@@ -36,5 +37,12 @@ export const setStudentSelectedLanguage = languageObj => dispatch => {
   dispatch({
     type: SET_STUDENT_SELECTED_LANGUAGE,
     data: languageObj
+  });
+};
+
+export const storeMentorBatch = batchObj => dispatch => {
+  dispatch({
+    type: SET_MENTOR_BATCH_DETAIL,
+    data: batchObj
   });
 };
