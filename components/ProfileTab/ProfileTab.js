@@ -134,7 +134,11 @@ export default function ProfileTab({}) {
     );
     const profileDetails = userUpdatedData.data.user_data;
 
-    setFields({ ...fields, ...profileDetails });
+    setFields({
+      ...fields,
+      ...profileDetails,
+      first_name: profileDetails.profile_name
+    });
   };
 
   const onChangeData = (value, type) => {

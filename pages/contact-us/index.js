@@ -223,7 +223,7 @@ export default function ContactUs() {
             <div>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.9313083713682!2d77.06765591555062!3d28.63182078241813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d05eceb01c121%3A0x19748ca208251438!2sAdvertising%20Salt!5e0!3m2!1sen!2sin!4v1641389764508!5m2!1sen!2sin"
-                width={isMobileView ? "360" : "600"}
+                width={isMobileView ? "300" : "600"}
                 height="450"
                 style={{ border: "none" }}
                 allowFullScreen=""

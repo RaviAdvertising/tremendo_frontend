@@ -141,7 +141,8 @@
   align-items: center;
   top: 38%;
   justify-content: space-evenly;
-  width: 100%;
+  /* left: 30%;
+  top: 35%; */
   font-family: Open Sans;
   color: #000;
 }
@@ -267,6 +268,7 @@
     display: inline-block;
     top: 15px;
     padding: 0 15px;
+    font-size: 10px;
   }
   .learnAnyWhere {
     padding: 15px;

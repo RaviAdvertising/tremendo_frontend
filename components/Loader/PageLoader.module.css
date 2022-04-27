@@ -5,6 +5,7 @@
   background: rgba(0, 0, 0, 0.2);
   top: 0px;
   z-index: 102;
+  left: 0;
 }
 .loaderWrapper {
   position: absolute;

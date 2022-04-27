@@ -597,7 +597,7 @@ export default function AdminPages({}) {
                   </List>
                 </div>
               </div>
-              <div className={styles.blogImage}></div>
+              {/* <div className={styles.blogImage}></div> */}
             </div>
           ))}
           <div className={styles.newUploadBtn}>

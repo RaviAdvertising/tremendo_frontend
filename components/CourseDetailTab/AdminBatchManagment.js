@@ -17,6 +17,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { COOKIE_TOKEN } from "../../utils/constants";
 import ButtonComponent from "../Button/Button";
 import styles from "./AdminBatchManagment.module.css";
+import DatePicker from "react-datepicker";
 
 export default function AdminBatchManagment({}) {
   const { homeState } = useContext(GlobalContext);
@@ -79,6 +80,7 @@ export default function AdminBatchManagment({}) {
     };
   });
   const onHandleChangeBatch = (data, type) => {
+    console.log(data);
     setCreateBatchData({ ...createBatchData, [type]: data.value });
   };
 
@@ -95,7 +97,10 @@ export default function AdminBatchManagment({}) {
       access_token: Cookies.get(COOKIE_TOKEN),
       language_code: languageCode.id,
       batch_mentor_id: mentorId.user_code,
-      batch_class_days: createBatchData.batch_class_days?.join(",")
+      batch_class_days: createBatchData.batch_class_days?.join(","),
+      batch_starting_date: moment(createBatchData.batch_starting_date).format(
+        "DD/MM/YYYY"
+      )
     };
     try {
       const response = await axiosInstance.post(`/createNewBatch`, payload);
@@ -128,7 +133,27 @@ export default function AdminBatchManagment({}) {
     { key: "Saturday", text: "Saturday", value: "Saturday" },
     { key: "Sunday", text: "Sunday", value: "Sunday" }
   ];
-
+  const DateInput = ({ value, onClick, placeholder }) => {
+    return (
+      <button
+        className={styles.dateInput}
+        style={{
+          width: "186px",
+          color: "#66666d",
+          border: "1px solid #cecedc",
+          height: "38px",
+          paddingLeft: "8px",
+          fontFamily: "Poppins",
+          backgroundColor: "#fff",
+          textAlign: "left"
+        }}
+        onClick={onClick}
+      >
+        {value ? value : placeholder}
+      </button>
+    );
+  };
+  console.log(createBatchData);
   const addNewBatchModal = () => {
     return (
       <Modal
@@ -184,21 +209,33 @@ export default function AdminBatchManagment({}) {
             </div>
             <div className={styles.inputCreateWrapper}>
               <div>
-                <Input
-                  placeholder="Start Date eg. dd/mm/yyyy"
-                  onChange={(e, data) =>
-                    onHandleChangeBatch(data, "batch_starting_date")
+                <DatePicker
+                  selected={createBatchData.batch_starting_date}
+                  onChange={date =>
+                    onHandleChangeBatch({ value: date }, "batch_starting_date")
                   }
-                  style={{ width: "100%" }}
+                  placeholderText="Start Date"
+                  customInput={<DateInput />}
+                  dateFormat="MMMM d, yyyy"
+                  minDate={Date.now()}
+                  dropdownMode="select"
                 />
               </div>
               <div>
-                <Input
-                  placeholder="End Date eg. dd/mm/yyyy"
-                  onChange={(e, data) =>
-                    onHandleChangeBatch(data, "batch_end_date")
+                <DatePicker
+                  selected={createBatchData.batch_end_date}
+                  onChange={date =>
+                    onHandleChangeBatch({ value: date }, "batch_end_date")
                   }
-                  style={{ width: "100%" }}
+                  placeholderText="End Date"
+                  customInput={<DateInput />}
+                  dateFormat="MMMM d, yyyy"
+                  minDate={
+                    createBatchData.batch_starting_date
+                      ? createBatchData.batch_starting_date
+                      : Date.now()
+                  }
+                  dropdownMode="select"
                 />
               </div>
             </div>
@@ -225,7 +262,7 @@ export default function AdminBatchManagment({}) {
             <div className={styles.inputCreateWrapper}>
               <div>
                 <Input
-                  placeholder="Total Time"
+                  placeholder="Total Time (Hrs)"
                   onChange={(e, data) =>
                     onHandleChangeBatch(data, "batch_total_time")
                   }

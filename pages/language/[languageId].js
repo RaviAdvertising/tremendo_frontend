@@ -11,9 +11,13 @@ import { getLangaugeDetails } from "../../Context/Actions/Language/LanguageActio
 import LanguageDetailSkelton from "../../components/Skelton/LanguageDetailSkelton";
 import { PAYMENT_PATH } from "../../utils/routes";
 import Cookies from "js-cookie";
+import { DeviceContext } from "../_app";
+import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
+import MobileOnly from "../../components/DeviceCheck/MobileOnly";
 
 export default function DetailLanguagePage({}) {
   const [openTab, setOpenTab] = useState(null);
+  const { isMobileView } = useContext(DeviceContext);
   const router = useRouter();
   const { languageState, languageDispatch: dispatch } = useContext(
     GlobalContext
@@ -182,101 +186,183 @@ export default function DetailLanguagePage({}) {
                         </div>
                       </div>
                       {openTab == i.batch_id && (
-                        <div className={styles.detailsWrapper}>
-                          <div className={styles.dateClassWrapper}>
-                            <div className={styles.startDateWrapper}>
+                        <>
+                          <DesktopOnly>
+                            <div className={styles.detailsWrapper}>
+                              <div className={styles.dateClassWrapper}>
+                                <div className={styles.startDateWrapper}>
+                                  <div className={styles.startDateHeading}>
+                                    Start Date :
+                                  </div>
+                                  <div className={styles.startDate}>
+                                    {i.batch_starting_date}
+                                  </div>
+                                </div>
+                                <div className={styles.startDateWrapper}>
+                                  <div className={styles.startDateHeading}>
+                                    End Date :
+                                  </div>
+                                  <div className={styles.startDate}>
+                                    {i.batch_end_date}
+                                  </div>
+                                </div>
+                                <div className={styles.startDateWrapper}>
+                                  <div className={styles.startDateHeading}>
+                                    Total Classes :
+                                  </div>
+                                  <div className={styles.startDate}>
+                                    {i.batch_total_classes}
+                                  </div>
+                                </div>
+                                <div className={styles.startDateWrapper}>
+                                  <div className={styles.startDateHeading}>
+                                    Exam Date :
+                                  </div>
+                                  <div className={styles.startDate}>
+                                    {i.batch_end_date}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className={styles.durationWrapper}>
+                                <div>
+                                  <Image
+                                    src={"/Images/duration_rotate.png"}
+                                    alt=""
+                                    height={"30px"}
+                                    width={"30px"}
+                                  />
+                                </div>
+                                <div className={styles.duration}>
+                                  <span style={{ fontWeight: "bold" }}>
+                                    TOTAL DURATION:{" "}
+                                  </span>{" "}
+                                  <span>{i.batch_total_time}</span>
+                                </div>
+                              </div>
+                              <div className={styles.timeWrapper}>
+                                <div className={styles.startTimeWrapper}>
+                                  <div className={styles.startTimeHeading}>
+                                    Start Time :
+                                  </div>
+                                  <div className={styles.startTime}>
+                                    {i.batch_start_time}
+                                  </div>
+                                </div>
+                                <div className={styles.startTimeWrapper}>
+                                  <div className={styles.startTimeHeading}>
+                                    End Time :
+                                  </div>
+                                  <div className={styles.startTime}>
+                                    {i.batch_end_time}
+                                  </div>
+                                </div>
+                                <div className={styles.priceWrapper}>
+                                  <div className={styles.priceHeading}>
+                                    Price :
+                                  </div>
+                                  <div className={styles.price}>
+                                    &#x20b9;
+                                    {i.batch_purchase_price}
+                                  </div>
+                                </div>
+                                {Cookies.get(COOKIE_TOKEN) && (
+                                  <div className={styles.enrollNowBtn}>
+                                    <Button
+                                      label={"Enroll Now"}
+                                      height={35}
+                                      borderRadius={5}
+                                      backgroundColor={"#f78f1e"}
+                                      textStyle={{
+                                        color: "#fff",
+                                        fontFamily: "Open Sans",
+                                        fontSize: isMobileView
+                                          ? "10px"
+                                          : "16px",
+                                        fontWeight: "bold"
+                                      }}
+                                      border="none"
+                                      onClick={() => enrollNow(i.batch_id)}
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </DesktopOnly>
+                          <MobileOnly>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between"
+                              }}
+                            >
                               <div className={styles.startDateHeading}>
-                                Start Date :
+                                Start Date : {i.batch_starting_date}
                               </div>
-                              <div className={styles.startDate}>
-                                {i.batch_starting_date}
-                              </div>
-                            </div>
-                            <div className={styles.startDateWrapper}>
                               <div className={styles.startDateHeading}>
-                                End Date :
-                              </div>
-                              <div className={styles.startDate}>
-                                {i.batch_end_date}
+                                End Date : {i.batch_end_date}
                               </div>
                             </div>
-                            <div className={styles.startDateWrapper}>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between"
+                              }}
+                            >
                               <div className={styles.startDateHeading}>
-                                Total Classes :
+                                Total Classes : {i.batch_total_classes}
                               </div>
-                              <div className={styles.startDate}>
-                                {i.batch_total_classes}
-                              </div>
-                            </div>
-                            <div className={styles.startDateWrapper}>
                               <div className={styles.startDateHeading}>
-                                Exam Date :
-                              </div>
-                              <div className={styles.startDate}>
-                                {i.batch_end_date}
+                                Exam Date : {i.batch_end_date}
                               </div>
                             </div>
-                          </div>
-                          <div className={styles.durationWrapper}>
-                            <div>
-                              <Image
-                                src={"/Images/duration_rotate.png"}
-                                alt=""
-                                height={"30px"}
-                                width={"30px"}
-                              />
+
+                            <div style={{ textAlign: "center" }}>
+                              TOTAL DURATION: {i.batch_total_time}
                             </div>
-                            <div className={styles.duration}>
-                              <span style={{ fontWeight: "bold" }}>
-                                TOTAL DURATION:{" "}
-                              </span>{" "}
-                              <span>{i.batch_total_time}</span>
-                            </div>
-                          </div>
-                          <div className={styles.timeWrapper}>
-                            <div className={styles.startTimeWrapper}>
-                              <div className={styles.startTimeHeading}>
-                                Start Time :
+
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between"
+                              }}
+                            >
+                              <div className={styles.startDateHeading}>
+                                Start Time : {i.batch_start_time}
                               </div>
-                              <div className={styles.startTime}>
-                                {i.batch_start_time}
+                              <div className={styles.startDateHeading}>
+                                End Time : {i.batch_end_time}
                               </div>
                             </div>
-                            <div className={styles.startTimeWrapper}>
-                              <div className={styles.startTimeHeading}>
-                                End Time :
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between"
+                              }}
+                            >
+                              <div className={styles.startDateHeading}>
+                                Price : &#x20b9;{i.batch_purchase_price}
                               </div>
-                              <div className={styles.startTime}>
-                                {i.batch_end_time}
-                              </div>
+                              {Cookies.get(COOKIE_TOKEN) && (
+                                <div className={styles.enrollNowBtn}>
+                                  <Button
+                                    label={"Enroll Now"}
+                                    height={35}
+                                    borderRadius={5}
+                                    backgroundColor={"#f78f1e"}
+                                    textStyle={{
+                                      color: "#fff",
+                                      fontFamily: "Open Sans",
+                                      fontSize: isMobileView ? "10px" : "16px",
+                                      fontWeight: "bold"
+                                    }}
+                                    border="none"
+                                    onClick={() => enrollNow(i.batch_id)}
+                                  />
+                                </div>
+                              )}
                             </div>
-                            <div className={styles.priceWrapper}>
-                              <div className={styles.priceHeading}>Price :</div>
-                              <div className={styles.price}>
-                                &#x20b9;
-                                {i.batch_purchase_price}
-                              </div>
-                            </div>
-                            {Cookies.get(COOKIE_TOKEN) && (
-                              <div className={styles.enrollNowBtn}>
-                                <Button
-                                  label={"Enroll Now"}
-                                  height={35}
-                                  borderRadius={5}
-                                  backgroundColor={"#f78f1e"}
-                                  textStyle={{
-                                    color: "#fff",
-                                    fontFamily: "Open Sans",
-                                    fontSize: "16px",
-                                    fontWeight: "bold"
-                                  }}
-                                  border="none"
-                                  onClick={() => enrollNow(i.batch_id)}
-                                />
-                              </div>
-                            )}
-                          </div>
-                        </div>
+                          </MobileOnly>
+                        </>
                       )}
                     </div>
                   </StatusBar>

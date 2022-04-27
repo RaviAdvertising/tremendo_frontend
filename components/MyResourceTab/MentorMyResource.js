@@ -436,7 +436,13 @@ export default function MentorMyResource() {
                     </div>
                   </div>
                   <div className={styles.tableBodyOption}>
-                    <div style={{ width: "50%" }}>
+                    <div
+                      style={{
+                        width: "70%",
+                        display: "flex",
+                        justifyContent: "flex-end"
+                      }}
+                    >
                       <ButtonComponent
                         label={"Send"}
                         height={25}

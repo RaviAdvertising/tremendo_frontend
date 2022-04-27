@@ -200,10 +200,10 @@ export default function Home({}) {
                 type="text"
                 placeholder="Enter your email"
                 inputStyling={{
-                  height: "49px",
+                  height: isMobileView ? "30px" : "49px",
                   borderRadius: "43px",
                   padding: "0 50px 0 24px",
-                  fontSize: "12px"
+                  fontSize: isMobileView ? "10px" : "12px"
                 }}
                 handleChange={text => setUsername(text)}
               />
@@ -211,14 +211,14 @@ export default function Home({}) {
             <div>
               <Button
                 label={"SUBSCRIBE"}
-                height={49}
+                height={isMobileView ? 30 : 49}
                 borderRadius={25}
                 backgroundColor={"#212121"}
                 textStyle={{
                   color: "#fff",
                   fontWeight: "bold",
                   fontFamily: "Open Sans",
-                  fontSize: "12px"
+                  fontSize: isMobileView ? "10px" : "12px"
                 }}
                 border="none"
                 loading={authState.subscribeLoading}
