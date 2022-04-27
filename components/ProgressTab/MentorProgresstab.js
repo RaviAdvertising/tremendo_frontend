@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import styles from "./MentorProgresstab.module.css";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
@@ -6,12 +6,32 @@ import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
 import { Image } from "semantic-ui-react";
 import { DeviceContext } from "../../pages/_app";
+import axiosInstance from "../../utils/axiosInstance";
+import { COOKIE_TOKEN } from "../../utils/constants";
+import jsCookie from "js-cookie";
 
 export default function MentorProgresstab() {
   const { isMobileView } = useContext(DeviceContext);
+  const [progressData, setProgressData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    createCircle();
+    getProgressData();
   }, []);
+
+  const getProgressData = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(
+        `/getMentorProgress?access_token=${jsCookie.get(COOKIE_TOKEN)}`
+      );
+      setProgressData(response.data.data);
+      createCircle();
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
 
   const createCircle = () => {
     let can = document.getElementById("canvas"),
@@ -158,6 +178,7 @@ export default function MentorProgresstab() {
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
+  console.log(progressData);
   // if (true) {
   //   return (
   //     <div
@@ -177,9 +198,9 @@ export default function MentorProgresstab() {
   //     </div>
   //   );
   // }
-  //   if (true) {
-  //     return <StudentDashboardSkelton />;
-  //   }
+  if (loading) {
+    return <StudentDashboardSkelton />;
+  }
   const lineIndication = [
     { name: "High", color: "#00a651" },
     { name: "Average", color: "#3bbafb" },
