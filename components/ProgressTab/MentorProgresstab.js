@@ -4,16 +4,23 @@ import { Bar, Line, Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 import moment from "moment";
-import { Image } from "semantic-ui-react";
+import { Image, Modal, Input, Dropdown, Button } from "semantic-ui-react";
 import { DeviceContext } from "../../pages/_app";
 import axiosInstance from "../../utils/axiosInstance";
 import { COOKIE_TOKEN } from "../../utils/constants";
 import jsCookie from "js-cookie";
+import ButtonComponent from "../Button/Button";
+import DatePicker from "react-datepicker";
+import { GlobalContext } from "../../Context/Provider";
 
 export default function MentorProgresstab() {
   const { isMobileView } = useContext(DeviceContext);
   const [progressData, setProgressData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [leaveModal, setLeaveModal] = useState(false);
+  const [leaveFeilds, setLeaveFeilds] = useState({});
+
+  const { languageState } = useContext(GlobalContext);
 
   useEffect(() => {
     getProgressData();
@@ -175,6 +182,102 @@ export default function MentorProgresstab() {
       }
     }
   };
+  const DateInput = ({ value, onClick, placeholder }) => {
+    return (
+      <button
+        className={styles.dateInput}
+        style={{
+          width: "100%",
+          fontSize: "12px",
+          color: "#66666d",
+          border: "1px solid #cecedc",
+          height: "31px",
+          paddingLeft: "8px",
+          fontFamily: "Poppins",
+          backgroundColor: "#f8f8fa",
+          textAlign: "left"
+        }}
+        onClick={onClick}
+      >
+        {value ? value : placeholder}
+      </button>
+    );
+  };
+  const onHandleChange = (value, type) => {
+    setLeaveFeilds({ ...leaveFeilds, [type]: value });
+  };
+
+  const applyLeave = async () => {
+    setLoading(true);
+    const payload = {
+      access_token: jsCookie.get(COOKIE_TOKEN),
+      lang_code: languageState.storedMentorBatch.code,
+      leave_date: moment(leaveFeilds.leave_date).format("DD/MM/YYYY"),
+      reason: leaveFeilds.reason,
+      leave_type: "cl"
+    };
+    try {
+      const response = await axiosInstance.post(`/applyMentorLeave`, payload);
+      setLeaveModal(false);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      setLeaveModal(false);
+    }
+  };
+  const applyLeaveModal = () => {
+    return (
+      <Modal
+        onClose={() => setLeaveModal(false)}
+        open={leaveModal}
+        closeIcon
+        size={"tiny"}
+      >
+        <Modal.Header>Leave Application</Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            <div style={{ marginBottom: "20px" }}>
+              <DatePicker
+                selected={
+                  leaveFeilds.leave_date
+                    ? moment(leaveFeilds.leave_date)._d
+                    : ""
+                }
+                onChange={date =>
+                  onHandleChange(moment(date).format(), "leave_date")
+                }
+                placeholderText="Leave Date"
+                customInput={<DateInput />}
+                dateFormat="MMMM d, yyyy"
+                minDate={Date.now()}
+                dropdownMode="select"
+              />
+            </div>
+            <div>
+              <Input
+                placeholder="Reason "
+                onChange={(e, data) => onHandleChange(data.value, "reason")}
+                style={{ width: "100%" }}
+              />
+            </div>
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="red" onClick={() => setLeaveModal(false)}>
+            Close
+          </Button>
+          <Button
+            content="Submit Leave"
+            labelPosition="right"
+            icon="checkmark"
+            onClick={() => applyLeave()}
+            positive
+            loading={loading}
+          />
+        </Modal.Actions>
+      </Modal>
+    );
+  };
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
@@ -198,9 +301,9 @@ export default function MentorProgresstab() {
   //     </div>
   //   );
   // }
-  if (loading) {
-    return <StudentDashboardSkelton />;
-  }
+  // if (loading) {
+  //   return <StudentDashboardSkelton />;
+  // }
   const lineIndication = [
     { name: "High", color: "#00a651" },
     { name: "Average", color: "#3bbafb" },
@@ -335,8 +438,25 @@ export default function MentorProgresstab() {
             ></canvas>
             <div className={styles.showProgress} id="procent"></div>
           </div>
+          <div className={styles.applyLeaveBtn}>
+            <ButtonComponent
+              label={"Apply Leave"}
+              height={25}
+              borderRadius={8}
+              backgroundColor={"#f98e46"}
+              textStyle={{
+                color: "#fff",
+                fontWeight: "bold",
+                fontFamily: "Open Sans",
+                fontSize: "12px"
+              }}
+              border="none"
+              onClick={() => setLeaveModal(true)}
+            />
+          </div>
         </div>
       </div>
+      {applyLeaveModal()}
     </div>
   );
 }

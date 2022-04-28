@@ -208,8 +208,8 @@ export default function MentorBatchDetails({}) {
           <div className={styles.headerName}>Joining Date</div>
           <div className={styles.headerName}>Mentor Id</div>
           <div className={styles.headerName}>Batch no.</div>
+          <div className={styles.headerName}>Leave</div>
           <div className={styles.headerName}>Delete</div>
-          <div className={styles.headerName}></div>
         </div>
         {mentorList.length > 0
           ? mentorList.map((i, index) => {
@@ -228,33 +228,34 @@ export default function MentorBatchDetails({}) {
                   </div>
                   <div className={styles.headerName}>{i.user_code}</div>
                   <div className={styles.headerName}>{i.batch_id}</div>
-                  {/* <div className={styles.headerName}>
-                {i.isSelectedLeave ? (
-                  <div className={styles.leaveOptionSelect}>
-                    <Dropdown
-                      className={styles.leaveOptionDropdown}
-                      style={{
-                        backgroundColor: backgroundColor,
-                        color: color,
-                        fontWeight: "600"
-                      }}
-                      fluid
-                      selection
-                      value={i.leave}
-                      options={leaveOptions}
-                      onChange={(e, data) => onSelectLeaveOption(data)}
-                    />
+                  <div className={styles.headerName}>
+                    {i.isSelectedLeave ? (
+                      <div className={styles.leaveOptionSelect}>
+                        <Dropdown
+                          className={styles.leaveOptionDropdown}
+                          style={{
+                            backgroundColor: backgroundColor,
+                            color: color,
+                            fontWeight: "600"
+                          }}
+                          fluid
+                          selection
+                          value={i.leave}
+                          options={leaveOptions}
+                          onChange={(e, data) => onSelectLeaveOption(data)}
+                        />
+                      </div>
+                    ) : (
+                      i.leave
+                    )}
                   </div>
-                ) : (
-                  i.leave
-                )}
-              </div> */}
                   <div
                     className={styles.headerName}
                     onClick={() => deleteMentor(i.user_code)}
                   >
                     <Icon name="trash alternate" size="large" color="red" />
                   </div>
+                  <div></div>
                 </div>
               );
             })

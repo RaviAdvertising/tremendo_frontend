@@ -5,7 +5,7 @@ import Head from "next/head";
 import Input from "../../components/Input/Input";
 import { Fragment, useContext, useState } from "react";
 import { Checkbox, Divider } from "semantic-ui-react";
-import { HOME_PAGE, LOGIN_PATH } from "../../utils/routes";
+import { HOME_PAGE, LOGIN_PATH, PAYMENT_PATH } from "../../utils/routes";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import Button from "../../components/Button/Button";
 import {
@@ -15,6 +15,7 @@ import {
   LOGIN_TYPE_EMAIL,
   LOGIN_TYPE_FB,
   LOGIN_TYPE_GOOGLE,
+  ORDER_DETAIL,
   PREVIOUS_PATH,
   USER_DETAILS
 } from "../../utils/constants";
@@ -147,10 +148,16 @@ export default function Signup(props) {
     }
   };
   const actionAfterLogin = () => {
-    if (localStorage.getItem(PREVIOUS_PATH)) {
-      router.replace(localStorage.getItem(PREVIOUS_PATH));
+    const order_id = localStorage.getItem(ORDER_DETAIL);
+    if (order_id) {
+      router.replace(`${PAYMENT_PATH}?id=${order_id}`);
+      localStorage.removeItem(ORDER_DETAIL);
     } else {
-      router.push(HOME_PAGE);
+      if (localStorage.getItem(PREVIOUS_PATH)) {
+        router.replace(localStorage.getItem(PREVIOUS_PATH));
+      } else {
+        router.push(HOME_PAGE);
+      }
     }
   };
 

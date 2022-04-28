@@ -101,6 +101,11 @@
   justify-content: center;
   align-items: center;
 }
+.applyLeaveBtn{
+  margin: auto;
+  width: 60%;
+  margin-top: 20px;
+}
 @media (max-width: 1024px) {
   .base {
     padding: 10px;
