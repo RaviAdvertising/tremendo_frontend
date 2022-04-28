@@ -8,6 +8,7 @@ import {
   LOGIN_TYPE_EMAIL,
   LOGIN_TYPE_FB,
   LOGIN_TYPE_GOOGLE,
+  ORDER_DETAIL,
   PREVIOUS_PATH,
   USER_DETAILS
 } from "../../utils/constants";
@@ -19,6 +20,7 @@ import { useRouter } from "next/router";
 import {
   HOME_PAGE,
   MENTOR_DASHBOARD_PATH,
+  PAYMENT_PATH,
   SIGN_UP_PATH,
   STUDENT_DASHBOARD_PATH
 } from "../../utils/routes";
@@ -147,10 +149,16 @@ export default function Login(props) {
   };
 
   const actionAfterLogin = response => {
-    if (response.data.access_type == LOGIN_MENTOR_TAB) {
-      router.push(MENTOR_DASHBOARD_PATH);
+    const order_id = localStorage.getItem(ORDER_DETAIL);
+    if (order_id) {
+      router.replace(`${PAYMENT_PATH}?id=${order_id}`);
+      localStorage.removeItem(ORDER_DETAIL);
     } else {
-      router.push(STUDENT_DASHBOARD_PATH);
+      if (response.data.access_type == LOGIN_MENTOR_TAB) {
+        router.push(MENTOR_DASHBOARD_PATH);
+      } else {
+        router.push(STUDENT_DASHBOARD_PATH);
+      }
     }
   };
 

@@ -2,14 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "../../styles/LanguageDetail.module.css";
 import StatusBar from "../../components/StatusBar/StatusBar";
 import ImageComponent from "../../components/Image/Image";
-import { COOKIE_TOKEN, USER_DETAILS } from "../../utils/constants";
+import {
+  COOKIE_TOKEN,
+  ORDER_DETAIL,
+  USER_DETAILS
+} from "../../utils/constants";
 import Image from "next/image";
 import Button from "../../components/Button/Button";
 import { useRouter } from "next/router";
 import { GlobalContext } from "../../Context/Provider";
 import { getLangaugeDetails } from "../../Context/Actions/Language/LanguageAction";
 import LanguageDetailSkelton from "../../components/Skelton/LanguageDetailSkelton";
-import { PAYMENT_PATH } from "../../utils/routes";
+import { LOGIN_PATH, PAYMENT_PATH } from "../../utils/routes";
 import Cookies from "js-cookie";
 import { DeviceContext } from "../_app";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
@@ -50,7 +54,12 @@ export default function DetailLanguagePage({}) {
     );
   };
   const enrollNow = batchID => {
-    router.replace(`${PAYMENT_PATH}?id=${batchID}`);
+    if (Cookies.get(COOKIE_TOKEN)) {
+      router.replace(`${PAYMENT_PATH}?id=${batchID}`);
+    } else {
+      localStorage.setItem(ORDER_DETAIL, batchID);
+      router.replace(`${LOGIN_PATH}`);
+    }
   };
   const details = languageState.getLanguageDetails;
 
@@ -265,26 +274,23 @@ export default function DetailLanguagePage({}) {
                                     {i.batch_purchase_price}
                                   </div>
                                 </div>
-                                {Cookies.get(COOKIE_TOKEN) && (
-                                  <div className={styles.enrollNowBtn}>
-                                    <Button
-                                      label={"Enroll Now"}
-                                      height={35}
-                                      borderRadius={5}
-                                      backgroundColor={"#f78f1e"}
-                                      textStyle={{
-                                        color: "#fff",
-                                        fontFamily: "Open Sans",
-                                        fontSize: isMobileView
-                                          ? "10px"
-                                          : "16px",
-                                        fontWeight: "bold"
-                                      }}
-                                      border="none"
-                                      onClick={() => enrollNow(i.batch_id)}
-                                    />
-                                  </div>
-                                )}
+
+                                <div className={styles.enrollNowBtn}>
+                                  <Button
+                                    label={"Enroll Now"}
+                                    height={35}
+                                    borderRadius={5}
+                                    backgroundColor={"#f78f1e"}
+                                    textStyle={{
+                                      color: "#fff",
+                                      fontFamily: "Open Sans",
+                                      fontSize: isMobileView ? "10px" : "16px",
+                                      fontWeight: "bold"
+                                    }}
+                                    border="none"
+                                    onClick={() => enrollNow(i.batch_id)}
+                                  />
+                                </div>
                               </div>
                             </div>
                           </DesktopOnly>
@@ -342,24 +348,23 @@ export default function DetailLanguagePage({}) {
                               <div className={styles.startDateHeading}>
                                 Price : &#x20b9;{i.batch_purchase_price}
                               </div>
-                              {Cookies.get(COOKIE_TOKEN) && (
-                                <div className={styles.enrollNowBtn}>
-                                  <Button
-                                    label={"Enroll Now"}
-                                    height={35}
-                                    borderRadius={5}
-                                    backgroundColor={"#f78f1e"}
-                                    textStyle={{
-                                      color: "#fff",
-                                      fontFamily: "Open Sans",
-                                      fontSize: isMobileView ? "10px" : "16px",
-                                      fontWeight: "bold"
-                                    }}
-                                    border="none"
-                                    onClick={() => enrollNow(i.batch_id)}
-                                  />
-                                </div>
-                              )}
+
+                              <div className={styles.enrollNowBtn}>
+                                <Button
+                                  label={"Enroll Now"}
+                                  height={35}
+                                  borderRadius={5}
+                                  backgroundColor={"#f78f1e"}
+                                  textStyle={{
+                                    color: "#fff",
+                                    fontFamily: "Open Sans",
+                                    fontSize: isMobileView ? "10px" : "16px",
+                                    fontWeight: "bold"
+                                  }}
+                                  border="none"
+                                  onClick={() => enrollNow(i.batch_id)}
+                                />
+                              </div>
                             </div>
                           </MobileOnly>
                         </>
