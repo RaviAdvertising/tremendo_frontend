@@ -148,7 +148,7 @@ export const getReviewDetails = id => dispatch => {
   dispatch({ type: GET_REVIEW_DETAILS_REQUEST });
   return axiosInstance
     .get(
-      `/getCourseReviewDetails?id=${id}?access_token=${Cookies.get(
+      `/getCourseReviewDetails?id=${id}&access_token=${Cookies.get(
         COOKIE_TOKEN
       )}`
     )
