@@ -32,14 +32,15 @@ export default function AdminBatchManagment({}) {
   const [selectedBatch, setSelectedBatch] = useState("");
 
   useEffect(() => {
-    getMentorList();
     getBatchList();
   }, []);
 
-  const getMentorList = async () => {
+  const getMentorList = async lang_code => {
     try {
       const response = await axiosInstance.get(
-        `/getMentorList?access_token=${Cookies.get(COOKIE_TOKEN)}&lang=all`
+        `/getMentorList?access_token=${Cookies.get(
+          COOKIE_TOKEN
+        )}&lang=${lang_code}`
       );
       setMentorList(response.data.data);
     } catch (err) {}
@@ -80,7 +81,12 @@ export default function AdminBatchManagment({}) {
     };
   });
   const onHandleChangeBatch = (data, type) => {
-    console.log(data);
+    if (type == "batch_language") {
+      console.log(data);
+      const lang_code = homeState.getLanguage.find(i => i.title == data.value);
+      getMentorList(lang_code.code);
+    }
+
     setCreateBatchData({ ...createBatchData, [type]: data.value });
   };
 
@@ -99,6 +105,9 @@ export default function AdminBatchManagment({}) {
       batch_mentor_id: mentorId.user_code,
       batch_class_days: createBatchData.batch_class_days?.join(","),
       batch_starting_date: moment(createBatchData.batch_starting_date).format(
+        "DD/MM/YYYY"
+      ),
+      batch_end_date: moment(createBatchData.batch_end_date).format(
         "DD/MM/YYYY"
       )
     };
