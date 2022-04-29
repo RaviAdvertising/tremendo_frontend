@@ -1,6 +1,7 @@
 import { Fragment, useContext, useState } from "react";
 import styles from "../../styles/Login.module.css";
 import {
+  ASK_A_QUESTION,
   COOKIE_TOKEN,
   EMAIL_REGULAR_EXPRESSION,
   LOGIN_MENTOR_TAB,
@@ -18,6 +19,7 @@ import Input from "../../components/Input/Input";
 import { Checkbox, Divider } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import {
+  FAQS_PATH,
   HOME_PAGE,
   MENTOR_DASHBOARD_PATH,
   PAYMENT_PATH,
@@ -150,9 +152,13 @@ export default function Login(props) {
 
   const actionAfterLogin = response => {
     const order_id = localStorage.getItem(ORDER_DETAIL);
+    const askAQuestion = localStorage.getItem(ASK_A_QUESTION);
     if (order_id) {
       router.replace(`${PAYMENT_PATH}?id=${order_id}`);
       localStorage.removeItem(ORDER_DETAIL);
+    } else if (askAQuestion) {
+      router.replace(FAQS_PATH);
+      localStorage.removeItem(ASK_A_QUESTION);
     } else {
       if (response.data.access_type == LOGIN_MENTOR_TAB) {
         router.push(MENTOR_DASHBOARD_PATH);

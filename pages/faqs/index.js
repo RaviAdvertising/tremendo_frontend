@@ -7,7 +7,11 @@ import FaqsStrip from "../../components/FaqsStrip/FaqsStrip";
 import ImageComponent from "../../components/Image/Image";
 import styles from "../../styles/Faqs.module.css";
 import { Image } from "semantic-ui-react";
-import { COOKIE_TOKEN, USER_DETAILS } from "../../utils/constants";
+import {
+  COOKIE_TOKEN,
+  USER_DETAILS,
+  ASK_A_QUESTION
+} from "../../utils/constants";
 import Input from "../../components/Input/Input";
 import { GlobalContext } from "../../Context/Provider";
 import {
@@ -18,12 +22,14 @@ import {
 import LanguageDetailSkelton from "../../components/Skelton/LanguageDetailSkelton";
 import Cookies from "js-cookie";
 import PageLoader from "../../components/Loader/PageLoader";
+import { LOGIN_PATH } from "../../utils/routes";
+import { useRouter } from "next/router";
 
 export default function Faqs() {
   const [isOpen, setIsOpen] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [question, setQuestion] = useState("");
-
+  const router = useRouter();
   const { homeState, homeDispatch: dispatch } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -55,8 +61,13 @@ export default function Faqs() {
       : "/Images/blank_profile.png";
 
   const askAQuestion = async () => {
-    setOpenModal(true);
-    await getUserFaqs()(dispatch);
+    if (Cookies.get(COOKIE_TOKEN)) {
+      setOpenModal(true);
+      await getUserFaqs()(dispatch);
+    } else {
+      localStorage.setItem(ASK_A_QUESTION, true);
+      router.replace(LOGIN_PATH);
+    }
   };
   const askUserQuestion = async () => {
     if (question != "") {
