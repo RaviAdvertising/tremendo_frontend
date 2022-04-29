@@ -66,11 +66,12 @@ export default function DetailLanguagePage({}) {
   return (
     <div className={styles.base}>
       <div className={styles.topBannerWrapper}>
-        <ImageComponent src={details.banner_large} paddingBottom={"21%"} />
+        <ImageComponent
+          src={isMobileView ? details.banner_small : details.banner_large}
+          paddingBottom={isMobileView ? "58%" : "21%"}
+        />
         {details.welcome_text && (
-          <div className={styles.profileName}>{`${
-            details.welcome_text
-          } ${name && name.split(" ")[0]}`}</div>
+          <div className={styles.profileName}>{details.welcome_text} </div>
         )}
       </div>
       <div
