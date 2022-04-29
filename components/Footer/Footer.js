@@ -155,7 +155,27 @@ export default function Footer(props) {
       </div>
       <div className={styles.blackFooterbase}>
         <div className={styles.copyright}>© 2022 Tremendo</div>
-        <div>Terms and Conditions | Privacy Statement</div>
+        <div>
+          <a
+            href={"/tnc.pdf"}
+            download="Term&Condition"
+            target={"_blank"}
+            rel="noreferrer"
+            style={{ cursor: "pointer", color: "#fff" }}
+          >
+            Terms and Conditions
+          </a>{" "}
+          |
+          <a
+            href={"/privacy_policy.pdf"}
+            download="Privacy_and_policy"
+            target={"_blank"}
+            rel="noreferrer"
+            style={{ cursor: "pointer", color: "#fff" }}
+          >
+            Privacy Statement
+          </a>
+        </div>
       </div>
     </div>
   );

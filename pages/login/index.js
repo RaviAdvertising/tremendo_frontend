@@ -336,7 +336,25 @@ export default function Login(props) {
         {loginFormWithImage()}
       </div>
       <div className={styles.termAndCondition}>
-        Terms and Conditions and Privacy Policy.
+        <a
+          href={"/tnc.pdf"}
+          download="Term&Condition"
+          target={"_blank"}
+          rel="noreferrer"
+          style={{ cursor: "pointer", color: "#2048bb" }}
+        >
+          Terms and Conditions
+        </a>{" "}
+        and{" "}
+        <a
+          href={"/privacy_policy.pdf"}
+          download="Privacy_and_policy"
+          target={"_blank"}
+          rel="noreferrer"
+          style={{ cursor: "pointer", color: "#2048bb" }}
+        >
+          Privacy Policy.
+        </a>
       </div>
     </div>
   );

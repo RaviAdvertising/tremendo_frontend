@@ -336,8 +336,26 @@ export default function Signup(props) {
           <span className={styles.tandC1}>
             By signing in to Tremendo, I accept the{" "}
           </span>
-          <span className={styles.tandC2} onClick={() => router.push("/")}>
-            Terms and Conditions and Privacy Policy.
+          <span className={styles.tandC2}>
+            <a
+              href={"/tnc.pdf"}
+              download="Term&Condition"
+              target={"_blank"}
+              rel="noreferrer"
+              style={{ cursor: "pointer", color: "#2048bb" }}
+            >
+              Terms and Conditions
+            </a>{" "}
+            and{" "}
+            <a
+              href={"/privacy_policy.pdf"}
+              download="Privacy_and_policy"
+              target={"_blank"}
+              rel="noreferrer"
+              style={{ cursor: "pointer", color: "#2048bb" }}
+            >
+              Privacy Policy.
+            </a>
           </span>
         </div>
       </div>
