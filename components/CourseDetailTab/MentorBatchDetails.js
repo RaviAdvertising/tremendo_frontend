@@ -18,8 +18,8 @@ import jsCookie from "js-cookie";
 import { COOKIE_TOKEN, LOGIN_MENTOR_TAB } from "../../utils/constants";
 import moment from "moment";
 const PENDING = "Pending";
-const APPROVE = "Approved";
-const DESAPPROVE = "Reject";
+const APPROVE = "approve";
+const DESAPPROVE = "deny";
 
 export default function MentorBatchDetails({}) {
   const { homeState } = useContext(GlobalContext);
@@ -149,19 +149,32 @@ export default function MentorBatchDetails({}) {
   const leaveOptions = [
     {
       text: "Pending",
-      value: "Pending"
+      value: "pending"
     },
     {
       text: "Approved",
-      value: "Approved"
+      value: "approve"
     },
     {
       text: "Reject",
-      value: "Reject"
+      value: "deny"
     }
   ];
-  const onSelectLeaveOption = data => {
+  const onSelectLeaveOption = async (data, leave_id) => {
     console.log(data);
+    setLoading(true);
+    try {
+      const payload = {
+        access_token: jsCookie.get(COOKIE_TOKEN),
+        leave_id: leave_id,
+        status: data.value
+      };
+      const response = await axiosInstance.post(`/updateMentorLeave`, payload);
+      getMentorList(selectedLang);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   };
   const onChangeLanguage = data => {
     const languageCode = homeState.getLanguage.find(i => i.title == data.value);
@@ -215,9 +228,9 @@ export default function MentorBatchDetails({}) {
           ? mentorList.map((i, index) => {
               let backgroundColor = "#FFF7EB",
                 color = "#f88312";
-              if (i.leave == APPROVE) {
+              if (i.leave_status == APPROVE) {
                 (backgroundColor = "#EAFCFA"), (color = "#1d8180");
-              } else if (i.leave == DESAPPROVE) {
+              } else if (i.leave_status == DESAPPROVE) {
                 (backgroundColor = "#FCEBEB"), (color = "#f81712");
               }
               return (
@@ -229,7 +242,7 @@ export default function MentorBatchDetails({}) {
                   <div className={styles.headerName}>{i.user_code}</div>
                   <div className={styles.headerName}>{i.batch_id}</div>
                   <div className={styles.headerName}>
-                    {i.isSelectedLeave ? (
+                    {i.leave_status != "" ? (
                       <div className={styles.leaveOptionSelect}>
                         <Dropdown
                           className={styles.leaveOptionDropdown}
@@ -240,13 +253,15 @@ export default function MentorBatchDetails({}) {
                           }}
                           fluid
                           selection
-                          value={i.leave}
+                          value={i.leave_status}
                           options={leaveOptions}
-                          onChange={(e, data) => onSelectLeaveOption(data)}
+                          onChange={(e, data) =>
+                            onSelectLeaveOption(data, i.leave_id)
+                          }
                         />
                       </div>
                     ) : (
-                      i.leave
+                      <div>Not Applied</div>
                     )}
                   </div>
                   <div
