@@ -30,7 +30,9 @@ export default function MentorProgresstab() {
     setLoading(true);
     try {
       const response = await axiosInstance.get(
-        `/getMentorProgress?access_token=${jsCookie.get(COOKIE_TOKEN)}`
+        `/getMentorProgress?access_token=${jsCookie.get(
+          COOKIE_TOKEN
+        )}&batch_id=${languageState.storedMentorBatch.batch_id}`
       );
       setProgressData(response.data.data);
       createCircle();
@@ -301,9 +303,9 @@ export default function MentorProgresstab() {
   //     </div>
   //   );
   // }
-  // if (loading) {
-  //   return <StudentDashboardSkelton />;
-  // }
+  if (loading) {
+    return <StudentDashboardSkelton />;
+  }
   const lineIndication = [
     { name: "High", color: "#00a651" },
     { name: "Average", color: "#3bbafb" },
