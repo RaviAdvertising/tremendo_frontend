@@ -302,7 +302,10 @@ export default function DetailLanguagePage({}) {
                                 justifyContent: "space-between"
                               }}
                             >
-                              <div className={styles.startDateHeading}>
+                              <div
+                                className={styles.startDateHeading}
+                                style={{ width: "85%" }}
+                              >
                                 Start Date : {i.batch_starting_date}
                               </div>
                               <div className={styles.startDateHeading}>
@@ -315,7 +318,10 @@ export default function DetailLanguagePage({}) {
                                 justifyContent: "space-between"
                               }}
                             >
-                              <div className={styles.startDateHeading}>
+                              <div
+                                className={styles.startDateHeading}
+                                style={{ width: "85%" }}
+                              >
                                 Total Classes : {i.batch_total_classes}
                               </div>
                               <div className={styles.startDateHeading}>
@@ -333,7 +339,10 @@ export default function DetailLanguagePage({}) {
                                 justifyContent: "space-between"
                               }}
                             >
-                              <div className={styles.startDateHeading}>
+                              <div
+                                className={styles.startDateHeading}
+                                style={{ width: "85%" }}
+                              >
                                 Start Time : {i.batch_start_time}
                               </div>
                               <div className={styles.startDateHeading}>
