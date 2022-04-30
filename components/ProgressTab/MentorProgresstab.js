@@ -25,6 +25,9 @@ export default function MentorProgresstab() {
   useEffect(() => {
     getProgressData();
   }, []);
+  useEffect(() => {
+    if (document.getElementById("canvas")) createCircle();
+  }, [progressData]);
 
   const getProgressData = async () => {
     setLoading(true);
@@ -35,7 +38,7 @@ export default function MentorProgresstab() {
         )}&batch_id=${languageState.storedMentorBatch.batch_id}`
       );
       setProgressData(response.data.data);
-      createCircle();
+
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -45,8 +48,8 @@ export default function MentorProgresstab() {
   const createCircle = () => {
     let can = document.getElementById("canvas"),
       spanProcent = document.getElementById("procent"),
-      c = can.getContext("2d");
-    const percentage = can.getAttribute("data-percent");
+      c = can?.getContext("2d");
+    const percentage = can?.getAttribute("data-percent");
     let posX = can.width / 2,
       posY = can.height / 2,
       fps = 1000 / 200,
@@ -306,13 +309,19 @@ export default function MentorProgresstab() {
   if (loading) {
     return <StudentDashboardSkelton />;
   }
-  const scores = progressData.score_data?.map(i => i.max_score);
-  const marks = progressData.progress_data?.map(i => i.score);
+  const scores = progressData.score_data?.map(i => i.avg_score);
+  const marks = progressData.progress_data?.map(i => i.student_score);
+  const attendence = progressData.attandance_data;
   const lineIndication = [
     { name: "High", color: "#00a651" },
     { name: "Average", color: "#3bbafb" },
     { name: "Low", color: "#ffb922" }
   ];
+  const presentPercentage =
+    (attendence?.present_count /
+      (attendence?.present_count + attendence?.absent_count)) *
+    100;
+  console.log(presentPercentage);
   return (
     <div className={styles.base}>
       <div className={styles.scoreChartWrapper}>
@@ -421,7 +430,7 @@ export default function MentorProgresstab() {
               id="canvas"
               width="240"
               height="240"
-              data-percent="61"
+              data-percent={presentPercentage}
             ></canvas>
             <div className={styles.showProgress} id="procent"></div>
           </div>

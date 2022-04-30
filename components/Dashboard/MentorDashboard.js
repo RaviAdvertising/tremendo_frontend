@@ -46,7 +46,7 @@ export default function MentorDashboard({}) {
     const firstday = moment(new Date(curr.setDate(first))).format("x");
     const lastday = moment(new Date(curr.setDate(last))).format("x");
 
-    const id = languageState.storedMentorBatch.batch_id;
+    const id = languageState.storedMentorBatch?.batch_id;
     await getMentorDashboardData(id, firstday, lastday)(dispatch);
     createCircle();
   };
@@ -302,11 +302,12 @@ export default function MentorDashboard({}) {
   }
 
   const attendencePercentage =
-    (dashboardData.attandance_data?.count /
-      dashboardData.attandance_data?.total) *
+    (dashboardData.attandance_data?.present_count /
+      (dashboardData.attandance_data?.present_count +
+        dashboardData.attandance_data?.absent_count)) *
     100;
-  const chartLabel = dashboardData.progress_data?.map(i => i.userName);
-  const marks = dashboardData.progress_data?.map(i => i.score);
+  const chartLabel = dashboardData.progress_data?.map(i => i.user_name);
+  const marks = dashboardData.progress_data?.map(i => i.student_score);
 
   let classesArray = [];
   days.forEach((i, index) =>

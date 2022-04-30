@@ -276,7 +276,9 @@ export default function Home({}) {
         className={styles.chat}
       >
         <Image
-          src={"/Images/chat.png"}
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fchat.png?alt=media&token=0baf7742-8b87-4fe1-b8b9-178434568116"
+          }
           alt={"chat icons"}
           width={isMobileView ? "40px" : "75px"}
           height={isMobileView ? "40px" : "70px"}

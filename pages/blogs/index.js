@@ -35,7 +35,9 @@ export default function Blogs() {
       <div className={styles.banner}>
         <DesktopOnly>
           <ImageComponent
-            src={"/Images/BlogsBanner.png"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FBlogsBanner.png?alt=media&token=b7c1e412-c53d-4eb7-86ce-e65a4a03586a"
+            }
             paddingBottom={"21%"}
             alt={"banner logo"}
           />

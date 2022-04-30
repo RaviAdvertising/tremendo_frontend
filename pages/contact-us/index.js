@@ -86,7 +86,9 @@ export default function ContactUs() {
       <div className={styles.banner}>
         <DesktopOnly>
           <ImageComponent
-            src={"/Images/contactUsBanner.png"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FcontactUsBanner.png?alt=media&token=e02bacbf-a09d-4f63-b757-91e4a32ddf0d"
+            }
             paddingBottom={"21%"}
             alt={"banner logo"}
           />

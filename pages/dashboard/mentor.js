@@ -11,7 +11,7 @@ import MentorFaq from "../../components/FaqTab/MentorFaq";
 import MentorProfile from "../../components/ProfileTab/MentorProfile";
 import { LOGIN_MENTOR_TAB, USER_DETAILS } from "../../utils/constants";
 import { useRouter } from "next/router";
-import { HOME_PAGE } from "../../utils/routes";
+import { HOME_PAGE, MENTOR_DASHBOARD_PATH } from "../../utils/routes";
 import { GlobalContext } from "../../Context/Provider";
 import {
   getMentorBatches,
@@ -55,13 +55,21 @@ function Mentor() {
     studentDashboardState,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
+  const router = useRouter();
+
   const clickOnTab = data => {
     setSelectedTabIndex(data.id);
+    router.push(`${MENTOR_DASHBOARD_PATH}?id=${data.id}`);
   };
-  const router = useRouter();
+
   useEffect(() => {
+    setTabIndex();
     getInitalData();
   }, []);
+  const setTabIndex = () => {
+    const tabID = router.query.id ? router.query.id : INITIAL_TAB_INDEX;
+    setSelectedTabIndex(tabID);
+  };
   const getInitalData = async () => {
     const batches = await getMentorBatches()(dispatch);
     const firstBatchId = batches.data.length > 0 && batches.data[0].batch_id;

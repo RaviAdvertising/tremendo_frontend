@@ -15,6 +15,8 @@ import {
   studentBatchMates,
   studentUpcomingTasks
 } from "../../Context/Actions/Dashboard/DashboardAction";
+import { STUDENT_DASHBOARD_PATH } from "../../utils/routes";
+import { useRouter } from "next/router";
 
 const INITIAL_TAB_INDEX = 6;
 
@@ -46,17 +48,23 @@ function Student() {
   const { languageState, studentDashboardDispatch: dispatch } = useContext(
     GlobalContext
   );
+  const router = useRouter();
   const clickOnTab = data => {
     setSelectedTabIndex(data.id);
+    router.push(`${STUDENT_DASHBOARD_PATH}?id=${data.id}`);
   };
   useEffect(() => {
+    setTabIndex();
     const batch_id = languageState.setStudentSelectedLanguage?.batch_id;
     if (batch_id) {
       studentUpcomingTasks(batch_id)(dispatch);
       studentBatchMates(batch_id)(dispatch);
     }
   }, [languageState.setStudentSelectedLanguage]);
-
+  const setTabIndex = () => {
+    const tabID = router.query.id ? router.query.id : INITIAL_TAB_INDEX;
+    setSelectedTabIndex(tabID);
+  };
   const userDetails =
     typeof window !== "undefined" &&
     localStorage.getItem(USER_DETAILS) &&

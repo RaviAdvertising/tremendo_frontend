@@ -41,7 +41,8 @@ export const whyTremendo2 = [
     heading: "Experienced mentors",
     subheading:
       "Tremendo appoints highly skilled mentors that provide both professional and personal support.",
-    image: "/Images/consulting.png"
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fconsulting.png?alt=media&token=56a77273-5ba8-483f-baa0-75b13670e4aa"
   },
   {
     heading: "Real-Time feedback",

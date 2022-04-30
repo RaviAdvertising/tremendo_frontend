@@ -128,24 +128,28 @@ export default function Tab({
           <div className={styles.leftSection}>
             {studentDashboard ? (
               <div className={styles.flagSection}>
-                <Dropdown
-                  fluid
-                  selection
-                  value={languageState.setStudentSelectedLanguage?.batch_id}
-                  options={countryOptions}
-                  onChange={(e, data) => onChangeStudentBatch(data.value)}
-                />
+                {countryOptions?.length != 0 && (
+                  <Dropdown
+                    fluid
+                    selection
+                    value={languageState.setStudentSelectedLanguage?.batch_id}
+                    options={countryOptions}
+                    onChange={(e, data) => onChangeStudentBatch(data.value)}
+                  />
+                )}
               </div>
             ) : (
               <div className={styles.mentorBatchDetails}>
-                <Dropdown
-                  className={styles.batchesDropDown}
-                  fluid
-                  selection
-                  value={languageState.storedMentorBatch?.batch_id}
-                  options={mentorBatches}
-                  onChange={(e, data) => onHandleChangeBatch(data.value)}
-                />
+                {mentorBatches?.length != 0 && (
+                  <Dropdown
+                    className={styles.batchesDropDown}
+                    fluid
+                    selection
+                    value={languageState.storedMentorBatch?.batch_id}
+                    options={mentorBatches}
+                    onChange={(e, data) => onHandleChangeBatch(data.value)}
+                  />
+                )}
               </div>
             )}
             <div className={styles.tabWrapper}>

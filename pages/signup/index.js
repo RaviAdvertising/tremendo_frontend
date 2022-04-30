@@ -48,8 +48,13 @@ export default function Signup(props) {
     return false;
   }
   const handleChange = (type, value) => {
-    setFields({ ...fields, [type]: value });
-    setErrors({});
+    if (type == "phone_number" && value.length > 14) {
+      setFields({ ...fields, [type]: value });
+      setErrors({ phone_number: "Please Enter Valid Number" });
+    } else {
+      setFields({ ...fields, [type]: value });
+      setErrors({});
+    }
   };
 
   const socialLogin = async (provider, type, fbResponse) => {
