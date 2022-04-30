@@ -58,7 +58,7 @@ export default function Faqs() {
   const imageUrl =
     typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
       ? JSON.parse(localStorage.getItem(USER_DETAILS)).profileUrl
-      : "/Images/blank_profile.png";
+      : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41";
 
   const askAQuestion = async () => {
     if (Cookies.get(COOKIE_TOKEN)) {
@@ -100,7 +100,9 @@ export default function Faqs() {
         </DesktopOnly>
         <MobileOnly>
           <ImageComponent
-            src={"/Images/about_banner_mobile.png"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout_banner_mobile.png?alt=media&token=be8f7644-800d-41fd-bb84-44e199f49785"
+            }
             paddingBottom={"65%"}
             alt={"banner logo"}
           />

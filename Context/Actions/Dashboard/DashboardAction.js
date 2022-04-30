@@ -386,10 +386,14 @@ export const getSubmittedAssignmentList = assignment_id => dispatch => {
     });
 };
 
-export const getMentorAssignmentList = () => dispatch => {
+export const getMentorAssignmentList = batch_id => dispatch => {
   dispatch({ type: GET_MENTOR_ASSIGNMENT_LIST_REQUEST });
   return axiosInstance
-    .get(`/getMentorAssignmentList?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .get(
+      `/getMentorAssignmentList?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}&batch_id=${batch_id}`
+    )
     .then(res => {
       dispatch({
         type: GET_MENTOR_ASSIGNMENT_LIST_SUCCESS,

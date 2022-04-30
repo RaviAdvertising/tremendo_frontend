@@ -288,7 +288,9 @@ export default function MentorProfile() {
               <div className={styles.profileImage}>
                 <Image
                   src={
-                    fields.avatar ? fields.avatar : "/Images/blank_profile.png"
+                    fields.avatar
+                      ? fields.avatar
+                      : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
                   }
                   circular
                   alt="profiletab_rocket"

@@ -122,7 +122,9 @@ export default function CourseDetailTab() {
             <div className={styles.mentorProfile}>
               <div className={styles.profile}>
                 <Image
-                  src={"/Images/blank_profile.png"}
+                  src={
+                    "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                  }
                   circular
                   alt="user-image"
                   height={"24px"}

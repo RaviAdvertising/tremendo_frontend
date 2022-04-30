@@ -41,6 +41,7 @@ export default function MentorMyResource() {
   const { isMobileView } = useContext(DeviceContext);
   const {
     studentDashboardState,
+    languageState,
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
   const [openModal, setOpenModal] = useState(false);
@@ -73,7 +74,7 @@ export default function MentorMyResource() {
   // }
   useEffect(() => {
     getDashboardData();
-    getMentorAssignmentList()(dispatch);
+    getMentorAssignmentList(languageState.storedMentorBatch.batch_id)(dispatch);
   }, []);
 
   const uploadFiles = (image, type) => {

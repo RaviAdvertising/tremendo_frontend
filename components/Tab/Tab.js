@@ -317,7 +317,7 @@ export default function Tab({
                   <div className={styles.chatNameAndImgWrapper}>
                     <div className={styles.userImg}>
                       <Image
-                        src={"/Images/blank_profile.png"}
+                        src={"https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
                         circular
                         alt="user-image"
                         height={"20px"}
@@ -336,7 +336,7 @@ export default function Tab({
                   <div className={styles.chatNameAndImgWrapper}>
                     <div className={styles.userImg}>
                       <Image
-                        src={"/Images/blank_profile.png"}
+                        src={"https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
                         circular
                         alt="user-image"
                         height={"20px"}
@@ -355,7 +355,7 @@ export default function Tab({
                   <div className={styles.chatNameAndImgWrapper}>
                     <div className={styles.userImg}>
                       <Image
-                        src={"/Images/blank_profile.png"}
+                        src={"https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
                         circular
                         alt="user-image"
                         height={"20px"}
