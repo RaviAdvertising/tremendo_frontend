@@ -306,6 +306,8 @@ export default function MentorProgresstab() {
   if (loading) {
     return <StudentDashboardSkelton />;
   }
+  const scores = progressData.score_data?.map(i => i.max_score);
+  const marks = progressData.progress_data?.map(i => i.score);
   const lineIndication = [
     { name: "High", color: "#00a651" },
     { name: "Average", color: "#3bbafb" },
@@ -322,24 +324,7 @@ export default function MentorProgresstab() {
                 labels: totalDatesInCurrentMonth,
                 datasets: [
                   {
-                    data: [
-                      20,
-                      30,
-                      90,
-                      20,
-                      40,
-                      20,
-                      56,
-                      25,
-                      45,
-                      65,
-                      44,
-                      76,
-                      81,
-                      54,
-                      77,
-                      33
-                    ],
+                    data: scores,
                     backgroundColor: [
                       "#ffb922",
                       "#3bbafb",
@@ -401,7 +386,7 @@ export default function MentorProgresstab() {
                   ],
                   datasets: [
                     {
-                      data: [60, 39, 80, 55, 45, 65, 57, 88],
+                      data: marks,
                       backgroundColor: [
                         "#8BDCDB",
                         "#8BDCDB",
@@ -415,7 +400,7 @@ export default function MentorProgresstab() {
                       order: 2
                     },
                     {
-                      data: [60, 39, 80, 55, 45, 65, 57, 88],
+                      data: marks,
                       backgroundColor: "#fff",
                       borderColor: "#fa9116",
 

@@ -18,9 +18,10 @@ export default function ProgressTab({}) {
     studentDashboardDispatch: dispatch
   } = useContext(GlobalContext);
   useEffect(() => {
-    getStudentProgress(languageState.setStudentSelectedLanguage.batch_id)(
-      dispatch
-    );
+    if (languageState.setStudentSelectedLanguage?.batch_id)
+      getStudentProgress(languageState.setStudentSelectedLanguage.batch_id)(
+        dispatch
+      );
   }, []);
   const options = {
     maintainAspectRatio: false,
@@ -138,25 +139,25 @@ export default function ProgressTab({}) {
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
-  if (studentDashboardState.getStudentProgress?.score?.length == 0) {
-    return (
-      <div
-        style={{
-          height: isMobileView ? "300px" : "700px",
-          width: isMobileView ? "300px" : "700px",
-          margin: "auto"
-        }}
-      >
-        <Image
-          src="/Images/no_data.png"
-          alt="tremendo dashboard banner"
-          height={isMobileView ? "300px" : "800px"}
-          width={isMobileView ? "300px" : "700px"}
-          className={styles.banner}
-        />
-      </div>
-    );
-  }
+  // if (studentDashboardState.getStudentProgress?.score?.length == 0) {
+  //   return (
+  //     <div
+  //       style={{
+  //         height: isMobileView ? "300px" : "700px",
+  //         width: isMobileView ? "300px" : "700px",
+  //         margin: "auto"
+  //       }}
+  //     >
+  //       <Image
+  //         src="/Images/no_data.png"
+  //         alt="tremendo dashboard banner"
+  //         height={isMobileView ? "300px" : "800px"}
+  //         width={isMobileView ? "300px" : "700px"}
+  //         className={styles.banner}
+  //       />
+  //     </div>
+  //   );
+  // }
 
   if (studentDashboardState.getStudentProgressLoading) {
     return <StudentDashboardSkelton />;

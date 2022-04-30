@@ -17,6 +17,8 @@ import axiosInstance from "../../utils/axiosInstance";
 import jsCookie from "js-cookie";
 import { COOKIE_TOKEN, LOGIN_MENTOR_TAB } from "../../utils/constants";
 import moment from "moment";
+import { toast } from "react-toastify";
+
 const PENDING = "Pending";
 const APPROVE = "approve";
 const DESAPPROVE = "deny";
@@ -67,11 +69,14 @@ export default function MentorBatchDetails({}) {
       lang_code: lang_code.id
     };
     try {
-      await axiosInstance.post(`/signup`, payload);
+      const response = await axiosInstance.post(`/signup`, payload);
       setLoading(false);
       setOpenModal(false);
       getMentorList(selectedLang);
     } catch (err) {
+      toast.error(err.response.data.msg, {
+        theme: "colored"
+      });
       setLoading(false);
       setOpenModal(false);
     }

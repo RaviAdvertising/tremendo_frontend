@@ -29,9 +29,11 @@ export default function CourseDetailTab() {
         block: "center"
       });
     }
-    getStudentCourseDetails(languageState.setStudentSelectedLanguage.batch_id)(
-      dispatch
-    );
+    if (languageState.setStudentSelectedLanguage?.batch_id) {
+      getStudentCourseDetails(
+        languageState.setStudentSelectedLanguage.batch_id
+      )(dispatch);
+    }
   }, []);
 
   const goToLink = link => {

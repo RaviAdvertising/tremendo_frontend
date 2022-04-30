@@ -5,10 +5,17 @@ import Head from "next/head";
 import Input from "../../components/Input/Input";
 import { Fragment, useContext, useState } from "react";
 import { Checkbox, Divider } from "semantic-ui-react";
-import { HOME_PAGE, LOGIN_PATH, PAYMENT_PATH } from "../../utils/routes";
+import {
+  FAQS_PATH,
+  HOME_PAGE,
+  LOGIN_PATH,
+  PAYMENT_PATH,
+  STUDENT_DASHBOARD_PATH
+} from "../../utils/routes";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import Button from "../../components/Button/Button";
 import {
+  ASK_A_QUESTION,
   COOKIE_TOKEN,
   EMAIL_REGULAR_EXPRESSION,
   LOGIN_STUDENT_TAB,
@@ -149,15 +156,15 @@ export default function Signup(props) {
   };
   const actionAfterLogin = () => {
     const order_id = localStorage.getItem(ORDER_DETAIL);
+    const askAQuestion = localStorage.getItem(ASK_A_QUESTION);
     if (order_id) {
       router.replace(`${PAYMENT_PATH}?id=${order_id}`);
       localStorage.removeItem(ORDER_DETAIL);
+    } else if (askAQuestion) {
+      router.replace(FAQS_PATH);
+      localStorage.removeItem(ASK_A_QUESTION);
     } else {
-      if (localStorage.getItem(PREVIOUS_PATH)) {
-        router.replace(localStorage.getItem(PREVIOUS_PATH));
-      } else {
-        router.push(HOME_PAGE);
-      }
+      router.push(STUDENT_DASHBOARD_PATH);
     }
   };
 

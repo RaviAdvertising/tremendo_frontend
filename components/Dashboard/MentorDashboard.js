@@ -322,7 +322,7 @@ export default function MentorDashboard({}) {
   const checkTodaysClassValidate = dashboardData.class_details?.find(
     i => moment(i.class_date).isoWeekday() == currentDay
   );
-  console.log(dashboardData, checkTodaysClassValidate);
+
   return (
     <div className={styles.base}>
       <div className={styles.chartHeading}>Batch Details</div>

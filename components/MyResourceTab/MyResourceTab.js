@@ -25,9 +25,10 @@ export default function MyResourceTab({}) {
   const [loading, setLoading] = useState(false);
   const [assignmentUrls, setAssignmentUrls] = useState({});
   useEffect(() => {
-    getStudentAssignmentList(languageState.setStudentSelectedLanguage.batch_id)(
-      dispatch
-    );
+    if (languageState.setStudentSelectedLanguage?.batch_id)
+      getStudentAssignmentList(
+        languageState.setStudentSelectedLanguage.batch_id
+      )(dispatch);
   }, []);
 
   const onClick = e => {
@@ -109,8 +110,7 @@ export default function MyResourceTab({}) {
   //   );
   // }
 
-  const assignmentList =
-    studentDashboardState.studentAssignmentList?.assighment;
+  const assignmentList = studentDashboardState.studentAssignmentList?.assigment;
   const finalAssesment =
     studentDashboardState.studentAssignmentList?.final_assessment;
 

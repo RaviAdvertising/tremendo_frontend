@@ -20,9 +20,10 @@ export default function Dashboard() {
   const { isMobileView } = useContext(DeviceContext);
 
   useEffect(() => {
-    getStudentDashboardData(languageState.setStudentSelectedLanguage.batch_id)(
-      dispatch
-    );
+    if (languageState.setStudentSelectedLanguage?.batch_id)
+      getStudentDashboardData(
+        languageState.setStudentSelectedLanguage.batch_id
+      )(dispatch);
   }, []);
 
   const options = {

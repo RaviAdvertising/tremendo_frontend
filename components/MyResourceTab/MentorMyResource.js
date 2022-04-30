@@ -112,7 +112,8 @@ export default function MentorMyResource() {
       access_token: jsCookie.get(COOKIE_TOKEN),
       student_assignment_id: i.student_assignment_id,
       student_user_id: i.user_id,
-      score: scoreList[i.user_id]
+      score: scoreList[i.user_id],
+      assignment_id: i.assignment_id
     };
     updateStudentAssignmentScore(payload)(dispatch);
   };
