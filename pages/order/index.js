@@ -188,7 +188,11 @@ export default function Order({}) {
         className={styles.modalStyles}
       >
         <Modal.Content image>
-          <Image src="/Images/success_image.png" wrapped alt="success image" />
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fsuccess_image.png?alt=media&token=a22dbbd8-88a7-46b1-b725-60f117beafc0"
+            wrapped
+            alt="success image"
+          />
         </Modal.Content>
       </Modal>
     </>

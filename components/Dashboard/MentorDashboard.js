@@ -287,7 +287,7 @@ export default function MentorDashboard({}) {
         }}
       >
         <Image
-          src="/Images/no_data.png"
+          src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
           alt="tremendo dashboard banner"
           height={isMobileView ? "300px" : "800px"}
           width={isMobileView ? "300px" : "700px"}

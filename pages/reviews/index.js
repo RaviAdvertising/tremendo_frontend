@@ -137,7 +137,9 @@ export default function Reviews() {
       <div className={styles.banner}>
         <DesktopOnly>
           <ImageComponent
-            src={"/Images/ReviewBanner.png"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FReviewBanner.png?alt=media&token=271e5425-fe8f-42a3-99b3-70f783ab3b12"
+            }
             paddingBottom={"21%"}
             alt={"banner logo"}
           />
