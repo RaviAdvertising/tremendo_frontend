@@ -350,7 +350,9 @@ export default function Signup(props) {
           </span>
           <span className={styles.tandC2}>
             <a
-              href={"/tnc.pdf"}
+              href={
+                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftnc.pdf?alt=media&token=ae0e7ac3-62fc-45cf-b9db-8c2291429176"
+              }
               download="Term&Condition"
               target={"_blank"}
               rel="noreferrer"
@@ -360,7 +362,9 @@ export default function Signup(props) {
             </a>{" "}
             and{" "}
             <a
-              href={"/privacy_policy.pdf"}
+              href={
+                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprivacy_policy.pdf?alt=media&token=162279da-2bec-4e1a-a47a-c330bd24b919"
+              }
               download="Privacy_and_policy"
               target={"_blank"}
               rel="noreferrer"

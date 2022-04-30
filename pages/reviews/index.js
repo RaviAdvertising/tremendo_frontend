@@ -206,7 +206,9 @@ export default function Reviews() {
         )}
         <div>
           <ImageComponent
-            src={"/Images/learn_grow_lead.png"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e"
+            }
             paddingBottom={"15%"}
             alt={"banner logo"}
           />

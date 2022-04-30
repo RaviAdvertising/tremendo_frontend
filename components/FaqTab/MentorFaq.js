@@ -85,7 +85,10 @@ export default class MentorFaq extends React.Component {
         <div className={styles.faqWrapper}>
           <DesktopOnly>
             <div>
-              <Image src="/Images/mentor_faq.png" alt="mentor faq" />
+              <Image
+                src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fmentor_faq.png?alt=media&token=4c37de63-90a2-4295-b8e9-d572370fdf4b"
+                alt="mentor faq"
+              />
             </div>
           </DesktopOnly>
           <div className={styles.faqBoxWrapper}>

@@ -118,7 +118,7 @@ export default function Dashboard() {
     <div className={styles.dashboardBase}>
       <div className={styles.dashboardBanner}>
         <Image
-          src="/Images/dashboard_banner.png"
+          src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fdashboard_banner.png?alt=media&token=b37ec534-bcbe-4476-8af6-7ddef42ad6b6"
           alt="tremendo dashboard banner"
           className={styles.banner}
         />

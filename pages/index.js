@@ -240,7 +240,9 @@ export default function Home({}) {
         </div>
         <div className={styles.devicesImages}>
           <Image
-            src={"/Images/devices.jpg"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fdevices.jpg?alt=media&token=1c6409ad-5ffc-4606-814b-2017407f13bb"
+            }
             alt={"devices"}
             width={"700px"}
             height={"300px"}
@@ -258,7 +260,9 @@ export default function Home({}) {
         </div>
         <div>
           <ImageComponent
-            src={"Images/learn_grow_lead.png"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e"
+            }
             paddingBottom={"15%"}
             alt={"banner logo"}
           />

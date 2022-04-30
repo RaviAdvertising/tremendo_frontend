@@ -179,11 +179,11 @@ export default function Login(props) {
             }}
           >
             <Image
-              src={`/Images/${
+              src={
                 selectedTab == LOGIN_STUDENT_TAB
-                  ? "student_login.png"
-                  : "mentor_login.png"
-              }`}
+                  ? "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fstudent_login.png?alt=media&token=b5f43022-0fde-4ce5-8c6a-9aa5d4dd2240"
+                  : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fmentor_login.png?alt=media&token=c838e554-ef41-4f34-ab98-01ac7e75fdd6"
+              }
               alt={"login page"}
               width={selectedTab == LOGIN_STUDENT_TAB ? "550px" : "567px"}
               height={selectedTab == LOGIN_STUDENT_TAB ? "350px" : "515px"}
@@ -337,7 +337,9 @@ export default function Login(props) {
       </div>
       <div className={styles.termAndCondition}>
         <a
-          href={"/tnc.pdf"}
+          href={
+            "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftnc.pdf?alt=media&token=ae0e7ac3-62fc-45cf-b9db-8c2291429176"
+          }
           download="Term&Condition"
           target={"_blank"}
           rel="noreferrer"
@@ -347,7 +349,9 @@ export default function Login(props) {
         </a>{" "}
         and{" "}
         <a
-          href={"/privacy_policy.pdf"}
+          href={
+            "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprivacy_policy.pdf?alt=media&token=162279da-2bec-4e1a-a47a-c330bd24b919"
+          }
           download="Privacy_and_policy"
           target={"_blank"}
           rel="noreferrer"

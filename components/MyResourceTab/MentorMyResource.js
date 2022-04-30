@@ -741,7 +741,7 @@ export default function MentorMyResource() {
             <Image src={"/Images/pdfImage.png"} alt="user-image" />
           </div>
           <Image
-            src="/Images/mentor_syllabus.png"
+            src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fmentor_syllabus.png?alt=media&token=ff47ea0e-5a7e-457c-8abd-354cb6374f23"
             alt="image"
             rounded
             style={{ width: "100%" }}
@@ -777,7 +777,7 @@ export default function MentorMyResource() {
             ))}
           </div>
           <Image
-            src="/Images/mentor_ebook.png"
+            src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fmentor_ebook.png?alt=media&token=2a602482-a3a9-4e80-b418-94bb8ab7b28f"
             alt="image"
             rounded
             style={{ width: "100%" }}

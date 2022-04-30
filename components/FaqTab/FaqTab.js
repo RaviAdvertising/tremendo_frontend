@@ -158,7 +158,12 @@ export default class FaqTab extends React.Component {
             </div>
           </div>
           <div className={styles.imageWrapper}>
-            <Image src={"/Images/faqQuestion.png"} alt="faqQuestion" />
+            <Image
+              src={
+                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FfaqQuestion.png?alt=media&token=85c77533-b08e-4458-8832-012250a7279e"
+              }
+              alt="faqQuestion"
+            />
           </div>
         </div>
       </div>
