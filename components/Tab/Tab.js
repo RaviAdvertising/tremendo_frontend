@@ -181,7 +181,9 @@ export default function Tab({
                 </div>
                 <div className={styles.footerImg}>
                   <ImageComponent
-                    src={"/Images/tabFooterImage.png"}
+                    src={
+                      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FtabFooterImage.png?alt=media&token=3f94b3bf-78a1-4788-a301-4c74d2777f1b"
+                    }
                     alt="tremendo footer image dashboard"
                     width={"165px"}
                     height={"128px"}

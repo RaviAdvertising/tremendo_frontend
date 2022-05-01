@@ -122,7 +122,7 @@ function Navbar({}) {
       <Menu fixed="top" secondary className={styles.menuWrapper}>
         <Menu.Item onClick={() => router.push(HOME_PAGE)}>
           <Image
-            src="/Images/tremendo_logo.png"
+            src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftremendo_logo.png?alt=media&token=2180fdbc-cab2-4f3e-9721-cd61da3348ba"
             alt="tremendo logo"
             width={"150px"}
             height={"50px"}
@@ -276,7 +276,11 @@ function Navbar({}) {
               </div>
             )}
           <div onClick={() => router.push(HOME_PAGE)}>
-            <Image src="/Images/tremendo_logo.png" alt="logo" size={"small"} />
+            <Image
+              src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftremendo_logo.png?alt=media&token=2180fdbc-cab2-4f3e-9721-cd61da3348ba"
+              alt="logo"
+              size={"small"}
+            />
           </div>
         </div>
         {visible && (

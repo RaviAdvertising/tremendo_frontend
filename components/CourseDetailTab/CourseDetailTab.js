@@ -141,7 +141,12 @@ export default function CourseDetailTab() {
               className={styles.joiningLink}
               onClick={() => goToLink(todays_class?.class_link)}
             >
-              <Image src={"/Images/google_meet.png"} alt="user-image" />
+              <Image
+                src={
+                  "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fgoogle_meet.png?alt=media&token=c0a905f7-90a6-4cc5-9377-2dc76aa1249b"
+                }
+                alt="user-image"
+              />
             </div>
             {(currentDay !== index + 1 ||
               (todays_class && Object.keys(todays_class)?.length == 0)) && (

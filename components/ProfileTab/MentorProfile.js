@@ -279,7 +279,12 @@ export default function MentorProfile() {
         </Dimmer>
       )}
       <div className={styles.profile_topImage}>
-        <Image src={"/Images/profile_top.png"} alt="profiletab_rocket" />
+        <Image
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprofile_top.png?alt=media&token=7dfe95c5-d496-4b98-b5d9-52c877ccb3ce"
+          }
+          alt="profiletab_rocket"
+        />
       </div>
       <div className={styles.sectionWrapper}>
         <div className={styles.leftSection}>
@@ -558,7 +563,12 @@ export default function MentorProfile() {
         </div>
       </div>
       <div className={styles.profile_bottomImage}>
-        <Image src={"/Images/profile_bottom.png"} alt="profiletab_rocket" />
+        <Image
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprofile_bottom.png?alt=media&token=c2340b81-26be-419f-b95b-310a07313fa3"
+          }
+          alt="profiletab_rocket"
+        />
       </div>
       <div className={styles.saveBtn}>
         <Button

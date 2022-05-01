@@ -187,7 +187,9 @@ export default function DetailLanguagePage({}) {
                             }}
                           >
                             <Image
-                              src={"/Images/down_arrow.png"}
+                              src={
+                                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fdown_arrow.png?alt=media&token=27bec4b4-58cf-498c-8d2c-df6381e223fc"
+                              }
                               alt=""
                               height={"20px"}
                               width={"20px"}
@@ -236,7 +238,9 @@ export default function DetailLanguagePage({}) {
                               <div className={styles.durationWrapper}>
                                 <div>
                                   <Image
-                                    src={"/Images/duration_rotate.png"}
+                                    src={
+                                      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fduration_rotate.png?alt=media&token=7fb632e3-b896-403c-bceb-e686cb698bf5"
+                                    }
                                     alt=""
                                     height={"30px"}
                                     width={"30px"}

@@ -537,7 +537,9 @@ export default function ProfileTab({}) {
       <DesktopOnly>
         <div className={styles.imageWrapper}>
           <Image
-            src={"/Images/profiletab_rocket.png"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprofiletab_rocket.png?alt=media&token=84ff6e0e-4808-4f36-8d82-459b92dba539"
+            }
             alt="profiletab_rocket"
           />
         </div>

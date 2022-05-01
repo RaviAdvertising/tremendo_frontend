@@ -197,7 +197,7 @@ export default function Signup(props) {
           <DesktopOnly>
             <div className={styles.loginImage}>
               <Image
-                src={`/Images/student_signup2.png`}
+                src={`https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fstudent_signup2.png?alt=media&token=c1c9b0d6-eb0e-4b6d-a016-206c55ac23bc`}
                 alt={"sign up page"}
                 width={"1138px"}
                 height={"897px"}
@@ -319,7 +319,7 @@ export default function Signup(props) {
                 onClick={() => socialLogin(googleProvider, LOGIN_TYPE_GOOGLE)}
               >
                 <Image
-                  src="/Images/google_loginbtn.png"
+                  src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fgoogle_loginbtn.png?alt=media&token=6d6162cd-0e6f-413d-b53a-10203f0be385"
                   alt="google login btn"
                   height="55px"
                   width="180px"

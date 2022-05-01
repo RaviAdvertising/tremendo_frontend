@@ -261,7 +261,7 @@ export default function Login(props) {
                 onClick={() => socialLogin(googleProvider, LOGIN_TYPE_GOOGLE)}
               >
                 <Image
-                  src="/Images/google_loginbtn.png"
+                  src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fgoogle_loginbtn.png?alt=media&token=6d6162cd-0e6f-413d-b53a-10203f0be385"
                   alt="google login btn"
                   height="60px"
                   width="200px"

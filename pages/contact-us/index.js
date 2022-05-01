@@ -238,7 +238,7 @@ export default function ContactUs() {
               <div className={styles.infoSec}>
                 <div>
                   <Image
-                    src="/Images/location.png"
+                    src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flocation.png?alt=media&token=3a220c3d-2f47-49a8-852e-abbe53a6dfae"
                     alt="location"
                     width={"32px"}
                     height={"37px"}
@@ -251,7 +251,7 @@ export default function ContactUs() {
               <div className={styles.infoSec}>
                 <div className={styles.phoneIcon}>
                   <Image
-                    src="/Images/phone.png"
+                    src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fphone.png?alt=media&token=e61b4f20-1c09-4366-bde7-94fc764f8bab"
                     alt="location"
                     width={"30px"}
                     height={"37px"}
@@ -262,7 +262,7 @@ export default function ContactUs() {
               <div className={styles.infoSec}>
                 <div>
                   <Image
-                    src="/Images/mail.png"
+                    src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fmail.png?alt=media&token=ce6a995a-1ec2-4ea7-8f21-80f706fb75af"
                     alt="location"
                     width={"37px"}
                     height={"37px"}
