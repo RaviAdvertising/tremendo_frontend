@@ -738,7 +738,12 @@ export default function MentorMyResource() {
         <div className={styles.mentorSyllabus}>
           <div className={styles.syllabus}>Syllabus</div>
           <div className={styles.pdf}>
-            <Image src={"/Images/pdfImage.png"} alt="user-image" />
+            <Image
+              src={
+                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FpdfImage.png?alt=media&token=dd36f672-6682-41b1-9e5a-8440e84be260"
+              }
+              alt="user-image"
+            />
           </div>
           <Image
             src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fmentor_syllabus.png?alt=media&token=ff47ea0e-5a7e-457c-8abd-354cb6374f23"
@@ -769,7 +774,9 @@ export default function MentorMyResource() {
                 rel="noreferrer"
               >
                 <Image
-                  src={"/Images/e-bookImage.png"}
+                  src={
+                    "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fe-bookImage.png?alt=media&token=80ea315b-6ecc-4024-aa90-ab5e6fc97cca"
+                  }
                   alt="user-image"
                   className={styles.eBook}
                 />

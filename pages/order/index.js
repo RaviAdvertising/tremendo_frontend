@@ -93,7 +93,7 @@ export default function Order({}) {
       order_id: response.data.id,
       name: "Tremendo",
       description: `Purchase ${orderDetails.batch_language} language`,
-      image: `${window.location.origin}/Images/tremendo_logo.png`,
+      image: `https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftremendo_logo.png?alt=media&token=2180fdbc-cab2-4f3e-9721-cd61da3348ba`,
       handler: function(response) {
         // alert(response.razorpay_payment_id);
         // alert(response.razorpay_order_id);

@@ -42,7 +42,9 @@ export default function CourseBox(props) {
         <div className={styles.price}>${props.price}</div>
         <div className={styles.offer}>
           <Image
-            src={"/Images/offer.png"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Foffer.png?alt=media&token=d17e6ba3-ed81-443c-8148-1812548f60d6"
+            }
             alt={"offer"}
             width={"70px"}
             height={"70px"}

@@ -77,7 +77,9 @@ export default function Home({}) {
         <HomeCarousal data={homeState} />
         <div className={styles.waveShape}>
           <ImageComponent
-            src={"/Images/wave_shape.png"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fwave_shape.png?alt=media&token=a736e768-12e6-4f7f-bd5e-b3643d5de3c7"
+            }
             paddingBottom={"5%"}
             alt={"banner logo"}
           />
@@ -140,7 +142,9 @@ export default function Home({}) {
             </div>
             <div className={styles.imgSections}>
               <Image
-                src={"/Images/why_tremendo.png"}
+                src={
+                  "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fwhy_tremendo.png?alt=media&token=a3bcc4bf-2277-4b9a-a7f5-9e031df322c1"
+                }
                 alt={""}
                 width={"450px"}
                 height={"200px"}
@@ -186,7 +190,9 @@ export default function Home({}) {
       {/* ---------------------------------------------------------------------------------------------- */}
       <div className={styles.subscribe}>
         <ImageComponent
-          src={"/Images/subscribe.png"}
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fsubscribe.png?alt=media&token=a4a26ccc-4b45-4041-8d78-cdf333909df9"
+          }
           paddingBottom={isMobileView ? "30%" : "10%"}
           alt={"banner logo"}
         />

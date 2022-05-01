@@ -270,11 +270,18 @@ export default function MyResourceTab({}) {
           <div className={styles.syllabusHeading}>Syllabus</div>
           <div className={styles.syylabusBox}>
             <div className={styles.eflyImage}>
-              <Image src={"/Images/syllabus.png"} alt="user-image" />
+              <Image
+                src={
+                  "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fsyllabus.png?alt=media&token=282036ad-0e00-4540-b28d-3d0c7cefb569"
+                }
+                alt="user-image"
+              />
             </div>
             <div className={styles.pdfDownload}>
               <Image
-                src={"/Images/pdfImage.png"}
+                src={
+                  "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FpdfImage.png?alt=media&token=dd36f672-6682-41b1-9e5a-8440e84be260"
+                }
                 alt="user-image"
                 style={{ margin: "auto" }}
               />
@@ -306,7 +313,9 @@ export default function MyResourceTab({}) {
                   rel="noreferrer"
                 >
                   <Image
-                    src={"/Images/e-bookImage.png"}
+                    src={
+                      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fe-bookImage.png?alt=media&token=80ea315b-6ecc-4024-aa90-ab5e6fc97cca"
+                    }
                     alt="user-image"
                     className={styles.eBook}
                   />
@@ -314,7 +323,9 @@ export default function MyResourceTab({}) {
               ))}
             </div>
             <Image
-              src={"/Images/e-book.png"}
+              src={
+                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fe-book.png?alt=media&token=8bfda71d-d955-40ff-be23-a9b78e423e2c"
+              }
               alt="user-image"
               style={{ margin: "auto" }}
             />
