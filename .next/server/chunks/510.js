@@ -2081,7 +2081,7 @@ function Footer(props) {
                                                         onClick: ()=>goToSocialMedia(FB_URL)
                                                         ,
                                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_image__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                                                            src: "/Images/facebook.png",
+                                                            src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ffacebook.png?alt=media&token=d3fac0f8-b5cd-4455-8319-d6435caa1273",
                                                             alt: "facebook",
                                                             height: "50px",
                                                             width: "50px"
@@ -2092,7 +2092,7 @@ function Footer(props) {
                                                         onClick: ()=>goToSocialMedia(INSTAGRAM_URL)
                                                         ,
                                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_image__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                                                            src: "/Images/instagram.png",
+                                                            src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Finstagram.png?alt=media&token=e86cf4f9-d7fb-4217-9512-cf4a386ccdb3",
                                                             alt: "instagram",
                                                             height: "50px",
                                                             width: "50px"
@@ -2103,7 +2103,7 @@ function Footer(props) {
                                                         onClick: ()=>goToSocialMedia(TWITTER_URL)
                                                         ,
                                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_image__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                                                            src: "/Images/twitter.png",
+                                                            src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftwitter.png?alt=media&token=02fb92e9-11f7-480a-b54c-81526ca3a04e",
                                                             alt: "twitter",
                                                             height: "50px",
                                                             width: "50px"
@@ -2112,7 +2112,7 @@ function Footer(props) {
                                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                         className: (_Footer_module_css__WEBPACK_IMPORTED_MODULE_6___default().socialIcons),
                                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_image__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                                                            src: "/Images/youtube.png",
+                                                            src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fyoutube.png?alt=media&token=8e1b812e-c1f6-4727-94c1-858c30e05844",
                                                             alt: "youtube",
                                                             height: "50px",
                                                             width: "50px"
@@ -2342,7 +2342,7 @@ function Navbar({}) {
                     onClick: ()=>router.push(_utils_routes__WEBPACK_IMPORTED_MODULE_14__/* .HOME_PAGE */ .s6)
                     ,
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                        src: "/Images/tremendo_logo.png",
+                        src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftremendo_logo.png?alt=media&token=2180fdbc-cab2-4f3e-9721-cd61da3348ba",
                         alt: "tremendo logo",
                         width: "150px",
                         height: "50px"
@@ -2486,7 +2486,7 @@ function Navbar({}) {
                             onClick: ()=>router.push(_utils_routes__WEBPACK_IMPORTED_MODULE_14__/* .HOME_PAGE */ .s6)
                             ,
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                                src: "/Images/tremendo_logo.png",
+                                src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftremendo_logo.png?alt=media&token=2180fdbc-cab2-4f3e-9721-cd61da3348ba",
                                 alt: "logo",
                                 size: "small"
                             })

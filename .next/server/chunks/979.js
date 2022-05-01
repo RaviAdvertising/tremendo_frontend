@@ -241,7 +241,7 @@ function Tab({ tabsData , selectTab , selectedTab , studentDashboard , sendDataC
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().footerImg),
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_image__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                                                src: "/Images/tabFooterImage.png",
+                                                src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FtabFooterImage.png?alt=media&token=3f94b3bf-78a1-4788-a301-4c74d2777f1b",
                                                 alt: "tremendo footer image dashboard",
                                                 width: "165px",
                                                 height: "128px"

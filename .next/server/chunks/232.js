@@ -1297,7 +1297,7 @@ function MentorMyResource() {
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                 className: (_MentorMyResource_module_css__WEBPACK_IMPORTED_MODULE_15___default().pdf),
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                                    src: "/Images/pdfImage.png",
+                                    src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FpdfImage.png?alt=media&token=dd36f672-6682-41b1-9e5a-8440e84be260",
                                     alt: "user-image"
                                 })
                             }),
@@ -1343,7 +1343,7 @@ function MentorMyResource() {
                                         target: "_blank",
                                         rel: "noreferrer",
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                                            src: "/Images/e-bookImage.png",
+                                            src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fe-bookImage.png?alt=media&token=80ea315b-6ecc-4024-aa90-ab5e6fc97cca",
                                             alt: "user-image",
                                             className: (_MentorMyResource_module_css__WEBPACK_IMPORTED_MODULE_15___default().eBook)
                                         })
@@ -1675,7 +1675,7 @@ function MentorProfile() {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: (_MentorProfile_module_css__WEBPACK_IMPORTED_MODULE_18___default().profile_topImage),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                    src: "/Images/profile_top.png",
+                    src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprofile_top.png?alt=media&token=7dfe95c5-d496-4b98-b5d9-52c877ccb3ce",
                     alt: "profiletab_rocket"
                 })
             }),
@@ -2149,7 +2149,7 @@ function MentorProfile() {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: (_MentorProfile_module_css__WEBPACK_IMPORTED_MODULE_18___default().profile_bottomImage),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                    src: "/Images/profile_bottom.png",
+                    src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprofile_bottom.png?alt=media&token=c2340b81-26be-419f-b95b-310a07313fa3",
                     alt: "profiletab_rocket"
                 })
             }),

@@ -452,7 +452,7 @@ function CourseDetailTab() {
                                         return goToLink(todays_class === null || todays_class === void 0 ? void 0 : todays_class.class_link);
                                     },
                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                                        src: "/Images/google_meet.png",
+                                        src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fgoogle_meet.png?alt=media&token=c0a905f7-90a6-4cc5-9377-2dc76aa1249b",
                                         alt: "user-image"
                                     })
                                 }),
@@ -1414,7 +1414,7 @@ function MyResourceTab({}) {
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                         className: (_MyResourceTab_module_css__WEBPACK_IMPORTED_MODULE_15___default().eflyImage),
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                                            src: "/Images/syllabus.png",
+                                            src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fsyllabus.png?alt=media&token=282036ad-0e00-4540-b28d-3d0c7cefb569",
                                             alt: "user-image"
                                         })
                                     }),
@@ -1422,7 +1422,7 @@ function MyResourceTab({}) {
                                         className: (_MyResourceTab_module_css__WEBPACK_IMPORTED_MODULE_15___default().pdfDownload),
                                         children: [
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                                                src: "/Images/pdfImage.png",
+                                                src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FpdfImage.png?alt=media&token=dd36f672-6682-41b1-9e5a-8440e84be260",
                                                 alt: "user-image",
                                                 style: {
                                                     margin: "auto"
@@ -1478,7 +1478,7 @@ function MyResourceTab({}) {
                                                 target: "_blank",
                                                 rel: "noreferrer",
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                                                    src: "/Images/e-bookImage.png",
+                                                    src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fe-bookImage.png?alt=media&token=80ea315b-6ecc-4024-aa90-ab5e6fc97cca",
                                                     alt: "user-image",
                                                     className: (_MyResourceTab_module_css__WEBPACK_IMPORTED_MODULE_15___default().eBook)
                                                 })
@@ -1486,7 +1486,7 @@ function MyResourceTab({}) {
                                         })
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                                        src: "/Images/e-book.png",
+                                        src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fe-book.png?alt=media&token=8bfda71d-d955-40ff-be23-a9b78e423e2c",
                                         alt: "user-image",
                                         style: {
                                             margin: "auto"
@@ -2230,7 +2230,7 @@ function ProfileTab({}) {
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: (_ProfileTab_module_css__WEBPACK_IMPORTED_MODULE_19___default().imageWrapper),
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                        src: "/Images/profiletab_rocket.png",
+                        src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprofiletab_rocket.png?alt=media&token=84ff6e0e-4808-4f36-8d82-459b92dba539",
                         alt: "profiletab_rocket"
                     })
                 })

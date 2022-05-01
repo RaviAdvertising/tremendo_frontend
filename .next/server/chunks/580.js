@@ -234,19 +234,19 @@ const trustFactor = [
     {
         heading: "Work & Experience ",
         subheading: "Command over a foreign language can set you ahead in your career. It can land you better job opportunities and help you in achieving your educational goals.    ",
-        image: "/Images/work_experience.png",
+        image: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fwork_experience.png?alt=media&token=e906f9f6-7721-4759-ab01-63929f232fbd",
         backgroundColor: "#f78f1e"
     },
     {
         heading: "Learn new culture",
         subheading: "Learning a foreign language is an investment as it helps you to understand other cultures and ideologies. Knowing a new language opens up a new world for you.",
-        image: "/Images/learning.png",
+        image: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flearning.png?alt=media&token=6fc541a5-13cb-4fab-bd26-cd3e9b158db5",
         backgroundColor: "#39cdc9"
     },
     {
         heading: "Travel",
         subheading: "Learning a foreign language will help you navigate new places and make travel so much easier. It helps you to understand signs and ask for directions. ",
-        image: "/Images/plane.png",
+        image: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fplane.png?alt=media&token=f35bfbab-e52b-4e77-b5c5-c32ec385e672",
         backgroundColor: "#f78f1e"
     }
 ];
@@ -254,12 +254,12 @@ const whyTremendo1 = [
     {
         heading: "Affordable price",
         subheading: "Tremendo aims to provide the best quality teaching at the minimum and pocket-friendly costs. As all the study material is provided digitally, you do not have to buy any books.",
-        image: "/Images/self-growth.png"
+        image: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fself-growth.png?alt=media&token=c90bf2a3-9475-4146-8ea9-15fb6d630f7c"
     },
     {
         heading: "Quick growth",
         subheading: "Having command over foreign languages can provide better career opportunities and set you on the fastest route to success.",
-        image: "/Images/online-class.png"
+        image: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fonline-class.png?alt=media&token=991507ab-d9dd-4164-9d1a-3e9fde957bf6"
     }
 ];
 const whyTremendo2 = [
@@ -271,7 +271,7 @@ const whyTremendo2 = [
     {
         heading: "Real-Time feedback",
         subheading: "We provide real-time feedback to ensure all students are on the right track throughout their learning journey. ",
-        image: "/Images/feedback.png"
+        image: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ffeedback.png?alt=media&token=99c4e409-7f8f-486e-a66a-5d80a9dbefa5"
     }
 ];
 const promotionsContent = [

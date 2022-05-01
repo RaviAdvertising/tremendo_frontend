@@ -34,7 +34,7 @@ function FacebookLoginComponent(props) {
                 onClick: ()=>renderProps.onClick()
                 ,
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_image__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                    src: "/Images/facebook_loginbtn.png",
+                    src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ffacebook_loginbtn.png?alt=media&token=f1710620-8316-4a3c-890c-da9fc1c81be1",
                     alt: "facebook login btn",
                     height: props.height,
                     width: props.width

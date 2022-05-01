@@ -420,7 +420,7 @@ function CourseBox(props) {
                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: (CourseBox_module_default()).offer,
                         children: /*#__PURE__*/ jsx_runtime_.jsx(next_image["default"], {
-                            src: "/Images/offer.png",
+                            src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Foffer.png?alt=media&token=d17e6ba3-ed81-443c-8148-1812548f60d6",
                             alt: "offer",
                             width: "70px",
                             height: "70px"
@@ -988,7 +988,7 @@ function Home({}) {
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                         className: (_styles_Home_module_css__WEBPACK_IMPORTED_MODULE_23___default().waveShape),
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Image_Image__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
-                            src: "/Images/wave_shape.png",
+                            src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fwave_shape.png?alt=media&token=a736e768-12e6-4f7f-bd5e-b3643d5de3c7",
                             paddingBottom: "5%",
                             alt: "banner logo"
                         })
@@ -1094,7 +1094,7 @@ function Home({}) {
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                     className: (_styles_Home_module_css__WEBPACK_IMPORTED_MODULE_23___default().imgSections),
                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_image__WEBPACK_IMPORTED_MODULE_7__["default"], {
-                                        src: "/Images/why_tremendo.png",
+                                        src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fwhy_tremendo.png?alt=media&token=a3bcc4bf-2277-4b9a-a7f5-9e031df322c1",
                                         alt: "",
                                         width: "450px",
                                         height: "200px"
@@ -1166,7 +1166,7 @@ function Home({}) {
                 className: (_styles_Home_module_css__WEBPACK_IMPORTED_MODULE_23___default().subscribe),
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Image_Image__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
-                        src: "/Images/subscribe.png",
+                        src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fsubscribe.png?alt=media&token=a4a26ccc-4b45-4041-8d78-cdf333909df9",
                         paddingBottom: isMobileView ? "30%" : "10%",
                         alt: "banner logo"
                     }),
