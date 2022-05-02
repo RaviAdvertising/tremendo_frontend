@@ -300,12 +300,17 @@ export default function MentorDashboard({}) {
   if (studentDashboardState.mentorDashboardDataLoading) {
     return <StudentDashboardSkelton />;
   }
-
-  const attendencePercentage =
-    (dashboardData.attandance_data?.present_count /
-      (dashboardData.attandance_data?.present_count +
-        dashboardData.attandance_data?.absent_count)) *
-    100;
+  let attendencePercentage = 0;
+  if (
+    dashboardData.attandance_data?.present_count &&
+    dashboardData.attandance_data?.absent_count
+  ) {
+    attendencePercentage =
+      (dashboardData.attandance_data?.present_count /
+        (dashboardData.attandance_data?.present_count +
+          dashboardData.attandance_data?.absent_count)) *
+      100;
+  }
   const chartLabel = dashboardData.progress_data?.map(i => i.user_name);
   const marks = dashboardData.progress_data?.map(i => i.student_score);
 

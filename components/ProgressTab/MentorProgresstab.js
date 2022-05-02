@@ -24,10 +24,8 @@ export default function MentorProgresstab() {
 
   useEffect(() => {
     getProgressData();
+    createCircle();
   }, []);
-  useEffect(() => {
-    if (document.getElementById("canvas")) createCircle();
-  }, [progressData]);
 
   const getProgressData = async () => {
     setLoading(true);
@@ -46,10 +44,13 @@ export default function MentorProgresstab() {
   };
 
   const createCircle = () => {
+    console.log("here");
     let can = document.getElementById("canvas"),
       spanProcent = document.getElementById("procent"),
-      c = can?.getContext("2d");
-    const percentage = can?.getAttribute("data-percent");
+      c = can.getContext("2d");
+    const percentage = can.getAttribute("data-percent");
+    console.log(percentage);
+
     let posX = can.width / 2,
       posY = can.height / 2,
       fps = 1000 / 200,
@@ -317,11 +318,14 @@ export default function MentorProgresstab() {
     { name: "Average", color: "#3bbafb" },
     { name: "Low", color: "#ffb922" }
   ];
-  const presentPercentage =
-    (attendence?.present_count /
-      (attendence?.present_count + attendence?.absent_count)) *
-    100;
-  console.log(presentPercentage);
+  let presentPercentage = 0;
+  if (attendence?.present_count && attendence?.absent_count) {
+    presentPercentage =
+      (attendence?.present_count /
+        (attendence?.present_count + attendence?.absent_count)) *
+      100;
+  }
+
   return (
     <div className={styles.base}>
       <div className={styles.scoreChartWrapper}>
