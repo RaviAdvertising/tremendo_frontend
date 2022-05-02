@@ -74,7 +74,9 @@ export default function MentorMyResource() {
   // }
   useEffect(() => {
     getDashboardData();
-    getMentorAssignmentList(languageState.storedMentorBatch.batch_id)(dispatch);
+    getMentorAssignmentList(languageState.storedMentorBatch?.batch_id)(
+      dispatch
+    );
   }, []);
 
   const uploadFiles = (image, type) => {
@@ -140,7 +142,7 @@ export default function MentorMyResource() {
     setLoading(true);
     const payload = {
       access_token: jsCookie.get(COOKIE_TOKEN),
-      batch_id: studentDashboardState.mentorDashboardData.batch_data.batch_id,
+      batch_id: languageState.storedMentorBatch.batch_id,
       assignment_lang:
         studentDashboardState.mentorDashboardData.batch_data.batch_language,
       lang_code:
