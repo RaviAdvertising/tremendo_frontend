@@ -409,7 +409,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_Con
 const IDLE_STATUS = "idle";
 const UPLOAD_STATUS = "published";
 function MentorMyResource() {
-    var ref, ref1;
+    var ref2, ref1;
     const uploadAssignmentRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     const uploadSyllabusRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     const uploadEbookRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
@@ -444,8 +444,9 @@ function MentorMyResource() {
     //   );
     // }
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        var ref;
         getDashboardData();
-        (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorAssignmentList */ .Qc)(languageState.storedMentorBatch.batch_id)(dispatch);
+        (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorAssignmentList */ .Qc)((ref = languageState.storedMentorBatch) === null || ref === void 0 ? void 0 : ref.batch_id)(dispatch);
     }, []);
     const uploadFiles = (image, type)=>{
         setUploadLoading(type);
@@ -482,7 +483,6 @@ function MentorMyResource() {
         };
         (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .updateStudentAssignmentScore */ .OQ)(payload)(dispatch);
     };
-    console.log(scoreList);
     const getDashboardData = async ()=>{
         const curr = new Date(); // get current date
         const first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
@@ -502,14 +502,14 @@ function MentorMyResource() {
         setLoading(true);
         const payload = {
             access_token: js_cookie__WEBPACK_IMPORTED_MODULE_8__["default"].get(_utils_constants__WEBPACK_IMPORTED_MODULE_9__/* .COOKIE_TOKEN */ .t5),
-            batch_id: studentDashboardState.mentorDashboardData.batch_data.batch_id,
+            batch_id: languageState.storedMentorBatch.batch_id,
             assignment_lang: studentDashboardState.mentorDashboardData.batch_data.batch_language,
             lang_code: studentDashboardState.mentorDashboardData.batch_data.language_code,
             ...feilds
         };
         try {
             const response = await _utils_axiosInstance__WEBPACK_IMPORTED_MODULE_10__/* ["default"].post */ .Z.post(`/createCourseAssignment`, payload);
-            await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorAssignmentList */ .Qc)()(dispatch);
+            await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorAssignmentList */ .Qc)(languageState.storedMentorBatch.batch_id)(dispatch);
             setOpenModal(false);
             setLoading(false);
             setFeilds({
@@ -1061,9 +1061,10 @@ function MentorMyResource() {
         published: "#368825"
     };
     const onDeleteAssignment = async (id)=>{
+        var ref;
         setLoading(true);
         await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .deleteAssignment */ .CT)(id)(dispatch);
-        await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorAssignmentList */ .Qc)()(dispatch);
+        await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorAssignmentList */ .Qc)((ref = languageState.storedMentorBatch) === null || ref === void 0 ? void 0 : ref.batch_id)(dispatch);
         setLoading(false);
     };
     const onPublishAssignment = async (data)=>{
@@ -1075,8 +1076,9 @@ function MentorMyResource() {
             batch_id: data.batch_id
         };
         try {
+            var ref;
             const response = await _utils_axiosInstance__WEBPACK_IMPORTED_MODULE_10__/* ["default"].post */ .Z.post(`/updateAssignmentStatus`, payload);
-            await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorAssignmentList */ .Qc)()(dispatch);
+            await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorAssignmentList */ .Qc)((ref = languageState.storedMentorBatch) === null || ref === void 0 ? void 0 : ref.batch_id)(dispatch);
             setLoading(false);
         } catch (err) {
             setLoading(false);
@@ -1092,7 +1094,7 @@ function MentorMyResource() {
         return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Dashboard_StudentDashboardSkelton__WEBPACK_IMPORTED_MODULE_13__/* ["default"] */ .Z, {
         }));
     }
-    const batchData = (ref = studentDashboardState.mentorDashboardData) === null || ref === void 0 ? void 0 : ref.batch_data;
+    const batchData = (ref2 = studentDashboardState.mentorDashboardData) === null || ref2 === void 0 ? void 0 : ref2.batch_data;
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_MentorMyResource_module_css__WEBPACK_IMPORTED_MODULE_15___default().base),
         children: [
@@ -2238,12 +2240,8 @@ function MentorProgresstab() {
     const { languageState  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_Context_Provider__WEBPACK_IMPORTED_MODULE_13__/* .GlobalContext */ .k);
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         getProgressData();
+        createCircle();
     }, []);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        if (document.getElementById("canvas")) createCircle();
-    }, [
-        progressData
-    ]);
     const getProgressData = async ()=>{
         setLoading(true);
         try {
@@ -2255,8 +2253,10 @@ function MentorProgresstab() {
         }
     };
     const createCircle = ()=>{
-        let can = document.getElementById("canvas"), spanProcent = document.getElementById("procent"), c = can === null || can === void 0 ? void 0 : can.getContext("2d");
-        const percentage = can === null || can === void 0 ? void 0 : can.getAttribute("data-percent");
+        console.log("here");
+        let can = document.getElementById("canvas"), spanProcent = document.getElementById("procent"), c = can.getContext("2d");
+        const percentage = can.getAttribute("data-percent");
+        console.log(percentage);
         let posX = can.width / 2, posY = can.height / 2, fps = 1000 / 200, procent = 0, oneProcent = 360 / 100, result = oneProcent * percentage;
         c.lineCap = "round";
         arcMove();
@@ -2522,8 +2522,10 @@ function MentorProgresstab() {
             color: "#ffb922"
         }
     ];
-    const presentPercentage = (attendence === null || attendence === void 0 ? void 0 : attendence.present_count) / ((attendence === null || attendence === void 0 ? void 0 : attendence.present_count) + (attendence === null || attendence === void 0 ? void 0 : attendence.absent_count)) * 100;
-    console.log(presentPercentage);
+    let presentPercentage = 0;
+    if ((attendence === null || attendence === void 0 ? void 0 : attendence.present_count) && (attendence === null || attendence === void 0 ? void 0 : attendence.absent_count)) {
+        presentPercentage = (attendence === null || attendence === void 0 ? void 0 : attendence.present_count) / ((attendence === null || attendence === void 0 ? void 0 : attendence.present_count) + (attendence === null || attendence === void 0 ? void 0 : attendence.absent_count)) * 100;
+    }
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_MentorProgresstab_module_css__WEBPACK_IMPORTED_MODULE_14___default().base),
         children: [

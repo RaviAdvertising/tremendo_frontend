@@ -416,7 +416,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([js_c
 
 
 function MentorDashboard({}) {
-    var ref9, ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8;
+    var ref11, ref1, ref2, ref3, ref4, ref5, ref6, ref7;
     const { isMobileView  } = (0,react__WEBPACK_IMPORTED_MODULE_6__.useContext)(_pages_app__WEBPACK_IMPORTED_MODULE_7__.DeviceContext);
     const { 0: openModal , 1: setOpenModal  } = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(null);
     const { 0: feilds , 1: setFeilds  } = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)({
@@ -668,7 +668,7 @@ function MentorDashboard({}) {
         }));
     };
     const dashboardData = studentDashboardState.mentorDashboardData;
-    if (((ref9 = dashboardData.batch_details) === null || ref9 === void 0 ? void 0 : ref9.length) == 0) {
+    if (((ref11 = dashboardData.batch_details) === null || ref11 === void 0 ? void 0 : ref11.length) == 0) {
         return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
             style: {
                 height: isMobileView ? "300px" : "700px",
@@ -688,10 +688,14 @@ function MentorDashboard({}) {
         return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Dashboard_StudentDashboardSkelton__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
         }));
     }
-    const attendencePercentage = ((ref1 = dashboardData.attandance_data) === null || ref1 === void 0 ? void 0 : ref1.present_count) / (((ref2 = dashboardData.attandance_data) === null || ref2 === void 0 ? void 0 : ref2.present_count) + ((ref3 = dashboardData.attandance_data) === null || ref3 === void 0 ? void 0 : ref3.absent_count)) * 100;
-    const chartLabel = (ref4 = dashboardData.progress_data) === null || ref4 === void 0 ? void 0 : ref4.map((i)=>i.user_name
+    let attendencePercentage = 0;
+    if (((ref1 = dashboardData.attandance_data) === null || ref1 === void 0 ? void 0 : ref1.present_count) && ((ref2 = dashboardData.attandance_data) === null || ref2 === void 0 ? void 0 : ref2.absent_count)) {
+        var ref8, ref9, ref10;
+        attendencePercentage = ((ref8 = dashboardData.attandance_data) === null || ref8 === void 0 ? void 0 : ref8.present_count) / (((ref9 = dashboardData.attandance_data) === null || ref9 === void 0 ? void 0 : ref9.present_count) + ((ref10 = dashboardData.attandance_data) === null || ref10 === void 0 ? void 0 : ref10.absent_count)) * 100;
+    }
+    const chartLabel = (ref3 = dashboardData.progress_data) === null || ref3 === void 0 ? void 0 : ref3.map((i)=>i.user_name
     );
-    const marks = (ref5 = dashboardData.progress_data) === null || ref5 === void 0 ? void 0 : ref5.map((i)=>i.student_score
+    const marks = (ref4 = dashboardData.progress_data) === null || ref4 === void 0 ? void 0 : ref4.map((i)=>i.student_score
     );
     let classesArray = [];
     days.forEach((i, index)=>{
@@ -712,8 +716,8 @@ function MentorDashboard({}) {
             }
         });
     });
-    const batch_days = (ref6 = dashboardData.batch_data) === null || ref6 === void 0 ? void 0 : (ref7 = ref6.batch_class_days) === null || ref7 === void 0 ? void 0 : ref7.split(",");
-    const checkTodaysClassValidate = (ref8 = dashboardData.class_details) === null || ref8 === void 0 ? void 0 : ref8.find((i)=>moment__WEBPACK_IMPORTED_MODULE_4___default()(i.class_date).isoWeekday() == currentDay
+    const batch_days = (ref5 = dashboardData.batch_data) === null || ref5 === void 0 ? void 0 : (ref6 = ref5.batch_class_days) === null || ref6 === void 0 ? void 0 : ref6.split(",");
+    const checkTodaysClassValidate = (ref7 = dashboardData.class_details) === null || ref7 === void 0 ? void 0 : ref7.find((i)=>moment__WEBPACK_IMPORTED_MODULE_4___default()(i.class_date).isoWeekday() == currentDay
     );
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_MentorDashboard_module_css__WEBPACK_IMPORTED_MODULE_14___default().base),
@@ -748,7 +752,7 @@ function MentorDashboard({}) {
                 )
             }),
             days.map((i, index)=>{
-                var ref, ref10, ref11;
+                var ref, ref12, ref13;
                 return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: (_MentorDashboard_module_css__WEBPACK_IMPORTED_MODULE_14___default().courseDetailSection),
                     children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -767,7 +771,7 @@ function MentorDashboard({}) {
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                 className: (_MentorDashboard_module_css__WEBPACK_IMPORTED_MODULE_14___default().timeCode),
-                                children: `${(ref10 = dashboardData.batch_data) === null || ref10 === void 0 ? void 0 : ref10.batch_start_time} - ${(ref11 = dashboardData.batch_data) === null || ref11 === void 0 ? void 0 : ref11.batch_end_time}`
+                                children: `${(ref12 = dashboardData.batch_data) === null || ref12 === void 0 ? void 0 : ref12.batch_start_time} - ${(ref13 = dashboardData.batch_data) === null || ref13 === void 0 ? void 0 : ref13.batch_end_time}`
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                 className: (_MentorDashboard_module_css__WEBPACK_IMPORTED_MODULE_14___default().batchCode),
