@@ -120,7 +120,6 @@ export default function MentorMyResource() {
     };
     updateStudentAssignmentScore(payload)(dispatch);
   };
-  console.log(scoreList);
 
   const getDashboardData = async () => {
     const curr = new Date(); // get current date
@@ -154,7 +153,9 @@ export default function MentorMyResource() {
         `/createCourseAssignment`,
         payload
       );
-      await getMentorAssignmentList()(dispatch);
+      await getMentorAssignmentList(languageState.storedMentorBatch.batch_id)(
+        dispatch
+      );
       setOpenModal(false);
       setLoading(false);
       setFeilds({});
@@ -586,7 +587,9 @@ export default function MentorMyResource() {
   const onDeleteAssignment = async id => {
     setLoading(true);
     await deleteAssignment(id)(dispatch);
-    await getMentorAssignmentList()(dispatch);
+    await getMentorAssignmentList(languageState.storedMentorBatch?.batch_id)(
+      dispatch
+    );
     setLoading(false);
   };
   const onPublishAssignment = async data => {
@@ -602,7 +605,9 @@ export default function MentorMyResource() {
         `/updateAssignmentStatus`,
         payload
       );
-      await getMentorAssignmentList()(dispatch);
+      await getMentorAssignmentList(languageState.storedMentorBatch?.batch_id)(
+        dispatch
+      );
       setLoading(false);
     } catch (err) {
       setLoading(false);
