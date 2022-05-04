@@ -14,6 +14,7 @@ import PageLoader from "../Loader/PageLoader";
 import { storage } from "../../utils/firebase-config";
 import moment from "moment";
 
+const IDLE = "idle";
 export default function MyResourceTab({}) {
   const inputFile = useRef(null);
   const {
@@ -36,6 +37,7 @@ export default function MyResourceTab({}) {
   };
 
   const uploadFiles = (image, id) => {
+    setLoading(true);
     //setUploadLoading(type);
     const uploadTask = storage.ref(`docs/${image.name}`).put(image);
     uploadTask.on(
@@ -47,6 +49,7 @@ export default function MyResourceTab({}) {
         console.log("here");
       },
       error => {
+        setLoading(false);
         //setUploadLoading("");
         console.log(error, "error");
       },
@@ -57,6 +60,7 @@ export default function MyResourceTab({}) {
           .getDownloadURL()
           .then(url => {
             setAssignmentUrls({ ...assignmentUrls, [id]: url });
+            setLoading(false);
             // setUploadLoading("");
           });
       }
@@ -198,7 +202,7 @@ export default function MyResourceTab({}) {
               </div>
               <div className={styles.checkboxesWrapper}>
                 <Button
-                  label={"Submit"}
+                  label={i.status == IDLE ? "Submit" : "Submitted"}
                   height={30}
                   borderRadius={8}
                   backgroundColor={"#f98e46"}
@@ -209,6 +213,7 @@ export default function MyResourceTab({}) {
                     fontSize: "12px"
                   }}
                   border="none"
+                  disabled={i.status == IDLE ? false : true}
                   onClick={() => submitAssigmentResult(i)}
                 />
               </div>

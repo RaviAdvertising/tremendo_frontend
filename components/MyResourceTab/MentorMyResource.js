@@ -315,6 +315,7 @@ export default function MentorMyResource() {
             <div className={styles.inputCreateWrapper}>
               <div style={{ width: "30%" }}>
                 <Input
+                  type="number"
                   placeholder="Max Score "
                   onChange={(e, data) =>
                     onHandleChange(data.value, "max_score")
@@ -324,6 +325,7 @@ export default function MentorMyResource() {
               </div>
               <div style={{ width: "30%" }}>
                 <Input
+                  type="number"
                   placeholder="Pass Score "
                   onChange={(e, data) =>
                     onHandleChange(data.value, "pass_score")
@@ -333,6 +335,7 @@ export default function MentorMyResource() {
               </div>
               <div style={{ width: "30%" }}>
                 <Input
+                  type="number"
                   placeholder="Avg Score "
                   onChange={(e, data) =>
                     onHandleChange(data.value, "avg_score")

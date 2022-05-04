@@ -194,6 +194,8 @@
   margin: auto;
   margin-top: 35px;
 }
+
+
 @media (max-width: 1024px) {
   .base {
     padding: 10px;

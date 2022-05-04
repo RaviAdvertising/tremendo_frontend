@@ -36,6 +36,9 @@
   padding: 20px;
   text-align: center;
 }
+.notification{
+  cursor: pointer;
+}
 .mentorBatchDetails {
   padding: 20px 10px;
  

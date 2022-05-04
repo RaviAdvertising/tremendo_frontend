@@ -72,7 +72,9 @@ export default function Home({}) {
         <meta name="description" content="Tremendo Education website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {authState.logoutLoading && <PageLoader />}
+      {(authState.logoutLoading || authState.profileDataLoading) && (
+        <PageLoader />
+      )}
       <div className={styles.bannerWaveWrapper}>
         <HomeCarousal data={homeState} />
         <div className={styles.waveShape}>

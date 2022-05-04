@@ -50,27 +50,27 @@ export default function CourseDetailTab() {
       moment().format("DD/MM/YYYY")
   );
 
-  if (
-    studentDashboardState.getStudentCourseDetails?.class_details?.length == 0
-  ) {
-    return (
-      <div
-        style={{
-          height: isMobileView ? "300px" : "700px",
-          width: isMobileView ? "300px" : "700px",
-          margin: "auto"
-        }}
-      >
-        <Image
-          src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
-          alt="tremendo dashboard banner"
-          height={isMobileView ? "300px" : "800px"}
-          width={isMobileView ? "300px" : "700px"}
-          className={styles.banner}
-        />
-      </div>
-    );
-  }
+  // if (
+  //   studentDashboardState.getStudentCourseDetails?.class_details?.length == 0
+  // ) {
+  //   return (
+  //     <div
+  //       style={{
+  //         height: isMobileView ? "300px" : "700px",
+  //         width: isMobileView ? "300px" : "700px",
+  //         margin: "auto"
+  //       }}
+  //     >
+  //       <Image
+  //         src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
+  //         alt="tremendo dashboard banner"
+  //         height={isMobileView ? "300px" : "800px"}
+  //         width={isMobileView ? "300px" : "700px"}
+  //         className={styles.banner}
+  //       />
+  //     </div>
+  //   );
+  // }
   const batch_data = studentDashboardState.getStudentCourseDetails?.batch_data;
   return (
     <div className={styles.base}>
@@ -149,6 +149,7 @@ export default function CourseDetailTab() {
               />
             </div>
             {(currentDay !== index + 1 ||
+              !todays_class ||
               (todays_class && Object.keys(todays_class)?.length == 0)) && (
               <div className={styles.overlay}></div>
             )}

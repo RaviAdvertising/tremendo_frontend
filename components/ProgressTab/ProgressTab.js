@@ -178,8 +178,8 @@ export default function ProgressTab({}) {
   )?.toFixed(2);
   const lineIndication = [
     { name: "Low", color: "#ffb922", height: "34px" },
-    { name: "Average", color: "#3bbafb", height: "220px" },
-    { name: "High", color: "#00a651", height: "180px" }
+    { name: "Average", color: "#3bbafb", height: "150px" },
+    { name: "High", color: "#00a651", height: "220px" }
   ];
   return (
     <div className={styles.base}>

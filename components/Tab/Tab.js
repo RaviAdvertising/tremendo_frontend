@@ -14,13 +14,17 @@ import {
   Segment,
   Sidebar,
   Dropdown,
-  Label
+  Label,
+  Popup,
+  Button,
+  List
 } from "semantic-ui-react";
 import { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../../Context/Provider";
 import {
   getMentorDashboardData,
-  getMentorStudentList
+  getMentorStudentList,
+  getStudentNotificationList
 } from "../../Context/Actions/Dashboard/DashboardAction";
 import {
   setStudentSelectedLanguage,
@@ -35,6 +39,7 @@ export default function Tab({
   sendDataCallback
 }) {
   const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
   const [startSearch, setStartSearch] = useState(false);
   const [inputVal, setInputValue] = useState("");
   const [selectedBatch, setSelectedBatches] = useState("");
@@ -76,6 +81,9 @@ export default function Tab({
       setStudentSelectedLanguage(authState.profileData.current_language)(
         langDispatch
       );
+      getStudentNotificationList(
+        authState.profileData.current_language?.batch_id
+      )(dispatch);
     } else {
       storeMentorBatch(authState.profileData.current_language)(langDispatch);
     }
@@ -105,6 +113,7 @@ export default function Tab({
     );
     storeMentorBatch(selectedBatch)(langDispatch);
     await getMentorStudentList(id)(dispatch);
+
     getMentorDashboardData(id, firstday, lastday)(dispatch);
   };
   const onChangeStudentBatch = value => {
@@ -112,6 +121,7 @@ export default function Tab({
       i => i.batch_id == value
     );
     setStudentSelectedLanguage(selectedBatch)(langDispatch);
+    getStudentNotificationList(selectedBatch.batch_id)(dispatch);
   };
 
   const countryOptions = authState.profileData?.all_languages?.map(i => {
@@ -257,8 +267,34 @@ export default function Tab({
                   name.split(" ")[0]
                 }`}</div>
               </div>
-              <div className={styles.notification}>
-                <IconComponent name="notification" color="#ff9000" />
+              <div>
+                <Popup
+                  open={open}
+                  position="bottom right"
+                  trigger={
+                    <div
+                      className={styles.notification}
+                      onClick={() => setOpen(!open)}
+                    >
+                      <IconComponent name="notification" color="#ff9000" />
+                    </div>
+                  }
+                >
+                  <List bulleted>
+                    {studentDashboardState.studentNotificationList &&
+                    studentDashboardState.studentNotificationList.length > 0 ? (
+                      studentDashboardState.studentNotificationList?.map(
+                        (notification, index) => (
+                          <List.Item key={index}>
+                            {notification.title}
+                          </List.Item>
+                        )
+                      )
+                    ) : (
+                      <List.Item>No New Notification</List.Item>
+                    )}
+                  </List>
+                </Popup>
               </div>
             </div>
             {studentDashboard
