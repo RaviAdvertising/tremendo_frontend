@@ -24,7 +24,7 @@ export default function Dashboard() {
       getStudentDashboardData(
         languageState.setStudentSelectedLanguage.batch_id
       )(dispatch);
-  }, []);
+  }, [languageState.setStudentSelectedLanguage]);
 
   const options = {
     maintainAspectRatio: false,

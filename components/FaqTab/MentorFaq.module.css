@@ -68,6 +68,8 @@
 .faqBoxWrapper {
   width: 50%;
   margin-left: 55px;
+  max-height: 450px;
+  overflow: auto;
 }
 @media (max-width: 1024px) {
   .base {

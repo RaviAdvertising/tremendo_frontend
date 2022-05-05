@@ -30,7 +30,7 @@ export default function MyResourceTab({}) {
       getStudentAssignmentList(
         languageState.setStudentSelectedLanguage.batch_id
       )(dispatch);
-  }, []);
+  }, [languageState.setStudentSelectedLanguage]);
 
   const onClick = e => {
     inputFile.current.click();

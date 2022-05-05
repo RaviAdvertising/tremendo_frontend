@@ -22,7 +22,7 @@ export default function ProgressTab({}) {
       getStudentProgress(languageState.setStudentSelectedLanguage.batch_id)(
         dispatch
       );
-  }, []);
+  }, [languageState.setStudentSelectedLanguage]);
   const options = {
     maintainAspectRatio: false,
     scales: {

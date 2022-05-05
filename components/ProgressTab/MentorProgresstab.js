@@ -25,7 +25,7 @@ export default function MentorProgresstab() {
   useEffect(() => {
     getProgressData();
     createCircle();
-  }, []);
+  }, [languageState.storedMentorBatch]);
 
   const getProgressData = async () => {
     setLoading(true);

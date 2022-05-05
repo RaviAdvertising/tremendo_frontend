@@ -44,6 +44,7 @@ function Navbar({}) {
   const router = useRouter();
   const {
     homeState,
+    authState,
     authDispatch: dispatch,
     homeDispatch: homeDispatch
   } = useContext(GlobalContext);
@@ -104,7 +105,16 @@ function Navbar({}) {
   };
 
   const goToDashboard = () => {
-    if (userDetails.access_type == LOGIN_STUDENT_TAB) {
+    const activatedLanguage = authState.profileData.all_languages;
+    if (
+      userDetails.access_type == LOGIN_STUDENT_TAB &&
+      activatedLanguage.length == 0
+    ) {
+      router.push(HOME_PAGE);
+    } else if (
+      userDetails.access_type == LOGIN_STUDENT_TAB &&
+      activatedLanguage.length != 0
+    ) {
       router.push(STUDENT_DASHBOARD_PATH);
     } else if (userDetails.access_type == LOGIN_MENTOR_TAB) {
       router.push(MENTOR_DASHBOARD_PATH);

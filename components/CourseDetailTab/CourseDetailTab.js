@@ -34,7 +34,7 @@ export default function CourseDetailTab() {
         languageState.setStudentSelectedLanguage.batch_id
       )(dispatch);
     }
-  }, []);
+  }, [languageState.setStudentSelectedLanguage]);
 
   const goToLink = link => {
     const url = link.includes("https") ? link : `https://${link}`;
