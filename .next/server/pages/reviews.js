@@ -388,6 +388,8 @@ function ReviewBox(props) {
 
 
 function WriteFormBox(props) {
+    const name =  false && 0;
+    const profile_imageurl =  false ? 0 : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41";
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_WriteFormBox_module_css__WEBPACK_IMPORTED_MODULE_4___default().writeReviewForm),
         children: [
@@ -397,25 +399,19 @@ function WriteFormBox(props) {
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                         className: (_WriteFormBox_module_css__WEBPACK_IMPORTED_MODULE_4___default().profileImg),
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__.Image, {
-                            src: JSON.parse(localStorage.getItem(_utils_constants__WEBPACK_IMPORTED_MODULE_2__/* .USER_DETAILS */ .DX)).profileUrl ? JSON.parse(localStorage.getItem(_utils_constants__WEBPACK_IMPORTED_MODULE_2__/* .USER_DETAILS */ .DX)).profileUrl : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41",
+                            src: profile_imageurl,
                             circular: true,
                             alt: "user-image",
                             height: "70px",
                             width: "70px"
                         })
                     }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                         className: (_WriteFormBox_module_css__WEBPACK_IMPORTED_MODULE_4___default().nameAndData),
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: (_WriteFormBox_module_css__WEBPACK_IMPORTED_MODULE_4___default().name),
-                                children: "Lorem Ipsum"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: (_WriteFormBox_module_css__WEBPACK_IMPORTED_MODULE_4___default().date),
-                                children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                            })
-                        ]
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: (_WriteFormBox_module_css__WEBPACK_IMPORTED_MODULE_4___default().name),
+                            children: name
+                        })
                     })
                 ]
             }),

@@ -85,8 +85,8 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2245);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Button_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3664);
-/* harmony import */ var _BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(7384);
-/* harmony import */ var _BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(7384);
+/* harmony import */ var _BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _pages_app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8510);
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1831);
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__);
@@ -96,8 +96,10 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var _utils_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(6076);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(1187);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _Dashboard_StudentDashboardSkelton__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(2909);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([js_cookie__WEBPACK_IMPORTED_MODULE_8__, _Context_Provider__WEBPACK_IMPORTED_MODULE_6__, _pages_app__WEBPACK_IMPORTED_MODULE_4__]);
 ([js_cookie__WEBPACK_IMPORTED_MODULE_8__, _Context_Provider__WEBPACK_IMPORTED_MODULE_6__, _pages_app__WEBPACK_IMPORTED_MODULE_4__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
+
 
 
 
@@ -171,7 +173,9 @@ function BatchManagement() {
         if (studentDashboardState.mentorBatches.length > 0) {
             getStudentsAccordingToBatch(languageState.storedMentorBatch.batch_id);
         }
-    }, []);
+    }, [
+        languageState.storedMentorBatch
+    ]);
     // if (true) {
     //   return (
     //     <div
@@ -191,6 +195,10 @@ function BatchManagement() {
     //     </div>
     //   );
     // }
+    if (loading) {
+        return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Dashboard_StudentDashboardSkelton__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z, {
+        }));
+    }
     const noDataSection = ()=>{
         return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__.Message, {
             children: [
@@ -204,63 +212,63 @@ function BatchManagement() {
         }));
     };
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().base),
+        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().base),
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().chartHeading),
+                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().chartHeading),
                 children: "Batch List"
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().batchListWrapper),
+                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().batchListWrapper),
                 children: [
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().batchListHeader),
+                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().batchListHeader),
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().headerOption),
+                                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().headerOption),
                                 children: "Batch Name"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().headerOption),
+                                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().headerOption),
                                 children: "Total students"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().headerOption),
+                                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().headerOption),
                                 children: "Total Classes"
                             })
                         ]
                     }),
                     (ref = studentDashboardState.mentorBatches) === null || ref === void 0 ? void 0 : ref.map((i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().batchListBody),
+                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().batchListBody),
                             onClick: ()=>getBatchStudents(i.batch_id)
                             ,
                             children: [
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                    className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().bodyOption),
+                                    className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().bodyOption),
                                     children: `${i.batch_language}-${i.batch_id}`
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                    className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().bodyOption),
+                                    className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().bodyOption),
                                     children: i.batch_capcity
                                 }),
                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                    className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().bodyOptionWithCheckBox),
+                                    className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().bodyOptionWithCheckBox),
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             children: i.batch_total_classes
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().completeCheckbox),
+                                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().completeCheckbox),
                                             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("label", {
-                                                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().completeContainer),
+                                                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().completeContainer),
                                                 children: [
                                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                                         type: "checkbox",
-                                                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().checkbox),
+                                                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().checkbox),
                                                         onClick: (event)=>console.log(event.target.checked)
                                                     }),
                                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().checkmark)
+                                                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().checkmark)
                                                     })
                                                 ]
                                             })
@@ -273,14 +281,14 @@ function BatchManagement() {
                 ]
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().headingSubmitBtnWrapper),
+                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().headingSubmitBtnWrapper),
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().chartHeading),
+                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().chartHeading),
                         children: "Student Attendence"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().createFaqgbtn),
+                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().createFaqgbtn),
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Button_Button__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
                             label: "Submit Attendence",
                             height: 25,
@@ -299,46 +307,46 @@ function BatchManagement() {
                 ]
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().tableHeader),
+                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().tableHeader),
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().headerName),
+                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().headerName),
                         children: "S no."
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().headerName),
+                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().headerName),
                         children: "Name."
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().headerName),
+                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().headerName),
                         children: "ID"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().headerName),
+                        className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().headerName),
                         children: "Status"
                     })
                 ]
             }),
             studentList.class_data && Object.keys(studentList.class_data).length != 0 ? (ref1 = studentList.student_list) === null || ref1 === void 0 ? void 0 : ref1.map((i, index)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                    className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().tableBody),
+                    className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().tableBody),
                     children: [
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().bodyName),
+                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().bodyName),
                             children: [
                                 index + 1,
                                 "."
                             ]
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().bodyName),
+                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().bodyName),
                             children: i.user_name
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().bodyName),
+                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().bodyName),
                             children: i.student_batch_id
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().bodyName),
+                            className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().bodyName),
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__.Dropdown, {
                                 fluid: true,
                                 options: [
@@ -351,7 +359,7 @@ function BatchManagement() {
                                         value: "a"
                                     }
                                 ],
-                                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_11___default().attendenceBody),
+                                className: (_BatchManagement_module_css__WEBPACK_IMPORTED_MODULE_12___default().attendenceBody),
                                 onChange: (event, data)=>onChangeAttendence(data, i)
                                 ,
                                 placeholder: "Attendence"
@@ -536,13 +544,14 @@ function MentorDashboard({}) {
         const mentorName = mentorList.find((i)=>{
             return i.user_code == (feilds === null || feilds === void 0 ? void 0 : feilds.batch_mentor_id);
         });
+        const defaultMentorName = studentDashboardState.mentorDashboardData.batch_data.batch_mentor;
         try {
             const response = await _utils_axiosInstance__WEBPACK_IMPORTED_MODULE_11__/* ["default"].post */ .Z.post(`/createNewBatchClass`, {
                 access_token: js_cookie__WEBPACK_IMPORTED_MODULE_12__["default"].get(_utils_constants__WEBPACK_IMPORTED_MODULE_13__/* .COOKIE_TOKEN */ .t5),
                 batch_id: openModal.batch_id,
                 class_start_time: feilds === null || feilds === void 0 ? void 0 : feilds.batch_start_time,
                 class_end_time: feilds === null || feilds === void 0 ? void 0 : feilds.batch_end_time,
-                batch_mentor: mentorName.name,
+                batch_mentor: mentorName ? mentorName.name : defaultMentorName,
                 batch_mentor_id: feilds === null || feilds === void 0 ? void 0 : feilds.batch_mentor_id,
                 class_link: feilds === null || feilds === void 0 ? void 0 : feilds.class_link
             });
@@ -550,6 +559,7 @@ function MentorDashboard({}) {
             setLoading(false);
             onCloseModal();
         } catch (err) {
+            console.log(err);
             setLoading(false);
             onCloseModal();
         }
@@ -995,7 +1005,7 @@ function Mentor() {
         const batches = await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_14__/* .getMentorBatches */ .G6)()(dispatch);
         const firstBatchId = batches.data.length > 0 && batches.data[0].batch_id;
         await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_14__/* .getMentorStudentList */ .FK)(firstBatchId)(dispatch);
-        await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_14__/* .mentorUpcomingTasks */ .BR)()(dispatch);
+        await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_14__/* .mentorUpcomingTasks */ .BR)(firstBatchId)(dispatch);
     };
     const userDetails =  false && 0;
     if (userDetails && userDetails.access_type != _utils_constants__WEBPACK_IMPORTED_MODULE_11__/* .LOGIN_MENTOR_TAB */ .fr) {

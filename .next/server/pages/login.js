@@ -170,7 +170,9 @@ function Login(props) {
             }
         }
     };
-    const actionAfterLogin = (response)=>{
+    const actionAfterLogin = async (response)=>{
+        const user_profile = await (0,_Context_Actions_Auth_AuthAction__WEBPACK_IMPORTED_MODULE_11__/* .getUserProfile */ .et)(response.data.access_type)(dispatch);
+        const purchaseLang = user_profile.data.all_languages;
         const order_id = localStorage.getItem(_utils_constants__WEBPACK_IMPORTED_MODULE_2__/* .ORDER_DETAIL */ .RC);
         const askAQuestion = localStorage.getItem(_utils_constants__WEBPACK_IMPORTED_MODULE_2__/* .ASK_A_QUESTION */ ._S);
         if (order_id) {
@@ -179,6 +181,8 @@ function Login(props) {
         } else if (askAQuestion) {
             router.replace(_utils_routes__WEBPACK_IMPORTED_MODULE_17__/* .FAQS_PATH */ .lC);
             localStorage.removeItem(_utils_constants__WEBPACK_IMPORTED_MODULE_2__/* .ASK_A_QUESTION */ ._S);
+        } else if (response.data.access_type == _utils_constants__WEBPACK_IMPORTED_MODULE_2__/* .LOGIN_STUDENT_TAB */ .mb && purchaseLang.length == 0) {
+            router.push(_utils_routes__WEBPACK_IMPORTED_MODULE_17__/* .HOME_PAGE */ .s6);
         } else {
             if (response.data.access_type == _utils_constants__WEBPACK_IMPORTED_MODULE_2__/* .LOGIN_MENTOR_TAB */ .fr) {
                 router.push(_utils_routes__WEBPACK_IMPORTED_MODULE_17__/* .MENTOR_DASHBOARD_PATH */ .o7);

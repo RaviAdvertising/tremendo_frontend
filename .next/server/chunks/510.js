@@ -281,6 +281,14 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony export */   "ko": () => (/* binding */ MENTOR_UPCOMING_TASKS_REQUEST),
 /* harmony export */   "NL": () => (/* binding */ MENTOR_UPCOMING_TASKS_SUCCESS),
 /* harmony export */   "C5": () => (/* binding */ MENTOR_UPCOMING_TASKS_ERROR),
+/* harmony export */   "Es": () => (/* binding */ GET_STUDENT_NOTIFICATION_REQUEST),
+/* harmony export */   "Ke": () => (/* binding */ GET_STUDENT_NOTIFICATION_SUCCESS),
+/* harmony export */   "z6": () => (/* binding */ GET_STUDENT_NOTIFICATION_ERROR),
+/* harmony export */   "kU": () => (/* binding */ GET_MENTOR_NOTIFICATION_REQUEST),
+/* harmony export */   "TV": () => (/* binding */ GET_MENTOR_NOTIFICATION_SUCCESS),
+/* harmony export */   "Mf": () => (/* binding */ GET_MENTOR_NOTIFICATION_ERROR),
+/* harmony export */   "kB": () => (/* binding */ getMentorNotificationList),
+/* harmony export */   "SC": () => (/* binding */ getStudentNotificationList),
 /* harmony export */   "BR": () => (/* binding */ mentorUpcomingTasks),
 /* harmony export */   "R1": () => (/* binding */ getStudentCourseDetails),
 /* harmony export */   "VQ": () => (/* binding */ getStudentProgress),
@@ -354,11 +362,51 @@ const GET_STUDENT_COURSE_DETAILS_ERROR = "GET_STUDENT_COURSE_DETAILS_error";
 const MENTOR_UPCOMING_TASKS_REQUEST = "MENTOR_UPCOMING_TASKS_request";
 const MENTOR_UPCOMING_TASKS_SUCCESS = "MENTOR_UPCOMING_TASKS_success";
 const MENTOR_UPCOMING_TASKS_ERROR = "MENTOR_UPCOMING_TASKS_error";
-const mentorUpcomingTasks = ()=>(dispatch)=>{
+const GET_STUDENT_NOTIFICATION_REQUEST = "GET_STUDENT_NOTIFICATION_request";
+const GET_STUDENT_NOTIFICATION_SUCCESS = "GET_STUDENT_NOTIFICATION_success";
+const GET_STUDENT_NOTIFICATION_ERROR = "GET_STUDENT_NOTIFICATION_error";
+const GET_MENTOR_NOTIFICATION_REQUEST = "GET_MENTOR_NOTIFICATION_request";
+const GET_MENTOR_NOTIFICATION_SUCCESS = "GET_MENTOR_NOTIFICATION_success";
+const GET_MENTOR_NOTIFICATION_ERROR = "GET_MENTOR_NOTIFICATION_error";
+const getMentorNotificationList = (id)=>(dispatch)=>{
+        dispatch({
+            type: GET_MENTOR_NOTIFICATION_REQUEST
+        });
+        return _utils_axiosInstance__WEBPACK_IMPORTED_MODULE_2__/* ["default"].get */ .Z.get(`/getMentorNotification?access_token=${js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].get(_utils_constants__WEBPACK_IMPORTED_MODULE_3__/* .COOKIE_TOKEN */ .t5)}&batch_id=${id}`).then((res)=>{
+            dispatch({
+                type: GET_MENTOR_NOTIFICATION_SUCCESS,
+                data: res.data.data
+            });
+        }).catch((err)=>{
+            dispatch({
+                type: GET_MENTOR_NOTIFICATION_ERROR,
+                error: err.response.data
+            });
+        });
+    }
+;
+const getStudentNotificationList = (id)=>(dispatch)=>{
+        dispatch({
+            type: GET_STUDENT_NOTIFICATION_REQUEST
+        });
+        return _utils_axiosInstance__WEBPACK_IMPORTED_MODULE_2__/* ["default"].get */ .Z.get(`/getStudentNotificationList?access_token=${js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].get(_utils_constants__WEBPACK_IMPORTED_MODULE_3__/* .COOKIE_TOKEN */ .t5)}&batch_id=${id}`).then((res)=>{
+            dispatch({
+                type: GET_STUDENT_NOTIFICATION_SUCCESS,
+                data: res.data.data
+            });
+        }).catch((err)=>{
+            dispatch({
+                type: GET_STUDENT_NOTIFICATION_ERROR,
+                error: err.response.data
+            });
+        });
+    }
+;
+const mentorUpcomingTasks = (id)=>(dispatch)=>{
         dispatch({
             type: MENTOR_UPCOMING_TASKS_REQUEST
         });
-        return _utils_axiosInstance__WEBPACK_IMPORTED_MODULE_2__/* ["default"].get */ .Z.get(`/getMentorUpcomingTask?access_token=${js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].get(_utils_constants__WEBPACK_IMPORTED_MODULE_3__/* .COOKIE_TOKEN */ .t5)}`).then((res)=>{
+        return _utils_axiosInstance__WEBPACK_IMPORTED_MODULE_2__/* ["default"].get */ .Z.get(`/getMentorUpcomingTask?access_token=${js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].get(_utils_constants__WEBPACK_IMPORTED_MODULE_3__/* .COOKIE_TOKEN */ .t5)}&batch_id=${id}`).then((res)=>{
             dispatch({
                 type: MENTOR_UPCOMING_TASKS_SUCCESS,
                 data: res.data.data
@@ -1119,7 +1167,11 @@ const dashboardIntialState = {
     getStudentCourseDetailsLoading: false,
     mentorUpcomingTask: [],
     mentorUpcomingTasksLoading: false,
-    updateScoreLoading: false
+    updateScoreLoading: false,
+    studentNotificationList: [],
+    studentNotificationLoading: false,
+    mentorNotificationList: [],
+    mentorNotificaiotnLoading: false
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dashboardIntialState);
 
@@ -1600,6 +1652,38 @@ const dashboardReducer = (state, action)=>{
             return Object.assign({
             }, state, {
                 updateScoreLoading: false
+            });
+        case _Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_0__/* .GET_STUDENT_NOTIFICATION_REQUEST */ .Es:
+            return Object.assign({
+            }, state, {
+                studentNotificationLoading: true
+            });
+        case _Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_0__/* .GET_STUDENT_NOTIFICATION_SUCCESS */ .Ke:
+            return Object.assign({
+            }, state, {
+                studentNotificationLoading: false,
+                studentNotificationList: action.data
+            });
+        case _Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_0__/* .GET_STUDENT_NOTIFICATION_ERROR */ .z6:
+            return Object.assign({
+            }, state, {
+                studentNotificationLoading: false
+            });
+        case _Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_0__/* .GET_MENTOR_NOTIFICATION_REQUEST */ .kU:
+            return Object.assign({
+            }, state, {
+                mentorNotificaiotnLoading: true
+            });
+        case _Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_0__/* .GET_MENTOR_NOTIFICATION_SUCCESS */ .TV:
+            return Object.assign({
+            }, state, {
+                mentorNotificaiotnLoading: false,
+                mentorNotificationList: action.data
+            });
+        case _Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_0__/* .GET_MENTOR_NOTIFICATION_ERROR */ .Mf:
+            return Object.assign({
+            }, state, {
+                mentorNotificaiotnLoading: false
             });
         default:
             return state;
@@ -2268,7 +2352,7 @@ function Navbar({}) {
     const { 0: visible , 1: setVisible  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const { 0: selectedLanguage , 1: setSelectedLanguage  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("LANGUAGES");
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
-    const { homeState , authDispatch: dispatch , homeDispatch: homeDispatch  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_Context_Provider__WEBPACK_IMPORTED_MODULE_9__/* .GlobalContext */ .k);
+    const { homeState , authState , authDispatch: dispatch , homeDispatch: homeDispatch  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_Context_Provider__WEBPACK_IMPORTED_MODULE_9__/* .GlobalContext */ .k);
     const userDetails =  false && 0;
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         if (!router.pathname.includes(_utils_routes__WEBPACK_IMPORTED_MODULE_14__/* .LANGUAGE_DETAIL */ .k1)) {
@@ -2319,7 +2403,10 @@ function Navbar({}) {
         setVisible(!visible);
     };
     const goToDashboard = ()=>{
-        if (userDetails.access_type == _utils_constants__WEBPACK_IMPORTED_MODULE_3__/* .LOGIN_STUDENT_TAB */ .mb) {
+        const activatedLanguage = authState.profileData.all_languages;
+        if (userDetails.access_type == _utils_constants__WEBPACK_IMPORTED_MODULE_3__/* .LOGIN_STUDENT_TAB */ .mb && activatedLanguage.length == 0) {
+            router.push(_utils_routes__WEBPACK_IMPORTED_MODULE_14__/* .HOME_PAGE */ .s6);
+        } else if (userDetails.access_type == _utils_constants__WEBPACK_IMPORTED_MODULE_3__/* .LOGIN_STUDENT_TAB */ .mb && activatedLanguage.length != 0) {
             router.push(_utils_routes__WEBPACK_IMPORTED_MODULE_14__/* .STUDENT_DASHBOARD_PATH */ .M4);
         } else if (userDetails.access_type == _utils_constants__WEBPACK_IMPORTED_MODULE_3__/* .LOGIN_MENTOR_TAB */ .fr) {
             router.push(_utils_routes__WEBPACK_IMPORTED_MODULE_14__/* .MENTOR_DASHBOARD_PATH */ .o7);

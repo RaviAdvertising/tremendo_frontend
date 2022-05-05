@@ -447,7 +447,9 @@ function MentorMyResource() {
         var ref;
         getDashboardData();
         (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorAssignmentList */ .Qc)((ref = languageState.storedMentorBatch) === null || ref === void 0 ? void 0 : ref.batch_id)(dispatch);
-    }, []);
+    }, [
+        languageState.storedMentorBatch
+    ]);
     const uploadFiles = (image, type)=>{
         setUploadLoading(type);
         const uploadTask = _utils_firebase_config__WEBPACK_IMPORTED_MODULE_14__/* .storage.ref */ .t.ref(`docs/${image.name}`).put(image);
@@ -484,12 +486,13 @@ function MentorMyResource() {
         (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .updateStudentAssignmentScore */ .OQ)(payload)(dispatch);
     };
     const getDashboardData = async ()=>{
+        var ref;
         const curr = new Date(); // get current date
         const first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
         const last = first + 6; // last day is the first day + 6
         const firstday = moment__WEBPACK_IMPORTED_MODULE_7___default()(new Date(curr.setDate(first))).format("x");
         const lastday = moment__WEBPACK_IMPORTED_MODULE_7___default()(new Date(curr.setDate(last))).format("x");
-        const id = studentDashboardState.mentorBatches.length > 0 && studentDashboardState.mentorBatches[0].batch_id;
+        const id = (ref = languageState.storedMentorBatch) === null || ref === void 0 ? void 0 : ref.batch_id;
         await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorDashboardData */ .Rj)(id, firstday, lastday)(dispatch);
     };
     const onHandleChange = (data, type)=>{
@@ -704,6 +707,7 @@ function MentorMyResource() {
                                             width: "30%"
                                         },
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Input, {
+                                            type: "number",
                                             placeholder: "Max Score ",
                                             onChange: (e, data)=>onHandleChange(data.value, "max_score")
                                             ,
@@ -717,6 +721,7 @@ function MentorMyResource() {
                                             width: "30%"
                                         },
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Input, {
+                                            type: "number",
                                             placeholder: "Pass Score ",
                                             onChange: (e, data)=>onHandleChange(data.value, "pass_score")
                                             ,
@@ -730,6 +735,7 @@ function MentorMyResource() {
                                             width: "30%"
                                         },
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Input, {
+                                            type: "number",
                                             placeholder: "Avg Score ",
                                             onChange: (e, data)=>onHandleChange(data.value, "avg_score")
                                             ,
@@ -2241,7 +2247,9 @@ function MentorProgresstab() {
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         getProgressData();
         createCircle();
-    }, []);
+    }, [
+        languageState.storedMentorBatch
+    ]);
     const getProgressData = async ()=>{
         setLoading(true);
         try {

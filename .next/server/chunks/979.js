@@ -16,6 +16,7 @@ module.exports = {
 	"search": "Tab_search__1kcut",
 	"dateSection": "Tab_dateSection__1mB1Z",
 	"flagSection": "Tab_flagSection__1Ybgn",
+	"notification": "Tab_notification__2anWP",
 	"mentorBatchDetails": "Tab_mentorBatchDetails__225Ie",
 	"batchesDropDown": "Tab_batchesDropDown__3zXub",
 	"tabs": "Tab_tabs__1wfyi",
@@ -51,7 +52,8 @@ module.exports = {
 	"sidebarSection": "Tab_sidebarSection__VPyVE",
 	"optionWrapper": "Tab_optionWrapper__1A-Ax",
 	"searchOptions": "Tab_searchOptions__d3GJ9",
-	"overlay": "Tab_overlay__2xfHE"
+	"overlay": "Tab_overlay__2xfHE",
+	"labelStyle": "Tab_labelStyle__2-gJ6"
 };
 
 
@@ -103,8 +105,9 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_Dev
 
 
 function Tab({ tabsData , selectTab , selectedTab , studentDashboard , sendDataCallback  }) {
-    var ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8;
+    var ref12, ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, ref10;
     const { 0: visible , 1: setVisible  } = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(false);
+    const { 0: open , 1: setOpen  } = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(false);
     const { 0: startSearch , 1: setStartSearch  } = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(false);
     const { 0: inputVal , 1: setInputValue  } = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)("");
     const { 0: selectedBatch1 , 1: setSelectedBatches  } = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)("");
@@ -130,8 +133,12 @@ function Tab({ tabsData , selectTab , selectedTab , studentDashboard , sendDataC
     }, []);
     (0,react__WEBPACK_IMPORTED_MODULE_10__.useEffect)(()=>{
         if (studentDashboard) {
+            var ref;
             (0,_Context_Actions_Language_LanguageAction__WEBPACK_IMPORTED_MODULE_13__/* .setStudentSelectedLanguage */ .yt)(authState.profileData.current_language)(langDispatch);
+            (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getStudentNotificationList */ .SC)((ref = authState.profileData.current_language) === null || ref === void 0 ? void 0 : ref.batch_id)(dispatch);
         } else {
+            var ref11;
+            (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorNotificationList */ .kB)((ref11 = authState.profileData.current_language) === null || ref11 === void 0 ? void 0 : ref11.batch_id)(dispatch);
             (0,_Context_Actions_Language_LanguageAction__WEBPACK_IMPORTED_MODULE_13__/* .storeMentorBatch */ .lA)(authState.profileData.current_language)(langDispatch);
         }
     }, [
@@ -159,13 +166,16 @@ function Tab({ tabsData , selectTab , selectedTab , studentDashboard , sendDataC
         (0,_Context_Actions_Language_LanguageAction__WEBPACK_IMPORTED_MODULE_13__/* .storeMentorBatch */ .lA)(selectedBatch)(langDispatch);
         await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorStudentList */ .FK)(id)(dispatch);
         (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorDashboardData */ .Rj)(id, firstday, lastday)(dispatch);
+        await (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .mentorUpcomingTasks */ .BR)(id)(dispatch);
+        (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getMentorNotificationList */ .kB)(id)(dispatch);
     };
     const onChangeStudentBatch = (value)=>{
         const selectedBatch = authState.profileData.all_languages.find((i)=>i.batch_id == value
         );
         (0,_Context_Actions_Language_LanguageAction__WEBPACK_IMPORTED_MODULE_13__/* .setStudentSelectedLanguage */ .yt)(selectedBatch)(langDispatch);
+        (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_12__/* .getStudentNotificationList */ .SC)(selectedBatch.batch_id)(dispatch);
     };
-    const countryOptions = (ref = authState.profileData) === null || ref === void 0 ? void 0 : (ref1 = ref.all_languages) === null || ref1 === void 0 ? void 0 : ref1.map((i)=>{
+    const countryOptions = (ref12 = authState.profileData) === null || ref12 === void 0 ? void 0 : (ref1 = ref12.all_languages) === null || ref1 === void 0 ? void 0 : ref1.map((i)=>{
         return {
             key: i.code,
             value: i.batch_id,
@@ -326,15 +336,40 @@ function Tab({ tabsData , selectTab , selectedTab , studentDashboard , sendDataC
                                             })
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().notification),
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_assets_Icon_Icon__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
-                                                name: "notification",
-                                                color: "#ff9000"
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.Popup, {
+                                                open: open,
+                                                position: "bottom right",
+                                                trigger: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                    className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().notification),
+                                                    onClick: ()=>setOpen(!open)
+                                                    ,
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_assets_Icon_Icon__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
+                                                        name: "notification",
+                                                        color: "#ff9000"
+                                                    })
+                                                }),
+                                                children: studentDashboard ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.List, {
+                                                    bulleted: true,
+                                                    children: studentDashboardState.studentNotificationList && studentDashboardState.studentNotificationList.length > 0 ? (ref4 = studentDashboardState.studentNotificationList) === null || ref4 === void 0 ? void 0 : ref4.map((notification, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.List.Item, {
+                                                            children: `${notification.title} (assignment) is ${notification.status}`
+                                                        }, index)
+                                                    ) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.List.Item, {
+                                                        children: "No New Notification"
+                                                    })
+                                                }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.List, {
+                                                    bulleted: true,
+                                                    children: studentDashboardState.mentorNotificationList && studentDashboardState.mentorNotificationList.length > 0 ? (ref5 = studentDashboardState.mentorNotificationList) === null || ref5 === void 0 ? void 0 : ref5.map((notification, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.List.Item, {
+                                                            children: `${notification.title} ${notification.notification_type} is ${notification.status} by ${notification.user_name}`
+                                                        }, index)
+                                                    ) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.List.Item, {
+                                                        children: "No New Notification"
+                                                    })
+                                                })
                                             })
                                         })
                                     ]
                                 }),
-                                studentDashboard ? ((ref4 = studentDashboardState.studentUpcomingTasks) === null || ref4 === void 0 ? void 0 : ref4.length) > 0 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                studentDashboard ? ((ref6 = studentDashboardState.studentUpcomingTasks) === null || ref6 === void 0 ? void 0 : ref6.length) > 0 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().upcomingTaskSection),
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
@@ -343,31 +378,25 @@ function Tab({ tabsData , selectTab , selectedTab , studentDashboard , sendDataC
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().upcomingTaskBox),
-                                            children: (ref5 = studentDashboardState.studentUpcomingTasks) === null || ref5 === void 0 ? void 0 : ref5.map((i, index)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            children: (ref7 = studentDashboardState.studentUpcomingTasks) === null || ref7 === void 0 ? void 0 : ref7.map((i, index)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                                     className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskWrapper),
                                                     children: [
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                             className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskImage)
                                                         }),
-                                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                             className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskDetail),
-                                                            children: [
-                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                                                    className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskName),
-                                                                    children: i.title
-                                                                }),
-                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                                                    className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskTime),
-                                                                    children: moment__WEBPACK_IMPORTED_MODULE_2___default()(i.start_date).format("LL")
-                                                                })
-                                                            ]
+                                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                                className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskName),
+                                                                children: `Next class on ${i.next_class_date}`
+                                                            })
                                                         })
                                                     ]
                                                 }, index)
                                             )
                                         })
                                     ]
-                                }) : ((ref6 = studentDashboardState.mentorUpcomingTask) === null || ref6 === void 0 ? void 0 : ref6.length) > 0 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                }) : ((ref8 = studentDashboardState.mentorUpcomingTask) === null || ref8 === void 0 ? void 0 : ref8.length) > 0 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().upcomingTaskSection),
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
@@ -376,24 +405,18 @@ function Tab({ tabsData , selectTab , selectedTab , studentDashboard , sendDataC
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().upcomingTaskBox),
-                                            children: (ref7 = studentDashboardState.mentorUpcomingTask) === null || ref7 === void 0 ? void 0 : ref7.map((i, index)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            children: (ref9 = studentDashboardState.mentorUpcomingTask) === null || ref9 === void 0 ? void 0 : ref9.map((i, index)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                                     className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskWrapper),
                                                     children: [
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                             className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskImage)
                                                         }),
-                                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                             className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskDetail),
-                                                            children: [
-                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                                                    className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskName),
-                                                                    children: i.title
-                                                                }),
-                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                                                    className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskTime),
-                                                                    children: moment__WEBPACK_IMPORTED_MODULE_2___default()(i.start_date).format("LL")
-                                                                })
-                                                            ]
+                                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                                className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().taskName),
+                                                                children: `Next class on ${i.next_class_date}`
+                                                            })
                                                         })
                                                     ]
                                                 }, index)
@@ -431,13 +454,33 @@ function Tab({ tabsData , selectTab , selectedTab , studentDashboard , sendDataC
                                             style: {
                                                 marginTop: "10px"
                                             },
-                                            children: studentDashboard ? (ref8 = studentDashboardState.studentBatchMates) === null || ref8 === void 0 ? void 0 : ref8.map((i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.Label, {
+                                            children: studentDashboard ? (ref10 = studentDashboardState.studentBatchMates) === null || ref10 === void 0 ? void 0 : ref10.map((i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.Label, {
                                                     as: "a",
-                                                    children: i.name
-                                                }, i.name)
-                                            ) : studentDashboardState.mentorStudentList.map((i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.Label, {
+                                                    image: true,
+                                                    className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().labelStyle),
+                                                    children: [
+                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.Image, {
+                                                            src: i.avatar ? i.avatar : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41",
+                                                            avatar: true,
+                                                            circular: true,
+                                                            alt: i.user_name
+                                                        }),
+                                                        i.user_name.split(" ")[0]
+                                                    ]
+                                                }, i.user_id)
+                                            ) : studentDashboardState.mentorStudentList.map((i)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.Label, {
                                                     as: "a",
-                                                    children: i.user_name
+                                                    image: true,
+                                                    className: (_Tab_module_css__WEBPACK_IMPORTED_MODULE_14___default().labelStyle),
+                                                    children: [
+                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_9__.Image, {
+                                                            src: i.avatar ? i.avatar : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41",
+                                                            avatar: true,
+                                                            circular: true,
+                                                            alt: i.user_name
+                                                        }),
+                                                        i.user_name.split(" ")[0]
+                                                    ]
                                                 }, i.student_batch_id)
                                             )
                                         })

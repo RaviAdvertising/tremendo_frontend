@@ -233,7 +233,7 @@ function Signup(props) {
             router.replace(_utils_routes__WEBPACK_IMPORTED_MODULE_18__/* .FAQS_PATH */ .lC);
             localStorage.removeItem(_utils_constants__WEBPACK_IMPORTED_MODULE_9__/* .ASK_A_QUESTION */ ._S);
         } else {
-            router.push(_utils_routes__WEBPACK_IMPORTED_MODULE_18__/* .STUDENT_DASHBOARD_PATH */ .M4);
+            router.push(_utils_routes__WEBPACK_IMPORTED_MODULE_18__/* .HOME_PAGE */ .s6);
         }
     };
     const DateInput = ({ value , onClick  })=>{

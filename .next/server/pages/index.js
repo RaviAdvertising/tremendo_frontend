@@ -977,7 +977,7 @@ function Home({}) {
                     })
                 ]
             }),
-            authState.logoutLoading && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader_PageLoader__WEBPACK_IMPORTED_MODULE_20__/* ["default"] */ .Z, {
+            (authState.logoutLoading || authState.profileDataLoading) && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Loader_PageLoader__WEBPACK_IMPORTED_MODULE_20__/* ["default"] */ .Z, {
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: (_styles_Home_module_css__WEBPACK_IMPORTED_MODULE_23___default().bannerWaveWrapper),

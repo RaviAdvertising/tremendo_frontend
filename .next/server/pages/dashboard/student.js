@@ -271,7 +271,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_Con
 
 
 function CourseDetailTab() {
-    var ref5, ref1, ref2, ref3, ref4;
+    var ref3, ref1, ref2;
     const { isMobileView  } = (0,react__WEBPACK_IMPORTED_MODULE_4__.useContext)(_pages_app__WEBPACK_IMPORTED_MODULE_5__.DeviceContext);
     const { studentDashboardState , languageState , studentDashboardDispatch: dispatch  } = (0,react__WEBPACK_IMPORTED_MODULE_4__.useContext)(_Context_Provider__WEBPACK_IMPORTED_MODULE_6__/* .GlobalContext */ .k);
     const totalDatesInCurrentMonth = Array.from(Array(moment__WEBPACK_IMPORTED_MODULE_1___default()().daysInMonth()).keys());
@@ -297,7 +297,9 @@ function CourseDetailTab() {
         if ((ref = languageState.setStudentSelectedLanguage) === null || ref === void 0 ? void 0 : ref.batch_id) {
             (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_7__/* .getStudentCourseDetails */ .R1)(languageState.setStudentSelectedLanguage.batch_id)(dispatch);
         }
-    }, []);
+    }, [
+        languageState.setStudentSelectedLanguage
+    ]);
     const goToLink = (link)=>{
         const url = link.includes("https") ? link : `https://${link}`;
         window.open(url, "_blank");
@@ -306,25 +308,30 @@ function CourseDetailTab() {
         return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Dashboard_StudentDashboardSkelton__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
         }));
     }
-    const todays_class = (ref5 = studentDashboardState.getStudentCourseDetails) === null || ref5 === void 0 ? void 0 : (ref1 = ref5.class_details) === null || ref1 === void 0 ? void 0 : ref1.find((i)=>moment__WEBPACK_IMPORTED_MODULE_1___default()(i.class_date).format("DD/MM/YYYY") === moment__WEBPACK_IMPORTED_MODULE_1___default()().format("DD/MM/YYYY")
+    const todays_class = (ref3 = studentDashboardState.getStudentCourseDetails) === null || ref3 === void 0 ? void 0 : (ref1 = ref3.class_details) === null || ref1 === void 0 ? void 0 : ref1.find((i)=>moment__WEBPACK_IMPORTED_MODULE_1___default()(i.class_date).format("DD/MM/YYYY") === moment__WEBPACK_IMPORTED_MODULE_1___default()().format("DD/MM/YYYY")
     );
-    if (((ref2 = studentDashboardState.getStudentCourseDetails) === null || ref2 === void 0 ? void 0 : (ref3 = ref2.class_details) === null || ref3 === void 0 ? void 0 : ref3.length) == 0) {
-        return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-            style: {
-                height: isMobileView ? "300px" : "700px",
-                width: isMobileView ? "300px" : "700px",
-                margin: "auto"
-            },
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__.Image, {
-                src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194",
-                alt: "tremendo dashboard banner",
-                height: isMobileView ? "300px" : "800px",
-                width: isMobileView ? "300px" : "700px",
-                className: (_CourseDetailTab_module_css__WEBPACK_IMPORTED_MODULE_8___default().banner)
-            })
-        }));
-    }
-    const batch_data = (ref4 = studentDashboardState.getStudentCourseDetails) === null || ref4 === void 0 ? void 0 : ref4.batch_data;
+    // if (
+    //   studentDashboardState.getStudentCourseDetails?.class_details?.length == 0
+    // ) {
+    //   return (
+    //     <div
+    //       style={{
+    //         height: isMobileView ? "300px" : "700px",
+    //         width: isMobileView ? "300px" : "700px",
+    //         margin: "auto"
+    //       }}
+    //     >
+    //       <Image
+    //         src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
+    //         alt="tremendo dashboard banner"
+    //         height={isMobileView ? "300px" : "800px"}
+    //         width={isMobileView ? "300px" : "700px"}
+    //         className={styles.banner}
+    //       />
+    //     </div>
+    //   );
+    // }
+    const batch_data = (ref2 = studentDashboardState.getStudentCourseDetails) === null || ref2 === void 0 ? void 0 : ref2.batch_data;
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_CourseDetailTab_module_css__WEBPACK_IMPORTED_MODULE_8___default().base),
         children: [
@@ -456,7 +463,7 @@ function CourseDetailTab() {
                                         alt: "user-image"
                                     })
                                 }),
-                                (currentDay !== index + 1 || todays_class && ((ref = Object.keys(todays_class)) === null || ref === void 0 ? void 0 : ref.length) == 0) && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                (currentDay !== index + 1 || !todays_class || todays_class && ((ref = Object.keys(todays_class)) === null || ref === void 0 ? void 0 : ref.length) == 0) && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                     className: (_CourseDetailTab_module_css__WEBPACK_IMPORTED_MODULE_8___default().overlay)
                                 })
                             ]
@@ -517,13 +524,15 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_Con
 
 
 function Dashboard() {
-    var ref4, ref1, ref2, ref3;
+    var ref2, ref1;
     const { studentDashboardState , languageState , studentDashboardDispatch: dispatch  } = (0,react__WEBPACK_IMPORTED_MODULE_7__.useContext)(_Context_Provider__WEBPACK_IMPORTED_MODULE_8__/* .GlobalContext */ .k);
     const { isMobileView  } = (0,react__WEBPACK_IMPORTED_MODULE_7__.useContext)(_pages_app__WEBPACK_IMPORTED_MODULE_10__.DeviceContext);
     (0,react__WEBPACK_IMPORTED_MODULE_7__.useEffect)(()=>{
         var ref;
         if ((ref = languageState.setStudentSelectedLanguage) === null || ref === void 0 ? void 0 : ref.batch_id) (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_9__/* .getStudentDashboardData */ .Zs)(languageState.setStudentSelectedLanguage.batch_id)(dispatch);
-    }, []);
+    }, [
+        languageState.setStudentSelectedLanguage
+    ]);
     const options = {
         maintainAspectRatio: false,
         scales: {
@@ -577,27 +586,30 @@ function Dashboard() {
         return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_StudentDashboardSkelton__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z, {
         }));
     }
-    if (((ref4 = studentDashboardState.getStudentDashboardData) === null || ref4 === void 0 ? void 0 : (ref1 = ref4.classes) === null || ref1 === void 0 ? void 0 : ref1.length) == 0) {
-        return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-            style: {
-                height: isMobileView ? "300px" : "700px",
-                width: isMobileView ? "300px" : "700px",
-                margin: "auto"
-            },
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__.Image, {
-                src: "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194",
-                alt: "tremendo dashboard banner",
-                height: isMobileView ? "300px" : "800px",
-                width: isMobileView ? "300px" : "700px",
-                className: (_Dashboard_module_css__WEBPACK_IMPORTED_MODULE_12___default().banner)
-            })
-        }));
-    }
+    // if (studentDashboardState.getStudentDashboardData?.classes?.length == 0) {
+    //   return (
+    //     <div
+    //       style={{
+    //         height: isMobileView ? "300px" : "700px",
+    //         width: isMobileView ? "300px" : "700px",
+    //         margin: "auto"
+    //       }}
+    //     >
+    //       <Image
+    //         src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
+    //         alt="tremendo dashboard banner"
+    //         height={isMobileView ? "300px" : "800px"}
+    //         width={isMobileView ? "300px" : "700px"}
+    //         className={styles.banner}
+    //       />
+    //     </div>
+    //   );
+    // }
     const studentClasses = studentDashboardState.getStudentDashboardData.classes;
     const studentProgress = studentDashboardState.getStudentDashboardData.progress;
     const studentAttendence = studentDashboardState.getStudentDashboardData.attandance;
     const presentPercentage = (ref2 = (studentAttendence === null || studentAttendence === void 0 ? void 0 : studentAttendence.present) / (studentAttendence === null || studentAttendence === void 0 ? void 0 : studentAttendence.total_days) * 100) === null || ref2 === void 0 ? void 0 : ref2.toFixed(2);
-    const absentPercentage = (ref3 = (studentAttendence === null || studentAttendence === void 0 ? void 0 : studentAttendence.absent) / (studentAttendence === null || studentAttendence === void 0 ? void 0 : studentAttendence.total_days) * 100) === null || ref3 === void 0 ? void 0 : ref3.toFixed(2);
+    const absentPercentage = (ref1 = (studentAttendence === null || studentAttendence === void 0 ? void 0 : studentAttendence.absent) / (studentAttendence === null || studentAttendence === void 0 ? void 0 : studentAttendence.total_days) * 100) === null || ref1 === void 0 ? void 0 : ref1.toFixed(2);
     console.log(moment__WEBPACK_IMPORTED_MODULE_11___default()(1650944308023).format("LL"));
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_Dashboard_module_css__WEBPACK_IMPORTED_MODULE_12___default().dashboardBase),
@@ -1181,6 +1193,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_Con
 
 
 
+const IDLE = "idle";
 function MyResourceTab({}) {
     var ref3, ref1, ref2;
     const inputFile = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
@@ -1192,17 +1205,21 @@ function MyResourceTab({}) {
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         var ref;
         if ((ref = languageState.setStudentSelectedLanguage) === null || ref === void 0 ? void 0 : ref.batch_id) (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_6__/* .getStudentAssignmentList */ .ZN)(languageState.setStudentSelectedLanguage.batch_id)(dispatch);
-    }, []);
+    }, [
+        languageState.setStudentSelectedLanguage
+    ]);
     const onClick = (e)=>{
         inputFile.current.click();
     };
     const uploadFiles = (image, id)=>{
+        setLoading(true);
         //setUploadLoading(type);
         const uploadTask = _utils_firebase_config__WEBPACK_IMPORTED_MODULE_13__/* .storage.ref */ .t.ref(`docs/${image.name}`).put(image);
         uploadTask.on("state_changed", (snapshot)=>{
             const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100);
             console.log("here");
         }, (error)=>{
+            setLoading(false);
             //setUploadLoading("");
             console.log(error, "error");
         }, ()=>{
@@ -1211,6 +1228,7 @@ function MyResourceTab({}) {
                     ...assignmentUrls,
                     [id]: url
                 });
+                setLoading(false);
             // setUploadLoading("");
             });
         });
@@ -1378,7 +1396,7 @@ function MyResourceTab({}) {
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                         className: (_MyResourceTab_module_css__WEBPACK_IMPORTED_MODULE_15___default().checkboxesWrapper),
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Button_Button__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
-                                            label: "Submit",
+                                            label: i.status == IDLE ? "Submit" : "Submitted",
                                             height: 30,
                                             borderRadius: 8,
                                             backgroundColor: "#f98e46",
@@ -1389,6 +1407,7 @@ function MyResourceTab({}) {
                                                 fontSize: "12px"
                                             },
                                             border: "none",
+                                            disabled: i.status == IDLE ? false : true,
                                             onClick: ()=>submitAssigmentResult(i)
                                         })
                                     })
@@ -2292,7 +2311,9 @@ function ProgressTab({}) {
     (0,react__WEBPACK_IMPORTED_MODULE_6__.useEffect)(()=>{
         var ref;
         if ((ref = languageState.setStudentSelectedLanguage) === null || ref === void 0 ? void 0 : ref.batch_id) (0,_Context_Actions_Dashboard_DashboardAction__WEBPACK_IMPORTED_MODULE_10__/* .getStudentProgress */ .VQ)(languageState.setStudentSelectedLanguage.batch_id)(dispatch);
-    }, []);
+    }, [
+        languageState.setStudentSelectedLanguage
+    ]);
     const options = {
         maintainAspectRatio: false,
         scales: {
@@ -2443,12 +2464,12 @@ function ProgressTab({}) {
         {
             name: "Average",
             color: "#3bbafb",
-            height: "220px"
+            height: "150px"
         },
         {
             name: "High",
             color: "#00a651",
-            height: "180px"
+            height: "220px"
         }
     ];
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
