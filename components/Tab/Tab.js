@@ -14,13 +14,19 @@ import {
   Segment,
   Sidebar,
   Dropdown,
-  Label
+  Label,
+  Popup,
+  Button,
+  List
 } from "semantic-ui-react";
 import { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../../Context/Provider";
 import {
   getMentorDashboardData,
-  getMentorStudentList
+  getMentorNotificationList,
+  getMentorStudentList,
+  getStudentNotificationList,
+  mentorUpcomingTasks
 } from "../../Context/Actions/Dashboard/DashboardAction";
 import {
   setStudentSelectedLanguage,
@@ -35,6 +41,7 @@ export default function Tab({
   sendDataCallback
 }) {
   const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
   const [startSearch, setStartSearch] = useState(false);
   const [inputVal, setInputValue] = useState("");
   const [selectedBatch, setSelectedBatches] = useState("");
@@ -76,7 +83,13 @@ export default function Tab({
       setStudentSelectedLanguage(authState.profileData.current_language)(
         langDispatch
       );
+      getStudentNotificationList(
+        authState.profileData.current_language?.batch_id
+      )(dispatch);
     } else {
+      getMentorNotificationList(
+        authState.profileData.current_language?.batch_id
+      )(dispatch);
       storeMentorBatch(authState.profileData.current_language)(langDispatch);
     }
   }, [authState.profileData]);
@@ -106,12 +119,15 @@ export default function Tab({
     storeMentorBatch(selectedBatch)(langDispatch);
     await getMentorStudentList(id)(dispatch);
     getMentorDashboardData(id, firstday, lastday)(dispatch);
+    await mentorUpcomingTasks(id)(dispatch);
+    getMentorNotificationList(id)(dispatch);
   };
   const onChangeStudentBatch = value => {
     const selectedBatch = authState.profileData.all_languages.find(
       i => i.batch_id == value
     );
     setStudentSelectedLanguage(selectedBatch)(langDispatch);
+    getStudentNotificationList(selectedBatch.batch_id)(dispatch);
   };
 
   const countryOptions = authState.profileData?.all_languages?.map(i => {
@@ -257,8 +273,53 @@ export default function Tab({
                   name.split(" ")[0]
                 }`}</div>
               </div>
-              <div className={styles.notification}>
-                <IconComponent name="notification" color="#ff9000" />
+              <div>
+                <Popup
+                  open={open}
+                  position="bottom right"
+                  trigger={
+                    <div
+                      className={styles.notification}
+                      onClick={() => setOpen(!open)}
+                    >
+                      <IconComponent name="notification" color="#ff9000" />
+                    </div>
+                  }
+                >
+                  {studentDashboard ? (
+                    <List bulleted>
+                      {studentDashboardState.studentNotificationList &&
+                      studentDashboardState.studentNotificationList.length >
+                        0 ? (
+                        studentDashboardState.studentNotificationList?.map(
+                          (notification, index) => (
+                            <List.Item key={index}>
+                              {`${notification.title} (assignment) is ${notification.status}`}
+                            </List.Item>
+                          )
+                        )
+                      ) : (
+                        <List.Item>No New Notification</List.Item>
+                      )}
+                    </List>
+                  ) : (
+                    <List bulleted>
+                      {studentDashboardState.mentorNotificationList &&
+                      studentDashboardState.mentorNotificationList.length >
+                        0 ? (
+                        studentDashboardState.mentorNotificationList?.map(
+                          (notification, index) => (
+                            <List.Item key={index}>
+                              {`${notification.title} ${notification.notification_type} is ${notification.status} by ${notification.user_name}`}
+                            </List.Item>
+                          )
+                        )
+                      ) : (
+                        <List.Item>No New Notification</List.Item>
+                      )}
+                    </List>
+                  )}
+                </Popup>
               </div>
             </div>
             {studentDashboard
@@ -273,10 +334,12 @@ export default function Tab({
                           <div className={styles.taskWrapper} key={index}>
                             <div className={styles.taskImage}></div>
                             <div className={styles.taskDetail}>
-                              <div className={styles.taskName}>{i.title}</div>
-                              <div className={styles.taskTime}>
+                              <div
+                                className={styles.taskName}
+                              >{`Next class on ${i.next_class_date}`}</div>
+                              {/* <div className={styles.taskTime}>
                                 {moment(i.start_date).format("LL")}
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         )
@@ -295,10 +358,12 @@ export default function Tab({
                           <div className={styles.taskWrapper} key={index}>
                             <div className={styles.taskImage}></div>
                             <div className={styles.taskDetail}>
-                              <div className={styles.taskName}>{i.title}</div>
-                              <div className={styles.taskTime}>
+                              <div
+                                className={styles.taskName}
+                              >{`Next class on ${i.next_class_date}`}</div>
+                              {/* <div className={styles.taskTime}>
                                 {moment(i.start_date).format("LL")}
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         )
@@ -405,13 +470,43 @@ export default function Tab({
               <div style={{ marginTop: "10px" }}>
                 {studentDashboard
                   ? studentDashboardState.studentBatchMates?.map(i => (
-                      <Label key={i.name} as="a">
-                        {i.name}
+                      <Label
+                        key={i.user_id}
+                        as="a"
+                        image
+                        className={styles.labelStyle}
+                      >
+                        <Image
+                          src={
+                            i.avatar
+                              ? i.avatar
+                              : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                          }
+                          avatar
+                          circular
+                          alt={i.user_name}
+                        />
+                        {i.user_name.split(" ")[0]}
                       </Label>
                     ))
                   : studentDashboardState.mentorStudentList.map(i => (
-                      <Label key={i.student_batch_id} as="a">
-                        {i.user_name}
+                      <Label
+                        key={i.student_batch_id}
+                        as="a"
+                        image
+                        className={styles.labelStyle}
+                      >
+                        <Image
+                          src={
+                            i.avatar
+                              ? i.avatar
+                              : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                          }
+                          avatar
+                          circular
+                          alt={i.user_name}
+                        />
+                        {i.user_name.split(" ")[0]}
                       </Label>
                     ))}
               </div>

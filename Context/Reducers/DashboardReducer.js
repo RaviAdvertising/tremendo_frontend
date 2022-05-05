@@ -195,6 +195,33 @@ const dashboardReducer = (state, action) => {
         updateScoreLoading: false
       });
 
+    case dashboardAction.GET_STUDENT_NOTIFICATION_REQUEST:
+      return Object.assign({}, state, {
+        studentNotificationLoading: true
+      });
+    case dashboardAction.GET_STUDENT_NOTIFICATION_SUCCESS:
+      return Object.assign({}, state, {
+        studentNotificationLoading: false,
+        studentNotificationList: action.data
+      });
+    case dashboardAction.GET_STUDENT_NOTIFICATION_ERROR:
+      return Object.assign({}, state, {
+        studentNotificationLoading: false
+      });
+
+    case dashboardAction.GET_MENTOR_NOTIFICATION_REQUEST:
+      return Object.assign({}, state, {
+        mentorNotificaiotnLoading: true
+      });
+    case dashboardAction.GET_MENTOR_NOTIFICATION_SUCCESS:
+      return Object.assign({}, state, {
+        mentorNotificaiotnLoading: false,
+        mentorNotificationList: action.data
+      });
+    case dashboardAction.GET_MENTOR_NOTIFICATION_ERROR:
+      return Object.assign({}, state, {
+        mentorNotificaiotnLoading: false
+      });
     default:
       return state;
   }

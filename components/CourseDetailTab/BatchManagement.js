@@ -10,6 +10,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import jsCookie from "js-cookie";
 import { COOKIE_TOKEN } from "../../utils/constants";
 import { toast } from "react-toastify";
+import StudentDashboardSkelton from "../Dashboard/StudentDashboardSkelton";
 
 export default function BatchManagement() {
   const { isMobileView } = useContext(DeviceContext);
@@ -80,7 +81,8 @@ export default function BatchManagement() {
     if (studentDashboardState.mentorBatches.length > 0) {
       getStudentsAccordingToBatch(languageState.storedMentorBatch.batch_id);
     }
-  }, []);
+  }, [languageState.storedMentorBatch]);
+
   // if (true) {
   //   return (
   //     <div
@@ -100,6 +102,9 @@ export default function BatchManagement() {
   //     </div>
   //   );
   // }
+  if (loading) {
+    return <StudentDashboardSkelton />;
+  }
 
   const noDataSection = () => {
     return (

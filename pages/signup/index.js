@@ -169,7 +169,7 @@ export default function Signup(props) {
       router.replace(FAQS_PATH);
       localStorage.removeItem(ASK_A_QUESTION);
     } else {
-      router.push(STUDENT_DASHBOARD_PATH);
+      router.push(HOME_PAGE);
     }
   };
 

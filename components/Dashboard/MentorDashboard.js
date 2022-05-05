@@ -163,13 +163,16 @@ export default function MentorDashboard({}) {
     const mentorName = mentorList.find(
       i => i.user_code == feilds?.batch_mentor_id
     );
+    const defaultMentorName =
+      studentDashboardState.mentorDashboardData.batch_data.batch_mentor;
+
     try {
       const response = await axiosInstance.post(`/createNewBatchClass`, {
         access_token: jsCookie.get(COOKIE_TOKEN),
         batch_id: openModal.batch_id,
         class_start_time: feilds?.batch_start_time,
         class_end_time: feilds?.batch_end_time,
-        batch_mentor: mentorName.name,
+        batch_mentor: mentorName ? mentorName.name : defaultMentorName,
         batch_mentor_id: feilds?.batch_mentor_id,
         class_link: feilds?.class_link
       });
@@ -177,6 +180,7 @@ export default function MentorDashboard({}) {
       setLoading(false);
       onCloseModal();
     } catch (err) {
+      console.log(err);
       setLoading(false);
       onCloseModal();
     }

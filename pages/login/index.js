@@ -30,6 +30,7 @@ import { facebookProvider, googleProvider } from "../../utils/firebaseMethods";
 import DesktopOnly from "../../components/DeviceCheck/DesktopOnly";
 import { toast } from "react-toastify";
 import socialMediaAuth, {
+  getUserProfile,
   loginAuth,
   LOGIN_ERROR
 } from "../../Context/Actions/Auth/AuthAction";
@@ -150,7 +151,11 @@ export default function Login(props) {
     }
   };
 
-  const actionAfterLogin = response => {
+  const actionAfterLogin = async response => {
+    const user_profile = await getUserProfile(response.data.access_type)(
+      dispatch
+    );
+    const purchaseLang = user_profile.data.all_languages;
     const order_id = localStorage.getItem(ORDER_DETAIL);
     const askAQuestion = localStorage.getItem(ASK_A_QUESTION);
     if (order_id) {
@@ -159,6 +164,11 @@ export default function Login(props) {
     } else if (askAQuestion) {
       router.replace(FAQS_PATH);
       localStorage.removeItem(ASK_A_QUESTION);
+    } else if (
+      response.data.access_type == LOGIN_STUDENT_TAB &&
+      purchaseLang.length == 0
+    ) {
+      router.push(HOME_PAGE);
     } else {
       if (response.data.access_type == LOGIN_MENTOR_TAB) {
         router.push(MENTOR_DASHBOARD_PATH);

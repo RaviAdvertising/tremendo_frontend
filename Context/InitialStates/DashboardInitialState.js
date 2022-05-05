@@ -25,6 +25,10 @@ const dashboardIntialState = {
   getStudentCourseDetailsLoading: false,
   mentorUpcomingTask: [],
   mentorUpcomingTasksLoading: false,
-  updateScoreLoading: false
+  updateScoreLoading: false,
+  studentNotificationList: [],
+  studentNotificationLoading: false,
+  mentorNotificationList: [],
+  mentorNotificaiotnLoading: false
 };
 export default dashboardIntialState;

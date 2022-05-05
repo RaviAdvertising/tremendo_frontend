@@ -81,10 +81,70 @@ export const MENTOR_UPCOMING_TASKS_REQUEST = "MENTOR_UPCOMING_TASKS_request";
 export const MENTOR_UPCOMING_TASKS_SUCCESS = "MENTOR_UPCOMING_TASKS_success";
 export const MENTOR_UPCOMING_TASKS_ERROR = "MENTOR_UPCOMING_TASKS_error";
 
-export const mentorUpcomingTasks = () => dispatch => {
+export const GET_STUDENT_NOTIFICATION_REQUEST =
+  "GET_STUDENT_NOTIFICATION_request";
+export const GET_STUDENT_NOTIFICATION_SUCCESS =
+  "GET_STUDENT_NOTIFICATION_success";
+export const GET_STUDENT_NOTIFICATION_ERROR = "GET_STUDENT_NOTIFICATION_error";
+
+export const GET_MENTOR_NOTIFICATION_REQUEST =
+  "GET_MENTOR_NOTIFICATION_request";
+export const GET_MENTOR_NOTIFICATION_SUCCESS =
+  "GET_MENTOR_NOTIFICATION_success";
+export const GET_MENTOR_NOTIFICATION_ERROR = "GET_MENTOR_NOTIFICATION_error";
+
+export const getMentorNotificationList = id => dispatch => {
+  dispatch({ type: GET_MENTOR_NOTIFICATION_REQUEST });
+  return axiosInstance
+    .get(
+      `/getMentorNotification?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}&batch_id=${id}`
+    )
+    .then(res => {
+      dispatch({
+        type: GET_MENTOR_NOTIFICATION_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_MENTOR_NOTIFICATION_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const getStudentNotificationList = id => dispatch => {
+  dispatch({ type: GET_STUDENT_NOTIFICATION_REQUEST });
+  return axiosInstance
+    .get(
+      `/getStudentNotificationList?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}&batch_id=${id}`
+    )
+    .then(res => {
+      dispatch({
+        type: GET_STUDENT_NOTIFICATION_SUCCESS,
+        data: res.data.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_STUDENT_NOTIFICATION_ERROR,
+        error: err.response.data
+      });
+    });
+};
+
+export const mentorUpcomingTasks = id => dispatch => {
   dispatch({ type: MENTOR_UPCOMING_TASKS_REQUEST });
   return axiosInstance
-    .get(`/getMentorUpcomingTask?access_token=${Cookies.get(COOKIE_TOKEN)}`)
+    .get(
+      `/getMentorUpcomingTask?access_token=${Cookies.get(
+        COOKIE_TOKEN
+      )}&batch_id=${id}`
+    )
     .then(res => {
       dispatch({
         type: MENTOR_UPCOMING_TASKS_SUCCESS,

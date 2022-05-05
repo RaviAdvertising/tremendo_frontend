@@ -77,7 +77,7 @@ export default function MentorMyResource() {
     getMentorAssignmentList(languageState.storedMentorBatch?.batch_id)(
       dispatch
     );
-  }, []);
+  }, [languageState.storedMentorBatch]);
 
   const uploadFiles = (image, type) => {
     setUploadLoading(type);
@@ -129,9 +129,7 @@ export default function MentorMyResource() {
     const firstday = moment(new Date(curr.setDate(first))).format("x");
     const lastday = moment(new Date(curr.setDate(last))).format("x");
 
-    const id =
-      studentDashboardState.mentorBatches.length > 0 &&
-      studentDashboardState.mentorBatches[0].batch_id;
+    const id = languageState.storedMentorBatch?.batch_id;
     await getMentorDashboardData(id, firstday, lastday)(dispatch);
   };
   const onHandleChange = (data, type) => {
@@ -315,6 +313,7 @@ export default function MentorMyResource() {
             <div className={styles.inputCreateWrapper}>
               <div style={{ width: "30%" }}>
                 <Input
+                  type="number"
                   placeholder="Max Score "
                   onChange={(e, data) =>
                     onHandleChange(data.value, "max_score")
@@ -324,6 +323,7 @@ export default function MentorMyResource() {
               </div>
               <div style={{ width: "30%" }}>
                 <Input
+                  type="number"
                   placeholder="Pass Score "
                   onChange={(e, data) =>
                     onHandleChange(data.value, "pass_score")
@@ -333,6 +333,7 @@ export default function MentorMyResource() {
               </div>
               <div style={{ width: "30%" }}>
                 <Input
+                  type="number"
                   placeholder="Avg Score "
                   onChange={(e, data) =>
                     onHandleChange(data.value, "avg_score")
