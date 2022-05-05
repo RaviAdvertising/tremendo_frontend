@@ -27,6 +27,8 @@ const dashboardIntialState = {
   mentorUpcomingTasksLoading: false,
   updateScoreLoading: false,
   studentNotificationList: [],
-  studentNotificationLoading: false
+  studentNotificationLoading: false,
+  mentorNotificationList: [],
+  mentorNotificaiotnLoading: false
 };
 export default dashboardIntialState;

@@ -23,8 +23,10 @@ import { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../../Context/Provider";
 import {
   getMentorDashboardData,
+  getMentorNotificationList,
   getMentorStudentList,
-  getStudentNotificationList
+  getStudentNotificationList,
+  mentorUpcomingTasks
 } from "../../Context/Actions/Dashboard/DashboardAction";
 import {
   setStudentSelectedLanguage,
@@ -85,6 +87,9 @@ export default function Tab({
         authState.profileData.current_language?.batch_id
       )(dispatch);
     } else {
+      getMentorNotificationList(
+        authState.profileData.current_language?.batch_id
+      )(dispatch);
       storeMentorBatch(authState.profileData.current_language)(langDispatch);
     }
   }, [authState.profileData]);
@@ -113,8 +118,9 @@ export default function Tab({
     );
     storeMentorBatch(selectedBatch)(langDispatch);
     await getMentorStudentList(id)(dispatch);
-
     getMentorDashboardData(id, firstday, lastday)(dispatch);
+    await mentorUpcomingTasks(id)(dispatch);
+    getMentorNotificationList(id)(dispatch);
   };
   const onChangeStudentBatch = value => {
     const selectedBatch = authState.profileData.all_languages.find(
@@ -280,20 +286,39 @@ export default function Tab({
                     </div>
                   }
                 >
-                  <List bulleted>
-                    {studentDashboardState.studentNotificationList &&
-                    studentDashboardState.studentNotificationList.length > 0 ? (
-                      studentDashboardState.studentNotificationList?.map(
-                        (notification, index) => (
-                          <List.Item key={index}>
-                            {notification.title}
-                          </List.Item>
+                  {studentDashboard ? (
+                    <List bulleted>
+                      {studentDashboardState.studentNotificationList &&
+                      studentDashboardState.studentNotificationList.length >
+                        0 ? (
+                        studentDashboardState.studentNotificationList?.map(
+                          (notification, index) => (
+                            <List.Item key={index}>
+                              {`${notification.title} (assignment) is ${notification.status}`}
+                            </List.Item>
+                          )
                         )
-                      )
-                    ) : (
-                      <List.Item>No New Notification</List.Item>
-                    )}
-                  </List>
+                      ) : (
+                        <List.Item>No New Notification</List.Item>
+                      )}
+                    </List>
+                  ) : (
+                    <List bulleted>
+                      {studentDashboardState.mentorNotificationList &&
+                      studentDashboardState.mentorNotificationList.length >
+                        0 ? (
+                        studentDashboardState.mentorNotificationList?.map(
+                          (notification, index) => (
+                            <List.Item key={index}>
+                              {`${notification.title} ${notification.notification_type} is ${notification.status} by ${notification.user_name}`}
+                            </List.Item>
+                          )
+                        )
+                      ) : (
+                        <List.Item>No New Notification</List.Item>
+                      )}
+                    </List>
+                  )}
                 </Popup>
               </div>
             </div>
@@ -309,10 +334,12 @@ export default function Tab({
                           <div className={styles.taskWrapper} key={index}>
                             <div className={styles.taskImage}></div>
                             <div className={styles.taskDetail}>
-                              <div className={styles.taskName}>{i.title}</div>
-                              <div className={styles.taskTime}>
+                              <div
+                                className={styles.taskName}
+                              >{`Next class on ${i.next_class_date}`}</div>
+                              {/* <div className={styles.taskTime}>
                                 {moment(i.start_date).format("LL")}
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         )
@@ -331,10 +358,12 @@ export default function Tab({
                           <div className={styles.taskWrapper} key={index}>
                             <div className={styles.taskImage}></div>
                             <div className={styles.taskDetail}>
-                              <div className={styles.taskName}>{i.title}</div>
-                              <div className={styles.taskTime}>
+                              <div
+                                className={styles.taskName}
+                              >{`Next class on ${i.next_class_date}`}</div>
+                              {/* <div className={styles.taskTime}>
                                 {moment(i.start_date).format("LL")}
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         )
@@ -442,17 +471,22 @@ export default function Tab({
                 {studentDashboard
                   ? studentDashboardState.studentBatchMates?.map(i => (
                       <Label
-                        key={i.name}
+                        key={i.user_id}
                         as="a"
                         image
                         className={styles.labelStyle}
                       >
                         <Image
-                          src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                          src={
+                            i.avatar
+                              ? i.avatar
+                              : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                          }
                           avatar
-                          alt={i.name}
+                          circular
+                          alt={i.user_name}
                         />
-                        {i.name}
+                        {i.user_name.split(" ")[0]}
                       </Label>
                     ))
                   : studentDashboardState.mentorStudentList.map(i => (
@@ -463,11 +497,16 @@ export default function Tab({
                         className={styles.labelStyle}
                       >
                         <Image
-                          src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                          src={
+                            i.avatar
+                              ? i.avatar
+                              : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                          }
                           avatar
+                          circular
                           alt={i.user_name}
                         />
-                        {i.user_name}
+                        {i.user_name.split(" ")[0]}
                       </Label>
                     ))}
               </div>

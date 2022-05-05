@@ -74,7 +74,7 @@ function Mentor() {
     const batches = await getMentorBatches()(dispatch);
     const firstBatchId = batches.data.length > 0 && batches.data[0].batch_id;
     await getMentorStudentList(firstBatchId)(dispatch);
-    await mentorUpcomingTasks()(dispatch);
+    await mentorUpcomingTasks(firstBatchId)(dispatch);
   };
   const userDetails =
     typeof window !== "undefined" &&
