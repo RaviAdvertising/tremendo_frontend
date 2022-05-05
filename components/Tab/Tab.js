@@ -441,12 +441,32 @@ export default function Tab({
               <div style={{ marginTop: "10px" }}>
                 {studentDashboard
                   ? studentDashboardState.studentBatchMates?.map(i => (
-                      <Label key={i.name} as="a">
+                      <Label
+                        key={i.name}
+                        as="a"
+                        image
+                        className={styles.labelStyle}
+                      >
+                        <Image
+                          src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                          avatar
+                          alt={i.name}
+                        />
                         {i.name}
                       </Label>
                     ))
                   : studentDashboardState.mentorStudentList.map(i => (
-                      <Label key={i.student_batch_id} as="a">
+                      <Label
+                        key={i.student_batch_id}
+                        as="a"
+                        image
+                        className={styles.labelStyle}
+                      >
+                        <Image
+                          src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                          avatar
+                          alt={i.user_name}
+                        />
                         {i.user_name}
                       </Label>
                     ))}
