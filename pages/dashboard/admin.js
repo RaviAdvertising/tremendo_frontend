@@ -14,6 +14,7 @@ import AdminBatchManagment from "../../components/CourseDetailTab/AdminBatchMana
 import MentorBatchDetails from "../../components/CourseDetailTab/MentorBatchDetails";
 import { ADMIN_ACCESS_TYPE, USER_DETAILS } from "../../utils/constants";
 import LanguageEdit from "../../components/LanguageEdit/LanguageEdit";
+import ContactList from "../../components/ContactList";
 
 const INITIAL_TAB_INDEX = 1;
 
@@ -49,6 +50,12 @@ function Admin() {
       tab: "Calender",
       icon: "termAndCondition",
       component: <CalenderTab />
+    },
+    {
+      id: 7,
+      tab: "Contact List",
+      icon: "courseDetail",
+      component: <ContactList />
     }
   ];
   const [selectedTabIndex, setSelectedTabIndex] = useState(INITIAL_TAB_INDEX);
