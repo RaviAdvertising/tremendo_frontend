@@ -1,0 +1,19 @@
+{
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/about-us": "pages/about-us.js",
+  "/blogs": "pages/blogs.js",
+  "/contact-us": "pages/contact-us.js",
+  "/dashboard/admin": "pages/dashboard/admin.js",
+  "/dashboard/mentor": "pages/dashboard/mentor.js",
+  "/dashboard/student": "pages/dashboard/student.js",
+  "/faqs": "pages/faqs.js",
+  "/": "pages/index.js",
+  "/language/[languageId]": "pages/language/[languageId].js",
+  "/login/admin": "pages/login/admin.js",
+  "/login": "pages/login.js",
+  "/order": "pages/order.js",
+  "/reviews": "pages/reviews.js",
+  "/signup": "pages/signup.js",
+  "/_error": "pages/_error.js"
+}
