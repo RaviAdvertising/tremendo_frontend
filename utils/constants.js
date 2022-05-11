@@ -80,6 +80,7 @@ export const DASHBOARD_PAGE_TYPE = "dashboard";
 export const LOGIN_STUDENT_TAB = "std";
 export const LOGIN_MENTOR_TAB = "mnt";
 export const ADMIN_ACCESS_TYPE = "adm";
+export const SUPER_ADMIN_ACCESS_TYPE = "s_adm";
 export const EMAIL_REGULAR_EXPRESSION = /[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,64}/;
 export const COOKIE_TOKEN = "tremendo_token";
 export const LOGIN_TYPE_EMAIL = "email";

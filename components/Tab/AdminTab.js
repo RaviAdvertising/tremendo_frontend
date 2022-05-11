@@ -18,9 +18,9 @@ export default function AdminTab({ tabsData, selectTab, selectedTab }) {
           <div className={styles.tabWrapper}>
             {tabsData.map((i, index) => (
               <div
-                className={styles.tabs}
+                className={i.disable ? styles.disableTab : styles.tabs}
                 key={index}
-                onClick={() => selectTab(i)}
+                onClick={i.disable ? null : () => selectTab(i)}
                 style={{ backgroundColor: selectedTab == i.id && "#FCF5BF" }}
               >
                 <div className={styles.tabIcon}>

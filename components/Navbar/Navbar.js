@@ -7,7 +7,8 @@ import {
   LOGIN_STUDENT_TAB,
   LOGIN_MENTOR_TAB,
   USER_DETAILS,
-  ADMIN_ACCESS_TYPE
+  ADMIN_ACCESS_TYPE,
+  SUPER_ADMIN_ACCESS_TYPE
 } from "../../utils/constants";
 import { useRouter } from "next/router";
 import DesktopOnly from "../DeviceCheck/DesktopOnly";
@@ -118,7 +119,10 @@ function Navbar({}) {
       router.push(STUDENT_DASHBOARD_PATH);
     } else if (userDetails.access_type == LOGIN_MENTOR_TAB) {
       router.push(MENTOR_DASHBOARD_PATH);
-    } else if (userDetails.access_type == ADMIN_ACCESS_TYPE) {
+    } else if (
+      userDetails.access_type == ADMIN_ACCESS_TYPE ||
+      userDetails.access_type == SUPER_ADMIN_ACCESS_TYPE
+    ) {
       router.push(ADMIN_DASHBOARD_PATH);
     } else {
       router.push(STUDENT_DASHBOARD_PATH);

@@ -168,9 +168,10 @@ export default function DetailLanguagePage({}) {
                         <div className={styles.batchTiming}>
                           {i.batch_week_type}
                         </div>
-                        <div className={styles.batchDays}>
+                        {/* <div className={styles.batchDays}>
                           {i.days?.map(i => i).join("  ")}
-                        </div>
+                        </div> */}
+                        <div className={styles.batchDays}>{i.batch_level}</div>
                         <div className={styles.batchCodes}>{i.batch_id}</div>
                         <div className={styles.batchSeats}>
                           <div

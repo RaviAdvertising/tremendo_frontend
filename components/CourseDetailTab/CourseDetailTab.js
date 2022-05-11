@@ -77,8 +77,11 @@ export default function CourseDetailTab() {
       <div className={styles.courseName}>
         Course Name : {batch_data?.batch_language}
       </div>
-      <div className={styles.batchName}>
+      <div className={styles.courseName}>
         Student Batch No. : {batch_data?.batch_id}
+      </div>
+      <div className={styles.batchName}>
+        Batch Level : {batch_data?.batch_level}
       </div>
       <div className={styles.dateMonthHeading}>
         <div className={styles.courseName}>Date</div>

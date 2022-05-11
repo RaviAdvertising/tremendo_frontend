@@ -162,7 +162,7 @@ export default function AdminBatchManagment({}) {
       </button>
     );
   };
-  console.log(createBatchData);
+
   const addNewBatchModal = () => {
     return (
       <Modal
@@ -309,15 +309,15 @@ export default function AdminBatchManagment({}) {
               </div>
             </div>
 
-            <div style={{ marginBottom: "20px" }}>
-              <Input
-                placeholder="Meeting Link"
-                onChange={(e, data) => onHandleChangeBatch(data, "class_link")}
-                style={{ width: "100%" }}
-              />
-            </div>
+            <div className={styles.inputCreateWrapper}>
+              <div>
+                <Input
+                  placeholder="Batch Level"
+                  onChange={(e, data) => onHandleChangeBatch(data, "level")}
+                  style={{ width: "100%" }}
+                />
+              </div>
 
-            <div>
               <Dropdown
                 placeholder="Batch Class Days"
                 fluid
@@ -327,6 +327,14 @@ export default function AdminBatchManagment({}) {
                   onHandleChangeBatch(data, "batch_class_days")
                 }
                 options={options}
+                style={{ width: "37%" }}
+              />
+            </div>
+
+            <div style={{ marginBottom: "20px" }}>
+              <Input
+                placeholder="Meeting Link"
+                onChange={(e, data) => onHandleChangeBatch(data, "class_link")}
                 style={{ width: "100%" }}
               />
             </div>
@@ -450,8 +458,8 @@ export default function AdminBatchManagment({}) {
           <div className={styles.headerName}>Mentor</div>
           <div className={styles.headerName}></div>
         </div>
-        {studentList.length > 0
-          ? studentList?.map((i, index) => (
+        {studentList?.student_list?.length > 0
+          ? studentList.student_list?.map((i, index) => (
               <div className={styles.tableBody} key={index}>
                 <div className={styles.headerName}>{i.user_name}</div>
                 <div className={styles.headerName}>

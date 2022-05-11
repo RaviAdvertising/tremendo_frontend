@@ -1,4 +1,6 @@
 import axios from "axios";
+import { COOKIE_TOKEN, USER_DETAILS } from "./constants";
+import Cookies from "js-cookie";
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -21,6 +23,10 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   error => {
+    // if (error.response.status === 300) {
+    //   localStorage.removeItem(USER_DETAILS);
+    //   Cookies.remove(COOKIE_TOKEN);
+    // }
     return Promise.reject(error);
   }
 );

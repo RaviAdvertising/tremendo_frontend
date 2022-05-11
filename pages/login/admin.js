@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 import styles from "../../styles/Login.module.css";
 import {
+  ADMIN_ACCESS_TYPE,
   COOKIE_TOKEN,
   EMAIL_REGULAR_EXPRESSION,
   LOGIN_MENTOR_TAB,
   LOGIN_STUDENT_TAB,
-  LOGIN_TYPE_EMAIL
+  LOGIN_TYPE_EMAIL,
+  SUPER_ADMIN_ACCESS_TYPE
 } from "../../utils/constants";
 
 import Head from "next/head";
@@ -21,7 +23,7 @@ import { GlobalContext } from "../../Context/Provider";
 import { DeviceContext } from "../_app";
 
 export default function AdminLogin(props) {
-  const [selectedTab, setSelectedTab] = useState(LOGIN_STUDENT_TAB);
+  const [selectedTab, setSelectedTab] = useState(SUPER_ADMIN_ACCESS_TYPE);
   const [fields, setFields] = useState({});
   const [errors, setErrors] = useState({});
   const { authState, authDispatch: dispatch } = useContext(GlobalContext);
@@ -58,7 +60,7 @@ export default function AdminLogin(props) {
         type: LOGIN_TYPE_EMAIL,
         gg_token: "",
         fb_token: "",
-        access_type: "adm"
+        access_type: selectedTab
       };
       const response = await loginAuth(payload)(dispatch);
       if (response.type == LOGIN_ERROR) {
@@ -86,7 +88,7 @@ export default function AdminLogin(props) {
             className={styles.loginSection}
             style={{ paddingBottom: "60px" }}
           >
-            <div className={styles.heading}>Hello Admin!</div>
+            <div className={styles.heading}>Hello</div>
             <div className={styles.inputs}>
               <Input
                 type="text"
@@ -130,9 +132,7 @@ export default function AdminLogin(props) {
               label={"LOG IN"}
               height={55}
               borderRadius={43}
-              backgroundColor={
-                selectedTab == LOGIN_STUDENT_TAB ? "#25908d" : "#f78f1e"
-              }
+              backgroundColor={"#25908d"}
               textStyle={{
                 color: "#fff",
                 fontWeight: "bold",
@@ -148,7 +148,18 @@ export default function AdminLogin(props) {
       </div>
     );
   };
-
+  const selectedTabStyling = {
+    color: "#212121",
+    borderBottom: "3px solid #212121"
+  };
+  const unSelectedTabStyling = {
+    color: "rgba(56, 56, 56, 0.3)",
+    borderBottom: "3px solid rgba(56, 56, 56, 0.3)"
+  };
+  const onChangeTabs = type => {
+    setSelectedTab(type);
+    setErrors({});
+  };
   return (
     <div className={styles.base}>
       <Head>
@@ -156,7 +167,33 @@ export default function AdminLogin(props) {
         <meta name="description" content="Tremendo Login page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>{loginFormWithImage()}</div>
+      <div className={styles.loginBox}>
+        <div className={styles.tabWrapper}>
+          <div
+            className={styles.tab}
+            style={
+              selectedTab == SUPER_ADMIN_ACCESS_TYPE
+                ? selectedTabStyling
+                : unSelectedTabStyling
+            }
+            onClick={() => onChangeTabs(SUPER_ADMIN_ACCESS_TYPE)}
+          >
+            For Super Admin
+          </div>
+          <div
+            className={styles.tab}
+            style={
+              selectedTab == ADMIN_ACCESS_TYPE
+                ? selectedTabStyling
+                : unSelectedTabStyling
+            }
+            onClick={() => onChangeTabs(ADMIN_ACCESS_TYPE)}
+          >
+            For Admin
+          </div>
+        </div>
+        {loginFormWithImage()}
+      </div>
     </div>
   );
 }
