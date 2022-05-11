@@ -122,6 +122,7 @@ export default function BatchManagement() {
         <div className={styles.batchListHeader}>
           <div className={styles.headerOption}>Batch Name</div>
           <div className={styles.headerOption}>Total students</div>
+          <div className={styles.headerOption}>Batch Level</div>
           <div className={styles.headerOption}>Total Classes</div>
         </div>
         {studentDashboardState.mentorBatches?.map(i => (
@@ -134,6 +135,7 @@ export default function BatchManagement() {
               className={styles.bodyOption}
             >{`${i.batch_language}-${i.batch_id}`}</div>
             <div className={styles.bodyOption}>{i.batch_capcity}</div>
+            <div className={styles.bodyOption}>{i.batch_level}</div>
             <div className={styles.bodyOptionWithCheckBox}>
               <div>{i.batch_total_classes}</div>
               <div className={styles.completeCheckbox}>

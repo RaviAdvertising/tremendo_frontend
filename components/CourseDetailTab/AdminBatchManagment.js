@@ -458,8 +458,8 @@ export default function AdminBatchManagment({}) {
           <div className={styles.headerName}>Mentor</div>
           <div className={styles.headerName}></div>
         </div>
-        {studentList.length > 0
-          ? studentList?.map((i, index) => (
+        {studentList?.student_list?.length > 0
+          ? studentList.student_list?.map((i, index) => (
               <div className={styles.tableBody} key={index}>
                 <div className={styles.headerName}>{i.user_name}</div>
                 <div className={styles.headerName}>
