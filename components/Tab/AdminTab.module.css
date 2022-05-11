@@ -46,6 +46,15 @@
     padding: 10px;
     margin-bottom: 20px;
   }
+  .disableTab{
+    display: flex;
+    align-items: center;
+    cursor: initial;
+    margin-left: 30px;
+    padding: 10px;
+    margin-bottom: 20px;
+    opacity: 0.3;
+  }
   .tabName {
     font-family: Poppins;
     font-size: 14px;

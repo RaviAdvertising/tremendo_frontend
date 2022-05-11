@@ -60,8 +60,8 @@ export default function ContactList({}) {
                 </div>
                 {selected == index && (
                   <div className={styles.answerWrapper}>
-                    <div>Message:- {contact.message}</div>
                     <div>Purpose:- {contact.purpose}</div>
+                    <div>Message:- {contact.message}</div>
                   </div>
                 )}
               </div>
