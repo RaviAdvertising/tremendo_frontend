@@ -30,8 +30,13 @@ export default function ContactUs() {
   const [errors, setErrors] = useState({});
 
   const handleChange = (type, value) => {
-    setFields({ ...fields, [type]: value });
-    setErrors({});
+    if (type == "phone_num" && value.length > 14) {
+      setFields({ ...fields, [type]: value });
+      setErrors({ phone_num: true });
+    } else {
+      setFields({ ...fields, [type]: value });
+      setErrors({});
+    }
   };
 
   const onSubmit = async () => {
@@ -45,6 +50,10 @@ export default function ContactUs() {
       setErrors(errors);
       return false;
     } else if (!fields.phone_num) {
+      errors["phone_num"] = true;
+      setErrors(errors);
+      return false;
+    } else if (fields.phone_num && fields.phone_num.length > 14) {
       errors["phone_num"] = true;
       setErrors(errors);
       return false;
@@ -139,7 +148,7 @@ export default function ContactUs() {
             <div className={styles.inputsWrapper}>
               <input
                 placeholder="Phone Number*"
-                type="text"
+                type="number"
                 className={styles.inputStyling}
                 style={{
                   border: errors["phone_num"]

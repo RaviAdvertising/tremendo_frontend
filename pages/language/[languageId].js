@@ -276,6 +276,10 @@ export default function DetailLanguagePage({}) {
                                     Price :
                                   </div>
                                   <div className={styles.price}>
+                                    <strike>
+                                      &#x20b9;
+                                      {i.batch_original_price}
+                                    </strike>{" "}
                                     &#x20b9;
                                     {i.batch_purchase_price}
                                   </div>
@@ -330,7 +334,7 @@ export default function DetailLanguagePage({}) {
                                 Total Classes : {i.batch_total_classes}
                               </div>
                               <div className={styles.startDateHeading}>
-                                Exam Date : {i.batch_end_date}
+                                Exam Date : {i.final_test_date}
                               </div>
                             </div>
 

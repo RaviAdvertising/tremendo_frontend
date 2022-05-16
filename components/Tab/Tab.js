@@ -133,7 +133,7 @@ export default function Tab({
   const countryOptions = authState.profileData?.all_languages?.map(i => {
     return { key: i.code, value: i.batch_id, flag: i.flag, text: i.name };
   });
-
+  const batchData = studentDashboardState.getStudentCourseDetails?.batch_data;
   return (
     <>
       <DesktopOnly>
@@ -192,8 +192,7 @@ export default function Tab({
             {studentDashboard && (
               <div className={styles.footerBanner}>
                 <div className={styles.footerText}>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
+                  {`${batchData?.batch_language} (${batchData?.batch_id}) final test will be on ${batchData?.final_test_date}. All The Best`}
                 </div>
                 <div className={styles.footerImg}>
                   <ImageComponent

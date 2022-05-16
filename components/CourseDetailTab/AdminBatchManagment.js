@@ -109,6 +109,9 @@ export default function AdminBatchManagment({}) {
       ),
       batch_end_date: moment(createBatchData.batch_end_date).format(
         "DD/MM/YYYY"
+      ),
+      final_test_date: moment(createBatchData.final_test_date).format(
+        "DD/MM/YYYY"
       )
     };
     try {
@@ -141,6 +144,10 @@ export default function AdminBatchManagment({}) {
     { key: "Friday", text: "Friday", value: "Friday" },
     { key: "Saturday", text: "Saturday", value: "Saturday" },
     { key: "Sunday", text: "Sunday", value: "Sunday" }
+  ];
+  const weekTypes = [
+    { text: "Weekdays", value: "Weekdays" },
+    { text: "Weekend", value: "Weekend" }
   ];
   const DateInput = ({ value, onClick, placeholder }) => {
     return (
@@ -278,12 +285,15 @@ export default function AdminBatchManagment({}) {
                   style={{ width: "100%" }}
                 />
               </div>
-              <div>
-                <Input
+              <div style={{ width: "40%" }}>
+                <Dropdown
                   placeholder="Week type"
+                  fluid
+                  selection
                   onChange={(e, data) =>
                     onHandleChangeBatch(data, "batch_week_type")
                   }
+                  options={weekTypes}
                   style={{ width: "100%" }}
                 />
               </div>
@@ -331,12 +341,29 @@ export default function AdminBatchManagment({}) {
               />
             </div>
 
-            <div style={{ marginBottom: "20px" }}>
-              <Input
-                placeholder="Meeting Link"
-                onChange={(e, data) => onHandleChangeBatch(data, "class_link")}
-                style={{ width: "100%" }}
-              />
+            <div className={styles.inputCreateWrapper}>
+              <div>
+                <DatePicker
+                  selected={createBatchData.final_test_date}
+                  onChange={date =>
+                    onHandleChangeBatch({ value: date }, "final_test_date")
+                  }
+                  placeholderText="Final Test Date"
+                  customInput={<DateInput />}
+                  dateFormat="MMMM d, yyyy"
+                  minDate={Date.now()}
+                  dropdownMode="select"
+                />
+              </div>
+              <div>
+                <Input
+                  placeholder="Meeting Link"
+                  onChange={(e, data) =>
+                    onHandleChangeBatch(data, "class_link")
+                  }
+                  style={{ width: "100%" }}
+                />
+              </div>
             </div>
           </Modal.Description>
         </Modal.Content>
