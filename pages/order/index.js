@@ -131,7 +131,7 @@ export default function Order({}) {
         <div className={styles.heading}>Summary</div>
         <div className={styles.imageDetailWrapper}>
           <div className={styles.flagImage}>
-            <Image src={orderDetails.flag_url} alt={"flag"} />
+            <Image src={orderDetails.flag_url} alt={"flag"} height="58px" />
           </div>
           <div className={styles.details}>
             <div

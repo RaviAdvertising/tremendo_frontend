@@ -134,7 +134,7 @@ export const getUserProfile = accessType => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_USER_PROFILE_ERROR,
-        error: err.response.data
+        error: err.response?.data
       });
     });
 };

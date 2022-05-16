@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import styles from "./CalenderTab.module.css";
 import moment from "moment";
 import {
@@ -85,18 +86,28 @@ export default function CalenderTab({}) {
     const url = link.includes("https") ? link : `https://${link}`;
     window.open(url, "_blank");
   };
+  const EventDetail = ({ event, el }) => {
+    const content = (
+      <div>
+        {event.title}
+        <div>{event.extendedProps.description}</div>
+      </div>
+    );
+    ReactDOM.render(content, el);
+    return el;
+  };
   const classes_name = [];
-  const classes_timing = [];
 
   classes.forEach((i, index) => {
     return classes_name.push({
       id: i.class_id,
-      title: `${i.class_start_time}:${i.class_end_time}:${i.batch_mentor}`,
+      title: `${i.class_start_time}:${i.class_end_time}`,
       start: moment(i.class_date).format("YYYY-MM-DD"),
       end: moment(i.class_date).format("YYYY-MM-DD"),
       backgroundColor: "#EEF4FF",
       textColor: "#3D8BFF",
-      className: styles.dateClass
+      className: styles.dateClass,
+      description: i.batch_mentor
     });
   });
 
@@ -123,7 +134,7 @@ export default function CalenderTab({}) {
           initialView="dayGridMonth"
           dateClick={handleDateClick}
           height={600}
-          events={classes_name.concat(classes_timing)}
+          events={classes_name}
           displayEventTime={true}
           displayEventEnd={true}
           eventTimeFormat={{
@@ -132,6 +143,7 @@ export default function CalenderTab({}) {
             meridiem: false
           }}
           eventClick={onClickEvent}
+          eventDidMount={EventDetail}
         />
       </div>
       <div>

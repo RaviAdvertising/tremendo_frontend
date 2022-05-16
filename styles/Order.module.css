@@ -16,7 +16,7 @@
 .flagImage{
   box-shadow: 0 8px 6px -7px #00000096;
   border: 1px solid;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .imageDetailWrapper {
   display: flex;

@@ -12,6 +12,7 @@ import ProfileTab from "../../components/ProfileTab/ProfileTab";
 import { LOGIN_STUDENT_TAB, USER_DETAILS } from "../../utils/constants";
 import { GlobalContext } from "../../Context/Provider";
 import {
+  getStudentCourseDetails,
   studentBatchMates,
   studentUpcomingTasks
 } from "../../Context/Actions/Dashboard/DashboardAction";
@@ -59,6 +60,7 @@ function Student() {
     if (batch_id) {
       studentUpcomingTasks(batch_id)(dispatch);
       studentBatchMates(batch_id)(dispatch);
+      getStudentCourseDetails(batch_id)(dispatch);
     }
   }, [languageState.setStudentSelectedLanguage]);
   const setTabIndex = () => {

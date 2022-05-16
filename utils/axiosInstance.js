@@ -23,10 +23,13 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   error => {
-    // if (error.response.status === 300) {
-    //   localStorage.removeItem(USER_DETAILS);
-    //   Cookies.remove(COOKIE_TOKEN);
-    // }
+    if (
+      error.response.status === 300 &&
+      error.response.data.msg == "User not found."
+    ) {
+      localStorage.removeItem(USER_DETAILS);
+      Cookies.remove(COOKIE_TOKEN);
+    }
     return Promise.reject(error);
   }
 );
