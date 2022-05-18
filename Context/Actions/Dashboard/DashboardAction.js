@@ -375,6 +375,9 @@ export const getMentorDashboardData = (
         type: GET_MENTOR_DASHBOARD_DATA_SUCCESS,
         data: res.data.data
       });
+      return {
+        data: res.data.data
+      };
     })
     .catch(err => {
       dispatch({

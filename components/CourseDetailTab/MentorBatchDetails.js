@@ -204,9 +204,9 @@ export default function MentorBatchDetails({}) {
       setLoading(false);
     }
   };
-  const onChangeLanguage = async data => {
+  const onChangeLanguage = data => {
     const languageCode = homeState.getLanguage.find(i => i.title == data.value);
-    await getMentorList(languageCode.id);
+    getMentorList(languageCode.id);
     getApplyMentorLeave(languageCode.id);
     setSelectedLang(languageCode.id);
   };

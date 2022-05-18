@@ -214,7 +214,11 @@ export default function Dashboard() {
                           family: "Poppins"
                         },
                         formatter: function(value) {
-                          return `${value}%`;
+                          if (value != 0) {
+                            return `${value}%`;
+                          } else {
+                            return null;
+                          }
                         }
                       }
                     }
