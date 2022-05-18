@@ -26,6 +26,7 @@ const DESAPPROVE = "deny";
 export default function MentorBatchDetails({}) {
   const { homeState } = useContext(GlobalContext);
   const [mentorList, setMentorList] = useState([]);
+  const [appliedMentorLeave, setAppliedMentorLeave] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [createBatchData, setCreateBatchData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -39,6 +40,7 @@ export default function MentorBatchDetails({}) {
   });
   useEffect(() => {
     getMentorList(homeState.getLanguage[0]?.id);
+    getApplyMentorLeave(homeState.getLanguage[0]?.id);
   }, []);
 
   const getMentorList = async code => {
@@ -48,6 +50,20 @@ export default function MentorBatchDetails({}) {
         `/getMentorList?access_token=${jsCookie.get(COOKIE_TOKEN)}&lang=${code}`
       );
       setMentorList(response.data.data);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
+  const getApplyMentorLeave = async code => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(
+        `/getMentorApplyLeaveList?access_token=${jsCookie.get(
+          COOKIE_TOKEN
+        )}&lang=${code}`
+      );
+      setAppliedMentorLeave(response.data.data);
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -150,6 +166,14 @@ export default function MentorBatchDetails({}) {
       </Message>
     );
   };
+  const noLeaveSection = () => {
+    return (
+      <Message>
+        <Message.Header>Oops</Message.Header>
+        <p>None Mentor Apply for leave</p>
+      </Message>
+    );
+  };
 
   const leaveOptions = [
     {
@@ -166,7 +190,6 @@ export default function MentorBatchDetails({}) {
     }
   ];
   const onSelectLeaveOption = async (data, leave_id) => {
-    console.log(data);
     setLoading(true);
     try {
       const payload = {
@@ -175,15 +198,16 @@ export default function MentorBatchDetails({}) {
         status: data.value
       };
       const response = await axiosInstance.post(`/updateMentorLeave`, payload);
-      getMentorList(selectedLang);
+      getApplyMentorLeave(selectedLang);
       setLoading(false);
     } catch (err) {
       setLoading(false);
     }
   };
-  const onChangeLanguage = data => {
+  const onChangeLanguage = async data => {
     const languageCode = homeState.getLanguage.find(i => i.title == data.value);
-    getMentorList(languageCode.id);
+    await getMentorList(languageCode.id);
+    getApplyMentorLeave(languageCode.id);
     setSelectedLang(languageCode.id);
   };
   const deleteMentor = async id => {
@@ -226,7 +250,7 @@ export default function MentorBatchDetails({}) {
           <div className={styles.headerName}>Joining Date</div>
           <div className={styles.headerName}>Mentor Id</div>
           <div className={styles.headerName}>Batch no.</div>
-          <div className={styles.headerName}>Leave</div>
+
           <div className={styles.headerName}>Delete</div>
         </div>
         {mentorList.length > 0
@@ -246,29 +270,7 @@ export default function MentorBatchDetails({}) {
                   </div>
                   <div className={styles.headerName}>{i.user_code}</div>
                   <div className={styles.headerName}>{i.batch_id}</div>
-                  <div className={styles.headerName}>
-                    {i.leave_status != "" ? (
-                      <div className={styles.leaveOptionSelect}>
-                        <Dropdown
-                          className={styles.leaveOptionDropdown}
-                          style={{
-                            backgroundColor: backgroundColor,
-                            color: color,
-                            fontWeight: "600"
-                          }}
-                          fluid
-                          selection
-                          value={i.leave_status}
-                          options={leaveOptions}
-                          onChange={(e, data) =>
-                            onSelectLeaveOption(data, i.leave_id)
-                          }
-                        />
-                      </div>
-                    ) : (
-                      <div>Not Applied</div>
-                    )}
-                  </div>
+
                   <div
                     className={styles.headerName}
                     onClick={() => deleteMentor(i.user_code)}
@@ -308,6 +310,61 @@ export default function MentorBatchDetails({}) {
                 totalPages={10}
               />
             </div> */}
+      </div>
+      <div className={styles.heading}>Mentor Leaves </div>
+      <div className={styles.tableSection}>
+        <div className={styles.tableHeader}>
+          <div className={styles.leaveHeaderName}>Mentor Name</div>
+          <div className={styles.leaveHeaderName}>Leave Date</div>
+          <div className={styles.leaveHeaderName}>Mentor Id</div>
+          <div className={styles.reasonHeaderName}>Reason</div>
+          <div className={styles.leaveHeaderName}>Status</div>
+        </div>
+        {appliedMentorLeave.length > 0
+          ? appliedMentorLeave.map((i, index) => {
+              let backgroundColor = "#FFF7EB",
+                color = "#f88312";
+              if (i.status == APPROVE) {
+                (backgroundColor = "#EAFCFA"), (color = "#1d8180");
+              } else if (i.status == DESAPPROVE) {
+                (backgroundColor = "#FCEBEB"), (color = "#f81712");
+              }
+
+              return (
+                <div className={styles.tableBody} key={index}>
+                  <div className={styles.leaveHeaderName}>{i.applied_by}</div>
+                  <div className={styles.leaveHeaderName}>{i.leave_date}</div>
+                  <div className={styles.leaveHeaderName}>{i.applied_by}</div>
+                  <div className={styles.reasonHeaderName}>{i.reason}</div>
+                  <div className={styles.leaveHeaderName}>
+                    {i.status != "" ? (
+                      <div className={styles.leaveOptionSelect}>
+                        <Dropdown
+                          className={styles.leaveOptionDropdown}
+                          style={{
+                            backgroundColor: backgroundColor,
+                            color: color,
+                            fontWeight: "600"
+                          }}
+                          fluid
+                          selection
+                          value={i.status}
+                          options={leaveOptions}
+                          onChange={(e, data) =>
+                            onSelectLeaveOption(data, i.leave_id)
+                          }
+                        />
+                      </div>
+                    ) : (
+                      <div>Not Applied</div>
+                    )}
+                  </div>
+
+                  <div></div>
+                </div>
+              );
+            })
+          : noLeaveSection()}
       </div>
       {addNewBatchModal()}
     </div>

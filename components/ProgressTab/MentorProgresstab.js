@@ -44,7 +44,6 @@ export default function MentorProgresstab() {
   };
 
   const createCircle = () => {
-    console.log("here");
     let can = document.getElementById("canvas"),
       spanProcent = document.getElementById("procent"),
       c = can.getContext("2d");
