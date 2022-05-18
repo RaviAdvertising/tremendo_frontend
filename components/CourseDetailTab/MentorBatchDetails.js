@@ -332,9 +332,9 @@ export default function MentorBatchDetails({}) {
 
               return (
                 <div className={styles.tableBody} key={index}>
-                  <div className={styles.leaveHeaderName}>{i.applied_by}</div>
+                  <div className={styles.leaveHeaderName}>{i.name}</div>
                   <div className={styles.leaveHeaderName}>{i.leave_date}</div>
-                  <div className={styles.leaveHeaderName}>{i.applied_by}</div>
+                  <div className={styles.leaveHeaderName}>{i.user_code}</div>
                   <div className={styles.reasonHeaderName}>{i.reason}</div>
                   <div className={styles.leaveHeaderName}>
                     {i.status != "" ? (
