@@ -82,10 +82,11 @@
 .footerText {
   color: #fff;
   font-family: Poppins;
-  font-size: 14px;
+  font-size: 12px;
+  text-align: center;
 }
 .footerImg {
-  margin-top: 35px;
+  margin-top: 20px;
 }
 .profileWrapper {
   display: flex;

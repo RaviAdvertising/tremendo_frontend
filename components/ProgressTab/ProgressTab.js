@@ -294,7 +294,11 @@ export default function ProgressTab({}) {
                           family: "Poppins"
                         },
                         formatter: function(value) {
-                          return `${value}%`;
+                          if (value != 0) {
+                            return `${value}%`;
+                          } else {
+                            return null;
+                          }
                         }
                       }
                     }
@@ -314,7 +318,9 @@ export default function ProgressTab({}) {
                 <div className={styles.pielabelText}>Absent</div>
               </div>
             </div>
-            <div className={styles.totalDays}>Total Days: 60</div>
+            <div className={styles.totalDays}>
+              Total Days: {studentAttendence?.total_days}
+            </div>
           </div>
         </div>
       </div>

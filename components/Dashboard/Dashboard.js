@@ -125,8 +125,8 @@ export default function Dashboard() {
         <div className={styles.bannerTextWrapper}>
           <div className={styles.welcomeText}>Welcome</div>
           <div className={styles.descriptionText}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            To learn a language is to have one more window from which you can
+            look at the world.
           </div>
         </div>
       </div>
@@ -214,7 +214,11 @@ export default function Dashboard() {
                           family: "Poppins"
                         },
                         formatter: function(value) {
-                          return `${value}%`;
+                          if (value != 0) {
+                            return `${value}%`;
+                          } else {
+                            return null;
+                          }
                         }
                       }
                     }

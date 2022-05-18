@@ -20,6 +20,7 @@
   }
   .createBtn {
     width: 20%;
+    margin-bottom: 30px;
   }
   .tableHeader {
     display: flex;
@@ -57,4 +58,14 @@
   }
   .leaveOptionSelect{
       width: 80%;
+  }
+  .leaveHeaderName{
+    width: 15%;
+  }
+  .reasonHeaderName{
+    width: 40%;
+    white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  padding-right: 15px;
   }

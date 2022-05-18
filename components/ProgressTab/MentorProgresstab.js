@@ -24,7 +24,6 @@ export default function MentorProgresstab() {
 
   useEffect(() => {
     getProgressData();
-    createCircle();
   }, [languageState.storedMentorBatch]);
 
   const getProgressData = async () => {
@@ -36,65 +35,74 @@ export default function MentorProgresstab() {
         )}&batch_id=${languageState.storedMentorBatch.batch_id}`
       );
       setProgressData(response.data.data);
+      setTimeout(() => {
+        const attendence = response.data.data.attandance_data;
 
+        const presentPercentage =
+          (attendence?.present_count /
+            (attendence?.present_count + attendence?.absent_count)) *
+          100;
+
+        createCircle(presentPercentage);
+      }, 1000);
       setLoading(false);
     } catch (err) {
       setLoading(false);
     }
   };
 
-  const createCircle = () => {
-    console.log("here");
-    let can = document.getElementById("canvas"),
-      spanProcent = document.getElementById("procent"),
-      c = can.getContext("2d");
-    const percentage = can.getAttribute("data-percent");
-    console.log(percentage);
+  const createCircle = presentPercentage => {
+    let can = document.getElementById("canvas");
 
-    let posX = can.width / 2,
-      posY = can.height / 2,
-      fps = 1000 / 200,
-      procent = 0,
-      oneProcent = 360 / 100,
-      result = oneProcent * percentage;
+    if (can) {
+      let spanProcent = document.getElementById("procent"),
+        c = can.getContext("2d");
 
-    c.lineCap = "round";
-    arcMove();
+      let posX = can.width / 2,
+        posY = can.height / 2,
+        fps = 1000 / 200,
+        procent = 0,
+        oneProcent = 360 / 100,
+        result = oneProcent * presentPercentage;
 
-    function arcMove() {
-      var deegres = 0;
-      var acrInterval = setInterval(function() {
-        deegres += 1;
-        c.clearRect(0, 0, can.width, can.height);
-        procent = deegres / oneProcent;
+      c.lineCap = "round";
+      arcMove();
 
-        spanProcent.innerHTML = procent.toFixed();
+      function arcMove() {
+        var deegres = 0;
+        var acrInterval = setInterval(function() {
+          deegres += 1;
+          c.clearRect(0, 0, can.width, can.height);
+          procent = deegres / oneProcent;
 
-        c.beginPath();
-        c.arc(
-          posX,
-          posY,
-          100,
-          (Math.PI / 180) * 270,
-          (Math.PI / 180) * (270 + 360)
-        );
-        c.strokeStyle = "#f2ddc0";
-        c.lineWidth = "20";
-        c.stroke();
+          spanProcent.innerHTML = procent.toFixed();
 
-        c.beginPath();
-        c.strokeStyle = "#F4910A";
-        c.lineWidth = "20";
-        c.arc(
-          posX,
-          posY,
-          100,
-          (Math.PI / 180) * 270,
-          (Math.PI / 180) * (270 + deegres)
-        );
-        c.stroke();
-        if (deegres >= result) clearInterval(acrInterval);
-      }, fps);
+          c.beginPath();
+          c.arc(
+            posX,
+            posY,
+            100,
+            (Math.PI / 180) * 270,
+            (Math.PI / 180) * (270 + 360)
+          );
+          c.strokeStyle = "#f2ddc0";
+          c.lineWidth = "20";
+          c.stroke();
+
+          c.beginPath();
+          c.strokeStyle = "#F4910A";
+          c.lineWidth = "20";
+          c.arc(
+            posX,
+            posY,
+            100,
+            (Math.PI / 180) * 270,
+            (Math.PI / 180) * (270 + deegres)
+          );
+          c.stroke();
+          if (deegres >= result) clearInterval(acrInterval);
+        }, fps);
+      }
     }
   };
 
@@ -287,7 +295,7 @@ export default function MentorProgresstab() {
   const totalDatesInCurrentMonth = Array.from(
     Array(moment().daysInMonth()).keys()
   );
-  console.log(progressData);
+
   // if (true) {
   //   return (
   //     <div
@@ -430,12 +438,7 @@ export default function MentorProgresstab() {
         <div className={styles.attendenceChart}>
           <div className={styles.chartHeading}>Attendance</div>
           <div className={styles.canvasWrap}>
-            <canvas
-              id="canvas"
-              width="240"
-              height="240"
-              data-percent={presentPercentage}
-            ></canvas>
+            <canvas id="canvas" width="240" height="240"></canvas>
             <div className={styles.showProgress} id="procent"></div>
           </div>
           <div className={styles.applyLeaveBtn}>

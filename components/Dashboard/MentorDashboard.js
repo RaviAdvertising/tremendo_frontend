@@ -47,21 +47,34 @@ export default function MentorDashboard({}) {
     const lastday = moment(new Date(curr.setDate(last))).format("x");
 
     const id = languageState.storedMentorBatch?.batch_id;
-    await getMentorDashboardData(id, firstday, lastday)(dispatch);
-    createCircle();
+    const response = await getMentorDashboardData(
+      id,
+      firstday,
+      lastday
+    )(dispatch);
+    setTimeout(() => {
+      const dashboardData = response.data;
+      const attendencePercentage =
+        (dashboardData.attandance_data?.present_count /
+          (dashboardData.attandance_data?.present_count +
+            dashboardData.attandance_data?.absent_count)) *
+        100;
+
+      createCircle(attendencePercentage);
+    }, 1000);
   };
 
-  const createCircle = () => {
+  const createCircle = attendencePercentage => {
     let can = document.getElementById("canvas"),
       spanProcent = document.getElementById("procent"),
       c = can.getContext("2d");
-    const percentage = can.getAttribute("data-percent");
+
     let posX = can.width / 2,
       posY = can.height / 2,
       fps = 1000 / 200,
       procent = 0,
       oneProcent = 360 / 100,
-      result = oneProcent * percentage;
+      result = oneProcent * attendencePercentage;
 
     c.lineCap = "round";
     arcMove();
