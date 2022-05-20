@@ -280,9 +280,7 @@ export default function MentorProfile() {
       )}
       <div className={styles.profile_topImage}>
         <Image
-          src={
-            "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprofile_top.png?alt=media&token=7dfe95c5-d496-4b98-b5d9-52c877ccb3ce"
-          }
+          src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fprofile_top.png?alt=media&token=7dfe95c5-d496-4b98-b5d9-52c877ccb3ce`}
           alt="profiletab_rocket"
         />
       </div>
@@ -295,7 +293,7 @@ export default function MentorProfile() {
                   src={
                     fields.avatar
                       ? fields.avatar
-                      : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                      : `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41`
                   }
                   circular
                   alt="profiletab_rocket"
@@ -564,9 +562,7 @@ export default function MentorProfile() {
       </div>
       <div className={styles.profile_bottomImage}>
         <Image
-          src={
-            "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprofile_bottom.png?alt=media&token=c2340b81-26be-419f-b95b-310a07313fa3"
-          }
+          src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fprofile_bottom.png?alt=media&token=c2340b81-26be-419f-b95b-310a07313fa3`}
           alt="profiletab_rocket"
         />
       </div>

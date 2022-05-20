@@ -188,9 +188,7 @@ export default function DetailLanguagePage({}) {
                             }}
                           >
                             <Image
-                              src={
-                                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fdown_arrow.png?alt=media&token=27bec4b4-58cf-498c-8d2c-df6381e223fc"
-                              }
+                              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fdown_arrow.png?alt=media&token=27bec4b4-58cf-498c-8d2c-df6381e223fc`}
                               alt=""
                               height={"20px"}
                               width={"20px"}
@@ -239,9 +237,7 @@ export default function DetailLanguagePage({}) {
                               <div className={styles.durationWrapper}>
                                 <div>
                                   <Image
-                                    src={
-                                      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fduration_rotate.png?alt=media&token=7fb632e3-b896-403c-bceb-e686cb698bf5"
-                                    }
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fduration_rotate.png?alt=media&token=7fb632e3-b896-403c-bceb-e686cb698bf5`}
                                     alt=""
                                     height={"30px"}
                                     width={"30px"}
@@ -397,9 +393,7 @@ export default function DetailLanguagePage({}) {
         )}
         <div>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e`}
             paddingBottom={"15%"}
             alt={"banner logo"}
           />

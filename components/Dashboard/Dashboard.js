@@ -90,7 +90,7 @@ export default function Dashboard() {
   //       }}
   //     >
   //       <Image
-  //         src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
+  //         src=`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
   //         alt="tremendo dashboard banner"
   //         height={isMobileView ? "300px" : "800px"}
   //         width={isMobileView ? "300px" : "700px"}
@@ -118,7 +118,7 @@ export default function Dashboard() {
     <div className={styles.dashboardBase}>
       <div className={styles.dashboardBanner}>
         <Image
-          src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fdashboard_banner.png?alt=media&token=b37ec534-bcbe-4476-8af6-7ddef42ad6b6"
+          src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fdashboard_banner.png?alt=media&token=b37ec534-bcbe-4476-8af6-7ddef42ad6b6`}
           alt="tremendo dashboard banner"
           className={styles.banner}
         />

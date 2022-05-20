@@ -63,7 +63,7 @@ export default function MentorMyResource() {
   //       }}
   //     >
   //       <Image
-  //         src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
+  //         src=`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
   //         alt="tremendo dashboard banner"
   //         height={isMobileView ? "300px" : "800px"}
   //         width={isMobileView ? "300px" : "700px"}
@@ -747,14 +747,12 @@ export default function MentorMyResource() {
           <div className={styles.syllabus}>Syllabus</div>
           <div className={styles.pdf}>
             <Image
-              src={
-                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FpdfImage.png?alt=media&token=dd36f672-6682-41b1-9e5a-8440e84be260"
-              }
+              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2FpdfImage.png?alt=media&token=dd36f672-6682-41b1-9e5a-8440e84be260`}
               alt="user-image"
             />
           </div>
           <Image
-            src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fmentor_syllabus.png?alt=media&token=ff47ea0e-5a7e-457c-8abd-354cb6374f23"
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fmentor_syllabus.png?alt=media&token=ff47ea0e-5a7e-457c-8abd-354cb6374f23`}
             alt="image"
             rounded
             style={{ width: "100%" }}
@@ -782,9 +780,7 @@ export default function MentorMyResource() {
                 rel="noreferrer"
               >
                 <Image
-                  src={
-                    "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fe-bookImage.png?alt=media&token=80ea315b-6ecc-4024-aa90-ab5e6fc97cca"
-                  }
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fe-bookImage.png?alt=media&token=80ea315b-6ecc-4024-aa90-ab5e6fc97cca`}
                   alt="user-image"
                   className={styles.eBook}
                 />
@@ -792,7 +788,7 @@ export default function MentorMyResource() {
             ))}
           </div>
           <Image
-            src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fmentor_ebook.png?alt=media&token=2a602482-a3a9-4e80-b418-94bb8ab7b28f"
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fmentor_ebook.png?alt=media&token=2a602482-a3a9-4e80-b418-94bb8ab7b28f`}
             alt="image"
             rounded
             style={{ width: "100%" }}

@@ -3,16 +3,14 @@ export const trustFactor = [
     heading: "Work & Experience ",
     subheading:
       "Command over a foreign language can set you ahead in your career. It can land you better job opportunities and help you in achieving your educational goals.    ",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fwork_experience.png?alt=media&token=e906f9f6-7721-4759-ab01-63929f232fbd",
+    image: `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fwork_experience.png?alt=media&token=e906f9f6-7721-4759-ab01-63929f232fbd`,
     backgroundColor: "#f78f1e"
   },
   {
     heading: "Learn new culture",
     subheading:
       "Learning a foreign language is an investment as it helps you to understand other cultures and ideologies. Knowing a new language opens up a new world for you.",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flearning.png?alt=media&token=6fc541a5-13cb-4fab-bd26-cd3e9b158db5",
+    image: `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Flearning.png?alt=media&token=6fc541a5-13cb-4fab-bd26-cd3e9b158db5`,
     backgroundColor: "#39cdc9"
   },
 
@@ -20,8 +18,7 @@ export const trustFactor = [
     heading: "Travel",
     subheading:
       "Learning a foreign language will help you navigate new places and make travel so much easier. It helps you to understand signs and ask for directions. ",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fplane.png?alt=media&token=f35bfbab-e52b-4e77-b5c5-c32ec385e672",
+    image: `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fplane.png?alt=media&token=f35bfbab-e52b-4e77-b5c5-c32ec385e672`,
     backgroundColor: "#f78f1e"
   }
 ];
@@ -30,15 +27,13 @@ export const whyTremendo1 = [
     heading: "Affordable price",
     subheading:
       "Tremendo aims to provide the best quality teaching at the minimum and pocket-friendly costs. As all the study material is provided digitally, you do not have to buy any books.",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fself-growth.png?alt=media&token=c90bf2a3-9475-4146-8ea9-15fb6d630f7c"
+    image: `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fself-growth.png?alt=media&token=c90bf2a3-9475-4146-8ea9-15fb6d630f7c`
   },
   {
     heading: "Quick growth",
     subheading:
       "Having command over foreign languages can provide better career opportunities and set you on the fastest route to success.",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fonline-class.png?alt=media&token=991507ab-d9dd-4164-9d1a-3e9fde957bf6"
+    image: `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fonline-class.png?alt=media&token=991507ab-d9dd-4164-9d1a-3e9fde957bf6`
   }
 ];
 export const whyTremendo2 = [
@@ -46,15 +41,13 @@ export const whyTremendo2 = [
     heading: "Experienced mentors",
     subheading:
       "Tremendo appoints highly skilled mentors that provide both professional and personal support.",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fconsulting.png?alt=media&token=56a77273-5ba8-483f-baa0-75b13670e4aa"
+    image: `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fconsulting.png?alt=media&token=56a77273-5ba8-483f-baa0-75b13670e4aa`
   },
   {
     heading: "Real-Time feedback",
     subheading:
       "We provide real-time feedback to ensure all students are on the right track throughout their learning journey. ",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ffeedback.png?alt=media&token=99c4e409-7f8f-486e-a66a-5d80a9dbefa5"
+    image: `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Ffeedback.png?alt=media&token=99c4e409-7f8f-486e-a66a-5d80a9dbefa5`
   }
 ];
 

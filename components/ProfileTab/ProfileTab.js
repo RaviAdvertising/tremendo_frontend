@@ -284,7 +284,7 @@ export default function ProfileTab({}) {
                   src={
                     fields.avatar
                       ? fields.avatar
-                      : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                      : `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41`
                   }
                   circular
                   alt="profiletab_rocket"
@@ -537,9 +537,7 @@ export default function ProfileTab({}) {
       <DesktopOnly>
         <div className={styles.imageWrapper}>
           <Image
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprofiletab_rocket.png?alt=media&token=84ff6e0e-4808-4f36-8d82-459b92dba539"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fprofiletab_rocket.png?alt=media&token=84ff6e0e-4808-4f36-8d82-459b92dba539`}
             alt="profiletab_rocket"
           />
         </div>

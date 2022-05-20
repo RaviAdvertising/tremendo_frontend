@@ -319,7 +319,7 @@ export default function Signup(props) {
                 onClick={() => socialLogin(googleProvider, LOGIN_TYPE_GOOGLE)}
               >
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fgoogle_loginbtn.png?alt=media&token=6d6162cd-0e6f-413d-b53a-10203f0be385"
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fgoogle_loginbtn.png?alt=media&token=6d6162cd-0e6f-413d-b53a-10203f0be385`}
                   alt="google login btn"
                   height="55px"
                   width="180px"
@@ -350,9 +350,7 @@ export default function Signup(props) {
           </span>
           <span className={styles.tandC2}>
             <a
-              href={
-                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftnc.pdf?alt=media&token=ae0e7ac3-62fc-45cf-b9db-8c2291429176"
-              }
+              href={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Ftnc.pdf?alt=media&token=ae0e7ac3-62fc-45cf-b9db-8c2291429176`}
               download="Term&Condition"
               target={"_blank"}
               rel="noreferrer"
@@ -362,9 +360,7 @@ export default function Signup(props) {
             </a>{" "}
             and{" "}
             <a
-              href={
-                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprivacy_policy.pdf?alt=media&token=162279da-2bec-4e1a-a47a-c330bd24b919"
-              }
+              href={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fprivacy_policy.pdf?alt=media&token=162279da-2bec-4e1a-a47a-c330bd24b919`}
               download="Privacy_and_policy"
               target={"_blank"}
               rel="noreferrer"
