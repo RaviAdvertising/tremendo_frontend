@@ -104,7 +104,7 @@ export default function MyResourceTab({}) {
   //       }}
   //     >
   //       <Image
-  //         src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
+  //         src=`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
   //         alt="tremendo dashboard banner"
   //         height={isMobileView ? "300px" : "800px"}
   //         width={isMobileView ? "300px" : "700px"}
@@ -247,7 +247,7 @@ export default function MyResourceTab({}) {
         <div className={styles.mentorName}>
           <div className={styles.profile}>
             <Image
-              src={"https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
+              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
               circular
               alt="user-image"
               height={"24px"}
@@ -276,17 +276,13 @@ export default function MyResourceTab({}) {
           <div className={styles.syylabusBox}>
             <div className={styles.eflyImage}>
               <Image
-                src={
-                  "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fsyllabus.png?alt=media&token=282036ad-0e00-4540-b28d-3d0c7cefb569"
-                }
+                src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fsyllabus.png?alt=media&token=282036ad-0e00-4540-b28d-3d0c7cefb569`}
                 alt="user-image"
               />
             </div>
             <div className={styles.pdfDownload}>
               <Image
-                src={
-                  "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FpdfImage.png?alt=media&token=dd36f672-6682-41b1-9e5a-8440e84be260"
-                }
+                src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2FpdfImage.png?alt=media&token=dd36f672-6682-41b1-9e5a-8440e84be260`}
                 alt="user-image"
                 style={{ margin: "auto" }}
               />
@@ -318,9 +314,7 @@ export default function MyResourceTab({}) {
                   rel="noreferrer"
                 >
                   <Image
-                    src={
-                      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fe-bookImage.png?alt=media&token=80ea315b-6ecc-4024-aa90-ab5e6fc97cca"
-                    }
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fe-bookImage.png?alt=media&token=80ea315b-6ecc-4024-aa90-ab5e6fc97cca`}
                     alt="user-image"
                     className={styles.eBook}
                   />
@@ -328,9 +322,7 @@ export default function MyResourceTab({}) {
               ))}
             </div>
             <Image
-              src={
-                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fe-book.png?alt=media&token=8bfda71d-d955-40ff-be23-a9b78e423e2c"
-              }
+              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fe-book.png?alt=media&token=8bfda71d-d955-40ff-be23-a9b78e423e2c`}
               alt="user-image"
               style={{ margin: "auto" }}
             />

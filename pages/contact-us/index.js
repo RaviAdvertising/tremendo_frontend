@@ -95,18 +95,14 @@ export default function ContactUs() {
       <div className={styles.banner}>
         <DesktopOnly>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FcontactUsBanner.png?alt=media&token=e02bacbf-a09d-4f63-b757-91e4a32ddf0d"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2FcontactUsBanner.png?alt=media&token=e02bacbf-a09d-4f63-b757-91e4a32ddf0d`}
             paddingBottom={"21%"}
             alt={"banner logo"}
           />
         </DesktopOnly>
         <MobileOnly>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout_banner_mobile.png?alt=media&token=be8f7644-800d-41fd-bb84-44e199f49785"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fabout_banner_mobile.png?alt=media&token=be8f7644-800d-41fd-bb84-44e199f49785`}
             paddingBottom={"65%"}
             alt={"banner logo"}
           />
@@ -247,7 +243,7 @@ export default function ContactUs() {
               <div className={styles.infoSec}>
                 <div>
                   <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flocation.png?alt=media&token=3a220c3d-2f47-49a8-852e-abbe53a6dfae"
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Flocation.png?alt=media&token=3a220c3d-2f47-49a8-852e-abbe53a6dfae`}
                     alt="location"
                     width={"32px"}
                     height={"37px"}
@@ -260,7 +256,7 @@ export default function ContactUs() {
               <div className={styles.infoSec}>
                 <div className={styles.phoneIcon}>
                   <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fphone.png?alt=media&token=e61b4f20-1c09-4366-bde7-94fc764f8bab"
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fphone.png?alt=media&token=e61b4f20-1c09-4366-bde7-94fc764f8bab`}
                     alt="location"
                     width={"30px"}
                     height={"37px"}
@@ -271,7 +267,7 @@ export default function ContactUs() {
               <div className={styles.infoSec}>
                 <div>
                   <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fmail.png?alt=media&token=ce6a995a-1ec2-4ea7-8f21-80f706fb75af"
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fmail.png?alt=media&token=ce6a995a-1ec2-4ea7-8f21-80f706fb75af`}
                     alt="location"
                     width={"37px"}
                     height={"37px"}
@@ -284,9 +280,7 @@ export default function ContactUs() {
         </div>
         <div>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e`}
             paddingBottom={"15%"}
             alt={"banner logo"}
           />

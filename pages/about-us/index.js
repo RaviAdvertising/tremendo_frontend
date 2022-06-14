@@ -21,9 +21,7 @@ export default function AboutUs() {
       <div className={styles.section1Base}>
         <div className={styles.image1}>
           <Image
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout-us1.png?alt=media&token=aa9acba2-ae1f-4956-8e8b-96f9031f6c0a"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fabout-us1.png?alt=media&token=aa9acba2-ae1f-4956-8e8b-96f9031f6c0a`}
             width={"362px"}
             height={"230px"}
             alt="aboutus"
@@ -59,9 +57,7 @@ export default function AboutUs() {
         <MobileOnly>
           <div className={styles.image1}>
             <Image
-              src={
-                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout-us2.png?alt=media&token=4236000c-220a-4798-b940-139ea2a4c999"
-              }
+              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fabout-us2.png?alt=media&token=4236000c-220a-4798-b940-139ea2a4c999`}
               width={"362px"}
               height={"230px"}
               alt="aboutus"
@@ -99,9 +95,7 @@ export default function AboutUs() {
         <DesktopOnly>
           <div className={styles.image1}>
             <Image
-              src={
-                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout-us2.png?alt=media&token=4236000c-220a-4798-b940-139ea2a4c999"
-              }
+              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fabout-us2.png?alt=media&token=4236000c-220a-4798-b940-139ea2a4c999`}
               width={"362px"}
               height={"230px"}
               alt="aboutus"
@@ -116,9 +110,7 @@ export default function AboutUs() {
       <div className={styles.section1Base}>
         <div className={styles.image1}>
           <Image
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout-us3.png?alt=media&token=901ff546-c6df-47e5-930b-19d2ca3a36ca"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fabout-us3.png?alt=media&token=901ff546-c6df-47e5-930b-19d2ca3a36ca`}
             width={"320px"}
             height={"280px"}
             alt="aboutus"
@@ -159,9 +151,7 @@ export default function AboutUs() {
         <MobileOnly>
           <div className={styles.image1}>
             <Image
-              src={
-                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout-us4.png?alt=media&token=132bc022-611a-4736-8b09-645474719063"
-              }
+              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fabout-us4.png?alt=media&token=132bc022-611a-4736-8b09-645474719063`}
               width={"320px"}
               height={"340px"}
               alt="aboutus"
@@ -191,9 +181,7 @@ export default function AboutUs() {
         <DesktopOnly>
           <div className={styles.image1}>
             <Image
-              src={
-                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout-us4.png?alt=media&token=132bc022-611a-4736-8b09-645474719063"
-              }
+              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fabout-us4.png?alt=media&token=132bc022-611a-4736-8b09-645474719063`}
               width={"320px"}
               height={"340px"}
               alt="aboutus"
@@ -214,18 +202,14 @@ export default function AboutUs() {
       <div className={styles.banner}>
         <DesktopOnly>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Faboutus_banner.png?alt=media&token=f48ff76f-30a1-40d0-b45c-8e9f62b9fd2f"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Faboutus_banner.png?alt=media&token=f48ff76f-30a1-40d0-b45c-8e9f62b9fd2f`}
             paddingBottom={"35%"}
             alt={"banner logo"}
           />
         </DesktopOnly>
         <MobileOnly>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout_banner_mobile.png?alt=media&token=be8f7644-800d-41fd-bb84-44e199f49785"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fabout_banner_mobile.png?alt=media&token=be8f7644-800d-41fd-bb84-44e199f49785`}
             paddingBottom={"65%"}
             alt={"banner logo"}
           />
@@ -267,9 +251,7 @@ export default function AboutUs() {
         </div>
         <div>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e`}
             paddingBottom={"15%"}
             alt={"banner logo"}
           />

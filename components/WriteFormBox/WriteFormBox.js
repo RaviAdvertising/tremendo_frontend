@@ -12,7 +12,7 @@ export default function WriteFormBox(props) {
     localStorage.getItem(USER_DETAILS) &&
     JSON.parse(localStorage.getItem(USER_DETAILS)).profileUrl
       ? JSON.parse(localStorage.getItem(USER_DETAILS)).profileUrl
-      : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41";
+      : `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41`;
   return (
     <div className={styles.writeReviewForm}>
       <div className={styles.profileImgAndDateWrapper}>

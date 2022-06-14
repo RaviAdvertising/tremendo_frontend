@@ -62,7 +62,7 @@ export default function CourseDetailTab() {
   //       }}
   //     >
   //       <Image
-  //         src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
+  //         src=`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
   //         alt="tremendo dashboard banner"
   //         height={isMobileView ? "300px" : "800px"}
   //         width={isMobileView ? "300px" : "700px"}
@@ -125,9 +125,7 @@ export default function CourseDetailTab() {
             <div className={styles.mentorProfile}>
               <div className={styles.profile}>
                 <Image
-                  src={
-                    "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
-                  }
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41`}
                   circular
                   alt="user-image"
                   height={"24px"}
@@ -145,9 +143,7 @@ export default function CourseDetailTab() {
               onClick={() => goToLink(todays_class?.class_link)}
             >
               <Image
-                src={
-                  "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fgoogle_meet.png?alt=media&token=c0a905f7-90a6-4cc5-9377-2dc76aa1249b"
-                }
+                src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fgoogle_meet.png?alt=media&token=c0a905f7-90a6-4cc5-9377-2dc76aa1249b`}
                 alt="user-image"
               />
             </div>

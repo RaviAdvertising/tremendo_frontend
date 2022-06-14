@@ -137,18 +137,14 @@ export default function Reviews() {
       <div className={styles.banner}>
         <DesktopOnly>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FReviewBanner.png?alt=media&token=271e5425-fe8f-42a3-99b3-70f783ab3b12"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2FReviewBanner.png?alt=media&token=271e5425-fe8f-42a3-99b3-70f783ab3b12`}
             paddingBottom={"21%"}
             alt={"banner logo"}
           />
         </DesktopOnly>
         <MobileOnly>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout_banner_mobile.png?alt=media&token=be8f7644-800d-41fd-bb84-44e199f49785"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fabout_banner_mobile.png?alt=media&token=be8f7644-800d-41fd-bb84-44e199f49785`}
             paddingBottom={"65%"}
             alt={"banner logo"}
           />
@@ -208,9 +204,7 @@ export default function Reviews() {
         )}
         <div>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e`}
             paddingBottom={"15%"}
             alt={"banner logo"}
           />

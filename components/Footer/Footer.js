@@ -112,9 +112,7 @@ export default function Footer(props) {
                   onClick={() => goToSocialMedia(FB_URL)}
                 >
                   <Image
-                    src={
-                      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ffacebook.png?alt=media&token=d3fac0f8-b5cd-4455-8319-d6435caa1273"
-                    }
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Ffacebook.png?alt=media&token=d3fac0f8-b5cd-4455-8319-d6435caa1273`}
                     alt={"facebook"}
                     height={"50px"}
                     width={"50px"}
@@ -125,9 +123,7 @@ export default function Footer(props) {
                   onClick={() => goToSocialMedia(INSTAGRAM_URL)}
                 >
                   <Image
-                    src={
-                      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Finstagram.png?alt=media&token=e86cf4f9-d7fb-4217-9512-cf4a386ccdb3"
-                    }
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Finstagram.png?alt=media&token=e86cf4f9-d7fb-4217-9512-cf4a386ccdb3`}
                     alt={"instagram"}
                     height={"50px"}
                     width={"50px"}
@@ -138,9 +134,7 @@ export default function Footer(props) {
                   onClick={() => goToSocialMedia(TWITTER_URL)}
                 >
                   <Image
-                    src={
-                      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftwitter.png?alt=media&token=02fb92e9-11f7-480a-b54c-81526ca3a04e"
-                    }
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Ftwitter.png?alt=media&token=02fb92e9-11f7-480a-b54c-81526ca3a04e`}
                     alt={"twitter"}
                     height={"50px"}
                     width={"50px"}
@@ -148,9 +142,7 @@ export default function Footer(props) {
                 </div>
                 <div className={styles.socialIcons}>
                   <Image
-                    src={
-                      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fyoutube.png?alt=media&token=8e1b812e-c1f6-4727-94c1-858c30e05844"
-                    }
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fyoutube.png?alt=media&token=8e1b812e-c1f6-4727-94c1-858c30e05844`}
                     alt={"youtube"}
                     height={"50px"}
                     width={"50px"}
@@ -165,9 +157,7 @@ export default function Footer(props) {
         <div className={styles.copyright}>© 2022 Tremendo</div>
         <div>
           <a
-            href={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftnc.pdf?alt=media&token=ae0e7ac3-62fc-45cf-b9db-8c2291429176"
-            }
+            href={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Ftnc.pdf?alt=media&token=ae0e7ac3-62fc-45cf-b9db-8c2291429176`}
             download="Term&Condition"
             target={"_blank"}
             rel="noreferrer"
@@ -177,9 +167,7 @@ export default function Footer(props) {
           </a>{" "}
           |
           <a
-            href={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fprivacy_policy.pdf?alt=media&token=162279da-2bec-4e1a-a47a-c330bd24b919"
-            }
+            href={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fprivacy_policy.pdf?alt=media&token=162279da-2bec-4e1a-a47a-c330bd24b919`}
             download="Privacy_and_policy"
             target={"_blank"}
             rel="noreferrer"

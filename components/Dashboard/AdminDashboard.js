@@ -228,7 +228,7 @@ export default function AdminDashboard({}) {
           </div>
           <div className={styles.summaryChart}>
             <Image
-              src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fadmin_graph.png?alt=media&token=2ea5db62-2101-4b70-8cd5-cbb87e523c7d"
+              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fadmin_graph.png?alt=media&token=2ea5db62-2101-4b70-8cd5-cbb87e523c7d`}
               alt="admin graph"
               width="96%"
             />

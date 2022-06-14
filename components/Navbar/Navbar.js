@@ -136,7 +136,7 @@ function Navbar({}) {
       <Menu fixed="top" secondary className={styles.menuWrapper}>
         <Menu.Item onClick={() => router.push(HOME_PAGE)}>
           <Image
-            src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftremendo_logo.png?alt=media&token=2180fdbc-cab2-4f3e-9721-cd61da3348ba"
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Ftremendo_logo.png?alt=media&token=2180fdbc-cab2-4f3e-9721-cd61da3348ba`}
             alt="tremendo logo"
             width={"150px"}
             height={"50px"}
@@ -214,7 +214,7 @@ function Navbar({}) {
                         src={
                           userDetails.profileUrl
                             ? userDetails.profileUrl
-                            : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                            : `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41`
                         }
                         circular
                         alt="profile"
@@ -291,7 +291,7 @@ function Navbar({}) {
             )}
           <div onClick={() => router.push(HOME_PAGE)}>
             <Image
-              src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ftremendo_logo.png?alt=media&token=2180fdbc-cab2-4f3e-9721-cd61da3348ba"
+              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Ftremendo_logo.png?alt=media&token=2180fdbc-cab2-4f3e-9721-cd61da3348ba`}
               alt="logo"
               size={"small"}
             />

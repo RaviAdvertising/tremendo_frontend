@@ -196,9 +196,7 @@ export default function Tab({
                 </div>
                 <div className={styles.footerImg}>
                   <ImageComponent
-                    src={
-                      "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FtabFooterImage.png?alt=media&token=3f94b3bf-78a1-4788-a301-4c74d2777f1b"
-                    }
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2FtabFooterImage.png?alt=media&token=3f94b3bf-78a1-4788-a301-4c74d2777f1b`}
                     alt="tremendo footer image dashboard"
                     width={"165px"}
                     height={"128px"}
@@ -387,7 +385,7 @@ export default function Tab({
                   <div className={styles.chatNameAndImgWrapper}>
                     <div className={styles.userImg}>
                       <Image
-                        src={"https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
                         circular
                         alt="user-image"
                         height={"20px"}
@@ -406,7 +404,7 @@ export default function Tab({
                   <div className={styles.chatNameAndImgWrapper}>
                     <div className={styles.userImg}>
                       <Image
-                        src={"https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
                         circular
                         alt="user-image"
                         height={"20px"}
@@ -425,7 +423,7 @@ export default function Tab({
                   <div className={styles.chatNameAndImgWrapper}>
                     <div className={styles.userImg}>
                       <Image
-                        src={"https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"}
                         circular
                         alt="user-image"
                         height={"20px"}
@@ -479,7 +477,7 @@ export default function Tab({
                           src={
                             i.avatar
                               ? i.avatar
-                              : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                              : `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41`
                           }
                           avatar
                           circular
@@ -499,7 +497,7 @@ export default function Tab({
                           src={
                             i.avatar
                               ? i.avatar
-                              : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41"
+                              : `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41`
                           }
                           avatar
                           circular

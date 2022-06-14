@@ -79,9 +79,7 @@ export default function Home({}) {
         <HomeCarousal data={homeState} />
         <div className={styles.waveShape}>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fwave_shape.png?alt=media&token=a736e768-12e6-4f7f-bd5e-b3643d5de3c7"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fwave_shape.png?alt=media&token=a736e768-12e6-4f7f-bd5e-b3643d5de3c7`}
             paddingBottom={"5%"}
             alt={"banner logo"}
           />
@@ -144,9 +142,7 @@ export default function Home({}) {
             </div>
             <div className={styles.imgSections}>
               <Image
-                src={
-                  "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fwhy_tremendo.png?alt=media&token=a3bcc4bf-2277-4b9a-a7f5-9e031df322c1"
-                }
+                src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fwhy_tremendo.png?alt=media&token=a3bcc4bf-2277-4b9a-a7f5-9e031df322c1`}
                 alt={""}
                 width={"450px"}
                 height={"200px"}
@@ -192,9 +188,7 @@ export default function Home({}) {
       {/* ---------------------------------------------------------------------------------------------- */}
       <div className={styles.subscribe}>
         <ImageComponent
-          src={
-            "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fsubscribe.png?alt=media&token=a4a26ccc-4b45-4041-8d78-cdf333909df9"
-          }
+          src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fsubscribe.png?alt=media&token=a4a26ccc-4b45-4041-8d78-cdf333909df9`}
           paddingBottom={isMobileView ? "30%" : "10%"}
           alt={"banner logo"}
         />
@@ -248,9 +242,7 @@ export default function Home({}) {
         </div>
         <div className={styles.devicesImages}>
           <Image
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fdevices.jpg?alt=media&token=1c6409ad-5ffc-4606-814b-2017407f13bb"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fdevices.jpg?alt=media&token=1c6409ad-5ffc-4606-814b-2017407f13bb`}
             alt={"devices"}
             width={"700px"}
             height={"300px"}
@@ -268,9 +260,7 @@ export default function Home({}) {
         </div>
         <div>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e`}
             paddingBottom={"15%"}
             alt={"banner logo"}
           />
@@ -288,9 +278,7 @@ export default function Home({}) {
         className={styles.chat}
       >
         <Image
-          src={
-            "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fchat.png?alt=media&token=0baf7742-8b87-4fe1-b8b9-178434568116"
-          }
+          src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fchat.png?alt=media&token=0baf7742-8b87-4fe1-b8b9-178434568116`}
           alt={"chat icons"}
           width={isMobileView ? "40px" : "75px"}
           height={isMobileView ? "40px" : "70px"}

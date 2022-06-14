@@ -89,7 +89,7 @@ export default class FaqTab extends React.Component {
     //   return (
     //     <div style={{ height: "700px", width: "700px", margin: "auto" }}>
     //       <Image
-    //         src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
+    //         src=`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fno_data.png?alt=media&token=79834bd2-97fa-4f63-897f-fe9498236194"
     //         alt="tremendo dashboard banner"
     //         height="800px"
     //         width="700px"
@@ -159,9 +159,7 @@ export default class FaqTab extends React.Component {
           </div>
           <div className={styles.imageWrapper}>
             <Image
-              src={
-                "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FfaqQuestion.png?alt=media&token=85c77533-b08e-4458-8832-012250a7279e"
-              }
+              src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2FfaqQuestion.png?alt=media&token=85c77533-b08e-4458-8832-012250a7279e`}
               alt="faqQuestion"
             />
           </div>

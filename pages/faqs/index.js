@@ -58,7 +58,7 @@ export default function Faqs() {
   const imageUrl =
     typeof window !== "undefined" && localStorage.getItem(USER_DETAILS)
       ? JSON.parse(localStorage.getItem(USER_DETAILS)).profileUrl
-      : "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41";
+      : `${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fblank_profile.png?alt=media&token=53afec48-03b2-4843-9b9c-8dc9c252ea41`;
 
   const askAQuestion = async () => {
     if (Cookies.get(COOKIE_TOKEN)) {
@@ -93,18 +93,14 @@ export default function Faqs() {
       <div className={styles.banner}>
         <DesktopOnly>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2FfaqsBanner.png?alt=media&token=0ffff088-5418-42d9-a4d9-ff56e8da0460"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2FfaqsBanner.png?alt=media&token=0ffff088-5418-42d9-a4d9-ff56e8da0460`}
             paddingBottom={"21%"}
             alt={"banner logo"}
           />
         </DesktopOnly>
         <MobileOnly>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Fabout_banner_mobile.png?alt=media&token=be8f7644-800d-41fd-bb84-44e199f49785"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Fabout_banner_mobile.png?alt=media&token=be8f7644-800d-41fd-bb84-44e199f49785`}
             paddingBottom={"65%"}
             alt={"banner logo"}
           />
@@ -208,9 +204,7 @@ export default function Faqs() {
         )}
         <div>
           <ImageComponent
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e"
-            }
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Flearn_grow_lead.png?alt=media&token=28f934e6-52ec-4783-a68b-aca27f4d2d3e`}
             paddingBottom={"15%"}
             alt={"banner logo"}
           />

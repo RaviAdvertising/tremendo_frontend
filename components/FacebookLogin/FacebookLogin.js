@@ -12,7 +12,7 @@ export default function FacebookLoginComponent(props) {
       render={renderProps => (
         <div className={styles.socialBtn} onClick={() => renderProps.onClick()}>
           <Image
-            src="https://firebasestorage.googleapis.com/v0/b/tremendodev.appspot.com/o/static_images%2Ffacebook_loginbtn.png?alt=media&token=f1710620-8316-4a3c-890c-da9fc1c81be1"
+            src={`${process.env.NEXT_PUBLIC_IMAGE_ASSETS_PATH}%2Ffacebook_loginbtn.png?alt=media&token=f1710620-8316-4a3c-890c-da9fc1c81be1`}
             alt="facebook login btn"
             height={props.height}
             width={props.width}
